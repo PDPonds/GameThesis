@@ -16,6 +16,9 @@ public class InputSystem : MonoBehaviour
             ia_action.Action.Crouch.performed += i => PlayerManager.Instance.b_isCrouch = true;
             ia_action.Action.Crouch.canceled += i => PlayerManager.Instance.b_isCrouch = false;
 
+            ia_action.Action.HoldPunch.performed += i => PlayerManager.Instance.s_playerFistCombat.holdButton();
+            ia_action.Action.HoldPunch.canceled += i => PlayerManager.Instance.s_playerFistCombat.releaseHoldButton();
+
             ia_action.Enable();
         }
     }

@@ -107,6 +107,15 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""HoldPunch"",
+                    ""type"": ""Button"",
+                    ""id"": ""3e08370d-7cb3-49ac-a5a7-ea42ed2f59d1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -118,6 +127,17 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Crouch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5725216e-ba2e-4016-a997-a71b24e1976c"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""HoldPunch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -132,6 +152,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         // Action
         m_Action = asset.FindActionMap("Action", throwIfNotFound: true);
         m_Action_Crouch = m_Action.FindAction("Crouch", throwIfNotFound: true);
+        m_Action_HoldPunch = m_Action.FindAction("HoldPunch", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -240,11 +261,13 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Action;
     private List<IActionActions> m_ActionActionsCallbackInterfaces = new List<IActionActions>();
     private readonly InputAction m_Action_Crouch;
+    private readonly InputAction m_Action_HoldPunch;
     public struct ActionActions
     {
         private @PlayerInputAction m_Wrapper;
         public ActionActions(@PlayerInputAction wrapper) { m_Wrapper = wrapper; }
         public InputAction @Crouch => m_Wrapper.m_Action_Crouch;
+        public InputAction @HoldPunch => m_Wrapper.m_Action_HoldPunch;
         public InputActionMap Get() { return m_Wrapper.m_Action; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -257,6 +280,9 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @Crouch.started += instance.OnCrouch;
             @Crouch.performed += instance.OnCrouch;
             @Crouch.canceled += instance.OnCrouch;
+            @HoldPunch.started += instance.OnHoldPunch;
+            @HoldPunch.performed += instance.OnHoldPunch;
+            @HoldPunch.canceled += instance.OnHoldPunch;
         }
 
         private void UnregisterCallbacks(IActionActions instance)
@@ -264,6 +290,9 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @Crouch.started -= instance.OnCrouch;
             @Crouch.performed -= instance.OnCrouch;
             @Crouch.canceled -= instance.OnCrouch;
+            @HoldPunch.started -= instance.OnHoldPunch;
+            @HoldPunch.performed -= instance.OnHoldPunch;
+            @HoldPunch.canceled -= instance.OnHoldPunch;
         }
 
         public void RemoveCallbacks(IActionActions instance)
@@ -288,5 +317,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     public interface IActionActions
     {
         void OnCrouch(InputAction.CallbackContext context);
+        void OnHoldPunch(InputAction.CallbackContext context);
     }
 }

@@ -10,9 +10,11 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
     [HideInInspector] public InputSystem s_playerInput;
     [HideInInspector] public PlayerMovement s_playerMovement;
     [HideInInspector] public PlayerCrouch s_playerCrouch;
+    [HideInInspector] public FistCombat s_playerFistCombat;
 
     [Header("===== Player Movement =====")]
-    public float f_moveSpeed;
+    public float f_walkSpeed;
+    [HideInInspector] public float f_moveSpeed;
     [HideInInspector] public Vector2 v_moveInput;
     [HideInInspector] public float f_mouseX;
     [HideInInspector] public float f_mouseY;
@@ -21,9 +23,19 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
     public Transform t_cameraPosition;
 
     [Header("===== Player Crouch =====")]
-    [HideInInspector] public bool b_isCrouch;
     public float f_standHeight;
     public float f_crouchHeight;
+    [HideInInspector] public bool b_isCrouch;
+
+    [Header("===== Player Fist Combat =====")]
+    public float f_holdTimeToPunch;
+    public float f_maxHoldTime;
+    public float f_fistDelay;
+    public Collider c_punchCol;
+    [HideInInspector] public float f_holdMoveSpeed;
+    [HideInInspector] public bool b_isHold;
+    [HideInInspector] public bool b_canPunch;
+
     private void Awake()
     {
         c_collider = GetComponent<CapsuleCollider>();
@@ -31,6 +43,8 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
         s_playerInput = GetComponent<InputSystem>();
         s_playerMovement = GetComponent<PlayerMovement>();
         s_playerCrouch = GetComponent<PlayerCrouch>();
+        s_playerFistCombat = GetComponent<FistCombat>();
+        f_moveSpeed = f_walkSpeed;
     }
 
 }

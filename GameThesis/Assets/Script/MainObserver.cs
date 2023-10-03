@@ -17,7 +17,7 @@ public abstract class MainObserver : MonoBehaviour
         _observers.Remove(observer);
     }
 
-    protected void ActiveAllObserver(PlayerAction action)
+    protected void ActiveAllObserver(ActionObserver action)
     {
         _observers.ForEach((_observers) => { _observers.FuncToDo(action); });
     }
@@ -26,10 +26,10 @@ public abstract class MainObserver : MonoBehaviour
 
 public interface IObserver
 {
-    public void FuncToDo(PlayerAction action);
+    public void FuncToDo(ActionObserver action);
 }
 
-public enum PlayerAction
+public enum ActionObserver
 {
-    
+    PlayerHoldPunch, PlayerPunch
 }
