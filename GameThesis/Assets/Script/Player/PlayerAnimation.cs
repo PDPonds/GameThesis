@@ -24,7 +24,7 @@ public class PlayerAnimation : Auto_Singleton<PlayerAnimation>, IObserver
             case ActionObserver.PlayerPunch:
 
                 animator.SetBool("isHold", false);
-                animator.Play("Armature|Punch");
+                animator.Play("Punch");
 
                 break;
             default: break;

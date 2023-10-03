@@ -35,6 +35,7 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
     [HideInInspector] public float f_holdMoveSpeed;
     [HideInInspector] public bool b_isHold;
     [HideInInspector] public bool b_canPunch;
+    [HideInInspector] public bool b_isAtk;
 
     [Header("===== Player Interactive =====")]
     public float f_interacRange;

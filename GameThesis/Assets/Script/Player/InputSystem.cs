@@ -40,7 +40,6 @@ public class InputSystem : MonoBehaviour
                 if(interactive != null)
                 {
                     interactive.Interaction();
-                    Debug.Log("Interaction");
                 }
             }
         }

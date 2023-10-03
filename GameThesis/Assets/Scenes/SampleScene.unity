@@ -741,11 +741,6 @@ PrefabInstance:
       propertyPath: t_holdObjPoint
       value: 
       objectReference: {fileID: 669764611}
-    - target: {fileID: 1198662052380363880, guid: 3a36f079f935f424a9b3b534a0d36ac2,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2554706629010025491, guid: 3a36f079f935f424a9b3b534a0d36ac2,
         type: 3}
       propertyPath: m_Name
