@@ -17,15 +17,18 @@ public class PlayerMovement : MonoBehaviour
 
     void MovePlayer()
     {
-        Vector3 v_dir = new Vector3(PlayerManager.Instance.v_moveInput.x, 0, PlayerManager.Instance.v_moveInput.y);
-        v_dir.Normalize();
-
-        v_moveDir = v_dir.z * PlayerManager.Instance.t_orientation.forward +
-            v_dir.x * PlayerManager.Instance.t_orientation.right;
-
-        if (v_dir.magnitude > 0)
+        if(PlayerManager.Instance.b_canMove)
         {
-            transform.Translate(v_moveDir * PlayerManager.Instance.f_moveSpeed * Time.deltaTime, Space.World);
+            Vector3 v_dir = new Vector3(PlayerManager.Instance.v_moveInput.x, 0, PlayerManager.Instance.v_moveInput.y);
+            v_dir.Normalize();
+
+            v_moveDir = v_dir.z * PlayerManager.Instance.t_orientation.forward +
+                v_dir.x * PlayerManager.Instance.t_orientation.right;
+
+            if (v_dir.magnitude > 0)
+            {
+                transform.Translate(v_moveDir * PlayerManager.Instance.f_moveSpeed * Time.deltaTime, Space.World);
+            }
         }
 
     }

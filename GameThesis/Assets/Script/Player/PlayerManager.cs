@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerManager : Auto_Singleton<PlayerManager>
 {
-
+    public int i_HP;
     [HideInInspector] public Rigidbody c_rb;
     [HideInInspector] public CapsuleCollider c_collider;
     [HideInInspector] public InputSystem s_playerInput;
@@ -21,6 +21,7 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
     public Transform t_playerMesh;
     public Transform t_orientation;
     public Transform t_cameraPosition;
+    public bool b_canMove;
 
     [Header("===== Player Crouch =====")]
     public float f_standHeight;
@@ -32,6 +33,7 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
     public float f_maxHoldTime;
     public float f_fistDelay;
     public Collider c_punchCol;
+    public float f_stuntedTime;
     [HideInInspector] public float f_holdMoveSpeed;
     [HideInInspector] public bool b_isHold;
     [HideInInspector] public bool b_canPunch;
@@ -52,6 +54,11 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
         s_playerCrouch = GetComponent<PlayerCrouch>();
         s_playerFistCombat = GetComponent<FistCombat>();
         f_moveSpeed = f_walkSpeed;
+    }
+
+    public void TakeDamage()
+    {
+        i_HP--;
     }
 
 }

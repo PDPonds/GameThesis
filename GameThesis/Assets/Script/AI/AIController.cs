@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Animations.Rigging;
 
-public class AIController : MonoBehaviour, IInteracable
+public class AIController : Auto_Singleton<AIController>, IInteracable
 {
     [Header("===== AIDetail =====")]
     public int i_HP;
@@ -17,10 +17,12 @@ public class AIController : MonoBehaviour, IInteracable
     [Header("===== AI Atk =====")]
     public float f_atkDelay;
     public float f_atkRange;
+    public Collider c_leftHand;
+    public Collider c_rightHand;
 
-    bool b_atk;
-    float f_currentAtk;
-    int i_atkCount;
+    [HideInInspector] public bool b_atk;
+    [HideInInspector] public float f_currentAtk;
+    [HideInInspector] public int i_atkCount;
 
     [SerializeField] bool b_dragThis;
 
@@ -29,6 +31,8 @@ public class AIController : MonoBehaviour, IInteracable
         anim = GetComponent<Animator>();
         rb = GetComponentsInChildren<Rigidbody>();
         nav = GetComponent<NavMeshAgent>();
+        c_leftHand.enabled = false;
+        c_rightHand.enabled = false;
     }
 
     private void Update()
@@ -62,7 +66,6 @@ public class AIController : MonoBehaviour, IInteracable
                                 i_atkCount++;
                                 f_currentAtk = f_atkDelay;
                                 b_atk = false;
-                                f_currentAtk = f_atkDelay;
                             }
                         }
                         else
@@ -144,6 +147,12 @@ public class AIController : MonoBehaviour, IInteracable
             default: break;
         }
 
+        if (nav.velocity != Vector3.zero)
+        {
+            anim.SetBool("velocity", true);
+        }
+        else anim.SetBool("velocity", false);
+
         if (i_HP <= 0)
         {
             state = AIState.Dead;
@@ -167,6 +176,7 @@ public class AIController : MonoBehaviour, IInteracable
     public void TakeDamege()
     {
         i_HP--;
+        anim.Play("Hit");
     }
 
     void RagdollOn()

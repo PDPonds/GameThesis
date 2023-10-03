@@ -47,7 +47,7 @@ public class PunchTrigger : MonoBehaviour
                     break;
                 default: break;
             }
-
+            Debug.Log("Hit");
             ai.TakeDamege();
             PlayerManager.Instance.c_punchCol.enabled = false;
         }

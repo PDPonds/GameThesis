@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 47fe0f2f7d55ae644b976a376ea206f7
+guid: 045f836c336aaee4aa016705553eea7e
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -33,46 +33,30 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: LeftPunch
+      name: Hit
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0
-      lastFrame: 30
+      lastFrame: 36
       wrapMode: 0
-      orientationOffsetY: -40
+      orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
       loopTime: 0
       loopBlend: 0
-      loopBlendOrientation: 1
+      loopBlendOrientation: 0
       loopBlendPositionY: 0
-      loopBlendPositionXZ: 1
+      loopBlendPositionXZ: 0
       keepOriginalOrientation: 0
       keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 1
+      keepOriginalPositionXZ: 0
       heightFromFeet: 0
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events:
-      - time: 0.7599203
-        functionName: DisableColliderLeftHand
-        data: 
-        objectReferenceParameter: {fileID: 11500000, guid: 6ffd05f1c64ac0041822185058013e2b,
-          type: 3}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.3027523
-        functionName: EnableColliderLeftHand
-        data: 
-        objectReferenceParameter: {fileID: 11500000, guid: 6ffd05f1c64ac0041822185058013e2b,
-          type: 3}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
+      events: []
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}

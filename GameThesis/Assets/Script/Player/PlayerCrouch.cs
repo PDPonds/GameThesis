@@ -14,6 +14,11 @@ public class PlayerCrouch : MonoBehaviour
                 PlayerManager.Instance.t_cameraPosition.transform.localPosition = Vector3.Lerp(
                     PlayerManager.Instance.t_cameraPosition.transform.localPosition, crouchCam, 10f * Time.deltaTime);
             }
+            if (PlayerManager.Instance.t_playerMesh.transform.localPosition != crouchCam)
+            {
+                PlayerManager.Instance.t_playerMesh.transform.localPosition = Vector3.Lerp(
+                    PlayerManager.Instance.t_playerMesh.transform.localPosition, crouchCam, 10f * Time.deltaTime);
+            }
             PlayerManager.Instance.t_orientation.transform.localPosition = crouchCam;
 
             Vector3 crouchCenter = new Vector3(0, PlayerManager.Instance.f_crouchHeight / 2f, 0);
@@ -29,7 +34,11 @@ public class PlayerCrouch : MonoBehaviour
                 PlayerManager.Instance.t_cameraPosition.transform.localPosition = Vector3.Lerp(
                     PlayerManager.Instance.t_cameraPosition.transform.localPosition, standCam, 10f * Time.deltaTime);
             }
-
+            if (PlayerManager.Instance.t_playerMesh.transform.localPosition != standCam)
+            {
+                PlayerManager.Instance.t_playerMesh.transform.localPosition = Vector3.Lerp(
+                    PlayerManager.Instance.t_playerMesh.transform.localPosition, standCam, 10f * Time.deltaTime);
+            }
             PlayerManager.Instance.t_orientation.transform.localPosition = standCam;
 
             Vector3 standCenter = new Vector3(0, PlayerManager.Instance.f_standHeight / 2f, 0);
