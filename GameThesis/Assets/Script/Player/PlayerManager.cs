@@ -36,6 +36,12 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
     [HideInInspector] public bool b_isHold;
     [HideInInspector] public bool b_canPunch;
 
+    [Header("===== Player Interactive =====")]
+    public float f_interacRange;
+    public LayerMask lm_interacMask;
+    public Transform t_holdObjPoint;
+    public GameObject g_interactiveObj;
+
     private void Awake()
     {
         c_collider = GetComponent<CapsuleCollider>();

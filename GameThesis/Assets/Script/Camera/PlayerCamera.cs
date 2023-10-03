@@ -25,7 +25,7 @@ public class PlayerCamera : MonoBehaviour
 
         transform.rotation = Quaternion.Euler(f_xRotation, f_yRotation, 0);
         PlayerManager.Instance.t_orientation.rotation = Quaternion.Euler(0, f_yRotation, 0);
-        //PlayerManager.Instance.t_playerMesh.rotation = Quaternion.Euler(0, f_yRotation, 0);
+        PlayerManager.Instance.t_playerMesh.rotation = Quaternion.Euler(0, f_yRotation, 0);
     }
 
 }

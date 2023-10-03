@@ -19,6 +19,8 @@ public class InputSystem : MonoBehaviour
             ia_action.Action.HoldPunch.performed += i => PlayerManager.Instance.s_playerFistCombat.holdButton();
             ia_action.Action.HoldPunch.canceled += i => PlayerManager.Instance.s_playerFistCombat.releaseHoldButton();
 
+            ia_action.Action.Interactive.performed += i => InteractivePerformed();
+
             ia_action.Enable();
         }
     }
@@ -26,6 +28,22 @@ public class InputSystem : MonoBehaviour
     private void OnDisable()
     {
         ia_action.Disable();
+    }
+
+    void InteractivePerformed()
+    {
+        if (PlayerManager.Instance.g_interactiveObj != null)
+        {
+            if (PlayerManager.Instance.g_interactiveObj.transform.parent != null)
+            {
+                IInteracable interactive = PlayerManager.Instance.g_interactiveObj.GetComponentInParent<IInteracable>();
+                if(interactive != null)
+                {
+                    interactive.Interaction();
+                    Debug.Log("Interaction");
+                }
+            }
+        }
     }
 
 }

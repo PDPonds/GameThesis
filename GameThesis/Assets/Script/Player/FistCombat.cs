@@ -29,6 +29,7 @@ public class FistCombat : MainObserver
             }
         }
 
+        ActiveAllObserver(ActionObserver.PlayerHoldPunch);
     }
 
     public void holdButton()
@@ -37,7 +38,6 @@ public class FistCombat : MainObserver
         {
             PlayerManager.Instance.b_isHold = true;
             PlayerManager.Instance.f_moveSpeed = PlayerManager.Instance.f_holdMoveSpeed;
-            ActiveAllObserver(ActionObserver.PlayerHoldPunch);
         }
     }
 
@@ -50,14 +50,13 @@ public class FistCombat : MainObserver
                 SetUpDalayTime(PlayerManager.Instance.f_fistDelay);
                 ActiveAllObserver(ActionObserver.PlayerPunch);
                 PlayerManager.Instance.c_punchCol.enabled = true;
-                Debug.Log("Punch");
             }
             else
             {
                 SetUpDalayTime(PlayerManager.Instance.f_fistDelay / 2f);
             }
 
-            
+
             PlayerManager.Instance.f_moveSpeed = PlayerManager.Instance.f_walkSpeed;
             PlayerManager.Instance.b_canPunch = false;
             PlayerManager.Instance.b_isHold = false;
