@@ -6,7 +6,7 @@ public class CustomerHurtState : AIBaseState
 {
     public override void EnterState(AIStateManager ai)
     {
-        Debug.Log("AI Hurt");
+
     }
 
     public override void UpdateState(AIStateManager ai)

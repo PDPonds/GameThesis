@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class InputSystem : MonoBehaviour
 {
@@ -37,7 +38,7 @@ public class InputSystem : MonoBehaviour
             if (PlayerManager.Instance.g_interactiveObj.transform.parent != null)
             {
                 IInteracable interactive = PlayerManager.Instance.g_interactiveObj.GetComponentInParent<IInteracable>();
-                if(interactive != null)
+                if (interactive != null)
                 {
                     interactive.Interaction();
                 }

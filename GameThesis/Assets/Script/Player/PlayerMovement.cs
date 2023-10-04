@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
 
     void MovePlayer()
     {
-        if(PlayerManager.Instance.b_canMove)
+        if (PlayerManager.Instance.b_canMove)
         {
             Vector3 v_dir = new Vector3(PlayerManager.Instance.v_moveInput.x, 0, PlayerManager.Instance.v_moveInput.y);
             v_dir.Normalize();

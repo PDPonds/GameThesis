@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8884d7dcd6dda2f4a86f2524bb78394d
+guid: 6de60cfbc3152614ca2e2c627719482d
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -33,11 +33,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Idle
+      name: Hold
       takeName: Take 001
       internalID: 1827226128182048838
       firstFrame: 0
-      lastFrame: 88
+      lastFrame: 40
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -124,7 +124,7 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 8035cece7cd481f4aa39c8cb74b61f05,
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 5ca6824177c529f4d83924fd4c04e2c5,
     type: 3}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2

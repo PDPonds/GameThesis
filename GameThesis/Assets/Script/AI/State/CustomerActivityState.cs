@@ -5,7 +5,7 @@ public class CustomerActivityState : AIBaseState
 {
     public override void EnterState(AIStateManager ai)
     {
-        Debug.Log("Customer Activity");
+
     }
 
     public override void UpdateState(AIStateManager ai)

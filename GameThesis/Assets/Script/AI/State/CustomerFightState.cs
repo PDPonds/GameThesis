@@ -5,7 +5,7 @@ public class CustomerFightState : AIBaseState
 {
     public override void EnterState(AIStateManager ai)
     {
-        Debug.Log("Customer Fight");
+
     }
 
     public override void UpdateState(AIStateManager ai)

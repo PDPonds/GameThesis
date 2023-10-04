@@ -10,7 +10,6 @@ public class CustomerAttackState : AIBaseState
         customerStateManager.b_canAtk = false;
         customerStateManager.f_currentAtkDelay = customerStateManager.f_atkDelay;
 
-        Debug.Log("Customer Atk");
     }
 
     public override void UpdateState(AIStateManager ai)
