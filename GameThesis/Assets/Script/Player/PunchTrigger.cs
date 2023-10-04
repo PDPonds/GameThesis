@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PunchTrigger : MonoBehaviour
+public class PunchTrigger : MainObserver
 {
     private void OnTriggerEnter(Collider other)
     {
@@ -14,6 +14,7 @@ public class PunchTrigger : MonoBehaviour
                 damageAble.TakeDamage(1);
                 PlayerManager.Instance.c_punchCol.enabled = false;
                 StartCoroutine(pauseAnim());
+                ActiveAllObserver(ActionObserver.PlayerAttackHit);
             }
         }
     }

@@ -31,5 +31,5 @@ public interface IObserver
 
 public enum ActionObserver
 {
-    PlayerHoldPunch, PlayerPunch
+    PlayerHoldPunch, PlayerPunch, PlayerAttackHit
 }

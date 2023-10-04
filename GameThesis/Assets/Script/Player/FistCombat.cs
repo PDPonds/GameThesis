@@ -5,7 +5,7 @@ using UnityEngine;
 public class FistCombat : MainObserver
 {
     float f_delayTime;
-    /*[HideInInspector]*/ public float f_holdTime;
+    [HideInInspector] public float f_holdTime;
 
     private void Update()
     {
