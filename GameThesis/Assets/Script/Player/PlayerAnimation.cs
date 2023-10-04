@@ -7,6 +7,7 @@ public class PlayerAnimation : Auto_Singleton<PlayerAnimation>, IObserver
     public MainObserver s_fistCombat;
 
     Animator animator;
+
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();

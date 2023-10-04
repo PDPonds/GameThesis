@@ -59,6 +59,11 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
     public void TakeDamage()
     {
         i_HP--;
+        b_isAtk = false;
+        b_canPunch = false;
+        b_isHold = false;
+        s_playerFistCombat.f_holdTime = 0;
+
     }
 
 }

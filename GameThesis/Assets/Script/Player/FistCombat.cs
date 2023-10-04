@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class FistCombat : MainObserver
 {
-    [SerializeField] float f_delayTime;
-    [SerializeField] float f_holdTime;
+    float f_delayTime;
+    [HideInInspector] public float f_holdTime;
 
     private void Update()
     {
