@@ -13,7 +13,18 @@ public class PunchTrigger : MonoBehaviour
             {
                 damageAble.TakeDamage(1);
                 PlayerManager.Instance.c_punchCol.enabled = false;
+                StartCoroutine(pauseAnim());
             }
         }
     }
+
+    IEnumerator pauseAnim()
+    {
+        PlayerAnimation.Instance.animator.SetBool("isAtk", false);
+        PlayerAnimation.Instance.animator.SetBool("isHold", false);
+        PlayerAnimation.Instance.animator.speed = 0;
+        yield return new WaitForSeconds(.2f);
+        PlayerAnimation.Instance.animator.speed = 1;
+    }
+
 }

@@ -6,7 +6,7 @@ public class PlayerAnimation : Auto_Singleton<PlayerAnimation>, IObserver
 {
     public MainObserver s_fistCombat;
 
-    Animator animator;
+    [HideInInspector] public Animator animator;
 
     private void Awake()
     {
@@ -24,13 +24,14 @@ public class PlayerAnimation : Auto_Singleton<PlayerAnimation>, IObserver
                 break;
             case ActionObserver.PlayerPunch:
 
-                animator.SetBool("isHold", false);
-                animator.Play("Punch");
+                animator.SetBool("isAtk", true);
 
                 break;
             default: break;
         }
     }
+
+
 
     private void OnEnable()
     {

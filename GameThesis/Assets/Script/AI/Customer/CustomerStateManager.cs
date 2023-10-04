@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class CustomerStateManager : AIStateManager, IDamageable
+public class CustomerStateManager : AIStateManager, IDamageable, IInteracable
 {
     public override AIBaseState s_currentState { get; set; }
 
@@ -89,6 +89,27 @@ public class CustomerStateManager : AIStateManager, IDamageable
     {
         c_leftHandPunch.enabled = false;
         c_rightHandPunch.enabled = false;
+    }
+
+    public void Interaction()
+    {
+        if (s_currentState == s_deadState)
+        {
+            if (PlayerManager.Instance.g_dragObj == null)
+            {
+                foreach (Rigidbody rb in rb) { rb.useGravity = false; }
+                PlayerManager.Instance.g_dragObj = this.gameObject;
+            }
+            else
+            {
+                if (PlayerManager.Instance.g_dragObj == this.gameObject)
+                {
+                    foreach (Rigidbody rb in rb) { rb.useGravity = true; }
+                    PlayerManager.Instance.g_dragObj = null;
+
+                }
+            }
+        }
     }
 
 }

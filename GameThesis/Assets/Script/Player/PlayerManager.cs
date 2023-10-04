@@ -33,7 +33,6 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
     public float f_maxHoldTime;
     public float f_fistDelay;
     public Collider c_punchCol;
-    public float f_stuntedTime;
     [HideInInspector] public float f_holdMoveSpeed;
     [HideInInspector] public bool b_isHold;
     [HideInInspector] public bool b_canPunch;
@@ -44,6 +43,9 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
     public LayerMask lm_interacMask;
     public Transform t_holdObjPoint;
     public GameObject g_interactiveObj;
+
+    [Header("===== Player Drag =====")]
+    public GameObject g_dragObj;
 
     private void Awake()
     {

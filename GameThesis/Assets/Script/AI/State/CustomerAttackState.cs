@@ -10,14 +10,6 @@ public class CustomerAttackState : AIBaseState
         customerStateManager.b_canAtk = false;
         customerStateManager.f_currentAtkDelay = customerStateManager.f_atkDelay;
 
-    }
-
-    public override void UpdateState(AIStateManager ai)
-    {
-        CustomerStateManager customerStateManager = (CustomerStateManager)ai;
-        customerStateManager.RagdollOff();
-        customerStateManager.agent.velocity = Vector3.zero;
-
         if (customerStateManager.i_atkCount % 2 == 0)
         {
             customerStateManager.anim.Play("LeftPunch");
@@ -29,8 +21,15 @@ public class CustomerAttackState : AIBaseState
             customerStateManager.c_rightHandPunch.enabled = true;
 
         }
+    }
 
-        if (customerStateManager.anim.GetCurrentAnimatorStateInfo(0).length > 0.9f)
+    public override void UpdateState(AIStateManager ai)
+    {
+        CustomerStateManager customerStateManager = (CustomerStateManager)ai;
+
+        customerStateManager.agent.velocity = Vector3.zero;
+
+        if (customerStateManager.anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.9f)
         {
             customerStateManager.SwitchState(customerStateManager.s_fightState);
         }

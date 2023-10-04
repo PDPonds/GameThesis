@@ -50,16 +50,32 @@ public class FistCombat : MainObserver
                 SetUpDalayTime(PlayerManager.Instance.f_fistDelay);
                 ActiveAllObserver(ActionObserver.PlayerPunch);
                 PlayerManager.Instance.c_punchCol.enabled = true;
+                StartCoroutine(SetAtkFalse());
             }
             else
             {
                 SetUpDalayTime(PlayerManager.Instance.f_fistDelay / 2f);
+                PlayerAnimation.Instance.animator.SetBool("isHold", false);
             }
 
             PlayerManager.Instance.f_moveSpeed = PlayerManager.Instance.f_walkSpeed;
             PlayerManager.Instance.b_canPunch = false;
             PlayerManager.Instance.b_isHold = false;
             f_holdTime = 0;
+        }
+
+    }
+
+    IEnumerator SetAtkFalse()
+    {
+        yield return new WaitForSeconds(PlayerAnimation.Instance.animator.GetCurrentAnimatorStateInfo(0).length);
+        if (PlayerAnimation.Instance.animator.GetCurrentAnimatorStateInfo(0).IsName("Punch"))
+        {
+            if (PlayerAnimation.Instance.animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.9f)
+            {
+                PlayerAnimation.Instance.animator.SetBool("isAtk", false);
+                PlayerAnimation.Instance.animator.SetBool("isHold", false);
+            }
         }
 
     }
