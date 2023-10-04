@@ -10,6 +10,7 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
     [HideInInspector] public InputSystem s_playerInput;
     [HideInInspector] public PlayerMovement s_playerMovement;
     [HideInInspector] public FistCombat s_playerFistCombat;
+    [HideInInspector] public PlayerGuard s_playerGuard;
 
     [Header("===== Player Movement =====")]
     public float f_walkSpeed;
@@ -41,6 +42,12 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
     [Header("===== Player Drag =====")]
     public GameObject g_dragObj;
 
+    [Header("===== Player Gaurd =====")]
+    public float f_gaurdTime;
+    public float f_guardDelay;
+    [HideInInspector] public bool b_isGuard;
+    [HideInInspector] public bool b_canGuard;
+
     private void Awake()
     {
         c_collider = GetComponent<CapsuleCollider>();
@@ -48,6 +55,8 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
         s_playerInput = GetComponent<InputSystem>();
         s_playerMovement = GetComponent<PlayerMovement>();
         s_playerFistCombat = GetComponent<FistCombat>();
+        s_playerGuard = GetComponent<PlayerGuard>();
+
         f_moveSpeed = f_walkSpeed;
     }
 

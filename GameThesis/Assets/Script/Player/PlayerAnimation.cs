@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerAnimation : Auto_Singleton<PlayerAnimation>, IObserver
 {
     public MainObserver s_fistCombat;
+    public MainObserver s_playerGuard;
 
     [HideInInspector] public Animator animator;
 
@@ -27,6 +28,11 @@ public class PlayerAnimation : Auto_Singleton<PlayerAnimation>, IObserver
                 animator.SetBool("isAtk", true);
 
                 break;
+            case ActionObserver.PlayerGuard:
+
+                animator.SetBool("isGuard", PlayerManager.Instance.b_isGuard);
+
+                break;
             default: break;
         }
     }
@@ -36,11 +42,13 @@ public class PlayerAnimation : Auto_Singleton<PlayerAnimation>, IObserver
     private void OnEnable()
     {
         s_fistCombat.AddObserver(this);
+        s_playerGuard.AddObserver(this);
     }
 
     private void OnDisable()
     {
         s_fistCombat.RemoveObserver(this);
+        s_playerGuard.RemoveObserver(this);
     }
 
 }

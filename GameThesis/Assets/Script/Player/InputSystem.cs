@@ -17,6 +17,8 @@ public class InputSystem : MonoBehaviour
             ia_action.Action.HoldPunch.performed += i => PlayerManager.Instance.s_playerFistCombat.holdButton();
             ia_action.Action.HoldPunch.canceled += i => PlayerManager.Instance.s_playerFistCombat.releaseHoldButton();
 
+            ia_action.Action.Guard.performed += i => Guard();
+
             ia_action.Action.Interactive.performed += i => InteractivePerformed();
 
             ia_action.Enable();
@@ -43,4 +45,13 @@ public class InputSystem : MonoBehaviour
         }
     }
 
+    void Guard()
+    {
+        if (PlayerManager.Instance.b_canGuard && !PlayerManager.Instance.b_isHold && !PlayerManager.Instance.b_isGuard)
+        {
+            PlayerManager.Instance.s_playerGuard.f_currentDelay = PlayerManager.Instance.f_guardDelay;
+            PlayerManager.Instance.b_isGuard = true;
+            PlayerManager.Instance.b_canGuard = false;
+        }
+    }
 }

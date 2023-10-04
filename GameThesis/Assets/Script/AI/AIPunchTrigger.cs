@@ -8,7 +8,14 @@ public class AIPunchTrigger : MonoBehaviour
     {
         if (other.TryGetComponent(out PlayerManager player))
         {
-            player.TakeDamage();
+            if (!player.b_isGuard)
+            {
+                player.TakeDamage();
+            }
+            else
+            {
+                Debug.Log("Block");
+            }
 
             CustomerStateManager customerStateManager = transform.GetComponentInParent<CustomerStateManager>();
 
