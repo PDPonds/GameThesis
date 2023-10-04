@@ -9,7 +9,6 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
     [HideInInspector] public CapsuleCollider c_collider;
     [HideInInspector] public InputSystem s_playerInput;
     [HideInInspector] public PlayerMovement s_playerMovement;
-    [HideInInspector] public PlayerCrouch s_playerCrouch;
     [HideInInspector] public FistCombat s_playerFistCombat;
 
     [Header("===== Player Movement =====")]
@@ -22,11 +21,6 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
     public Transform t_orientation;
     public Transform t_cameraPosition;
     public bool b_canMove;
-
-    [Header("===== Player Crouch =====")]
-    public float f_standHeight;
-    public float f_crouchHeight;
-    [HideInInspector] public bool b_isCrouch;
 
     [Header("===== Player Fist Combat =====")]
     public float f_holdTimeToPunch;
@@ -53,7 +47,6 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
         c_rb = GetComponent<Rigidbody>();
         s_playerInput = GetComponent<InputSystem>();
         s_playerMovement = GetComponent<PlayerMovement>();
-        s_playerCrouch = GetComponent<PlayerCrouch>();
         s_playerFistCombat = GetComponent<FistCombat>();
         f_moveSpeed = f_walkSpeed;
     }

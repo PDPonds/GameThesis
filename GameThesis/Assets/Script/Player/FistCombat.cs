@@ -5,7 +5,7 @@ using UnityEngine;
 public class FistCombat : MainObserver
 {
     float f_delayTime;
-    [HideInInspector] public float f_holdTime;
+    /*[HideInInspector]*/ public float f_holdTime;
 
     private void Update()
     {
@@ -68,10 +68,10 @@ public class FistCombat : MainObserver
 
     IEnumerator SetAtkFalse()
     {
-        yield return new WaitForSeconds(PlayerAnimation.Instance.animator.GetCurrentAnimatorStateInfo(0).length);
+        yield return new WaitForSeconds(PlayerAnimation.Instance.animator.GetCurrentAnimatorStateInfo(0).length * 0.7f);
         if (PlayerAnimation.Instance.animator.GetCurrentAnimatorStateInfo(0).IsName("Punch"))
         {
-            if (PlayerAnimation.Instance.animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.9f)
+            if (PlayerAnimation.Instance.animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f)
             {
                 PlayerAnimation.Instance.animator.SetBool("isAtk", false);
                 PlayerAnimation.Instance.animator.SetBool("isHold", false);

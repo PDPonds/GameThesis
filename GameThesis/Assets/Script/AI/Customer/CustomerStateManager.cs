@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class CustomerStateManager : AIStateManager, IDamageable, IInteracable
+public class CustomerStateManager : StateManager, IDamageable, IInteracable
 {
-    public override AIBaseState s_currentState { get; set; }
+    public override BaseState s_currentState { get; set; }
 
     public CustomerActivityState s_activityState = new CustomerActivityState();
     public CustomerFightState s_fightState = new CustomerFightState();
@@ -47,12 +47,6 @@ public class CustomerStateManager : AIStateManager, IDamageable, IInteracable
     private void Update()
     {
         s_currentState.UpdateState(this);
-    }
-
-    public void SwitchState(AIBaseState state)
-    {
-        s_currentState = state;
-        state.EnterState(this);
     }
 
     public void TakeDamage(int damage)
