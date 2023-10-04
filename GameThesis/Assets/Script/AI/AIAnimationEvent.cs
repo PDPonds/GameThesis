@@ -4,23 +4,28 @@ using UnityEngine;
 
 public class AIAnimationEvent : MonoBehaviour
 {
+    CustomerStateManager customerStateManager;
+    private void Awake()
+    {
+        customerStateManager = GetComponent<CustomerStateManager>();
+    }
     public void EnableColliderLeftHand()
     {
-        AIController.Instance.c_leftHand.enabled = true;
+        customerStateManager.c_leftHandPunch.enabled = true;
     }
 
     public void DisableColliderLeftHand()
     {
-        AIController.Instance.c_leftHand.enabled = false;
+        customerStateManager.c_leftHandPunch.enabled = false;
     }
 
     public void EnableColliderRightHand()
     {
-        AIController.Instance.c_rightHand.enabled = true;
+        customerStateManager.c_rightHandPunch.enabled = true;
     }
 
     public void DisableColliderRightHand()
     {
-        AIController.Instance.c_rightHand.enabled = false;
+        customerStateManager.c_rightHandPunch.enabled = false;
     }
 }

@@ -4,52 +4,19 @@ using UnityEngine;
 
 public class PunchTrigger : MonoBehaviour
 {
-
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponentInParent<AIController>())
+        Debug.Log("Hit");
+        if (other.CompareTag("Enemy"))
         {
-            AIController ai = other.GetComponentInParent<AIController>();
-            switch (ai.type)
+            Debug.Log("HitEnemy");
+            IDamageable damageAble = other.GetComponentInParent<IDamageable>();
+            if (damageAble != null)
             {
-                case AIType.Customer:
-
-                    switch (ai.state)
-                    {
-                        case AIState.Activity:
-                            ai.state = AIState.Fight;
-                            break;
-                        default: break;
-                    }
-
-                    break;
-                case AIType.Employee:
-
-                    switch (ai.state)
-                    {
-                        case AIState.Activity:
-                            ai.state = AIState.Fight;
-                            break;
-                        default: break;
-                    }
-                    break;
-
-                case AIType.Animal:
-
-                    switch (ai.state)
-                    {
-                        case AIState.Activity:
-                            ai.state = AIState.Escape;
-                            break;
-                        default: break;
-                    }
-
-                    break;
-                default: break;
+                Debug.Log("EnemyTakeDamage");
+                damageAble.TakeDamage(1);
+                PlayerManager.Instance.c_punchCol.enabled = false;
             }
-            Debug.Log("Hit");
-            ai.TakeDamege();
-            PlayerManager.Instance.c_punchCol.enabled = false;
         }
     }
 }

@@ -94,7 +94,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Fight_Idle
+  m_Name: Fight
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -108,7 +108,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: d2bd649dd91242d42948a05589edf5a0,
+  m_Motion: {fileID: -203655887218126122, guid: c6d9a8520d334e54f821b537d59e64e4,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 
@@ -222,7 +222,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Hit
+  m_Name: Hurt
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -253,12 +253,6 @@ AnimatorController:
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: fightState
-    m_Type: 4
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
-  - m_Name: velocity
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
