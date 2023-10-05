@@ -24,10 +24,26 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
     public bool b_canMove;
 
     [Header("===== Player Fist Combat =====")]
-
+    public float f_punchDelay;
+    public float f_heavyPunchTime;
+    public float f_softPunchTime;
+    public Collider c_leftHandPunch;
+    public Collider c_rightHandPunch;
+    [HideInInspector] public bool b_canPunch;
+    [HideInInspector] public bool b_isHold;
+    [HideInInspector] public float f_currentHoldTime;
+    [HideInInspector] public float f_currentPunchDelay;
+    [HideInInspector] public int i_atkCount;
+    [HideInInspector] public Vector3 v_punchHitPoint;
 
     [Header("===== Player Gaurd =====")]
-    public bool b_isGuard;
+    public float f_guardTime;
+    public float f_guardDelay;
+
+    [HideInInspector] public bool b_canGuard;
+    [HideInInspector] public bool b_isGuard;
+    [HideInInspector] public float f_currentGuardDelay;
+    [HideInInspector] public float f_currentGuardTime;
 
     [Header("===== Player Interactive =====")]
     public float f_interacRange;

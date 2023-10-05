@@ -10,6 +10,8 @@ public class PlayerParticle : Auto_Singleton<PlayerParticle>, IObserver
     [Header("===== PlayerPunch =====")]
     public GameObject g_hitShockWave;
 
+
+
     private void OnEnable()
     {
         s_punchTrigger.AddObserver(this);
@@ -26,15 +28,17 @@ public class PlayerParticle : Auto_Singleton<PlayerParticle>, IObserver
         {
             case ActionObserver.PlayerAttackHit:
 
-                StartCoroutine(ActiveAndDisableGameObject(g_hitShockWave, .5f));
+                StartCoroutine(ActiveAndDisableGameObject(g_hitShockWave, .5f, PlayerManager.Instance.v_punchHitPoint));
 
                 break;
+
             default: break;
         }
     }
 
-    IEnumerator ActiveAndDisableGameObject(GameObject obj, float time)
+    IEnumerator ActiveAndDisableGameObject(GameObject obj, float time, Vector3 point)
     {
+        obj.transform.position = point;
         obj.SetActive(true);
         yield return new WaitForSeconds(time);
         obj.SetActive(false);

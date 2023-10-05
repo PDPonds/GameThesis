@@ -129,15 +129,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""HoldPunch"",
                     ""type"": ""Button"",
-                    ""id"": ""3e08370d-7cb3-49ac-a5a7-ea42ed2f59d1"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": ""Hold"",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Punch"",
-                    ""type"": ""Button"",
                     ""id"": ""ee879c45-43e9-453d-b0b7-ec7a3285344a"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
@@ -186,17 +177,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Punch"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""5725216e-ba2e-4016-a997-a71b24e1976c"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
                     ""action"": ""HoldPunch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -215,7 +195,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         m_Action_Interactive = m_Action.FindAction("Interactive", throwIfNotFound: true);
         m_Action_Guard = m_Action.FindAction("Guard", throwIfNotFound: true);
         m_Action_HoldPunch = m_Action.FindAction("HoldPunch", throwIfNotFound: true);
-        m_Action_Punch = m_Action.FindAction("Punch", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -327,7 +306,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     private readonly InputAction m_Action_Interactive;
     private readonly InputAction m_Action_Guard;
     private readonly InputAction m_Action_HoldPunch;
-    private readonly InputAction m_Action_Punch;
     public struct ActionActions
     {
         private @PlayerInputAction m_Wrapper;
@@ -336,7 +314,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         public InputAction @Interactive => m_Wrapper.m_Action_Interactive;
         public InputAction @Guard => m_Wrapper.m_Action_Guard;
         public InputAction @HoldPunch => m_Wrapper.m_Action_HoldPunch;
-        public InputAction @Punch => m_Wrapper.m_Action_Punch;
         public InputActionMap Get() { return m_Wrapper.m_Action; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -358,9 +335,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @HoldPunch.started += instance.OnHoldPunch;
             @HoldPunch.performed += instance.OnHoldPunch;
             @HoldPunch.canceled += instance.OnHoldPunch;
-            @Punch.started += instance.OnPunch;
-            @Punch.performed += instance.OnPunch;
-            @Punch.canceled += instance.OnPunch;
         }
 
         private void UnregisterCallbacks(IActionActions instance)
@@ -377,9 +351,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @HoldPunch.started -= instance.OnHoldPunch;
             @HoldPunch.performed -= instance.OnHoldPunch;
             @HoldPunch.canceled -= instance.OnHoldPunch;
-            @Punch.started -= instance.OnPunch;
-            @Punch.performed -= instance.OnPunch;
-            @Punch.canceled -= instance.OnPunch;
         }
 
         public void RemoveCallbacks(IActionActions instance)
@@ -407,6 +378,5 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         void OnInteractive(InputAction.CallbackContext context);
         void OnGuard(InputAction.CallbackContext context);
         void OnHoldPunch(InputAction.CallbackContext context);
-        void OnPunch(InputAction.CallbackContext context);
     }
 }

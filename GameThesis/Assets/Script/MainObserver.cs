@@ -31,7 +31,8 @@ public interface IObserver
 
 public enum ActionObserver
 {
-    PlayerHoldPunch, PlayerPunch, PlayerAttackHit, PlayerGuard,
+    PlayerHeavyPunch, PlayerLeftSoftPunch, PlayerRightSoftPunch, PlayerAttackHit,
+    PlayerGuard,
 
 
     AIPunchHitBlock, AIPunchHit, AIPunch

@@ -18,14 +18,19 @@ public class PlayerAnimation : Auto_Singleton<PlayerAnimation>, IObserver
     {
         switch (action)
         {
-            case ActionObserver.PlayerHoldPunch:
+            case ActionObserver.PlayerHeavyPunch:
 
-                //animator.SetBool("isHold", PlayerManager.Instance.b_isHold);
+                animator.Play("HeavyPunch");
 
                 break;
-            case ActionObserver.PlayerPunch:
+            case ActionObserver.PlayerLeftSoftPunch:
 
-                animator.SetBool("isAtk", true);
+                animator.Play("LeftPunch");
+
+                break;
+            case ActionObserver.PlayerRightSoftPunch:
+
+                animator.Play("RightPunch");
 
                 break;
             case ActionObserver.PlayerGuard:

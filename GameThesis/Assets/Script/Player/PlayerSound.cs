@@ -17,7 +17,7 @@ public class PlayerSound : Auto_Singleton<PlayerSound>, IObserver
 
     [Header("===== Audio Clip =====")]
     public List<AudioClip> ac_playerPunchClip = new List<AudioClip>();
-    public List<AudioClip> ac_playerHoldClip = new List<AudioClip>();
+    public List<AudioClip> ac_playerHeavyPunchClip = new List<AudioClip>();
     public List<AudioClip> ac_hitClip = new List<AudioClip>();
 
 
@@ -44,14 +44,19 @@ public class PlayerSound : Auto_Singleton<PlayerSound>, IObserver
     {
         switch (action)
         {
-            case ActionObserver.PlayerPunch:
+            case ActionObserver.PlayerLeftSoftPunch:
 
                 PlaySound(as_playerPunchSource, ac_playerPunchClip);
 
                 break;
-            case ActionObserver.PlayerHoldPunch:
+            case ActionObserver.PlayerRightSoftPunch:
 
-                PlaySound(as_playerHoldSource, ac_playerHoldClip);
+                PlaySound(as_playerPunchSource, ac_playerPunchClip);
+
+                break;
+            case ActionObserver.PlayerHeavyPunch:
+
+                PlaySound(as_playerHoldSource, ac_playerHeavyPunchClip);
 
                 break;
             case ActionObserver.PlayerAttackHit:

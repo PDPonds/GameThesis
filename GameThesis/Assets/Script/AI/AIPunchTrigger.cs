@@ -22,17 +22,18 @@ public class AIPunchTrigger : MainObserver
                 ActiveAllObserver(ActionObserver.AIPunchHitBlock);
 
             }
+        }
 
-            CustomerStateManager customerStateManager = transform.GetComponentInParent<CustomerStateManager>();
+        CustomerStateManager customerStateManager = transform.GetComponentInParent<CustomerStateManager>();
 
-            if (customerStateManager.i_atkCount % 2 == 0)
-            {
-                customerStateManager.c_leftHandPunch.enabled = false;
-            }
-            else
-            {
-                customerStateManager.c_rightHandPunch.enabled = false;
-            }
+        if (customerStateManager.i_atkCount % 2 == 0)
+        {
+            customerStateManager.c_leftHandPunch.enabled = false;
+        }
+        else
+        {
+            customerStateManager.c_rightHandPunch.enabled = false;
         }
     }
 }
+

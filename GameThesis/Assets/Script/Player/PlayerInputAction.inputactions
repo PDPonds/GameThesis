@@ -107,15 +107,6 @@
                 {
                     "name": "HoldPunch",
                     "type": "Button",
-                    "id": "3e08370d-7cb3-49ac-a5a7-ea42ed2f59d1",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "Hold",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Punch",
-                    "type": "Button",
                     "id": "ee879c45-43e9-453d-b0b7-ec7a3285344a",
                     "expectedControlType": "Button",
                     "processors": "",
@@ -162,17 +153,6 @@
                     "id": "1df17efe-d48a-49bc-85ec-eab4c3539a67",
                     "path": "<Mouse>/leftButton",
                     "interactions": "Press",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Punch",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "5725216e-ba2e-4016-a997-a71b24e1976c",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "HoldPunch",

@@ -12,7 +12,15 @@ public class PunchTrigger : MainObserver
             if (damageAble != null)
             {
                 damageAble.TakeDamage(1);
-                //PlayerManager.Instance.c_punchCol.enabled = false;
+                if (transform.TryGetComponent(out Collider collider))
+                {
+                    if (collider.enabled == true)
+                    {
+                        collider.enabled = false;
+                    }
+                }
+                Vector3 hitpoint = other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
+                PlayerManager.Instance.v_punchHitPoint = hitpoint;
                 ActiveAllObserver(ActionObserver.PlayerAttackHit);
             }
         }
