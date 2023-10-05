@@ -11,7 +11,10 @@ public class AIPunchTrigger : MainObserver
         {
             if (!player.b_isGuard)
             {
-                player.TakeDamage();
+                if (player.TakeDamage())
+                {
+
+                }
                 ActiveAllObserver(ActionObserver.AIPunchHit);
             }
             else

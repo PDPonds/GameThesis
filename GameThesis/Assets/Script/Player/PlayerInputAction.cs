@@ -109,15 +109,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""HoldPunch"",
-                    ""type"": ""Button"",
-                    ""id"": ""3e08370d-7cb3-49ac-a5a7-ea42ed2f59d1"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Interactive"",
                     ""type"": ""Button"",
                     ""id"": ""4761b539-7e25-4a11-ab6f-a523bd8d3010"",
@@ -134,6 +125,24 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""HoldPunch"",
+                    ""type"": ""Button"",
+                    ""id"": ""3e08370d-7cb3-49ac-a5a7-ea42ed2f59d1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Punch"",
+                    ""type"": ""Button"",
+                    ""id"": ""ee879c45-43e9-453d-b0b7-ec7a3285344a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -145,17 +154,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Crouch"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""5725216e-ba2e-4016-a997-a71b24e1976c"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""HoldPunch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -180,6 +178,28 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""action"": ""Guard"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1df17efe-d48a-49bc-85ec-eab4c3539a67"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Punch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5725216e-ba2e-4016-a997-a71b24e1976c"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""HoldPunch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -192,9 +212,10 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         // Action
         m_Action = asset.FindActionMap("Action", throwIfNotFound: true);
         m_Action_Crouch = m_Action.FindAction("Crouch", throwIfNotFound: true);
-        m_Action_HoldPunch = m_Action.FindAction("HoldPunch", throwIfNotFound: true);
         m_Action_Interactive = m_Action.FindAction("Interactive", throwIfNotFound: true);
         m_Action_Guard = m_Action.FindAction("Guard", throwIfNotFound: true);
+        m_Action_HoldPunch = m_Action.FindAction("HoldPunch", throwIfNotFound: true);
+        m_Action_Punch = m_Action.FindAction("Punch", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -303,17 +324,19 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Action;
     private List<IActionActions> m_ActionActionsCallbackInterfaces = new List<IActionActions>();
     private readonly InputAction m_Action_Crouch;
-    private readonly InputAction m_Action_HoldPunch;
     private readonly InputAction m_Action_Interactive;
     private readonly InputAction m_Action_Guard;
+    private readonly InputAction m_Action_HoldPunch;
+    private readonly InputAction m_Action_Punch;
     public struct ActionActions
     {
         private @PlayerInputAction m_Wrapper;
         public ActionActions(@PlayerInputAction wrapper) { m_Wrapper = wrapper; }
         public InputAction @Crouch => m_Wrapper.m_Action_Crouch;
-        public InputAction @HoldPunch => m_Wrapper.m_Action_HoldPunch;
         public InputAction @Interactive => m_Wrapper.m_Action_Interactive;
         public InputAction @Guard => m_Wrapper.m_Action_Guard;
+        public InputAction @HoldPunch => m_Wrapper.m_Action_HoldPunch;
+        public InputAction @Punch => m_Wrapper.m_Action_Punch;
         public InputActionMap Get() { return m_Wrapper.m_Action; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -326,15 +349,18 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @Crouch.started += instance.OnCrouch;
             @Crouch.performed += instance.OnCrouch;
             @Crouch.canceled += instance.OnCrouch;
-            @HoldPunch.started += instance.OnHoldPunch;
-            @HoldPunch.performed += instance.OnHoldPunch;
-            @HoldPunch.canceled += instance.OnHoldPunch;
             @Interactive.started += instance.OnInteractive;
             @Interactive.performed += instance.OnInteractive;
             @Interactive.canceled += instance.OnInteractive;
             @Guard.started += instance.OnGuard;
             @Guard.performed += instance.OnGuard;
             @Guard.canceled += instance.OnGuard;
+            @HoldPunch.started += instance.OnHoldPunch;
+            @HoldPunch.performed += instance.OnHoldPunch;
+            @HoldPunch.canceled += instance.OnHoldPunch;
+            @Punch.started += instance.OnPunch;
+            @Punch.performed += instance.OnPunch;
+            @Punch.canceled += instance.OnPunch;
         }
 
         private void UnregisterCallbacks(IActionActions instance)
@@ -342,15 +368,18 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @Crouch.started -= instance.OnCrouch;
             @Crouch.performed -= instance.OnCrouch;
             @Crouch.canceled -= instance.OnCrouch;
-            @HoldPunch.started -= instance.OnHoldPunch;
-            @HoldPunch.performed -= instance.OnHoldPunch;
-            @HoldPunch.canceled -= instance.OnHoldPunch;
             @Interactive.started -= instance.OnInteractive;
             @Interactive.performed -= instance.OnInteractive;
             @Interactive.canceled -= instance.OnInteractive;
             @Guard.started -= instance.OnGuard;
             @Guard.performed -= instance.OnGuard;
             @Guard.canceled -= instance.OnGuard;
+            @HoldPunch.started -= instance.OnHoldPunch;
+            @HoldPunch.performed -= instance.OnHoldPunch;
+            @HoldPunch.canceled -= instance.OnHoldPunch;
+            @Punch.started -= instance.OnPunch;
+            @Punch.performed -= instance.OnPunch;
+            @Punch.canceled -= instance.OnPunch;
         }
 
         public void RemoveCallbacks(IActionActions instance)
@@ -375,8 +404,9 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     public interface IActionActions
     {
         void OnCrouch(InputAction.CallbackContext context);
-        void OnHoldPunch(InputAction.CallbackContext context);
         void OnInteractive(InputAction.CallbackContext context);
         void OnGuard(InputAction.CallbackContext context);
+        void OnHoldPunch(InputAction.CallbackContext context);
+        void OnPunch(InputAction.CallbackContext context);
     }
 }

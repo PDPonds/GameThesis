@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerAnimationEvent : MonoBehaviour
 {
-    public void DisableCollider()
-    {
-        PlayerManager.Instance.c_punchCol.enabled = false;
-    }
+    //public void DisableCollider()
+    //{
+    //    PlayerManager.Instance.c_punchCol.enabled = false;
+    //}
 }

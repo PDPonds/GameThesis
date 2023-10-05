@@ -24,14 +24,10 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
     public bool b_canMove;
 
     [Header("===== Player Fist Combat =====")]
-    public float f_holdTimeToPunch;
-    public float f_maxHoldTime;
-    public float f_fistDelay;
-    public Collider c_punchCol;
-    [HideInInspector] public float f_holdMoveSpeed;
-    [HideInInspector] public bool b_isHold;
-    [HideInInspector] public bool b_canPunch;
-    [HideInInspector] public bool b_isAtk;
+
+
+    [Header("===== Player Gaurd =====")]
+    public bool b_isGuard;
 
     [Header("===== Player Interactive =====")]
     public float f_interacRange;
@@ -43,11 +39,7 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
     public GameObject g_dragObj;
     public Transform t_dragPos;
 
-    [Header("===== Player Gaurd =====")]
-    public float f_gaurdTime;
-    public float f_guardDelay;
-    [HideInInspector] public bool b_isGuard;
-    [HideInInspector] public bool b_canGuard;
+
 
     private void Awake()
     {
@@ -64,10 +56,7 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
     public bool TakeDamage()
     {
         i_HP--;
-        b_isAtk = false;
-        b_canPunch = false;
-        b_isHold = false;
-        s_playerFistCombat.f_holdTime = 0;
+
         return true;
     }
 

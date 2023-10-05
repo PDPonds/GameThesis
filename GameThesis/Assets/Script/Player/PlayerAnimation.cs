@@ -20,7 +20,7 @@ public class PlayerAnimation : Auto_Singleton<PlayerAnimation>, IObserver
         {
             case ActionObserver.PlayerHoldPunch:
 
-                animator.SetBool("isHold", PlayerManager.Instance.b_isHold);
+                //animator.SetBool("isHold", PlayerManager.Instance.b_isHold);
 
                 break;
             case ActionObserver.PlayerPunch:

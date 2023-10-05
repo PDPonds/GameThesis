@@ -14,10 +14,11 @@ public class InputSystem : MonoBehaviour
         {
             ia_action.PlayerMovement.Move.performed += i => PlayerManager.Instance.v_moveInput = i.ReadValue<Vector2>();
 
-            ia_action.Action.HoldPunch.performed += i => PlayerManager.Instance.s_playerFistCombat.holdButton();
-            ia_action.Action.HoldPunch.canceled += i => PlayerManager.Instance.s_playerFistCombat.releaseHoldButton();
+            //ia_action.Action.HoldPunch.performed += i =>
+            //
+            //ia_action.Action.Punch.performed += i => 
 
-            ia_action.Action.Guard.performed += i => Guard();
+            //ia_action.Action.Guard.performed += i => 
 
             ia_action.Action.Interactive.performed += i => InteractivePerformed();
 
@@ -45,13 +46,4 @@ public class InputSystem : MonoBehaviour
         }
     }
 
-    void Guard()
-    {
-        if (PlayerManager.Instance.b_canGuard && !PlayerManager.Instance.b_isHold && !PlayerManager.Instance.b_isGuard)
-        {
-            PlayerManager.Instance.s_playerGuard.f_currentDelay = PlayerManager.Instance.f_guardDelay;
-            PlayerManager.Instance.b_isGuard = true;
-            PlayerManager.Instance.b_canGuard = false;
-        }
-    }
 }
