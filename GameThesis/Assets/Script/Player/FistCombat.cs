@@ -56,6 +56,7 @@ public class FistCombat : MainObserver
             {
                 SetUpDalayTime(PlayerManager.Instance.f_fistDelay / 2f);
                 PlayerAnimation.Instance.animator.SetBool("isHold", false);
+                PlayerAnimation.Instance.animator.SetBool("isAtk", false);
             }
 
             PlayerManager.Instance.f_moveSpeed = PlayerManager.Instance.f_walkSpeed;

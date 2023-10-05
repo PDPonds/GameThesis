@@ -2,19 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AIPunchTrigger : MonoBehaviour
+public class AIPunchTrigger : MainObserver
 {
     private void OnTriggerEnter(Collider other)
     {
+        ActiveAllObserver(ActionObserver.AIPunch);
         if (other.TryGetComponent(out PlayerManager player))
         {
             if (!player.b_isGuard)
             {
                 player.TakeDamage();
+                ActiveAllObserver(ActionObserver.AIPunchHit);
             }
             else
             {
-                Debug.Log("Block");
+                ActiveAllObserver(ActionObserver.AIPunchHitBlock);
+
             }
 
             CustomerStateManager customerStateManager = transform.GetComponentInParent<CustomerStateManager>();

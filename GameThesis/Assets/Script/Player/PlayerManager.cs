@@ -61,14 +61,14 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
         f_moveSpeed = f_walkSpeed;
     }
 
-    public void TakeDamage()
+    public bool TakeDamage()
     {
         i_HP--;
         b_isAtk = false;
         b_canPunch = false;
         b_isHold = false;
         s_playerFistCombat.f_holdTime = 0;
-
+        return true;
     }
 
 }

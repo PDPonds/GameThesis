@@ -3,60 +3,55 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerSound : Auto_Singleton<PlayerSound>, IObserver
+public class AISoundController : MonoBehaviour, IObserver
 {
-    [Header("===== Main Observer =====")]
-    public MainObserver s_fistCombat;
-    public MainObserver s_hit;
+    public MainObserver s_leftPunchTrigger;
+    public MainObserver s_rightPunchTrigger;
 
-    [Header("===== Audio Source =====")]
-    public AudioSource as_playerPunchSource;
-    public AudioSource as_playerHoldSource;
-    public AudioSource as_playerHitSource;
+    public AudioSource as_punchHitBlock;
+    public AudioSource as_punchHit;
+    public AudioSource as_punch;
 
-
-    [Header("===== Audio Clip =====")]
-    public List<AudioClip> ac_playerPunchClip = new List<AudioClip>();
-    public List<AudioClip> ac_playerHoldClip = new List<AudioClip>();
-    public List<AudioClip> ac_hitClip = new List<AudioClip>();
-
+    public List<AudioClip> ac_punchHitBlock = new List<AudioClip>();
+    public List<AudioClip> ac_punchHit = new List<AudioClip>();
+    public List<AudioClip> ac_punch = new List<AudioClip>();
 
     private void OnEnable()
     {
-        s_fistCombat.AddObserver(this);
-        s_hit.AddObserver(this);
-
+        s_rightPunchTrigger.AddObserver(this);
+        s_leftPunchTrigger.AddObserver(this);
     }
 
     private void OnDisable()
     {
-        s_fistCombat.RemoveObserver(this);
-        s_hit.RemoveObserver(this);
-
+        s_rightPunchTrigger.RemoveObserver(this);
+        s_leftPunchTrigger.RemoveObserver(this);
     }
+
     private void Awake()
     {
-        as_playerPunchSource = InitializedAudioSource(false);
-        as_playerHoldSource = InitializedAudioSource(false);
-        as_playerHitSource = InitializedAudioSource(false);
+        as_punch = InitializedAudioSource(false);
+        as_punchHit = InitializedAudioSource(false);
+        as_punchHitBlock = InitializedAudioSource(false);
     }
+
     public void FuncToDo(ActionObserver action)
     {
         switch (action)
         {
-            case ActionObserver.PlayerPunch:
+            case ActionObserver.AIPunchHitBlock:
 
-                PlaySound(as_playerPunchSource, ac_playerPunchClip);
-
-                break;
-            case ActionObserver.PlayerHoldPunch:
-
-                PlaySound(as_playerHoldSource, ac_playerHoldClip);
+                PlaySound(as_punchHitBlock, ac_punchHitBlock);
 
                 break;
-            case ActionObserver.PlayerAttackHit:
+            case ActionObserver.AIPunchHit:
 
-                PlaySound(as_playerHitSource, ac_hitClip);
+                PlaySound(as_punchHit, ac_punchHit);
+
+                break;
+            case ActionObserver.AIPunch:
+
+                PlaySound(as_punch, ac_punch);
 
                 break;
             default: break;

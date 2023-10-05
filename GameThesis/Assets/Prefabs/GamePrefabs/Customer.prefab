@@ -641,6 +641,21 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 5465940246521907071, guid: 9aaaf0bd240db874d938dcc20b4d50fe,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5465940246521907071, guid: 9aaaf0bd240db874d938dcc20b4d50fe,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5465940246521907071, guid: 9aaaf0bd240db874d938dcc20b4d50fe,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6240733294840144465, guid: 9aaaf0bd240db874d938dcc20b4d50fe,
         type: 3}
       propertyPath: m_Layer
@@ -761,6 +776,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 5195991269414582378}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9aaaf0bd240db874d938dcc20b4d50fe,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2372297061458813180}
     - targetCorrespondingSourceObject: {fileID: 1082271958561512970, guid: 9aaaf0bd240db874d938dcc20b4d50fe,
         type: 3}
       insertIndex: -1
@@ -1700,7 +1719,7 @@ SpringJoint:
   m_ConnectedBody: {fileID: 0}
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0.8, z: 0}
-  m_AutoConfigureConnectedAnchor: 0
+  m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   serializedVersion: 2
   m_Spring: 200
@@ -1798,6 +1817,30 @@ MonoBehaviour:
   rb: []
   anim: {fileID: 0}
   agent: {fileID: 0}
+--- !u!114 &2372297061458813180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6838223316451348711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75c4eab561ae1924faf28b7bcf6f82a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  s_leftPunchTrigger: {fileID: 3875659318129456524}
+  s_rightPunchTrigger: {fileID: 8431771988169983306}
+  as_punchHitBlock: {fileID: 0}
+  as_punchHit: {fileID: 0}
+  as_punch: {fileID: 0}
+  ac_punchHitBlock:
+  - {fileID: 8300000, guid: d5c053a7ec92db043bc298a9aef6cb07, type: 3}
+  ac_punchHit:
+  - {fileID: 8300000, guid: d7af6a12a669c1647b66111cf6fe2caa, type: 3}
+  ac_punch:
+  - {fileID: 8300000, guid: 064bfb791da2cd84da06f681afa030fb, type: 3}
+  - {fileID: 8300000, guid: 68783a421d1b0c94cbc46ba90d14c69d, type: 3}
 --- !u!1 &7271690433501804797 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3948933247560734027, guid: 9aaaf0bd240db874d938dcc20b4d50fe,
