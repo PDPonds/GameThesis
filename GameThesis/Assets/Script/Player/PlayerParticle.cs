@@ -7,9 +7,8 @@ public class PlayerParticle : Auto_Singleton<PlayerParticle>, IObserver
     [Header("===== MainObserver =====")]
     public MainObserver s_punchTrigger;
 
-    [Header("===== Asset =====")]
+    [Header("===== PlayerPunch =====")]
     public GameObject g_hitShockWave;
-
 
     private void OnEnable()
     {
