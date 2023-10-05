@@ -41,6 +41,7 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
 
     [Header("===== Player Drag =====")]
     public GameObject g_dragObj;
+    public Transform t_dragPos;
 
     [Header("===== Player Gaurd =====")]
     public float f_gaurdTime;

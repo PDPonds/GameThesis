@@ -91,16 +91,18 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
         {
             if (PlayerManager.Instance.g_dragObj == null)
             {
-                foreach (Rigidbody rb in rb) { rb.useGravity = false; }
                 PlayerManager.Instance.g_dragObj = this.gameObject;
+                Rigidbody connectRb = PlayerManager.Instance.t_dragPos.GetComponent<Rigidbody>();
+                SpringJoint spring = PlayerManager.Instance.g_dragObj.GetComponentInChildren<SpringJoint>();
+                spring.connectedBody = connectRb;
             }
             else
             {
                 if (PlayerManager.Instance.g_dragObj == this.gameObject)
                 {
-                    foreach (Rigidbody rb in rb) { rb.useGravity = true; }
+                    SpringJoint spring = PlayerManager.Instance.g_dragObj.GetComponentInChildren<SpringJoint>();
+                    spring.connectedBody = null;
                     PlayerManager.Instance.g_dragObj = null;
-
                 }
             }
         }

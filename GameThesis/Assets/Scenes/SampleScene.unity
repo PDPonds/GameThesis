@@ -749,6 +749,36 @@ MonoBehaviour:
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
+--- !u!1 &1470342109 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6711021697568453564, guid: 45558ae7febf88b47ae2d8e6e1601c2a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1082391812656716702}
+  m_PrefabAsset: {fileID: 0}
+--- !u!145 &1470342113
+SpringJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1470342109}
+  m_ConnectedBody: {fileID: 0}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: 0, y: 0.8, z: 0}
+  m_AutoConfigureConnectedAnchor: 0
+  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  serializedVersion: 2
+  m_Spring: 200
+  m_Damper: 0.2
+  m_MinDistance: 0
+  m_MaxDistance: 0
+  m_Tolerance: 0.025
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!1001 &653483152160680215
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -888,7 +918,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6711021697568453564, guid: 45558ae7febf88b47ae2d8e6e1601c2a,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1470342113}
   m_SourcePrefab: {fileID: 100100000, guid: 45558ae7febf88b47ae2d8e6e1601c2a, type: 3}
 --- !u!1001 &6594623196728284094
 PrefabInstance:
