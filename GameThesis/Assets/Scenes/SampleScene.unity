@@ -767,6 +767,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b1aa35c3f4454e4eb4389c46e7fb8d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  s_fistCombat: {fileID: 653483152160680216}
+  s_hit: {fileID: 653483152160680217}
+  as_playerPunchSource: {fileID: 0}
+  as_playerHoldSource: {fileID: 0}
+  as_playerHitSource: {fileID: 0}
+  ac_playerPunchClip: []
+  ac_playerHoldClip: []
+  ac_hitClip: []
 --- !u!1001 &653483152160680215
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -844,6 +852,30 @@ PrefabInstance:
       insertIndex: 6
       addedObject: {fileID: 1481240315}
   m_SourcePrefab: {fileID: 100100000, guid: 3a36f079f935f424a9b3b534a0d36ac2, type: 3}
+--- !u!114 &653483152160680216 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8397674540248559893, guid: 3a36f079f935f424a9b3b534a0d36ac2,
+    type: 3}
+  m_PrefabInstance: {fileID: 653483152160680215}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1481240303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d642cffd9b6a7a488c8f5e017364d37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &653483152160680217 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4110454909252681658, guid: 3a36f079f935f424a9b3b534a0d36ac2,
+    type: 3}
+  m_PrefabInstance: {fileID: 653483152160680215}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a61daf1d979261b4abae48cd667048cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1082391812656716702
 PrefabInstance:
   m_ObjectHideFlags: 0

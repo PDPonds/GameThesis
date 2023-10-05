@@ -6,7 +6,8 @@ using UnityEngine;
 public class PlayerSound : Auto_Singleton<PlayerSound>, IObserver
 {
     [Header("===== Main Observer =====")]
-    public MainObserver s_punchTrigger;
+    public MainObserver s_fistCombat;
+    public MainObserver s_hit;
 
     [Header("===== Audio Source =====")]
     public AudioSource as_playerPunchSource;
@@ -20,12 +21,14 @@ public class PlayerSound : Auto_Singleton<PlayerSound>, IObserver
 
     private void OnEnable()
     {
-        s_punchTrigger.AddObserver(this);
+        s_fistCombat.AddObserver(this);
+        s_hit.AddObserver(this);
     }
 
     private void OnDisable()
     {
-        s_punchTrigger.RemoveObserver(this);
+        s_fistCombat.RemoveObserver(this);
+        s_hit.RemoveObserver(this);
     }
     private void Awake()
     {
@@ -39,11 +42,17 @@ public class PlayerSound : Auto_Singleton<PlayerSound>, IObserver
         {
             case ActionObserver.PlayerPunch:
 
+                PlaySound(as_playerPunchSource, ac_playerPunchClip);
+
                 break;
             case ActionObserver.PlayerHoldPunch:
 
+                PlaySound(as_playerHoldSource, ac_playerHoldClip);
+
                 break;
             case ActionObserver.PlayerAttackHit:
+
+                PlaySound(as_playerHitSource, ac_hitClip);
 
                 break;
             default: break;
@@ -56,14 +65,32 @@ public class PlayerSound : Auto_Singleton<PlayerSound>, IObserver
         source.loop = loop;
     }
 
-    void PlayAudio(AudioSource source)
+    void PlaySound(AudioSource source, List<AudioClip> clips)
     {
-
+        if(clips.Count > 0)
+        {
+            if (clips.Count > 1)
+            {
+                PlayRandomAudio(source, clips);
+            }
+            else
+            {
+                PlaySelectAudio(source, clips, 0);
+            }
+        }
     }
 
-    void PlayRandomAudio(AudioSource source)
+    void PlaySelectAudio(AudioSource source, List<AudioClip> clips, int index)
     {
+        source.clip = clips[index];
+        source.Play();
+    }
 
+    void PlayRandomAudio(AudioSource source, List<AudioClip> clips)
+    {
+        int soundPlayIndex = Random.Range(0, clips.Count);
+        source.clip = clips[soundPlayIndex];
+        source.Play();
     }
 
 }
