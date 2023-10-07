@@ -2719,6 +2719,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d4eba81e4f690d49b083b9b39f22344, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_bloodMat: {fileID: 2100000, guid: 0a40951fdbdc5dd4f97da85d5bc4c2f6, type: 2}
+  t_bloodObj: {fileID: 0}
 --- !u!1001 &1508679268
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3550,6 +3552,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Fade
+      objectReference: {fileID: 0}
+    - target: {fileID: 3252813172149889375, guid: 9e5f478272d270d42b5e12a217e5a15f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4775797083218178421, guid: 9e5f478272d270d42b5e12a217e5a15f,
         type: 3}
