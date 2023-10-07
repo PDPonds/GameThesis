@@ -7,7 +7,8 @@ public class PlayerSound : Auto_Singleton<PlayerSound>, IObserver
 {
     [Header("===== Main Observer =====")]
     public MainObserver s_fistCombat;
-    public MainObserver s_hit;
+    public MainObserver s_rightHit;
+    public MainObserver s_leftHit;
 
     [Header("===== Audio Source =====")]
     public AudioSource as_playerPunchSource;
@@ -24,15 +25,15 @@ public class PlayerSound : Auto_Singleton<PlayerSound>, IObserver
     private void OnEnable()
     {
         s_fistCombat.AddObserver(this);
-        s_hit.AddObserver(this);
-
+        s_rightHit.AddObserver(this);
+        s_leftHit.AddObserver(this);
     }
 
     private void OnDisable()
     {
         s_fistCombat.RemoveObserver(this);
-        s_hit.RemoveObserver(this);
-
+        s_rightHit.RemoveObserver(this);
+        s_leftHit.RemoveObserver(this);
     }
     private void Awake()
     {
@@ -59,7 +60,12 @@ public class PlayerSound : Auto_Singleton<PlayerSound>, IObserver
                 PlaySound(as_playerHoldSource, ac_playerHeavyPunchClip);
 
                 break;
-            case ActionObserver.PlayerAttackHit:
+            case ActionObserver.PlayerAttackRightHit:
+
+                PlaySound(as_playerHitSource, ac_hitClip);
+
+                break;
+            case ActionObserver.PlayerAttackLeftHit:
 
                 PlaySound(as_playerHitSource, ac_hitClip);
 

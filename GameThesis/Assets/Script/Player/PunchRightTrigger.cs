@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PunchTrigger : MainObserver
+public class PunchRightTrigger : MainObserver
 {
     private void OnTriggerEnter(Collider other)
     {
@@ -19,9 +19,10 @@ public class PunchTrigger : MainObserver
                         collider.enabled = false;
                     }
                 }
+
                 Vector3 hitpoint = other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
                 PlayerManager.Instance.v_punchHitPoint = hitpoint;
-                ActiveAllObserver(ActionObserver.PlayerAttackHit);
+                ActiveAllObserver(ActionObserver.PlayerAttackRightHit);
             }
         }
     }

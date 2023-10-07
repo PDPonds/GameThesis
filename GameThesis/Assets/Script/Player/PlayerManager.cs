@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerManager : Auto_Singleton<PlayerManager>
 {
-    public int i_HP;
+    public int i_maxHP;
+    [HideInInspector] public int i_currentHP;
     [HideInInspector] public Rigidbody c_rb;
     [HideInInspector] public CapsuleCollider c_collider;
     [HideInInspector] public InputSystem s_playerInput;
@@ -55,8 +56,10 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
     public GameObject g_dragObj;
     public Transform t_dragPos;
 
-
-
+    [Header("===== Player Dead =====")]
+    public Animator a_cameraAnim;
+    public Animator a_fadeAnim;
+    public bool b_isDead;
     private void Awake()
     {
         c_collider = GetComponent<CapsuleCollider>();
@@ -65,15 +68,39 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
         s_playerMovement = GetComponent<PlayerMovement>();
         s_playerFistCombat = GetComponent<FistCombat>();
         s_playerGuard = GetComponent<PlayerGuard>();
-
+        a_cameraAnim.enabled = false;
         f_moveSpeed = f_walkSpeed;
+        i_currentHP = i_maxHP;
     }
 
-    public bool TakeDamage()
-    {
-        i_HP--;
 
-        return true;
+    IEnumerator DeadState()
+    {
+        b_isDead = true;
+        b_canMove = false;
+        a_cameraAnim.SetBool("dead", true);
+        a_fadeAnim.SetBool("black", true);
+        yield return new WaitForSeconds(3f);
+        a_cameraAnim.SetBool("dead", false);
+        a_fadeAnim.SetBool("black", false);
+        yield return new WaitForSeconds(0.5f);
+        a_cameraAnim.enabled = false;
+        b_canMove = true;
+        b_isDead = false;
+        i_currentHP = i_maxHP;
+    }
+
+    public bool TakeDamageAndDead()
+    {
+        i_currentHP--;
+        if (i_currentHP <= 0)
+        {
+            StartCoroutine(DeadState());
+            a_cameraAnim.enabled = true;
+            return true;
+        }
+
+        return false;
     }
 
 }

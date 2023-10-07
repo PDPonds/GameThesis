@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlayerParticle : Auto_Singleton<PlayerParticle>, IObserver
 {
     [Header("===== MainObserver =====")]
-    public MainObserver s_punchTrigger;
+    public MainObserver s_punchRightTrigger;
+    public MainObserver s_punchLeftTrigger;
 
     [Header("===== PlayerPunch =====")]
     public GameObject g_hitShockWave;
@@ -14,24 +15,30 @@ public class PlayerParticle : Auto_Singleton<PlayerParticle>, IObserver
 
     private void OnEnable()
     {
-        s_punchTrigger.AddObserver(this);
+        s_punchRightTrigger.AddObserver(this);
+        s_punchLeftTrigger.AddObserver(this);
     }
 
     private void OnDisable()
     {
-        s_punchTrigger.RemoveObserver(this);
+        s_punchRightTrigger.RemoveObserver(this);
+        s_punchLeftTrigger.RemoveObserver(this);
     }
 
     public void FuncToDo(ActionObserver action)
     {
         switch (action)
         {
-            case ActionObserver.PlayerAttackHit:
+            case ActionObserver.PlayerAttackRightHit:
 
                 StartCoroutine(ActiveAndDisableGameObject(g_hitShockWave, .5f, PlayerManager.Instance.v_punchHitPoint));
 
                 break;
+            case ActionObserver.PlayerAttackLeftHit:
 
+                StartCoroutine(ActiveAndDisableGameObject(g_hitShockWave, .5f, PlayerManager.Instance.v_punchHitPoint));
+
+                break;
             default: break;
         }
     }

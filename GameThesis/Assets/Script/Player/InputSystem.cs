@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Interactions;
 
 public class InputSystem : MonoBehaviour
 {
@@ -35,33 +33,45 @@ public class InputSystem : MonoBehaviour
 
     void InteractivePerformed()
     {
-        if (PlayerManager.Instance.g_interactiveObj != null)
+        if(!PlayerManager.Instance.b_isDead)
         {
-            if (PlayerManager.Instance.g_interactiveObj.transform.parent != null)
+            if (PlayerManager.Instance.g_interactiveObj != null)
             {
-                IInteracable interactive = PlayerManager.Instance.g_interactiveObj.GetComponentInParent<IInteracable>();
-                if (interactive != null)
+                if (PlayerManager.Instance.g_interactiveObj.transform.parent != null)
                 {
-                    interactive.Interaction();
+                    IInteracable interactive = PlayerManager.Instance.g_interactiveObj.GetComponentInParent<IInteracable>();
+                    if (interactive != null)
+                    {
+                        interactive.Interaction();
+                    }
                 }
             }
         }
+        
     }
 
     void HoldPerformed()
     {
-        if (PlayerManager.Instance.b_canPunch)
+        if (!PlayerManager.Instance.b_isDead)
         {
-            PlayerManager.Instance.b_isHold = true;
+            if (PlayerManager.Instance.b_canPunch)
+            {
+                PlayerManager.Instance.b_isHold = true;
+            }
         }
+            
     }
 
     void GuardPerformed()
     {
-        if (PlayerManager.Instance.b_canGuard)
+        if (!PlayerManager.Instance.b_isDead)
         {
-            PlayerManager.Instance.b_isGuard = true;
+            if (PlayerManager.Instance.b_canGuard)
+            {
+                PlayerManager.Instance.b_isGuard = true;
+            }
         }
+        
     }
 
     void GuardCanceled()

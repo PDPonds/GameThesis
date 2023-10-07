@@ -38,6 +38,11 @@ public class PlayerAnimation : Auto_Singleton<PlayerAnimation>, IObserver
                 animator.SetBool("isGuard", PlayerManager.Instance.b_isGuard);
 
                 break;
+            case ActionObserver.PlayerDead:
+
+
+
+                break;
             default: break;
         }
     }
