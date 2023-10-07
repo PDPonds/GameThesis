@@ -14,18 +14,14 @@ public class AIAnimationEvent : MonoBehaviour
         customerStateManager.c_leftHandPunch.enabled = true;
     }
 
-    public void DisableColliderLeftHand()
+    public void DisableColliderHand()
     {
         customerStateManager.c_leftHandPunch.enabled = false;
+        customerStateManager.c_rightHandPunch.enabled = false;
     }
 
     public void EnableColliderRightHand()
     {
         customerStateManager.c_rightHandPunch.enabled = true;
-    }
-
-    public void DisableColliderRightHand()
-    {
-        customerStateManager.c_rightHandPunch.enabled = false;
     }
 }

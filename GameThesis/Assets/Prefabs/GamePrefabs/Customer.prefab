@@ -788,10 +788,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 5313131496311891181}
-    - targetCorrespondingSourceObject: {fileID: 1082271958561512970, guid: 9aaaf0bd240db874d938dcc20b4d50fe,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4154575248245396162}
     - targetCorrespondingSourceObject: {fileID: 3135921509060577837, guid: 9aaaf0bd240db874d938dcc20b4d50fe,
         type: 3}
       insertIndex: -1
@@ -1149,6 +1145,12 @@ CharacterJoint:
   m_EnablePreprocessing: 0
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!4 &1872861377888938697 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5465940246521907071, guid: 9aaaf0bd240db874d938dcc20b4d50fe,
+    type: 3}
+  m_PrefabInstance: {fileID: 5919795007210745270}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2916131748575549493 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8817898888258712963, guid: 9aaaf0bd240db874d938dcc20b4d50fe,
@@ -1709,30 +1711,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!145 &4154575248245396162
-SpringJoint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6711021697568453564}
-  m_ConnectedBody: {fileID: 0}
-  m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: 0.8, z: 0}
-  m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
-  serializedVersion: 2
-  m_Spring: 200
-  m_Damper: 10
-  m_MinDistance: 0
-  m_MaxDistance: 0
-  m_Tolerance: 0.025
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_EnableCollision: 0
-  m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
 --- !u!1 &6838223316451348711 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 9aaaf0bd240db874d938dcc20b4d50fe,
@@ -1814,6 +1792,7 @@ MonoBehaviour:
   i_atkCount: 0
   c_leftHandPunch: {fileID: 8081073387389002391}
   c_rightHandPunch: {fileID: 4763372299831958672}
+  t_hips: {fileID: 1872861377888938697}
   rb: []
   anim: {fileID: 0}
   agent: {fileID: 0}

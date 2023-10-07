@@ -57,16 +57,16 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.7599203
-        functionName: DisableColliderLeftHand
+      - time: 0.49727282
+        functionName: EnableColliderLeftHand
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: 6ffd05f1c64ac0041822185058013e2b,
           type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.3027523
-        functionName: EnableColliderLeftHand
+      - time: 0.7599203
+        functionName: DisableColliderHand
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: 6ffd05f1c64ac0041822185058013e2b,
           type: 3}

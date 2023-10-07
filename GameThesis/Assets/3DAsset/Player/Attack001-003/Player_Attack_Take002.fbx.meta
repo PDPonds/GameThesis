@@ -57,7 +57,7 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0
+      - time: 0.4328767
         functionName: EnableLeftCollider
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: 3fde07f359a463a4987c58267e2b219b,
