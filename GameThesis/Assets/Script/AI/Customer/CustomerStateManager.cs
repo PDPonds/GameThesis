@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -26,10 +27,12 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     public Collider c_leftHandPunch;
     public Collider c_rightHandPunch;
 
-    [Header("===== Ragdoll =====")]
+    [Header("===== RagdollAndDrag =====")]
+    public Transform t_hips;
     [HideInInspector] public Rigidbody[] rb;
     [HideInInspector] public Animator anim;
     [HideInInspector] public NavMeshAgent agent;
+
 
     private void Awake()
     {
@@ -93,15 +96,19 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
             {
                 PlayerManager.Instance.g_dragObj = this.gameObject;
                 Rigidbody connectRb = PlayerManager.Instance.t_dragPos.GetComponent<Rigidbody>();
-                SpringJoint spring = PlayerManager.Instance.g_dragObj.GetComponentInChildren<SpringJoint>();
+
+                SpringJoint spring = t_hips.AddComponent<SpringJoint>();
                 spring.connectedBody = connectRb;
+                spring.spring = 200f;
+                spring.anchor = new Vector3(0, .85f, 0);
+                spring.damper = .1f;
+                spring.autoConfigureConnectedAnchor = false;
             }
             else
             {
                 if (PlayerManager.Instance.g_dragObj == this.gameObject)
                 {
-                    SpringJoint spring = PlayerManager.Instance.g_dragObj.GetComponentInChildren<SpringJoint>();
-                    spring.connectedBody = null;
+                    Destroy(t_hips.GetComponent<SpringJoint>());
                     PlayerManager.Instance.g_dragObj = null;
                 }
             }
