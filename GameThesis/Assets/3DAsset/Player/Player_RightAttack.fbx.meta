@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e0be8cf6535eb4845880c6fa298c2313
+guid: 51b1ec8177842324e844513b583b2587
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -33,11 +33,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Punch
+      name: Player_RightAttack
       takeName: Take 001
       internalID: 1827226128182048838
       firstFrame: 0
-      lastFrame: 20
+      lastFrame: 30
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -57,7 +57,15 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.33337054
+      - time: 0.2547945
+        functionName: EnableRightCollider
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 3fde07f359a463a4987c58267e2b219b,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.4980292
         functionName: DisableCollider
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: 3fde07f359a463a4987c58267e2b219b,
@@ -132,7 +140,7 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 2b29de36c79d3c64e83713d84f65ec30,
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 329e9fd1b9f6abd4a97290ee823a72b7,
     type: 3}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2

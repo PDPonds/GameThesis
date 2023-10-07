@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 00461cb96301b634d8e2553a8e2bfef6
+guid: 41f557423de07414095a8200a037c657
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -33,11 +33,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Punch
+      name: Player_HeavyAttack
       takeName: Take 001
       internalID: 1827226128182048838
       firstFrame: 0
-      lastFrame: 50
+      lastFrame: 40
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -57,16 +57,16 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.29357797
-        functionName: DisableCollider
+      - time: 0.2547945
+        functionName: EnableRightCollider
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: 3fde07f359a463a4987c58267e2b219b,
           type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0
-        functionName: EnableRightCollider
+      - time: 0.33972603
+        functionName: DisableCollider
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: 3fde07f359a463a4987c58267e2b219b,
           type: 3}

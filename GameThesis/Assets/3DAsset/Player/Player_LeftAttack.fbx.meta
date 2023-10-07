@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3cd62c11fdd7f844eae1c94038c5b8e6
+guid: 08578ec770335ab44982449be8adcdb4
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -33,7 +33,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Hold
+      name: Player_LeftAttack
       takeName: Take 001
       internalID: 1827226128182048838
       firstFrame: 0
@@ -56,7 +56,23 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.35616437
+        functionName: EnableLeftCollider
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 3fde07f359a463a4987c58267e2b219b,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.50684935
+        functionName: DisableCollider
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 3fde07f359a463a4987c58267e2b219b,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -124,7 +140,7 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 2b29de36c79d3c64e83713d84f65ec30,
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 329e9fd1b9f6abd4a97290ee823a72b7,
     type: 3}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
