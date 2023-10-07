@@ -39,14 +39,8 @@ public class AIPunchTrigger : MainObserver
             {
                 CustomerStateManager customerStateManager = transform.GetComponentInParent<CustomerStateManager>();
 
-                if (customerStateManager.i_atkCount % 2 == 0)
-                {
-                    customerStateManager.c_leftHandPunch.enabled = false;
-                }
-                else
-                {
-                    customerStateManager.c_rightHandPunch.enabled = false;
-                }
+                customerStateManager.c_rightHandPunch.enabled = false;
+                customerStateManager.c_leftHandPunch.enabled = false;
             }
         }
 

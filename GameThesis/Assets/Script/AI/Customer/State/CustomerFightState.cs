@@ -32,6 +32,7 @@ public class CustomerFightState : BaseState
         Collider[] player = Physics.OverlapSphere(ai.transform.position, customerStateManager.f_atkRange, GameManager.Instance.lm_playerMask);
         if (player.Length > 0)
         {
+            customerStateManager.agent.velocity = Vector2.zero;
             if (customerStateManager.b_canAtk)
             {
                 customerStateManager.SwitchState(customerStateManager.s_attackState);
