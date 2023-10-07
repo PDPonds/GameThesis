@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 059cba4af3a7fa9419cdcf097f81a90f
+guid: 60cc336dcb53d38499cabeb473f88b40
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,8 +7,18 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Front Door
-    second: {fileID: 2100000, guid: 8b46d0cd2a7dd554b8e2bf8d82e3b0bf, type: 2}
+      name: Kitchen Wall
+    second: {fileID: 2100000, guid: 003d5e817ac5b9040b1ad4b9af01026a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Plank Wall
+    second: {fileID: 2100000, guid: 1801b530fa3f8f040a44de19a6ae211e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Window Frame
+    second: {fileID: 2100000, guid: 9c786e8e2ee38e244a3a1d326fc72b2f, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -72,7 +82,7 @@ ModelImporter:
     secondaryUVMinLightmapResolution: 40
     secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
-    useFileScale: 0
+    useFileScale: 1
     strictVertexDataChecks: 0
   tangentSpace:
     normalSmoothAngle: 60

@@ -1,9 +1,14 @@
 fileFormatVersion: 2
-guid: d609189eba96bff4eb37a521e5cf8b0c
+guid: 0bd98e84db700714eaeb584f4d469525
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Plank Wall
+    second: {fileID: 2100000, guid: 7da2c2a9e96ea7044ba162e7bf3466ec, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -67,7 +72,7 @@ ModelImporter:
     secondaryUVMinLightmapResolution: 40
     secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
-    useFileScale: 0
+    useFileScale: 1
     strictVertexDataChecks: 0
   tangentSpace:
     normalSmoothAngle: 60
