@@ -104,15 +104,21 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
                 spring.damper = .1f;
                 spring.autoConfigureConnectedAnchor = false;
             }
-            else
-            {
-                if (PlayerManager.Instance.g_dragObj == this.gameObject)
-                {
-                    Destroy(t_hips.GetComponent<SpringJoint>());
-                    PlayerManager.Instance.g_dragObj = null;
-                }
-            }
         }
     }
 
+    public string InteractionText()
+    {
+        string text = string.Empty;
+
+        if (s_currentState == s_deadState)
+        {
+            if (PlayerManager.Instance.g_dragObj == null)
+            {
+                text = "[E] to Drag";
+            }
+        }
+
+        return text;
+    }
 }

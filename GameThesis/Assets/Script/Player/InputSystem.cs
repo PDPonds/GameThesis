@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class InputSystem : MonoBehaviour
@@ -33,21 +34,45 @@ public class InputSystem : MonoBehaviour
 
     void InteractivePerformed()
     {
-        if(!PlayerManager.Instance.b_isDead)
+        if (!PlayerManager.Instance.b_isDead)
         {
-            if (PlayerManager.Instance.g_interactiveObj != null)
+            if (PlayerManager.Instance.g_dragObj != null)
             {
-                if (PlayerManager.Instance.g_interactiveObj.transform.parent != null)
+                if (PlayerManager.Instance.g_dragObj.TryGetComponent(out StateManager state))
                 {
-                    IInteracable interactive = PlayerManager.Instance.g_interactiveObj.GetComponentInParent<IInteracable>();
-                    if (interactive != null)
+                    if (state is CustomerStateManager)
                     {
-                        interactive.Interaction();
+                        CustomerStateManager customerStateManager = (CustomerStateManager)state;
+                        Destroy(customerStateManager.t_hips.GetComponent<SpringJoint>());
+                        PlayerManager.Instance.g_dragObj = null;
+                    }
+
+                }
+            }
+            else
+            {
+                if (PlayerManager.Instance.g_interactiveObj != null)
+                {
+                    if (PlayerManager.Instance.g_interactiveObj.transform.parent != null)
+                    {
+                        IInteracable interactive = PlayerManager.Instance.g_interactiveObj.GetComponentInParent<IInteracable>();
+                        if (interactive != null)
+                        {
+                            interactive.Interaction();
+                        }
+                    }
+                    else
+                    {
+                        IInteracable interactive = PlayerManager.Instance.g_interactiveObj.GetComponent<IInteracable>();
+                        if (interactive != null)
+                        {
+                            interactive.Interaction();
+                        }
                     }
                 }
             }
         }
-        
+
     }
 
     void HoldPerformed()
@@ -59,7 +84,7 @@ public class InputSystem : MonoBehaviour
                 PlayerManager.Instance.b_isHold = true;
             }
         }
-            
+
     }
 
     void GuardPerformed()
@@ -71,7 +96,7 @@ public class InputSystem : MonoBehaviour
                 PlayerManager.Instance.b_isGuard = true;
             }
         }
-        
+
     }
 
     void GuardCanceled()

@@ -1,11 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerUI : Auto_Singleton<PlayerUI>
 {
+    [Header("===== Player UI =====")]
     public Image img_blood;
+
+    [Header("===== Interactive =====")]
+    public TextMeshProUGUI text_interactText;
 
     private void Update()
     {
@@ -17,6 +22,38 @@ public class PlayerUI : Auto_Singleton<PlayerUI>
         else
         {
             img_blood.gameObject.SetActive(false);
+        }
+
+        if (PlayerManager.Instance.g_dragObj == null)
+        {
+            if (PlayerManager.Instance.g_interactiveObj != null)
+            {
+
+                if (PlayerManager.Instance.g_interactiveObj.transform.parent != null)
+                {
+                    IInteracable interactive = PlayerManager.Instance.g_interactiveObj.GetComponentInParent<IInteracable>();
+                    if (interactive != null)
+                    {
+                        text_interactText.text = interactive.InteractionText();
+                    }
+                    else text_interactText.text = string.Empty;
+                }
+                else
+                {
+                    IInteracable interactive = PlayerManager.Instance.g_interactiveObj.GetComponent<IInteracable>();
+                    if (interactive != null)
+                    {
+                        text_interactText.text = interactive.InteractionText();
+                    }
+                    else text_interactText.text = string.Empty;
+                }
+
+            }
+            else text_interactText.text = string.Empty;
+        }
+        else
+        {
+            text_interactText.text = "[E] to Drop";
         }
     }
 }

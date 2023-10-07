@@ -5,4 +5,7 @@ using UnityEngine;
 public interface IInteracable
 {
     public void Interaction();
+
+    public string InteractionText();
+
 }
