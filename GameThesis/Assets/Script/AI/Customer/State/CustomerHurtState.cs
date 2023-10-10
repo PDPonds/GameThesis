@@ -21,9 +21,13 @@ public class CustomerHurtState : BaseState
 
         customerStateManager.DisablePunch();
 
-        if (!customerStateManager.anim.GetCurrentAnimatorStateInfo(0).IsName("Hurt"))
+        if (customerStateManager.anim.GetCurrentAnimatorStateInfo(0).IsName("Hurt"))
         {
-            customerStateManager.SwitchState(customerStateManager.s_fightState);
+            if(customerStateManager.anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.5f)
+            {
+                customerStateManager.SwitchState(customerStateManager.s_fightState);
+            }
+            
         }
 
     }

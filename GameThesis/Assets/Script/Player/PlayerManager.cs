@@ -56,6 +56,7 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
     [Header("===== Player Drag =====")]
     public GameObject g_dragObj;
     public Transform t_dragPos;
+    public float f_dragAngle;
 
     [Header("===== Player Dead =====")]
     public Animator a_cameraAnim;

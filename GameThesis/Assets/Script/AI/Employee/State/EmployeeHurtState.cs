@@ -23,19 +23,21 @@ public class EmployeeHurtState : BaseState
 
         employeeStateManager.DisablePunch();
 
-        if (!employeeStateManager.anim.GetCurrentAnimatorStateInfo(0).IsName("Hurt"))
+        if (employeeStateManager.anim.GetCurrentAnimatorStateInfo(0).IsName("Hurt"))
         {
-            if(s_lastState != employeeStateManager.s_passedOutState)
+            if(employeeStateManager.anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.5f)
             {
-                employeeStateManager.SwitchState(employeeStateManager.s_fightState);
-            }
-            else
-            {
-                employeeStateManager.SwitchState(employeeStateManager.s_activityState);
+                if(s_lastState != employeeStateManager.s_passedOutState)
+                {
+                    employeeStateManager.SwitchState(employeeStateManager.s_fightState);
+                }
+                else
+                {
+                    employeeStateManager.SwitchState(employeeStateManager.s_activityState);
 
+                }
             }
         }
-
     }
 
 }
