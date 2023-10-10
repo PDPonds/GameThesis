@@ -22,6 +22,9 @@ public class InputSystem : MonoBehaviour
 
             ia_action.Action.Interactive.performed += i => InteractivePerformed();
 
+            ia_action.Action.Crouch.performed += i => CrouchPerformed();
+            ia_action.Action.Crouch.canceled += i => PlayerManager.Instance.b_isCrouch = false;
+
             ia_action.Enable();
         }
     }
@@ -103,5 +106,13 @@ public class InputSystem : MonoBehaviour
     {
         PlayerManager.Instance.b_canGuard = false;
         PlayerManager.Instance.b_isGuard = false;
+    }
+
+    void CrouchPerformed()
+    {
+        if(!PlayerManager.Instance.b_isDead)
+        {
+            PlayerManager.Instance.b_isCrouch = true;
+        }
     }
 }
