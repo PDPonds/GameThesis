@@ -14,7 +14,8 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     public CustomerDeadState s_deadState = new CustomerDeadState();
     public CustomerHurtState s_hurtState = new CustomerHurtState();
 
-    public int i_HP;
+    [HideInInspector] public int i_currentHP;
+    public int i_maxHP;
 
     [Header("===== Fight =====")]
     public float f_atkRange;
@@ -45,6 +46,7 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     {
         s_currentState = s_activityState;
         s_currentState.EnterState(this);
+        i_currentHP = i_maxHP;
     }
 
     private void Update()
@@ -54,10 +56,10 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
 
     public void TakeDamage(int damage)
     {
-        i_HP -= damage;
+        i_currentHP -= damage;
         SwitchState(s_hurtState);
 
-        if (i_HP <= 0)
+        if (i_currentHP <= 0)
         {
             Die();
         }

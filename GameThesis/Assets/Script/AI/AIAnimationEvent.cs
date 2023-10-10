@@ -4,24 +4,45 @@ using UnityEngine;
 
 public class AIAnimationEvent : MonoBehaviour
 {
-    CustomerStateManager customerStateManager;
-    private void Awake()
-    {
-        customerStateManager = GetComponent<CustomerStateManager>();
-    }
     public void EnableColliderLeftHand()
     {
-        customerStateManager.c_leftHandPunch.enabled = true;
+        if(transform.TryGetComponent<CustomerStateManager>(out CustomerStateManager customerStateManager))
+        {
+            customerStateManager.c_leftHandPunch.enabled = true;
+        }
+        
+        if(transform.TryGetComponent<EmployeeStateManager>(out EmployeeStateManager employeeStateManager))
+        {
+            employeeStateManager.c_leftHandPunch.enabled = true;
+        }
     }
 
     public void DisableColliderHand()
     {
-        customerStateManager.c_leftHandPunch.enabled = false;
-        customerStateManager.c_rightHandPunch.enabled = false;
+        if(transform.TryGetComponent<CustomerStateManager>(out CustomerStateManager customerStateManager))
+        {
+            customerStateManager.c_leftHandPunch.enabled = false;
+            customerStateManager.c_rightHandPunch.enabled = false;
+        }
+        if(transform.TryGetComponent<EmployeeStateManager>(out EmployeeStateManager employeeStateManager))
+        {
+            employeeStateManager.c_leftHandPunch.enabled = false;
+            employeeStateManager.c_rightHandPunch.enabled = false;
+        }
+        
+
     }
 
     public void EnableColliderRightHand()
     {
-        customerStateManager.c_rightHandPunch.enabled = true;
+        if(transform.TryGetComponent<CustomerStateManager>(out CustomerStateManager customerStateManager))
+        {
+            customerStateManager.c_rightHandPunch.enabled = true;
+        }
+        if(transform.TryGetComponent<EmployeeStateManager>(out EmployeeStateManager employeeStateManager))
+        {
+            employeeStateManager.c_rightHandPunch.enabled = true;
+        }
+
     }
 }

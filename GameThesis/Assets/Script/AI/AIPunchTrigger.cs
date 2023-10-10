@@ -6,8 +6,6 @@ public class AIPunchTrigger : MainObserver
 {
     private void OnTriggerEnter(Collider other)
     {
-
-        ActiveAllObserver(ActionObserver.AIPunch);
         if (other.TryGetComponent(out PlayerManager player))
         {
             if (!player.b_isGuard)
@@ -21,6 +19,11 @@ public class AIPunchTrigger : MainObserver
                         {
                             CustomerStateManager customerStateManager = transform.GetComponentInParent<CustomerStateManager>();
                             customerStateManager.SwitchState(customerStateManager.s_activityState);
+                        }
+                        if(state is EmployeeStateManager)
+                         {
+                            EmployeeStateManager employeeStateManager = transform.GetComponentInParent<EmployeeStateManager>();
+                            employeeStateManager.SwitchState(employeeStateManager.s_activityState);
                         }
                     }
                 }
@@ -41,6 +44,12 @@ public class AIPunchTrigger : MainObserver
 
                 customerStateManager.c_rightHandPunch.enabled = false;
                 customerStateManager.c_leftHandPunch.enabled = false;
+            }
+            if(state is EmployeeStateManager)
+            {
+                EmployeeStateManager employeeStateManager = transform.GetComponentInParent<EmployeeStateManager>();
+                employeeStateManager.c_rightHandPunch.enabled = false;
+                employeeStateManager.c_leftHandPunch.enabled = false;
             }
         }
 

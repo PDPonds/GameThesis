@@ -5,7 +5,8 @@ public class CustomerActivityState : BaseState
 {
     public override void EnterState(StateManager ai)
     {
-
+        CustomerStateManager customerStateManager = (CustomerStateManager)ai;
+        customerStateManager.i_currentHP = customerStateManager.i_maxHP;
     }
 
     public override void UpdateState(StateManager ai)
