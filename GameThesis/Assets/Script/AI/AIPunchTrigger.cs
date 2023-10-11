@@ -18,7 +18,7 @@ public class AIPunchTrigger : MainObserver
                         if (state is CustomerStateManager)
                         {
                             CustomerStateManager customerStateManager = transform.GetComponentInParent<CustomerStateManager>();
-                            customerStateManager.SwitchState(customerStateManager.s_activityState);
+                            customerStateManager.SwitchState(customerStateManager.s_walkAroundState);
                         }
                         if(state is EmployeeStateManager)
                          {

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CustomerHurtState : BaseState
+public class CustomerGoOutFormRestaurantState : BaseState
 {
     public override void EnterState(StateManager ai)
     {
@@ -19,26 +19,18 @@ public class CustomerHurtState : BaseState
     public override void UpdateState(StateManager ai)
     {
         CustomerStateManager customerStateManager = (CustomerStateManager)ai;
-
-        customerStateManager.agent.velocity = Vector3.zero;
-
-        customerStateManager.anim.Play("Hurt");
-
         customerStateManager.anim.SetBool("fightState", false);
         customerStateManager.anim.SetBool("sit", false);
+        customerStateManager.anim.SetBool("walk", true);
 
-        customerStateManager.RagdollOff();
+        customerStateManager.agent.SetDestination(GameManager.Instance.t_restaurantForntDoor.position);
 
-        customerStateManager.DisablePunch();
-
-        if (customerStateManager.anim.GetCurrentAnimatorStateInfo(0).IsName("Hurt"))
+        if (Vector3.Distance(customerStateManager.transform.position, GameManager.Instance.t_restaurantForntDoor.position)
+            <= 0.5f)
         {
-            if (customerStateManager.anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.5f)
-            {
-                customerStateManager.SwitchState(customerStateManager.s_fightState);
-            }
-
+            customerStateManager.SwitchState(customerStateManager.s_walkAroundState);
         }
 
     }
+
 }

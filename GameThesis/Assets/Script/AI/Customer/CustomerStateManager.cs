@@ -8,7 +8,14 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
 {
     public override BaseState s_currentState { get; set; }
 
-    public CustomerActivityState s_activityState = new CustomerActivityState();
+    public CustomerWalkAroundState s_walkAroundState = new CustomerWalkAroundState();
+    
+    public CustomerGoToChairState s_goToChairState = new CustomerGoToChairState();
+    public CustomerWaitFoodState s_waitFoodState = new CustomerWaitFoodState();
+    public CustomerGoToCounterState s_goToCounterState = new CustomerGoToCounterState();
+    public CustomerRunOutState s_runOutState = new CustomerRunOutState();
+    public CustomerGoOutFormRestaurantState s_goOutState = new CustomerGoOutFormRestaurantState();
+
     public CustomerFightState s_fightState = new CustomerFightState();
     public CustomerAttackState s_attackState = new CustomerAttackState();
     public CustomerDeadState s_deadState = new CustomerDeadState();
@@ -34,6 +41,16 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     [HideInInspector] public Animator anim;
     [HideInInspector] public NavMeshAgent agent;
 
+    [Header("===== WalkAround =====")]
+    public float f_findNextPositionTime;
+    public Vector3 v_walkPos;
+
+    [Header("===== Order Food =====")]
+    public TableObj c_tableObj;
+    public ChairObj c_chairObj;
+    public float f_orderTime;
+    [Header("===== Dead State =====")]
+    public float f_destroyTime;
 
     private void Awake()
     {
@@ -44,7 +61,7 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
 
     private void Start()
     {
-        s_currentState = s_activityState;
+        s_currentState = s_walkAroundState;
         s_currentState.EnterState(this);
         i_currentHP = i_maxHP;
     }
@@ -123,4 +140,10 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
 
         return text;
     }
+
+    public void DestroyAI()
+    {
+        Destroy(gameObject);
+    }
+
 }

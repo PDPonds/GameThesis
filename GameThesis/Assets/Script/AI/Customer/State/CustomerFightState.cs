@@ -17,6 +17,7 @@ public class CustomerFightState : BaseState
         customerStateManager.agent.SetDestination(PlayerManager.Instance.transform.position);
 
         customerStateManager.anim.SetBool("fightState", true);
+        customerStateManager.anim.SetBool("sit", false);
 
         customerStateManager.DisablePunch();
 

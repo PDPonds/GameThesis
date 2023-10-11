@@ -36,7 +36,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.677237
+      value: 14.78
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
@@ -46,7 +46,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.3461752
+      value: 2.04
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
@@ -1631,7 +1631,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 6815341079782304034}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.2
+  m_Radius: 0.5
   m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
@@ -1668,7 +1668,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6afb1dfd3f6679e4fa44e808489c93d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  i_HP: 4
+  i_currentHP: 0
+  i_maxHP: 5
   f_atkRange: 0.5
   f_atkDelay: 1
   f_currentAtkDelay: 0
@@ -1680,6 +1681,12 @@ MonoBehaviour:
   rb: []
   anim: {fileID: 0}
   agent: {fileID: 0}
+  f_findNextPositionTime: 10
+  v_walkPos: {x: 0, y: 0, z: 0}
+  c_tableObj: {fileID: 0}
+  c_chairObj: {fileID: 0}
+  f_orderTime: 10
+  f_destroyTime: 10
 --- !u!114 &4548816158027124120
 MonoBehaviour:
   m_ObjectHideFlags: 0

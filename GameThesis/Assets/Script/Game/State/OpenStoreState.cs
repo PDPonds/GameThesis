@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class OpenStoreState : BaseState
 {
-    public override void EnterState(StateManager ai)
+    public override void EnterState(StateManager state)
     {
-        Debug.Log("Open Store");
+        
     }
 
-    public override void UpdateState(StateManager ai)
+    public override void UpdateState(StateManager state)
     {
-       
+
     }
+
+
 }

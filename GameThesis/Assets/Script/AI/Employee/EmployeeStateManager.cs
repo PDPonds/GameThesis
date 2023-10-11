@@ -31,6 +31,9 @@ public class EmployeeStateManager : StateManager,IDamageable
     public Collider c_leftHandPunch;
     public Collider c_rightHandPunch;
     
+    [Header("===== Pressed Out =====")]
+    public float f_pressedOutTime;
+
     [HideInInspector] public Rigidbody[] rb;
     [HideInInspector] public Animator anim;
     [HideInInspector] public NavMeshAgent agent;

@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class BeforeStoreOpenState : BaseState
 {
-    public override void EnterState(StateManager ai)
+    public override void EnterState(StateManager state)
     {
-        Debug.Log("Before Open");
+        
     }
 
-    public override void UpdateState(StateManager ai)
+    public override void UpdateState(StateManager state)
     {
         
     }

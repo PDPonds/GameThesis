@@ -1868,6 +1868,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 710051d9fa72bf4418c75b6883733d80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  employeeType: 0
+  i_currentHP: 0
+  i_maxHP: 5
+  f_atkRange: 0.5
+  f_atkDelay: 1
+  f_currentAtkDelay: 0
+  b_canAtk: 0
+  i_atkCount: 0
+  c_leftHandPunch: {fileID: 3837603388199032107}
+  c_rightHandPunch: {fileID: 5872443642433992741}
+  f_pressedOutTime: 5
+  rb: []
+  anim: {fileID: 0}
+  agent: {fileID: 0}
 --- !u!1 &7568270876083967290 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -9070493210130169274, guid: b204018a8378be5498eb3adc2908f6ab,
