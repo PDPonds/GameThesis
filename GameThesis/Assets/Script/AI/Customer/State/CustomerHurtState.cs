@@ -11,6 +11,7 @@ public class CustomerHurtState : BaseState
         {
             customerStateManager.c_tableObj.b_isEmtry = true;
             customerStateManager.c_tableObj.b_readyForNextCustomer = false;
+            customerStateManager.c_tableObj.s_currentCustomer = null;
         }
         customerStateManager.c_tableObj = null;
         customerStateManager.c_chairObj = null;

@@ -14,8 +14,11 @@ public class EmployeeStateManager : StateManager,IDamageable
     public int i_maxHP;
 
     public EmployeeServeAndCookingState s_activityState = new EmployeeServeAndCookingState();
+
     public EmployeeSlowDownState s_slowDownState = new EmployeeSlowDownState();
+
     public EmployeePassedOutState s_passedOutState = new EmployeePassedOutState();
+
     public EmployeeHurtState s_hurtState = new EmployeeHurtState();
     public EmployeeFightState s_fightState = new EmployeeFightState();
     public EmployeeAttackState s_attackState = new EmployeeAttackState();
@@ -37,6 +40,15 @@ public class EmployeeStateManager : StateManager,IDamageable
     [HideInInspector] public Rigidbody[] rb;
     [HideInInspector] public Animator anim;
     [HideInInspector] public NavMeshAgent agent;
+
+    [Space(50)]
+    [Header("===== Serve =====")]
+    public Transform t_getFoodPos;
+    public Transform t_stayPos;
+    public bool b_hasFood;
+
+    [Header("===== Cooking =====")]
+    public Transform t_workingPos;
 
     private void Awake() {
         anim = GetComponent<Animator>();

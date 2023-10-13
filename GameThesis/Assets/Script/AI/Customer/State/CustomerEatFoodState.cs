@@ -2,15 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CustomerWaitFoodState : BaseState
+public class CustomerEatFoodState : BaseState
 {
-    float f_currentOrderTime;
-
     public override void EnterState(StateManager ai)
     {
         CustomerStateManager customerStateManager = (CustomerStateManager)ai;
-        f_currentOrderTime = customerStateManager.f_orderTime;
-        customerStateManager.c_tableObj.s_currentCustomer = customerStateManager;
+        Debug.Log("Eat Food");
     }
 
     public override void UpdateState(StateManager ai)
@@ -31,14 +28,5 @@ public class CustomerWaitFoodState : BaseState
             }
 
         }
-
-        f_currentOrderTime -= Time.deltaTime;
-        if (f_currentOrderTime <= 0)
-        {
-            customerStateManager.SwitchState(customerStateManager.s_goOutState);
-        }
-
     }
-
-
 }

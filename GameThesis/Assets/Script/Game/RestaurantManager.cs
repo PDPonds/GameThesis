@@ -95,4 +95,25 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
         return false;
     }
 
+    public bool GetTableCanServe(out int tableIndex)
+    {
+        if (allTables.Length > 0)
+        {
+            for (int i = 0; i < allTables.Length; i++)
+            {
+                if (!allTables[i].b_isEmtry)
+                {
+                    if (allTables[i].s_currentCustomer != null)
+                    {
+                        tableIndex = i;
+                        return true;
+                    }
+                }
+            }
+        }
+
+        tableIndex = -1;
+        return false;
+    }
+
 }

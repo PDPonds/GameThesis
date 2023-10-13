@@ -15,6 +15,8 @@ public class TableObj : MonoBehaviour
     [HideInInspector] public bool b_readyForNextCustomer;
     float f_currentCDForNextCustomer;
 
+    [HideInInspector] public CustomerStateManager s_currentCustomer;
+
     private void Awake()
     {
         b_isEmtry = true;

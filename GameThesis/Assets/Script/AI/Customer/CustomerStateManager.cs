@@ -15,6 +15,7 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     public CustomerGoToCounterState s_goToCounterState = new CustomerGoToCounterState();
     public CustomerRunOutState s_runOutState = new CustomerRunOutState();
     public CustomerGoOutFormRestaurantState s_goOutState = new CustomerGoOutFormRestaurantState();
+    public CustomerEatFoodState s_eatFoodState = new CustomerEatFoodState();
 
     public CustomerFightState s_fightState = new CustomerFightState();
     public CustomerAttackState s_attackState = new CustomerAttackState();
