@@ -15,6 +15,7 @@ public class CustomerGoOutFormRestaurantState : BaseState
         }
         customerStateManager.c_tableObj = null;
         customerStateManager.c_chairObj = null;
+        
     }
 
     public override void UpdateState(StateManager ai)

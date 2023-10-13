@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CustomerRunOutState : BaseState
+public class CustomerEscapeState : BaseState
 {
+
     public override void EnterState(StateManager ai)
     {
         CustomerStateManager customerStateManager = (CustomerStateManager)ai;
@@ -15,14 +16,16 @@ public class CustomerRunOutState : BaseState
         }
         customerStateManager.c_tableObj = null;
         customerStateManager.c_chairObj = null;
+
+        customerStateManager.b_escape = true;
+        customerStateManager.SwitchState(customerStateManager.s_walkAroundState);
+
+        Debug.Log("Escape");
     }
 
     public override void UpdateState(StateManager ai)
     {
         CustomerStateManager customerStateManager = (CustomerStateManager)ai;
-
-        customerStateManager.anim.SetBool("fightState", false);
-        customerStateManager.anim.SetBool("sit", false);
     }
 
 }

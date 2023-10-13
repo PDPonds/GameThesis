@@ -9,11 +9,12 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     public override BaseState s_currentState { get; set; }
 
     public CustomerWalkAroundState s_walkAroundState = new CustomerWalkAroundState();
-    
+
     public CustomerGoToChairState s_goToChairState = new CustomerGoToChairState();
     public CustomerWaitFoodState s_waitFoodState = new CustomerWaitFoodState();
     public CustomerGoToCounterState s_goToCounterState = new CustomerGoToCounterState();
-    public CustomerRunOutState s_runOutState = new CustomerRunOutState();
+    public CustomerFrontOfCounterState s_frontCounter = new CustomerFrontOfCounterState();
+    public CustomerEscapeState s_escapeState = new CustomerEscapeState();
     public CustomerGoOutFormRestaurantState s_goOutState = new CustomerGoOutFormRestaurantState();
     public CustomerEatFoodState s_eatFoodState = new CustomerEatFoodState();
 
@@ -47,9 +48,18 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     public Vector3 v_walkPos;
 
     [Header("===== Order Food =====")]
-    public TableObj c_tableObj;
-    public ChairObj c_chairObj;
     public float f_orderTime;
+    [HideInInspector] public TableObj c_tableObj;
+    [HideInInspector] public ChairObj c_chairObj;
+
+    [Header("===== Eat Food =====")]
+    public Vector2 v_minAndMaxEatFood;
+    public float f_randomEventPercent;
+
+    [Header("===== Run Out =====")]
+    public float f_escapeTime;
+    public bool b_escape;
+
     [Header("===== Dead State =====")]
     public float f_destroyTime;
 
@@ -85,6 +95,8 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
 
     public void Die()
     {
+        if(b_escape) GameManager.Instance.AddCoin(10f);
+
         SwitchState(s_deadState);
     }
 
@@ -125,6 +137,12 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
                 spring.autoConfigureConnectedAnchor = false;
             }
         }
+        else if (s_currentState == s_frontCounter)
+        {
+            GameManager.Instance.AddCoin(10f);
+            SwitchState(s_goOutState);
+        }
+
     }
 
     public string InteractionText()
@@ -137,6 +155,10 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
             {
                 text = "[E] to Drag";
             }
+        }
+        else if(s_currentState == s_frontCounter)
+        {
+            text = "[E] to Take Money";
         }
 
         return text;

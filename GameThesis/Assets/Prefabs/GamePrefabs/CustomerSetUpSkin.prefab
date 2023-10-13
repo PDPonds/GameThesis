@@ -1683,9 +1683,12 @@ MonoBehaviour:
   agent: {fileID: 0}
   f_findNextPositionTime: 10
   v_walkPos: {x: 0, y: 0, z: 0}
+  f_orderTime: 30
   c_tableObj: {fileID: 0}
   c_chairObj: {fileID: 0}
-  f_orderTime: 30
+  v_minAndMaxEatFood: {x: 10, y: 15}
+  f_randomEventPercent: 50
+  f_escapeTime: 30
   f_destroyTime: 10
 --- !u!114 &4548816158027124120
 MonoBehaviour:

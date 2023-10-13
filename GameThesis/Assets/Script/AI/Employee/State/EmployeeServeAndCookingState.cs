@@ -30,8 +30,8 @@ public class EmployeeServeAndCookingState : BaseState
                     TableObj table = RestaurantManager.Instance.allTables[tableIndex];
                     if (!employeeStateManager.b_hasFood)
                     {
-                        employeeStateManager.agent.SetDestination(employeeStateManager.t_getFoodPos.position);
-                        if (Vector3.Distance(employeeStateManager.transform.position, employeeStateManager.t_getFoodPos.position)
+                        employeeStateManager.agent.SetDestination(GameManager.Instance.t_getFoodPos.position);
+                        if (Vector3.Distance(employeeStateManager.transform.position, GameManager.Instance.t_getFoodPos.position)
                             <= 1f)
                         {
                             employeeStateManager.b_hasFood = true;
@@ -52,8 +52,8 @@ public class EmployeeServeAndCookingState : BaseState
                 }
                 else
                 {
-                    employeeStateManager.agent.SetDestination(employeeStateManager.t_stayPos.position);
-                    if (Vector3.Distance(employeeStateManager.transform.position, employeeStateManager.t_stayPos.position)
+                    employeeStateManager.agent.SetDestination(GameManager.Instance.t_stayPos.position);
+                    if (Vector3.Distance(employeeStateManager.transform.position, GameManager.Instance.t_stayPos.position)
                        <= 1f)
                     {
                         employeeStateManager.agent.velocity = Vector3.zero;

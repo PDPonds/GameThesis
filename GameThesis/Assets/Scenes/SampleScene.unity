@@ -962,6 +962,37 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4.000001, y: 0.23902237, z: 0.23902172}
   m_Center: {x: 0.00000011920928, y: 0.00000002980233, z: -0.0000002384187}
+--- !u!1 &42328507
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 42328508}
+  m_Layer: 0
+  m_Name: Couter
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &42328508
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 42328507}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.47, y: 0, z: -5.98}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &43003158
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10279,7 +10310,7 @@ GameObject:
   m_Layer: 0
   m_Name: ServStayPos
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -10292,7 +10323,7 @@ Transform:
   m_GameObject: {fileID: 362852296}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.56, y: 0, z: -6.65}
+  m_LocalPosition: {x: 14.25, y: 0, z: -8.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -36886,6 +36917,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   t_restaurantForntDoor: {fileID: 1880096747}
+  t_counterPos: {fileID: 42328508}
+  t_getFoodPos: {fileID: 782094464}
+  t_stayPos: {fileID: 362852297}
+  f_coin: 0
   s_gameState: {fileID: 0}
 --- !u!114 &1327070459
 MonoBehaviour:
@@ -60005,7 +60040,7 @@ PrefabInstance:
     - target: {fileID: 4860630405076078897, guid: 3a36f079f935f424a9b3b534a0d36ac2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 1.91
       objectReference: {fileID: 0}
     - target: {fileID: 4860630405076078897, guid: 3a36f079f935f424a9b3b534a0d36ac2,
         type: 3}
@@ -60015,7 +60050,7 @@ PrefabInstance:
     - target: {fileID: 4860630405076078897, guid: 3a36f079f935f424a9b3b534a0d36ac2,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -6.68
       objectReference: {fileID: 0}
     - target: {fileID: 4860630405076078897, guid: 3a36f079f935f424a9b3b534a0d36ac2,
         type: 3}
@@ -60193,16 +60228,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2063728290122027743, guid: 72c46466a90fc204b8cd428292df4bf0,
-        type: 3}
-      propertyPath: t_stayPos
-      value: 
-      objectReference: {fileID: 362852297}
-    - target: {fileID: 2063728290122027743, guid: 72c46466a90fc204b8cd428292df4bf0,
-        type: 3}
-      propertyPath: t_getFoodPos
-      value: 
-      objectReference: {fileID: 782094464}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -60434,3 +60459,4 @@ SceneRoots:
   - {fileID: 782094464}
   - {fileID: 315127062}
   - {fileID: 362852297}
+  - {fileID: 42328508}

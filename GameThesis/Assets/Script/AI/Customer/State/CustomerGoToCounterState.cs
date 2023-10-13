@@ -15,6 +15,7 @@ public class CustomerGoToCounterState : BaseState
         }
         customerStateManager.c_tableObj = null;
         customerStateManager.c_chairObj = null;
+        Debug.Log("Go to Counter");
     }
 
     public override void UpdateState(StateManager ai)
@@ -22,6 +23,13 @@ public class CustomerGoToCounterState : BaseState
         CustomerStateManager customerStateManager = (CustomerStateManager)ai;
         customerStateManager.anim.SetBool("fightState", false);
         customerStateManager.anim.SetBool("sit", false);
+        customerStateManager.anim.SetBool("walk", true);
+        customerStateManager.agent.SetDestination(GameManager.Instance.t_counterPos.position);
+        if (Vector3.Distance(customerStateManager.transform.position, GameManager.Instance.t_counterPos.position)
+            <= 1f)
+        {
+            customerStateManager.SwitchState(customerStateManager.s_frontCounter);
+        }
     }
 
 }

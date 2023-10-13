@@ -15,12 +15,18 @@ public class CustomerDeadState : BaseState
         customerStateManager.RagdollOn();
         customerStateManager.DisablePunch();
 
-        f_currentDestroyTime -= Time.deltaTime;
-        if(f_currentDestroyTime <= 0)
+        if(PlayerManager.Instance.g_dragObj != null)
         {
-            customerStateManager.DestroyAI();
+            f_currentDestroyTime -= Time.deltaTime;
+            if (f_currentDestroyTime <= 0)
+            {
+                customerStateManager.DestroyAI();
+            }
         }
-
+        else
+        {
+            f_currentDestroyTime = customerStateManager.f_destroyTime;
+        }
 
     }
 }

@@ -179,6 +179,7 @@ MonoBehaviour:
   b_isEmtry: 0
   f_cdForNextCustomer: 5
   b_readyForNextCustomer: 0
+  s_currentCustomer: {fileID: 0}
 --- !u!1001 &4907787286514178180
 PrefabInstance:
   m_ObjectHideFlags: 0

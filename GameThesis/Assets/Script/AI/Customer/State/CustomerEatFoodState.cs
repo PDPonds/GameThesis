@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class CustomerEatFoodState : BaseState
 {
+    float f_eatTime;
+    float f_currentEatTime;
+
     public override void EnterState(StateManager ai)
     {
         CustomerStateManager customerStateManager = (CustomerStateManager)ai;
-        Debug.Log("Eat Food");
+        f_eatTime = Random.Range(customerStateManager.v_minAndMaxEatFood.x, customerStateManager.v_minAndMaxEatFood.y);
+        f_currentEatTime = f_eatTime;
     }
 
     public override void UpdateState(StateManager ai)
@@ -28,5 +32,21 @@ public class CustomerEatFoodState : BaseState
             }
 
         }
+
+        f_currentEatTime -= Time.deltaTime;
+        if (f_currentEatTime <= 0)
+        {
+            float ran = Random.Range(0, 100f);
+
+            if (ran <= customerStateManager.f_randomEventPercent)
+            {
+                customerStateManager.SwitchState(customerStateManager.s_escapeState);
+            }
+            else
+            {
+                customerStateManager.SwitchState(customerStateManager.s_goToCounterState);
+            }
+        }
+
     }
 }

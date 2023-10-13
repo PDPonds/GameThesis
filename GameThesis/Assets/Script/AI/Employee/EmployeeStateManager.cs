@@ -43,8 +43,6 @@ public class EmployeeStateManager : StateManager,IDamageable
 
     [Space(50)]
     [Header("===== Serve =====")]
-    public Transform t_getFoodPos;
-    public Transform t_stayPos;
     public bool b_hasFood;
 
     [Header("===== Cooking =====")]

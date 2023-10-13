@@ -4,6 +4,7 @@ using UnityEngine.AI;
 public class CustomerWalkAroundState : BaseState
 {
     float f_currentTimeToWalk;
+    float f_currentEscapeTime;
 
     public override void EnterState(StateManager ai)
     {
@@ -50,6 +51,16 @@ public class CustomerWalkAroundState : BaseState
         else
         {
             customerStateManager.anim.SetBool("walk", false);
+        }
+
+        if(customerStateManager.b_escape)
+        {
+            f_currentEscapeTime += Time.deltaTime;
+            if(f_currentEscapeTime >= customerStateManager.f_escapeTime)
+            {
+                f_currentEscapeTime = 0;
+                customerStateManager.b_escape = false;
+            }
         }
 
     }
