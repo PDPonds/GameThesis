@@ -83,15 +83,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 48cdd6ce60fac2c44a2908e1e8b7fc67,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 822484617735947651}
-    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 48cdd6ce60fac2c44a2908e1e8b7fc67,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 646339331444094430}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 48cdd6ce60fac2c44a2908e1e8b7fc67,
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2390189505535151529}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 48cdd6ce60fac2c44a2908e1e8b7fc67,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 822484617735947651}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 48cdd6ce60fac2c44a2908e1e8b7fc67,
         type: 3}

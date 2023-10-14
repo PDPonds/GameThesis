@@ -8,6 +8,7 @@ public class TableObj : MonoBehaviour
 {
     public GameObject g_table;
     public List<GameObject> g_chairs = new List<GameObject>();
+    public List<GameObject> g_foods = new List<GameObject>();
 
     public float f_dirtyCount;
 
@@ -89,6 +90,22 @@ public class TableObj : MonoBehaviour
             s_currentEmployee = null;
         }
 
+        if (s_currentCustomer != null)
+        {
+            if (s_currentCustomer.s_currentState == s_currentCustomer.s_eatFoodState)
+            {
+                foreach (GameObject food in g_foods) food.SetActive(true);
+
+            }
+            else
+            {
+                foreach (GameObject food in g_foods) food.SetActive(false);
+            }
+        }
+        else
+        {
+            foreach (GameObject food in g_foods) food.SetActive(false);
+        }
     }
 
 }
