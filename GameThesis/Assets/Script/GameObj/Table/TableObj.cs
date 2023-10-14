@@ -64,8 +64,8 @@ public class TableObj : MonoBehaviour
                     s_currentEmployee == null)
                 {
                     RestaurantManager.Instance.allEmployees[index].s_serveTable = this;
-                    s_currentEmployee = RestaurantManager.Instance.allEmployees[index];
                     RestaurantManager.Instance.allEmployees[index].b_canServe = false;
+                    s_currentEmployee = RestaurantManager.Instance.allEmployees[index];
                 }
             }
             else

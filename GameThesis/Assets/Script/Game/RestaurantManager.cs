@@ -110,8 +110,11 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
                     {
                         if (allEmployees[i].s_serveTable == null)
                         {
-                            serveIndex = i;
-                            return true;
+                            if (!CheckAIRepleat(allEmployees[i]))
+                            {
+                                serveIndex = i;
+                                return true;
+                            }
                         }
                     }
                 }
@@ -138,4 +141,20 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
         tableFormEmployee = -1;
         return false;
     }
+
+    bool CheckAIRepleat(EmployeeStateManager ai)
+    {
+        if (allTables.Length > 0)
+        {
+            for (int i = 0; i < allTables.Length; i++)
+            {
+                if (allTables[i].s_currentEmployee == ai)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 }

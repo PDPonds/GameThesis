@@ -65,6 +65,7 @@ public class EmployeeServeAndCookingState : BaseState
                                 <= 1f)
                             {
                                 employeeStateManager.b_hasFood = true;
+                                employeeStateManager.b_canServe = false;
                             }
                         }
                         else
@@ -74,7 +75,7 @@ public class EmployeeServeAndCookingState : BaseState
                                 <= 2f)
                             {
                                 employeeStateManager.b_hasFood = false;
-                                employeeStateManager.b_canServe = true;
+                                employeeStateManager.b_canServe = false;
                                 employeeStateManager.s_serveTable = null;
                                 table.s_currentCustomer.SwitchState(table.s_currentCustomer.s_eatFoodState);
                             }
@@ -90,6 +91,7 @@ public class EmployeeServeAndCookingState : BaseState
                            <= 1f)
                         {
                             employeeStateManager.agent.velocity = Vector3.zero;
+                            employeeStateManager.b_canServe = true;
                             employeeStateManager.anim.SetBool("walk", false);
                         }
                         else
@@ -97,7 +99,6 @@ public class EmployeeServeAndCookingState : BaseState
                             employeeStateManager.anim.SetBool("walk", true);
                         }
                         employeeStateManager.b_hasFood = false;
-                        employeeStateManager.b_canServe = true;
                         employeeStateManager.s_serveTable = null;
                     }
 
@@ -119,6 +120,7 @@ public class EmployeeServeAndCookingState : BaseState
                     employeeStateManager.b_hasFood = false;
                     employeeStateManager.b_canServe = true;
                     employeeStateManager.s_serveTable = null;
+
                 }
 
                 employeeStateManager.b_isWorking = true;
