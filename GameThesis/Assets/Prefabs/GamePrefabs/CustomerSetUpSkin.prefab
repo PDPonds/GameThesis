@@ -1967,6 +1967,7 @@ MonoBehaviour:
   f_randomEventPercent: 50
   img_progressBar: {fileID: 6959761221574519225}
   img_icon: {fileID: 8895682841520443865}
+  sprit_payIcon: {fileID: 21300000, guid: 55a257e0742ec8e4cab7d0c875a43766, type: 3}
   sprite_escapeIcon: {fileID: 21300000, guid: 31f70e16199a2354da84ee54eb82cecf, type: 3}
   f_escapeTime: 30
   b_escape: 0

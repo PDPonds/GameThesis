@@ -7,7 +7,8 @@ public class CustomerFrontOfCounterState : BaseState
     public override void EnterState(StateManager ai)
     {
         CustomerStateManager customerStateManager = (CustomerStateManager)ai;
-        customerStateManager.img_icon.enabled = false;
+        customerStateManager.img_icon.enabled = true;
+        customerStateManager.img_icon.sprite = customerStateManager.sprit_payIcon;
         customerStateManager.img_progressBar.enabled = false;
     }
 

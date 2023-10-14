@@ -14,6 +14,7 @@ public class CustomerEatFoodState : BaseState
         f_currentEatTime = f_eatTime;
         customerStateManager.img_icon.enabled = false;
         customerStateManager.img_progressBar.enabled = false;
+
     }
 
     public override void UpdateState(StateManager ai)

@@ -18,6 +18,10 @@ public class CustomerGoToCounterState : BaseState
         customerStateManager.img_icon.enabled = false;
         customerStateManager.img_progressBar.enabled = false;
         Debug.Log("Go to Counter");
+
+        customerStateManager.img_icon.enabled = true;
+        customerStateManager.img_icon.sprite = customerStateManager.sprit_payIcon;
+
     }
 
     public override void UpdateState(StateManager ai)

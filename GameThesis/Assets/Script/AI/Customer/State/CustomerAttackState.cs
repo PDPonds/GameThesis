@@ -21,6 +21,7 @@ public class CustomerAttackState : BaseState
             customerStateManager.c_rightHandPunch.enabled = true;
 
         }
+        customerStateManager.img_icon.enabled = false;
     }
 
     public override void UpdateState(StateManager ai)
