@@ -5,7 +5,9 @@ public class CustomerFightState : BaseState
 {
     public override void EnterState(StateManager ai)
     {
-
+        CustomerStateManager customerStateManager = (CustomerStateManager)ai;
+        customerStateManager.img_icon.enabled = false;
+        customerStateManager.img_progressBar.enabled = false;
     }
 
     public override void UpdateState(StateManager ai)
@@ -17,6 +19,7 @@ public class CustomerFightState : BaseState
         customerStateManager.agent.SetDestination(PlayerManager.Instance.transform.position);
 
         customerStateManager.anim.SetBool("fightState", true);
+        customerStateManager.anim.SetBool("sit", false);
 
         customerStateManager.DisablePunch();
 
