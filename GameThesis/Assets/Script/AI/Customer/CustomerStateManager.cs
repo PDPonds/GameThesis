@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class CustomerStateManager : StateManager, IDamageable, IInteracable
 {
@@ -49,6 +50,7 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
 
     [Header("===== Order Food =====")]
     public float f_orderTime;
+    [HideInInspector] public float f_currentOrderTime;
     [HideInInspector] public TableObj c_tableObj;
     [HideInInspector] public ChairObj c_chairObj;
 
@@ -56,7 +58,10 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     public Vector2 v_minAndMaxEatFood;
     public float f_randomEventPercent;
 
-    [Header("===== Run Out =====")]
+    [Header("===== Escape =====")]
+    public Image img_progressBar;
+    public Image img_icon;
+    public Sprite sprite_escapeIcon;
     public float f_escapeTime;
     public bool b_escape;
 

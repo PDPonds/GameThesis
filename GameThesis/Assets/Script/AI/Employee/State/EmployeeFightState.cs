@@ -6,7 +6,8 @@ public class EmployeeFightState : BaseState
 {
     public override void EnterState(StateManager ai)
     {
-        
+        EmployeeStateManager employeeStateManager = (EmployeeStateManager)ai;
+        employeeStateManager.b_isWorking = false;
     }
 
     public override void UpdateState(StateManager ai)

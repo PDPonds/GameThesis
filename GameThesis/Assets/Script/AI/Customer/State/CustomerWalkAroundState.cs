@@ -12,6 +12,10 @@ public class CustomerWalkAroundState : BaseState
         CustomerStateManager customerStateManager = (CustomerStateManager)ai;
         customerStateManager.i_currentHP = customerStateManager.i_maxHP;
         f_currentTimeToWalk = 0;
+        if(customerStateManager.b_escape)
+        {
+            f_currentEscapeTime = customerStateManager.f_escapeTime;
+        }
     }
 
     public override void UpdateState(StateManager ai)
@@ -38,13 +42,13 @@ public class CustomerWalkAroundState : BaseState
         {
             float xPos = Random.Range(10f, 20f);
             float zPos = Random.Range(-13f, 13f);
-            customerStateManager.v_walkPos = new Vector3(xPos,0,zPos);
+            customerStateManager.v_walkPos = new Vector3(xPos, 0, zPos);
             f_currentTimeToWalk = customerStateManager.f_findNextPositionTime;
         }
 
         customerStateManager.agent.SetDestination(customerStateManager.v_walkPos);
 
-        if(customerStateManager.agent.velocity != Vector3.zero)
+        if (customerStateManager.agent.velocity != Vector3.zero)
         {
             customerStateManager.anim.SetBool("walk", true);
         }
@@ -53,16 +57,29 @@ public class CustomerWalkAroundState : BaseState
             customerStateManager.anim.SetBool("walk", false);
         }
 
-        if(customerStateManager.b_escape)
+        if (customerStateManager.b_escape)
         {
-            f_currentEscapeTime += Time.deltaTime;
-            if(f_currentEscapeTime >= customerStateManager.f_escapeTime)
+            f_currentEscapeTime -= Time.deltaTime;
+            if (f_currentEscapeTime <= 0)
             {
-                f_currentEscapeTime = 0;
                 customerStateManager.b_escape = false;
             }
-        }
 
+            customerStateManager.img_icon.enabled = true;
+            customerStateManager.img_progressBar.enabled = true;
+
+            customerStateManager.img_icon.sprite = customerStateManager.sprite_escapeIcon;
+            float progressTime = f_currentEscapeTime / customerStateManager.f_escapeTime;
+
+            customerStateManager.img_progressBar.fillAmount = progressTime;
+            customerStateManager.img_progressBar.color = new Color(1 - progressTime, progressTime, 0, 1);
+
+        }
+        else
+        {
+            customerStateManager.img_icon.enabled = false;
+            customerStateManager.img_progressBar.enabled = false;
+        }
     }
 
 

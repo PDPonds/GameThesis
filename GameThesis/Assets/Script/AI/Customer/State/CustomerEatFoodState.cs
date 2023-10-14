@@ -12,6 +12,8 @@ public class CustomerEatFoodState : BaseState
         CustomerStateManager customerStateManager = (CustomerStateManager)ai;
         f_eatTime = Random.Range(customerStateManager.v_minAndMaxEatFood.x, customerStateManager.v_minAndMaxEatFood.y);
         f_currentEatTime = f_eatTime;
+        customerStateManager.img_icon.enabled = false;
+        customerStateManager.img_progressBar.enabled = false;
     }
 
     public override void UpdateState(StateManager ai)

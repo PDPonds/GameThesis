@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class CustomerWaitFoodState : BaseState
 {
-    float f_currentOrderTime;
-
     public override void EnterState(StateManager ai)
     {
         CustomerStateManager customerStateManager = (CustomerStateManager)ai;
-        f_currentOrderTime = customerStateManager.f_orderTime;
+        customerStateManager.f_currentOrderTime = customerStateManager.f_orderTime;
         customerStateManager.c_tableObj.s_currentCustomer = customerStateManager;
+        customerStateManager.img_icon.enabled = false;
+        customerStateManager.img_progressBar.enabled = false;
     }
 
     public override void UpdateState(StateManager ai)
@@ -32,8 +32,8 @@ public class CustomerWaitFoodState : BaseState
 
         }
 
-        f_currentOrderTime -= Time.deltaTime;
-        if (f_currentOrderTime <= 0)
+        customerStateManager.f_currentOrderTime -= Time.deltaTime;
+        if (customerStateManager.f_currentOrderTime <= 0)
         {
             customerStateManager.SwitchState(customerStateManager.s_goOutState);
         }

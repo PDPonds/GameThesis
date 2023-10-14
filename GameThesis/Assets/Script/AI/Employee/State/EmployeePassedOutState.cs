@@ -10,6 +10,7 @@ public class EmployeePassedOutState : BaseState
     {
         EmployeeStateManager employeeStateManager = (EmployeeStateManager)ai;
         f_currentPressedOutTime = employeeStateManager.f_pressedOutTime;
+        employeeStateManager.b_isWorking = false;
     }
 
     public override void UpdateState(StateManager ai)

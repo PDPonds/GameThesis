@@ -21,6 +21,8 @@ public class EmployeeAttackState : BaseState
             employeeStateManager.anim.Play("RightPunch");
             employeeStateManager.c_rightHandPunch.enabled = true;
         }
+        employeeStateManager.b_isWorking = false;
+
     }
 
     public override void UpdateState(StateManager ai)

@@ -7,6 +7,8 @@ public class CustomerDeadState : BaseState
     {
         CustomerStateManager customerStateManager = (CustomerStateManager)ai;
         f_currentDestroyTime = customerStateManager.f_destroyTime;
+        customerStateManager.img_icon.enabled = false;
+        customerStateManager.img_progressBar.enabled = false;
     }
 
     public override void UpdateState(StateManager ai)
@@ -15,7 +17,7 @@ public class CustomerDeadState : BaseState
         customerStateManager.RagdollOn();
         customerStateManager.DisablePunch();
 
-        if(PlayerManager.Instance.g_dragObj != null)
+        if (PlayerManager.Instance.g_dragObj != ai.transform.gameObject)
         {
             f_currentDestroyTime -= Time.deltaTime;
             if (f_currentDestroyTime <= 0)

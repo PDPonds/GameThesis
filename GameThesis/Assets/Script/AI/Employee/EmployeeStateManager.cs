@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public enum EmployeeType{Cooking,Serve}
+public enum EmployeeType { Cooking, Serve }
 
-public class EmployeeStateManager : StateManager,IDamageable
+public class EmployeeStateManager : StateManager, IDamageable
 {
-    public override BaseState s_currentState { get;set; }
+    public override BaseState s_currentState { get; set; }
     public EmployeeType employeeType = EmployeeType.Cooking;
 
     [HideInInspector] public int i_currentHP;
@@ -33,7 +33,7 @@ public class EmployeeStateManager : StateManager,IDamageable
     public int i_atkCount;
     public Collider c_leftHandPunch;
     public Collider c_rightHandPunch;
-    
+
     [Header("===== Pressed Out =====")]
     public float f_pressedOutTime;
 
@@ -43,15 +43,22 @@ public class EmployeeStateManager : StateManager,IDamageable
 
     [Space(50)]
     [Header("===== Serve =====")]
+    public bool b_canServe;
     public bool b_hasFood;
+    public TableObj s_serveTable;
 
     [Header("===== Cooking =====")]
+    public bool b_isWorking;
     public Transform t_workingPos;
 
-    private void Awake() {
+    private void Awake()
+    {
         anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponentsInChildren<Rigidbody>();
+
+        if (employeeType == EmployeeType.Serve) b_canServe = true;
+
     }
 
     void Start()
@@ -59,7 +66,7 @@ public class EmployeeStateManager : StateManager,IDamageable
         i_currentHP = i_maxHP;
         SwitchState(s_activityState);
     }
-    
+
     void Update()
     {
         s_currentState.UpdateState(this);
@@ -68,12 +75,12 @@ public class EmployeeStateManager : StateManager,IDamageable
     public void TakeDamage(int damage)
     {
         i_currentHP -= damage;
-        
+
         s_hurtState.s_lastState = s_currentState;
 
         SwitchState(s_hurtState);
 
-        if(i_currentHP <= 0)
+        if (i_currentHP <= 0)
         {
             Die();
         }

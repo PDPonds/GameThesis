@@ -11,7 +11,6 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
 
     public bool b_inProcess;
 
-
     void Update()
     {
         allCustomers = FindObjectsOfType<CustomerStateManager>();
@@ -54,7 +53,10 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
             {
                 if (allEmployees[i].s_currentState == allEmployees[i].s_activityState)
                 {
-                    allEmployeeProcessing++;
+                    if (allEmployees[i].b_isWorking)
+                    {
+                        allEmployeeProcessing++;
+                    }
                 }
             }
         }
@@ -83,7 +85,8 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
         {
             for (int i = 0; i < allCustomers.Length; i++)
             {
-                if (allCustomers[i].s_currentState == allCustomers[i].s_walkAroundState)
+                if (allCustomers[i].s_currentState == allCustomers[i].s_walkAroundState &&
+                    !allCustomers[i].b_escape)
                 {
                     customerIndex = i;
                     return true;
@@ -95,25 +98,44 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
         return false;
     }
 
-    public bool GetTableCanServe(out int tableIndex)
+    public bool GetCanEmployeeServe(out int serveIndex)
     {
-        if (allTables.Length > 0)
+        if (allEmployees.Length > 0)
         {
-            for (int i = 0; i < allTables.Length; i++)
+            for (int i = 0; i < allEmployees.Length; i++)
             {
-                if (!allTables[i].b_isEmtry)
+                if (allEmployees[i].employeeType == EmployeeType.Serve)
                 {
-                    if (allTables[i].s_currentCustomer != null)
+                    if (allEmployees[i].b_canServe)
                     {
-                        tableIndex = i;
-                        return true;
+                        if (allEmployees[i].s_serveTable == null)
+                        {
+                            serveIndex = i;
+                            return true;
+                        }
                     }
                 }
             }
         }
 
-        tableIndex = -1;
+        serveIndex = -1;
         return false;
     }
 
+    public bool GetCurrentTableFormEmployee(EmployeeStateManager ai, out int tableFormEmployee)
+    {
+        if (allTables.Length > 0)
+        {
+            for (int i = 0; i < allTables.Length; i++)
+            {
+                if (allTables[i].s_currentEmployee == ai)
+                {
+                    tableFormEmployee = i;
+                    return true;
+                }
+            }
+        }
+        tableFormEmployee = -1;
+        return false;
+    }
 }

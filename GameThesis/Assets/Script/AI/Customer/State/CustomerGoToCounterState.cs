@@ -15,6 +15,8 @@ public class CustomerGoToCounterState : BaseState
         }
         customerStateManager.c_tableObj = null;
         customerStateManager.c_chairObj = null;
+        customerStateManager.img_icon.enabled = false;
+        customerStateManager.img_progressBar.enabled = false;
         Debug.Log("Go to Counter");
     }
 

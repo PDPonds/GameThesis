@@ -941,7 +941,9 @@ MonoBehaviour:
   rb: []
   anim: {fileID: 0}
   agent: {fileID: 0}
+  b_canServe: 1
   b_hasFood: 0
+  b_isWorking: 0
   t_workingPos: {fileID: 0}
 --- !u!1 &204564350380485289 stripped
 GameObject:
