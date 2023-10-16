@@ -12,7 +12,7 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
     [HideInInspector] public PlayerMovement s_playerMovement;
     [HideInInspector] public FistCombat s_playerFistCombat;
     [HideInInspector] public PlayerGuard s_playerGuard;
-    [HideInInspector] public PlayerCrouch s_playerCrouch;
+    [HideInInspector] public PlayerSprint s_playerSprint;
 
     [Header("===== Player Movement =====")]
     public float f_walkSpeed;
@@ -63,10 +63,9 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
     public Animator a_fadeAnim;
     public bool b_isDead;
 
-    [Header("===== Player Crouch =====")]
-    public float f_standHeight;
-    public float f_crouchHeight;
-    [HideInInspector] public bool b_isCrouch;
+    [Header("===== Player Sprint =====")]
+    public float f_runSpeed;
+    public bool b_isSprint;
 
     private void Awake()
     {
@@ -76,7 +75,7 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
         s_playerMovement = GetComponent<PlayerMovement>();
         s_playerFistCombat = GetComponent<FistCombat>();
         s_playerGuard = GetComponent<PlayerGuard>();
-        s_playerCrouch = GetComponent<PlayerCrouch>();
+        s_playerSprint = GetComponent<PlayerSprint>();
         a_cameraAnim.enabled = false;
         f_moveSpeed = f_walkSpeed;
         i_currentHP = i_maxHP;

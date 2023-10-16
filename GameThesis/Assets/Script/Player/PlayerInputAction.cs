@@ -100,7 +100,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             ""id"": ""f403bd90-3635-431c-8baa-06d5fc42d4b5"",
             ""actions"": [
                 {
-                    ""name"": ""Crouch"",
+                    ""name"": ""Sprint"",
                     ""type"": ""Button"",
                     ""id"": ""977185f8-9d3b-411d-a773-e1a8ac7808eb"",
                     ""expectedControlType"": ""Button"",
@@ -140,11 +140,11 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""d67186ca-0e95-4bf8-bde7-bf5aa50bf21d"",
-                    ""path"": ""<Keyboard>/ctrl"",
+                    ""path"": ""<Keyboard>/shift"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Crouch"",
+                    ""action"": ""Sprint"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -191,7 +191,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         m_PlayerMovement_Move = m_PlayerMovement.FindAction("Move", throwIfNotFound: true);
         // Action
         m_Action = asset.FindActionMap("Action", throwIfNotFound: true);
-        m_Action_Crouch = m_Action.FindAction("Crouch", throwIfNotFound: true);
+        m_Action_Sprint = m_Action.FindAction("Sprint", throwIfNotFound: true);
         m_Action_Interactive = m_Action.FindAction("Interactive", throwIfNotFound: true);
         m_Action_Guard = m_Action.FindAction("Guard", throwIfNotFound: true);
         m_Action_HoldPunch = m_Action.FindAction("HoldPunch", throwIfNotFound: true);
@@ -302,7 +302,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     // Action
     private readonly InputActionMap m_Action;
     private List<IActionActions> m_ActionActionsCallbackInterfaces = new List<IActionActions>();
-    private readonly InputAction m_Action_Crouch;
+    private readonly InputAction m_Action_Sprint;
     private readonly InputAction m_Action_Interactive;
     private readonly InputAction m_Action_Guard;
     private readonly InputAction m_Action_HoldPunch;
@@ -310,7 +310,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     {
         private @PlayerInputAction m_Wrapper;
         public ActionActions(@PlayerInputAction wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Crouch => m_Wrapper.m_Action_Crouch;
+        public InputAction @Sprint => m_Wrapper.m_Action_Sprint;
         public InputAction @Interactive => m_Wrapper.m_Action_Interactive;
         public InputAction @Guard => m_Wrapper.m_Action_Guard;
         public InputAction @HoldPunch => m_Wrapper.m_Action_HoldPunch;
@@ -323,9 +323,9 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_ActionActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_ActionActionsCallbackInterfaces.Add(instance);
-            @Crouch.started += instance.OnCrouch;
-            @Crouch.performed += instance.OnCrouch;
-            @Crouch.canceled += instance.OnCrouch;
+            @Sprint.started += instance.OnSprint;
+            @Sprint.performed += instance.OnSprint;
+            @Sprint.canceled += instance.OnSprint;
             @Interactive.started += instance.OnInteractive;
             @Interactive.performed += instance.OnInteractive;
             @Interactive.canceled += instance.OnInteractive;
@@ -339,9 +339,9 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
 
         private void UnregisterCallbacks(IActionActions instance)
         {
-            @Crouch.started -= instance.OnCrouch;
-            @Crouch.performed -= instance.OnCrouch;
-            @Crouch.canceled -= instance.OnCrouch;
+            @Sprint.started -= instance.OnSprint;
+            @Sprint.performed -= instance.OnSprint;
+            @Sprint.canceled -= instance.OnSprint;
             @Interactive.started -= instance.OnInteractive;
             @Interactive.performed -= instance.OnInteractive;
             @Interactive.canceled -= instance.OnInteractive;
@@ -374,7 +374,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     }
     public interface IActionActions
     {
-        void OnCrouch(InputAction.CallbackContext context);
+        void OnSprint(InputAction.CallbackContext context);
         void OnInteractive(InputAction.CallbackContext context);
         void OnGuard(InputAction.CallbackContext context);
         void OnHoldPunch(InputAction.CallbackContext context);
