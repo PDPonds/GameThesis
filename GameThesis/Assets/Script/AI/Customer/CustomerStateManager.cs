@@ -18,6 +18,8 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     public CustomerEscapeState s_escapeState = new CustomerEscapeState();
     public CustomerGoOutFormRestaurantState s_goOutState = new CustomerGoOutFormRestaurantState();
     public CustomerEatFoodState s_eatFoodState = new CustomerEatFoodState();
+    public CustomerGiveMoneyBackState s_giveBackState = new CustomerGiveMoneyBackState();
+    public CustomerRunEscapeState s_runEscapeState = new CustomerRunEscapeState();
 
     public CustomerFightState s_fightState = new CustomerFightState();
     public CustomerAttackState s_attackState = new CustomerAttackState();
@@ -65,6 +67,12 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     public Sprite sprite_escapeIcon;
     public float f_escapeTime;
     public bool b_escape;
+    public float f_fightBackPercent;
+
+    [Header("===== Run Escape =====")]
+    public float f_runTime;
+    public float f_runSpeed;
+    public float f_walkSpeed;
 
     [Header("===== Dead State =====")]
     public float f_destroyTime;
@@ -91,6 +99,9 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     public void TakeDamage(int damage)
     {
         i_currentHP -= damage;
+
+        s_hurtState.s_lastState = s_currentState;
+
         SwitchState(s_hurtState);
 
         if (i_currentHP <= 0)
@@ -101,7 +112,7 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
 
     public void Die()
     {
-        if(b_escape) GameManager.Instance.AddCoin(10f);
+        if (b_escape) GameManager.Instance.AddCoin(10f);
 
         SwitchState(s_deadState);
     }
@@ -162,7 +173,7 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
                 text = "[E] to Drag";
             }
         }
-        else if(s_currentState == s_frontCounter)
+        else if (s_currentState == s_frontCounter)
         {
             text = "[E] to Take Money";
         }

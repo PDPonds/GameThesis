@@ -31,6 +31,7 @@ public class CustomerGoToCounterState : BaseState
         customerStateManager.anim.SetBool("sit", false);
         customerStateManager.anim.SetBool("walk", true);
         customerStateManager.agent.SetDestination(GameManager.Instance.t_counterPos.position);
+        customerStateManager.agent.speed = customerStateManager.f_walkSpeed;
         if (Vector3.Distance(customerStateManager.transform.position, GameManager.Instance.t_counterPos.position)
             <= 1f)
         {

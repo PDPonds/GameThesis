@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,7 +9,9 @@ public class CustomerFightState : BaseState
         CustomerStateManager customerStateManager = (CustomerStateManager)ai;
         customerStateManager.img_icon.enabled = false;
         customerStateManager.img_progressBar.enabled = false;
+
     }
+
 
     public override void UpdateState(StateManager ai)
     {
@@ -17,7 +20,7 @@ public class CustomerFightState : BaseState
         customerStateManager.RagdollOff();
 
         customerStateManager.agent.SetDestination(PlayerManager.Instance.transform.position);
-
+        customerStateManager.agent.speed = customerStateManager.f_walkSpeed;
         customerStateManager.anim.SetBool("fightState", true);
         customerStateManager.anim.SetBool("sit", false);
 

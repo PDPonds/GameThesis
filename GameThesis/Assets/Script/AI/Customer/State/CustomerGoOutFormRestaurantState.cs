@@ -25,7 +25,7 @@ public class CustomerGoOutFormRestaurantState : BaseState
         customerStateManager.anim.SetBool("fightState", false);
         customerStateManager.anim.SetBool("sit", false);
         customerStateManager.anim.SetBool("walk", true);
-
+        customerStateManager.agent.speed = customerStateManager.f_walkSpeed;
         customerStateManager.agent.SetDestination(GameManager.Instance.t_restaurantForntDoor.position);
 
         if (Vector3.Distance(customerStateManager.transform.position, GameManager.Instance.t_restaurantForntDoor.position)

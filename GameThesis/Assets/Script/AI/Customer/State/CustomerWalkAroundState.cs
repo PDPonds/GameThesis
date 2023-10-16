@@ -28,6 +28,8 @@ public class CustomerWalkAroundState : BaseState
         customerStateManager.anim.SetBool("sit", false);
         customerStateManager.DisablePunch();
 
+        customerStateManager.agent.speed = customerStateManager.f_walkSpeed;
+
         if (!customerStateManager.b_canAtk)
         {
             customerStateManager.f_currentAtkDelay -= Time.deltaTime;

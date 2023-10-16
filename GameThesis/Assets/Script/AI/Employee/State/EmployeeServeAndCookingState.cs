@@ -3,21 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
 
-public enum ServerState
-{
-    None, GoToBar, GoToTable, GoToWaitPoint
-}
-
 public class EmployeeServeAndCookingState : BaseState
 {
-
-    public ServerState serverState = ServerState.None;
+    public float f_currentToSlowTime;
 
     public override void EnterState(StateManager ai)
     {
         EmployeeStateManager employeeStateManager = (EmployeeStateManager)ai;
         employeeStateManager.i_currentHP = employeeStateManager.i_maxHP;
         employeeStateManager.b_isWorking = false;
+        f_currentToSlowTime = employeeStateManager.f_timeToSlow;
+        employeeStateManager.anim.SetBool("fightState", false);
     }
 
     public override void UpdateState(StateManager ai)
@@ -36,6 +32,7 @@ public class EmployeeServeAndCookingState : BaseState
                 {
                     employeeStateManager.b_isWorking = true;
                     employeeStateManager.agent.velocity = Vector3.zero;
+                    employeeStateManager.anim.SetBool("run", false);
                     employeeStateManager.anim.SetBool("walk", false);
                 }
                 else
@@ -46,11 +43,16 @@ public class EmployeeServeAndCookingState : BaseState
                 if (!employeeStateManager.b_isWorking)
                 {
                     employeeStateManager.agent.SetDestination(employeeStateManager.t_workingPos.position);
-                    employeeStateManager.anim.SetBool("walk", true);
+                    employeeStateManager.anim.SetBool("run", true);
+                    employeeStateManager.anim.SetBool("walk", false);
                 }
+
+                employeeStateManager.agent.speed = employeeStateManager.f_runSpeed;
 
                 break;
             case EmployeeType.Serve:
+
+                employeeStateManager.agent.speed = employeeStateManager.f_walkSpeed;
 
                 if (RestaurantManager.Instance.b_inProcess)
                 {
@@ -129,8 +131,6 @@ public class EmployeeServeAndCookingState : BaseState
             default: break;
         }
 
-        employeeStateManager.anim.SetBool("fightState", false);
-
         if (!employeeStateManager.b_canAtk)
         {
             employeeStateManager.f_currentAtkDelay -= Time.deltaTime;
@@ -139,6 +139,22 @@ public class EmployeeServeAndCookingState : BaseState
                 employeeStateManager.b_canAtk = true;
             }
         }
+
+        f_currentToSlowTime -= Time.deltaTime;
+        if (f_currentToSlowTime <= 0)
+        {
+            float p = Random.Range(0f, 100f);
+            if (p <= employeeStateManager.f_slowPercent)
+            {
+                employeeStateManager.SwitchState(employeeStateManager.s_slowDownState);
+                f_currentToSlowTime = employeeStateManager.f_timeToSlow;
+            }
+            else
+            {
+                f_currentToSlowTime = employeeStateManager.f_timeToSlow;
+            }
+        }
+
     }
 
 }

@@ -302,7 +302,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 14.78
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
@@ -312,7 +312,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.04
+      value: -11.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
@@ -1971,6 +1971,10 @@ MonoBehaviour:
   sprite_escapeIcon: {fileID: 21300000, guid: 31f70e16199a2354da84ee54eb82cecf, type: 3}
   f_escapeTime: 30
   b_escape: 0
+  f_fightBackPercent: 30
+  f_runTime: 10
+  f_runSpeed: 4
+  f_walkSpeed: 2
   f_destroyTime: 10
 --- !u!114 &4548816158027124120
 MonoBehaviour:

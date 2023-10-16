@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CustomerEscapeState : BaseState
 {
-
     public override void EnterState(StateManager ai)
     {
         CustomerStateManager customerStateManager = (CustomerStateManager)ai;
@@ -26,6 +25,7 @@ public class CustomerEscapeState : BaseState
     public override void UpdateState(StateManager ai)
     {
         CustomerStateManager customerStateManager = (CustomerStateManager)ai;
+        customerStateManager.agent.speed = customerStateManager.f_walkSpeed;
     }
 
 }

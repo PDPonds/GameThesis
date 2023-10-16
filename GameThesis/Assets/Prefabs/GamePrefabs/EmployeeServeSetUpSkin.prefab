@@ -36,17 +36,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 14.68
+      value: 5.24
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6.69
+      value: 3.8999996
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
@@ -930,6 +930,8 @@ MonoBehaviour:
   employeeType: 1
   i_currentHP: 0
   i_maxHP: 5
+  f_walkSpeed: 2
+  f_runSpeed: 4
   f_atkRange: 0.5
   f_atkDelay: 1
   f_currentAtkDelay: 0
@@ -943,8 +945,16 @@ MonoBehaviour:
   agent: {fileID: 0}
   b_canServe: 1
   b_hasFood: 0
+  s_serveTable: {fileID: 0}
   b_isWorking: 0
   t_workingPos: {fileID: 0}
+  f_timeToSlow: 10
+  f_slowPercent: 10
+  v_minmaxX: {x: -19, y: -14}
+  v_minmaxZ: {x: -14, y: 14}
+  v_minAndMaxSlowTime: {x: 30, y: 60}
+  v_walkPos: {x: 0, y: 0, z: 0}
+  f_slowTime: 0
 --- !u!1 &204564350380485289 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1082271958561512970, guid: b204018a8378be5498eb3adc2908f6ab,

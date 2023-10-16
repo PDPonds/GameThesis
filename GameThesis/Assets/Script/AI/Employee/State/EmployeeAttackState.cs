@@ -35,7 +35,6 @@ public class EmployeeAttackState : BaseState
         {
             employeeStateManager.SwitchState(employeeStateManager.s_fightState);
         }
-
     }
 
 }

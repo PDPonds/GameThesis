@@ -12,6 +12,8 @@ public class EmployeeStateManager : StateManager, IDamageable
 
     [HideInInspector] public int i_currentHP;
     public int i_maxHP;
+    public float f_walkSpeed;
+    public float f_runSpeed;
 
     public EmployeeServeAndCookingState s_activityState = new EmployeeServeAndCookingState();
 
@@ -50,6 +52,15 @@ public class EmployeeStateManager : StateManager, IDamageable
     [Header("===== Cooking =====")]
     public bool b_isWorking;
     public Transform t_workingPos;
+
+    [Header("===== Slow Down =====")]
+    public float f_timeToSlow;
+    public float f_slowPercent;
+    public Vector2 v_minmaxX;
+    public Vector2 v_minmaxZ;
+    public Vector2 v_minAndMaxSlowTime;
+    [HideInInspector] public Vector3 v_walkPos;
+    [HideInInspector] public float f_slowTime;
 
     private void Awake()
     {

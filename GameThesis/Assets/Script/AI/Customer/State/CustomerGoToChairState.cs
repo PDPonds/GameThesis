@@ -22,7 +22,7 @@ public class CustomerGoToChairState : BaseState
 
         customerStateManager.anim.SetBool("fightState", false);
         customerStateManager.anim.SetBool("walk", true);
-
+        customerStateManager.agent.speed = customerStateManager.f_walkSpeed;
         if (customerStateManager.c_tableObj != null)
         {
             ChairObj chair = customerStateManager.c_tableObj.g_chairs[chairIndex].GetComponent<ChairObj>();

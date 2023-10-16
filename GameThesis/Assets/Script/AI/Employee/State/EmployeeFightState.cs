@@ -16,6 +16,8 @@ public class EmployeeFightState : BaseState
 
         employeeStateManager.RagdollOff();
 
+        employeeStateManager.agent.speed = employeeStateManager.f_walkSpeed;
+
         employeeStateManager.agent.SetDestination(PlayerManager.Instance.transform.position);
 
         employeeStateManager.anim.SetBool("fightState", true);

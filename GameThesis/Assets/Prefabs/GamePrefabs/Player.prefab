@@ -52,7 +52,7 @@ GameObject:
   - component: {fileID: 6460029257633658136}
   - component: {fileID: 8397674540248559893}
   - component: {fileID: 7504912189488333588}
-  - component: {fileID: 8389627922253265513}
+  - component: {fileID: 6666325954764319300}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -149,7 +149,7 @@ MonoBehaviour:
   s_playerMovement: {fileID: 0}
   s_playerFistCombat: {fileID: 0}
   s_playerGuard: {fileID: 0}
-  s_playerCrouch: {fileID: 0}
+  s_playerSprint: {fileID: 0}
   f_walkSpeed: 3
   f_moveSpeed: 3
   v_moveInput: {x: 0, y: 0}
@@ -188,9 +188,8 @@ MonoBehaviour:
   a_cameraAnim: {fileID: 0}
   a_fadeAnim: {fileID: 0}
   b_isDead: 0
-  f_standHeight: 1.85
-  f_crouchHeight: 1
-  b_isCrouch: 0
+  f_runSpeed: 5
+  b_isSprint: 0
 --- !u!114 &8195681851754336247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -320,7 +319,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f69d31784d87f9942ab2cec956584a7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8389627922253265513
+--- !u!114 &6666325954764319300
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -329,7 +328,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2554706629010025491}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 091b020d60dc76f479c2abebc1230849, type: 3}
+  m_Script: {fileID: 11500000, guid: 02ef0295f54c6f14fa13e6f2f7017ea6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3701506965978550876
