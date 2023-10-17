@@ -60532,11 +60532,6 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 6594623196728284095}
-    - target: {fileID: 4186185451628163371, guid: d4e9833617a5fcc419cd2ac330caeac0,
-        type: 3}
-      propertyPath: f_atkRange
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 6187704230753432472, guid: d4e9833617a5fcc419cd2ac330caeac0,
         type: 3}
       propertyPath: m_LocalPosition.x
