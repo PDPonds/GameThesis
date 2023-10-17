@@ -32,7 +32,6 @@ public class TableObj : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(s_currentEmployee + transform.name);
 
         if (b_isEmtry && !b_readyForNextCustomer)
         {

@@ -21,16 +21,18 @@ public class PlayerAnimation : Auto_Singleton<PlayerAnimation>, IObserver
             case ActionObserver.PlayerHeavyPunch:
 
                 animator.Play("HeavyPunch");
-
+                StartCoroutine(cantMovePlayer());
                 break;
             case ActionObserver.PlayerLeftSoftPunch:
 
                 animator.Play("LeftPunch");
+                StartCoroutine(cantMovePlayer());
 
                 break;
             case ActionObserver.PlayerRightSoftPunch:
 
                 animator.Play("RightPunch");
+                StartCoroutine(cantMovePlayer());
 
                 break;
             case ActionObserver.PlayerGuard:
@@ -47,7 +49,13 @@ public class PlayerAnimation : Auto_Singleton<PlayerAnimation>, IObserver
         }
     }
 
+    IEnumerator cantMovePlayer()
+    {
+        PlayerManager.Instance.b_canMove = false;
+        yield return new WaitForSeconds(0.5f);
+        PlayerManager.Instance.b_canMove = true;
 
+    }
 
     private void OnEnable()
     {

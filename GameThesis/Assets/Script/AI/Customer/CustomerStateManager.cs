@@ -63,11 +63,14 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     [Header("===== Escape =====")]
     public Image img_progressBar;
     public Image img_icon;
-    public Sprite sprit_payIcon;
     public Sprite sprite_escapeIcon;
     public float f_escapeTime;
     public bool b_escape;
     public float f_fightBackPercent;
+
+    [Header("===== Pay =====")]
+    public Sprite sprit_payIcon;
+    public float f_payTime;
 
     [Header("===== Run Escape =====")]
     public float f_runTime;

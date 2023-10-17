@@ -11,7 +11,16 @@ public class PunchRightTrigger : MainObserver
             IDamageable damageAble = other.GetComponentInParent<IDamageable>();
             if (damageAble != null)
             {
-                damageAble.TakeDamage(1);
+                if(PlayerAnimation.Instance.animator.GetCurrentAnimatorStateInfo(0).IsName("HeavyPunch"))
+                {
+                    damageAble.TakeDamage(2);
+                }
+                else
+                {
+                    damageAble.TakeDamage(1);
+
+                }
+
                 if (transform.TryGetComponent(out Collider collider))
                 {
                     if (collider.enabled == true)

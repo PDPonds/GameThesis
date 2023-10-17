@@ -53,6 +53,10 @@ public class CustomerHurtState : BaseState
                             customerStateManager.SwitchState(customerStateManager.s_giveBackState);
                         }
                     }
+                    else
+                    {
+                        customerStateManager.SwitchState(customerStateManager.s_fightState);
+                    }
                 }
                 else if (s_lastState == customerStateManager.s_giveBackState)
                 {

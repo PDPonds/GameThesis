@@ -11,6 +11,8 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
 
     public bool b_inProcess;
 
+    [HideInInspector] public bool b_summaryButHasCustome;
+
     void Update()
     {
         allCustomers = FindObjectsOfType<CustomerStateManager>();
@@ -26,22 +28,32 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
             b_inProcess = false;
         }
 
-        if (!AllTableIsFull())
+        if (GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_openState)
         {
-            for (int i = 0; i < allTables.Length; i++)
+            if (!AllTableIsFull())
             {
-                if (allTables[i].b_isEmtry && allTables[i].b_readyForNextCustomer)
+                for (int i = 0; i < allTables.Length; i++)
                 {
-                    if (GetCustomerIndexCanOrder(out int customerIndex))
+                    if (allTables[i].b_isEmtry && allTables[i].b_readyForNextCustomer)
                     {
-                        allCustomers[customerIndex].SwitchState(allCustomers[customerIndex].s_goToChairState);
-                        allCustomers[customerIndex].c_tableObj = allTables[i];
-                        allTables[i].b_isEmtry = false;
+                        if (GetCustomerIndexCanOrder(out int customerIndex))
+                        {
+                            allCustomers[customerIndex].SwitchState(allCustomers[customerIndex].s_goToChairState);
+                            allCustomers[customerIndex].c_tableObj = allTables[i];
+                            allTables[i].b_isEmtry = false;
+                        }
                     }
                 }
             }
         }
 
+        if (GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_summaryState)
+        {
+            if (RestaurantIsEmpty())
+            {
+                Debug.Log("Summary");
+            }
+        }
     }
 
     bool AllEmployeeWorking()
@@ -155,6 +167,30 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
             }
         }
         return false;
+    }
+
+    bool RestaurantIsEmpty()
+    {
+        if (allCustomers.Length > 0)
+        {
+            for (int i = 0; i < allCustomers.Length; i++)
+            {
+                if (allCustomers[i].s_currentState == allCustomers[i].s_eatFoodState ||
+                    allCustomers[i].s_currentState == allCustomers[i].s_waitFoodState ||
+                    allCustomers[i].s_currentState == allCustomers[i].s_goToCounterState ||
+                    allCustomers[i].s_currentState == allCustomers[i].s_goToChairState ||
+                    allCustomers[i].s_currentState == allCustomers[i].s_frontCounter ||
+                    allCustomers[i].s_currentState == allCustomers[i].s_fightState ||
+                    allCustomers[i].s_currentState == allCustomers[i].s_attackState ||
+                    allCustomers[i].b_escape)
+                {
+                    b_summaryButHasCustome = true;
+                    return false;
+                }
+            }
+        }
+        b_summaryButHasCustome = false;
+        return true;
     }
 
 }

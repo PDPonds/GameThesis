@@ -18,7 +18,10 @@ public class EmployeeSlowDownState : BaseState
             employeeStateManager.v_minAndMaxSlowTime.y);
         f_currentSlowTime = employeeStateManager.f_slowTime;
 
-        Debug.Log("SlowDown");
+        if(employeeStateManager.employeeType == EmployeeType.Serve)
+        {
+            employeeStateManager.b_hasFood = false;
+        }
     }
 
     public override void UpdateState(StateManager ai)

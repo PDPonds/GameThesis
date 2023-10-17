@@ -1911,7 +1911,7 @@ NavMeshAgent:
   m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 360
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -1945,9 +1945,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   i_currentHP: 0
-  i_maxHP: 5
-  f_atkRange: 0.5
-  f_atkDelay: 1
+  i_maxHP: 10
+  f_atkRange: 1
+  f_atkDelay: 0.5
   f_currentAtkDelay: 0
   b_canAtk: 0
   i_atkCount: 0
@@ -1967,11 +1967,12 @@ MonoBehaviour:
   f_randomEventPercent: 50
   img_progressBar: {fileID: 6959761221574519225}
   img_icon: {fileID: 8895682841520443865}
-  sprit_payIcon: {fileID: 21300000, guid: 55a257e0742ec8e4cab7d0c875a43766, type: 3}
   sprite_escapeIcon: {fileID: 21300000, guid: 31f70e16199a2354da84ee54eb82cecf, type: 3}
   f_escapeTime: 30
   b_escape: 0
   f_fightBackPercent: 30
+  sprit_payIcon: {fileID: 21300000, guid: 55a257e0742ec8e4cab7d0c875a43766, type: 3}
+  f_payTime: 10
   f_runTime: 10
   f_runSpeed: 4
   f_walkSpeed: 2
