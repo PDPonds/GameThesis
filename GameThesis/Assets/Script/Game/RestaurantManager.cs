@@ -226,4 +226,20 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
 
         return allEmployees.Length == allEmployeeProcessing;
     }
+
+    public bool HasCustomerInFightState()
+    {
+        if (allCustomers.Length > 0)
+        {
+            for (int i = 0; i < allCustomers.Length; i++)
+            {
+                if (allCustomers[i].s_currentState == allCustomers[i].s_fightState ||
+                    allCustomers[i].s_currentState == allCustomers[i].s_attackState)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }

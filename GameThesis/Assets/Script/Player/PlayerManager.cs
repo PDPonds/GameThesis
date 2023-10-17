@@ -100,6 +100,10 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
             {
                 i_currentHP = i_maxHP;
                 b_inFighting = false;
+
+                CameraTrigger camTrigger = Camera.main.GetComponent<CameraTrigger>();
+                camTrigger.Vignette_StepDown();
+                camTrigger.DOF_StepDown();
             }
             //SetAnimation
             t_playerMesh.GetChild(0).gameObject.SetActive(true);
@@ -109,6 +113,13 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
             //SetAnimation
             t_playerMesh.GetChild(0).gameObject.SetActive(false);
         }
+
+        if(RestaurantManager.Instance.HasCustomerInFightState())
+        {
+            b_inFighting = true;
+            f_currentInFightingTime = f_maxInFightingTime;
+        }
+
     }
 
     IEnumerator DeadState()
@@ -125,6 +136,11 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
         b_canMove = true;
         b_isDead = false;
         i_currentHP = i_maxHP;
+
+        CameraTrigger camTrigger = Camera.main.GetComponent<CameraTrigger>();
+        camTrigger.Vignette_StepDown();
+        camTrigger.DOF_StepDown();
+
         f_currentStamina = 0;
         GameManager.Instance.RemoveCoint(10);
     }
@@ -132,8 +148,15 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
     public bool TakeDamageAndDead()
     {
         i_currentHP--;
+
         b_inFighting = true;
         f_currentInFightingTime = f_maxInFightingTime;
+
+        CameraTrigger camTrigger = Camera.main.GetComponent<CameraTrigger>();
+        StartCoroutine(camTrigger.Shake(camTrigger.duration, camTrigger.magnitude));
+        camTrigger.Vignette_StepUp();
+        camTrigger.DOF_StepUp();
+
         if (i_currentHP <= 0)
         {
             StartCoroutine(DeadState());

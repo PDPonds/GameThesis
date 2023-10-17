@@ -43,6 +43,7 @@ public class PlayerSprint : MonoBehaviour
                     {
                         customerStateManager.transform.LookAt(transform.position);
                         customerStateManager.SwitchState(customerStateManager.s_pushState);
+                        StartCoroutine(StopPlayer());
                     }
                 }
             }
@@ -55,11 +56,20 @@ public class PlayerSprint : MonoBehaviour
                     {
                         customerStateManager.transform.LookAt(transform.position);
                         customerStateManager.SwitchState(customerStateManager.s_pushState);
+                        StartCoroutine(StopPlayer());
+
                     }
                 }
             }
 
         }
+    }
+
+    IEnumerator StopPlayer()
+    {
+        PlayerManager.Instance.b_canMove = false;
+        yield return new WaitForSeconds(0.5f);
+        PlayerManager.Instance.b_canMove = true;
     }
 
 }
