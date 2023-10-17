@@ -48,6 +48,7 @@ public class EmployeeStateManager : StateManager, IDamageable
     public bool b_canServe;
     public bool b_hasFood;
     public TableObj s_serveTable;
+    public GameObject g_FoodInHand;
 
     [Header("===== Cooking =====")]
     public bool b_isWorking;

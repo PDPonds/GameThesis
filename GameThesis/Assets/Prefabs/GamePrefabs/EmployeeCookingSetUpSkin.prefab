@@ -1894,7 +1894,7 @@ MonoBehaviour:
   s_serveTable: {fileID: 0}
   b_isWorking: 0
   t_workingPos: {fileID: 0}
-  f_timeToSlow: 10
+  f_timeToSlow: 15
   f_slowPercent: 5
   v_minmaxX: {x: -19, y: -14}
   v_minmaxZ: {x: -14, y: 14}

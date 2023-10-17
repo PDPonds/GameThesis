@@ -150,7 +150,7 @@ MonoBehaviour:
   s_playerFistCombat: {fileID: 0}
   s_playerGuard: {fileID: 0}
   s_playerSprint: {fileID: 0}
-  f_walkSpeed: 3
+  f_walkSpeed: 4
   f_moveSpeed: 3
   v_moveInput: {x: 0, y: 0}
   f_mouseX: 0
@@ -159,11 +159,14 @@ MonoBehaviour:
   t_orientation: {fileID: 3737909744888210637}
   t_cameraPosition: {fileID: 8402433857913408833}
   b_canMove: 1
-  f_punchDelay: 1
+  f_punchDelay: 1.2
   f_heavyPunchTime: 0.4
   f_softPunchTime: 0.01
   c_leftHandPunch: {fileID: 8051925041932235509}
   c_rightHandPunch: {fileID: 7983275411382480778}
+  b_inFighting: 0
+  f_maxInFightingTime: 5
+  f_currentInFightingTime: 0
   b_canPunch: 0
   b_isHold: 0
   f_currentHoldTime: 0
@@ -188,8 +191,11 @@ MonoBehaviour:
   a_cameraAnim: {fileID: 0}
   a_fadeAnim: {fileID: 0}
   b_isDead: 0
-  f_runSpeed: 5
+  f_runSpeed: 7
   b_isSprint: 0
+  f_staminaMultiply: 3
+  f_maxStamina: 10
+  f_currentStamina: 0
 --- !u!114 &8195681851754336247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -259,6 +265,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   img_blood: {fileID: 0}
   text_interactText: {fileID: 0}
+  s_staminaSlider: {fileID: 0}
+  s_hpSlider: {fileID: 0}
 --- !u!114 &6083551488770495348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1669,7 +1677,7 @@ PrefabInstance:
     - target: {fileID: 3181872521001101421, guid: 96f4d0f3fd94d484997157dfc3e4535d,
         type: 3}
       propertyPath: m_CastShadows
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -135,6 +135,17 @@ public class EmployeeServeAndCookingState : BaseState
 
                     }
 
+                    if(employeeStateManager.b_hasFood)
+                    {
+                        employeeStateManager.anim.SetLayerWeight(1, 1);
+                        employeeStateManager.g_FoodInHand.SetActive(true);
+                    }
+                    else
+                    {
+                        employeeStateManager.anim.SetLayerWeight(1, 0);
+                        employeeStateManager.g_FoodInHand.SetActive(false);
+                    }
+
                     employeeStateManager.b_isWorking = true;
 
                     break;
@@ -147,11 +158,13 @@ public class EmployeeServeAndCookingState : BaseState
                 float p = Random.Range(0f, 100f);
                 if (p <= employeeStateManager.f_slowPercent)
                 {
+                    Debug.Log("Slack off");
                     employeeStateManager.SwitchState(employeeStateManager.s_slowDownState);
                     f_currentToSlowTime = employeeStateManager.f_timeToSlow;
                 }
                 else
                 {
+                    Debug.Log("No Slack off");
                     f_currentToSlowTime = employeeStateManager.f_timeToSlow;
                 }
             }
@@ -252,6 +265,17 @@ public class EmployeeServeAndCookingState : BaseState
                             employeeStateManager.agent.speed = employeeStateManager.f_walkSpeed;
                             employeeStateManager.anim.SetBool("run", false);
                         }
+                    }
+
+                    if (employeeStateManager.b_hasFood)
+                    {
+                        employeeStateManager.anim.SetLayerWeight(1, 1);
+                        employeeStateManager.g_FoodInHand.SetActive(true);
+                    }
+                    else
+                    {
+                        employeeStateManager.anim.SetLayerWeight(1, 0);
+                        employeeStateManager.g_FoodInHand.SetActive(false);
                     }
 
                     break;

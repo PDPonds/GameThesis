@@ -125,12 +125,15 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
         b_canMove = true;
         b_isDead = false;
         i_currentHP = i_maxHP;
+        f_currentStamina = 0;
+        GameManager.Instance.RemoveCoint(10);
     }
 
     public bool TakeDamageAndDead()
     {
         i_currentHP--;
         b_inFighting = true;
+        f_currentInFightingTime = f_maxInFightingTime;
         if (i_currentHP <= 0)
         {
             StartCoroutine(DeadState());

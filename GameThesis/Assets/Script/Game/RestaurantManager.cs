@@ -19,7 +19,7 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
         allEmployees = FindObjectsOfType<EmployeeStateManager>();
         allTables = FindObjectsOfType<TableObj>();
 
-        if (AllEmployeeWorking())
+        if (AllEmployeeWorkingCheckProcess())
         {
             b_inProcess = true;
         }
@@ -56,7 +56,7 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
         }
     }
 
-    bool AllEmployeeWorking()
+    bool AllEmployeeWorkingCheckProcess()
     {
         int allEmployeeProcessing = 0;
         if (allEmployees.Length > 0)
@@ -193,4 +193,37 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
         return true;
     }
 
+    public bool SomeOneEscape()
+    {
+        if (allCustomers.Length >= 0)
+        {
+            for (int i = 0; i < allCustomers.Length; i++)
+            {
+                if (allCustomers[i].b_escape)
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public bool AllEmployeeWorkingCheckForText()
+    {
+        int allEmployeeProcessing = 0;
+        if (allEmployees.Length > 0)
+        {
+            for (int i = 0; i < allEmployees.Length; i++)
+            {
+                if (allEmployees[i].s_currentState == allEmployees[i].s_activityState)
+                {
+                    allEmployeeProcessing++;
+
+                }
+            }
+        }
+
+        return allEmployees.Length == allEmployeeProcessing;
+    }
 }

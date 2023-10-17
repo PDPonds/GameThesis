@@ -42,9 +42,8 @@ public class PlayerSprint : MonoBehaviour
                         customerStateManager.s_currentState == customerStateManager.s_goOutState)
                     {
                         customerStateManager.transform.LookAt(transform.position);
-                        customerStateManager.SwitchState(customerStateManager.s_fightState);
+                        customerStateManager.SwitchState(customerStateManager.s_pushState);
                     }
-
                 }
             }
             else
@@ -55,7 +54,7 @@ public class PlayerSprint : MonoBehaviour
                         customerStateManager.s_currentState == customerStateManager.s_goOutState)
                     {
                         customerStateManager.transform.LookAt(transform.position);
-                        customerStateManager.SwitchState(customerStateManager.s_fightState);
+                        customerStateManager.SwitchState(customerStateManager.s_pushState);
                     }
                 }
             }

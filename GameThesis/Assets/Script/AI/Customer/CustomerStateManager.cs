@@ -22,6 +22,7 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     public CustomerRunEscapeState s_runEscapeState = new CustomerRunEscapeState();
 
     public CustomerFightState s_fightState = new CustomerFightState();
+    public CustomerPushState s_pushState = new CustomerPushState();
     public CustomerAttackState s_attackState = new CustomerAttackState();
     public CustomerDeadState s_deadState = new CustomerDeadState();
     public CustomerHurtState s_hurtState = new CustomerHurtState();

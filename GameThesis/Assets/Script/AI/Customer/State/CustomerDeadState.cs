@@ -7,6 +7,7 @@ public class CustomerDeadState : BaseState
     {
         CustomerStateManager customerStateManager = (CustomerStateManager)ai;
         f_currentDestroyTime = customerStateManager.f_destroyTime;
+        customerStateManager.b_escape = false;
         customerStateManager.img_icon.enabled = false;
         customerStateManager.img_progressBar.enabled = false;
     }
