@@ -35,14 +35,14 @@ public class CustomerRunEscapeState : BaseState
             customerStateManager.SwitchState(customerStateManager.s_walkAroundState);
         }
 
-        if (Vector3.Distance(customerStateManager.transform.position, v_walkPos) <= 0.1f)
+        if (Vector3.Distance(customerStateManager.transform.position, GameManager.Instance.s_gameState.t_spawnPoint.position) <= 1f)
         {
             customerStateManager.agent.velocity = Vector3.zero;
             customerStateManager.anim.SetBool("run", false);
         }
         else
         {
-            customerStateManager.agent.SetDestination(v_walkPos);
+            customerStateManager.agent.SetDestination(GameManager.Instance.s_gameState.t_spawnPoint.position);
             customerStateManager.anim.SetBool("run", true);
 
         }

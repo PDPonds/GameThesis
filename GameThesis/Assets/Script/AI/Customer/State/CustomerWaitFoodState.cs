@@ -25,6 +25,7 @@ public class CustomerWaitFoodState : BaseState
             {
                 ChairObj chair = customerStateManager.c_chairObj;
                 customerStateManager.anim.SetBool("walk", false);
+                customerStateManager.anim.SetBool("run", false);
                 customerStateManager.anim.SetBool("sit", true);
                 customerStateManager.anim.SetBool("drunk", false);
                 customerStateManager.agent.velocity = Vector3.zero;

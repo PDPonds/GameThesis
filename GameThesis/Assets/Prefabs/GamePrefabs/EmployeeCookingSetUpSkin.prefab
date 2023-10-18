@@ -1872,8 +1872,8 @@ MonoBehaviour:
   t_workingPos: {fileID: 0}
   f_timeToSlow: 15
   f_slowPercent: 2
-  v_minmaxX: {x: -19, y: -14}
-  v_minmaxZ: {x: -14, y: 14}
+  v_minmaxX: {x: -21, y: -14}
+  v_minmaxZ: {x: -7, y: 11}
   v_minAndMaxSlowTime: {x: 30, y: 60}
   v_walkPos: {x: 0, y: 0, z: 0}
   f_slowTime: 0

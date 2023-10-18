@@ -46,12 +46,10 @@ public class CustomerWalkAroundState : BaseState
         if (f_currentTimeToWalk <= 0)
         {
             float xPos = Random.Range(10f, 20f);
-            float zPos = Random.Range(-13f, 13f);
+            float zPos = Random.Range(-35f, 25f);
             customerStateManager.v_walkPos = new Vector3(xPos, 0, zPos);
             f_currentTimeToWalk = customerStateManager.f_findNextPositionTime;
         }
-
-        customerStateManager.agent.SetDestination(customerStateManager.v_walkPos);
 
         if (customerStateManager.agent.velocity != Vector3.zero)
         {
@@ -64,6 +62,7 @@ public class CustomerWalkAroundState : BaseState
 
         if (customerStateManager.b_escape)
         {
+            customerStateManager.agent.SetDestination(GameManager.Instance.s_gameState.t_spawnPoint.position);
             f_currentEscapeTime -= Time.deltaTime;
             if (f_currentEscapeTime <= 0)
             {
@@ -81,13 +80,13 @@ public class CustomerWalkAroundState : BaseState
 
             customerStateManager.img_progressBar.fillAmount = progressTime;
             customerStateManager.img_progressBar.color = new Color(1 - progressTime, progressTime, 0, 1);
-
         }
         else
         {
             customerStateManager.img_icon.enabled = false;
             customerStateManager.img_progressBar.enabled = false;
             customerStateManager.text_coin.SetActive(false);
+            customerStateManager.agent.SetDestination(customerStateManager.v_walkPos);
 
         }
     }

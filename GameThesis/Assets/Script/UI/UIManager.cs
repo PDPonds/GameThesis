@@ -18,6 +18,9 @@ public class UIManager : Auto_Singleton<UIManager>
     [Header("===== Rating =====")]
     public TextMeshProUGUI text_rating;
 
+    [Header("===== Leave Area Text =====")]
+    public GameObject text_leaveArea;
+    public bool b_leaveTrigger;
     private void Update()
     {
         text_coin.text = $"$ : {GameManager.Instance.f_coin.ToString("00.00")}";
@@ -32,6 +35,17 @@ public class UIManager : Auto_Singleton<UIManager>
         #endregion
 
         text_rating.text = $"{RestaurantManager.Instance.i_rating} / {RestaurantManager.Instance.v_minmaxRating.y}";
+
+        if (b_leaveTrigger)
+        {
+            text_leaveArea.SetActive(true);
+        }
+        else
+        {
+            text_leaveArea.SetActive(false);
+
+        }
+
     }
 
     string GetWarningText()

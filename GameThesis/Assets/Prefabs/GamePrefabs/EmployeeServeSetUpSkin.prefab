@@ -1008,8 +1008,8 @@ MonoBehaviour:
   t_workingPos: {fileID: 0}
   f_timeToSlow: 15
   f_slowPercent: 2
-  v_minmaxX: {x: -19, y: -14}
-  v_minmaxZ: {x: -14, y: 14}
+  v_minmaxX: {x: -21, y: -14}
+  v_minmaxZ: {x: -7, y: 11}
   v_minAndMaxSlowTime: {x: 30, y: 60}
   v_walkPos: {x: 0, y: 0, z: 0}
   f_slowTime: 0
@@ -2152,6 +2152,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FoodPlateEmployee
+      objectReference: {fileID: 0}
+    - target: {fileID: 4752440506443369609, guid: 123209948b512c940a2283b7454a70e9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5386269809170994739, guid: 123209948b512c940a2283b7454a70e9,
         type: 3}

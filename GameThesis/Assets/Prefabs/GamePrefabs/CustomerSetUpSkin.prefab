@@ -769,7 +769,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 14
+      value: 3.02
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
@@ -779,7 +779,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -11.5
+      value: -34.64
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
@@ -2447,10 +2447,10 @@ MonoBehaviour:
   img_wakeUpImage: {fileID: 3138884861243291897}
   img_BGWakeUpImage: {fileID: 3946363682038985419}
   b_isDrunk: 0
-  f_drunkPercent: 100
+  f_drunkPercent: 20
   f_currentWekeUpPoint: 0
   f_wekeUpMultiply: 1
-  f_maxWekeUpPoint: 10
+  f_maxWekeUpPoint: 7
 --- !u!114 &4548816158027124120
 MonoBehaviour:
   m_ObjectHideFlags: 0
