@@ -18,14 +18,13 @@ public class CustomerEscapeState : BaseState
 
         customerStateManager.b_escape = true;
         customerStateManager.SwitchState(customerStateManager.s_walkAroundState);
-
-        Debug.Log("Escape");
     }
 
     public override void UpdateState(StateManager ai)
     {
         CustomerStateManager customerStateManager = (CustomerStateManager)ai;
         customerStateManager.agent.speed = customerStateManager.f_walkSpeed;
+        customerStateManager.RagdollOff();
     }
 
 }

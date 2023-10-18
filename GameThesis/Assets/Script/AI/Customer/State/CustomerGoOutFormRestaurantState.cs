@@ -17,6 +17,9 @@ public class CustomerGoOutFormRestaurantState : BaseState
         customerStateManager.c_chairObj = null;
         customerStateManager.img_icon.enabled = false;
         customerStateManager.img_progressBar.enabled = false;
+        customerStateManager.text_coin.SetActive(false);
+        customerStateManager.img_wakeUpImage.enabled = false;
+        customerStateManager.img_BGWakeUpImage.enabled = false;
     }
 
     public override void UpdateState(StateManager ai)
@@ -24,6 +27,7 @@ public class CustomerGoOutFormRestaurantState : BaseState
         CustomerStateManager customerStateManager = (CustomerStateManager)ai;
         customerStateManager.anim.SetBool("fightState", false);
         customerStateManager.anim.SetBool("sit", false);
+        customerStateManager.anim.SetBool("drunk", false);
         customerStateManager.anim.SetBool("walk", true);
         customerStateManager.agent.speed = customerStateManager.f_walkSpeed;
         customerStateManager.agent.SetDestination(GameManager.Instance.t_restaurantForntDoor.position);

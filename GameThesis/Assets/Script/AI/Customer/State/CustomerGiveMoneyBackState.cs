@@ -7,6 +7,7 @@ public class CustomerGiveMoneyBackState : BaseState
     public override void EnterState(StateManager ai)
     {
         CustomerStateManager customerStateManager = (CustomerStateManager)ai;
+
     }
 
     public override void UpdateState(StateManager ai)
@@ -19,7 +20,7 @@ public class CustomerGiveMoneyBackState : BaseState
         {
             if (customerStateManager.anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.5f)
             {
-                GameManager.Instance.AddCoin(10f);
+                GameManager.Instance.AddCoin(customerStateManager.f_giveCoin);
                 customerStateManager.SwitchState(customerStateManager.s_runEscapeState);
             }
         }

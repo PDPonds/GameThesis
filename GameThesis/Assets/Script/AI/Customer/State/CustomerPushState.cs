@@ -27,6 +27,7 @@ public class CustomerPushState : BaseState
 
         customerStateManager.anim.SetBool("fightState", false);
         customerStateManager.anim.SetBool("sit", false);
+        customerStateManager.anim.SetBool("drunk", false);
 
         customerStateManager.RagdollOff();
 

@@ -33,8 +33,7 @@ public class EmployeeStateManager : StateManager, IDamageable
 
     [Header("===== Attack =====")]
     public int i_atkCount;
-    public Collider c_leftHandPunch;
-    public Collider c_rightHandPunch;
+    public Collider c_atkCollider;
 
     [Header("===== Pressed Out =====")]
     public float f_pressedOutTime;
@@ -120,8 +119,8 @@ public class EmployeeStateManager : StateManager, IDamageable
 
     public void DisablePunch()
     {
-        c_leftHandPunch.enabled = false;
-        c_rightHandPunch.enabled = false;
+        c_atkCollider.enabled = false;
+
     }
 
 }

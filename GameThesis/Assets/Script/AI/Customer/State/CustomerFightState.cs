@@ -9,7 +9,9 @@ public class CustomerFightState : BaseState
         CustomerStateManager customerStateManager = (CustomerStateManager)ai;
         customerStateManager.img_icon.enabled = false;
         customerStateManager.img_progressBar.enabled = false;
-
+        customerStateManager.text_coin.SetActive(false);
+        customerStateManager.img_wakeUpImage.enabled = false;
+        customerStateManager.img_BGWakeUpImage.enabled = false;
     }
 
 
@@ -23,6 +25,7 @@ public class CustomerFightState : BaseState
         customerStateManager.agent.speed = customerStateManager.f_walkSpeed;
         customerStateManager.anim.SetBool("fightState", true);
         customerStateManager.anim.SetBool("sit", false);
+        customerStateManager.anim.SetBool("drunk", false);
 
         customerStateManager.DisablePunch();
 

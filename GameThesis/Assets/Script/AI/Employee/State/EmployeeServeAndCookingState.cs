@@ -158,13 +158,11 @@ public class EmployeeServeAndCookingState : BaseState
                 float p = Random.Range(0f, 100f);
                 if (p <= employeeStateManager.f_slowPercent)
                 {
-                    Debug.Log("Slack off");
                     employeeStateManager.SwitchState(employeeStateManager.s_slowDownState);
                     f_currentToSlowTime = employeeStateManager.f_timeToSlow;
                 }
                 else
                 {
-                    Debug.Log("No Slack off");
                     f_currentToSlowTime = employeeStateManager.f_timeToSlow;
                 }
             }

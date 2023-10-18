@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class RestaurantManager : Auto_Singleton<RestaurantManager>
@@ -12,6 +13,16 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
     public bool b_inProcess;
 
     [HideInInspector] public bool b_summaryButHasCustome;
+
+    public int i_rating;
+    public Vector2Int v_minmaxRating;
+    public int i_ratingToRemove;
+    public int i_ratingToAdd;
+
+    private void Awake()
+    {
+        i_rating = v_minmaxRating.y;
+    }
 
     void Update()
     {
@@ -41,6 +52,7 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
                             allCustomers[customerIndex].SwitchState(allCustomers[customerIndex].s_goToChairState);
                             allCustomers[customerIndex].c_tableObj = allTables[i];
                             allTables[i].b_isEmtry = false;
+                            allTables[i].b_readyForNextCustomer = false;
                         }
                     }
                 }
@@ -54,6 +66,7 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
                 Debug.Log("Summary");
             }
         }
+
     }
 
     bool AllEmployeeWorkingCheckProcess()
@@ -242,4 +255,23 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
         }
         return false;
     }
+
+    public void RemoveRating()
+    {
+        i_rating -= i_ratingToRemove;
+        if (i_rating <= v_minmaxRating.x)
+        {
+            i_rating = v_minmaxRating.x;
+        }
+    }
+
+    public void AddRating()
+    {
+        i_rating += i_ratingToAdd;
+        if (i_rating >= v_minmaxRating.y)
+        {
+            i_rating = v_minmaxRating.y;
+        }
+    }
+
 }

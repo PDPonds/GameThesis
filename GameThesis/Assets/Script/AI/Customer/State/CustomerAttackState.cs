@@ -13,15 +13,15 @@ public class CustomerAttackState : BaseState
         if (customerStateManager.i_atkCount % 2 == 0)
         {
             customerStateManager.anim.Play("LeftPunch");
-            customerStateManager.c_leftHandPunch.enabled = true;
         }
         else
         {
             customerStateManager.anim.Play("RightPunch");
-            customerStateManager.c_rightHandPunch.enabled = true;
-
         }
         customerStateManager.img_icon.enabled = false;
+        customerStateManager.text_coin.SetActive(false);
+        customerStateManager.img_wakeUpImage.enabled = false;
+        customerStateManager.img_BGWakeUpImage.enabled = false;
     }
 
     public override void UpdateState(StateManager ai)

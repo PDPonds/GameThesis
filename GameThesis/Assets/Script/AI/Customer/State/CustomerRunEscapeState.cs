@@ -19,7 +19,10 @@ public class CustomerRunEscapeState : BaseState
         customerStateManager.img_icon.enabled = false;
         customerStateManager.img_progressBar.enabled = false;
         customerStateManager.b_escape = false;
-
+        customerStateManager.b_isDrunk = false;
+        customerStateManager.text_coin.SetActive(false);
+        customerStateManager.img_wakeUpImage.enabled = false;
+        customerStateManager.img_BGWakeUpImage.enabled = false;
     }
 
     public override void UpdateState(StateManager ai)

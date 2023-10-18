@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
@@ -21,6 +23,8 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     public CustomerGiveMoneyBackState s_giveBackState = new CustomerGiveMoneyBackState();
     public CustomerRunEscapeState s_runEscapeState = new CustomerRunEscapeState();
 
+    public CustomerDrunkState s_drunkState = new CustomerDrunkState();
+
     public CustomerFightState s_fightState = new CustomerFightState();
     public CustomerPushState s_pushState = new CustomerPushState();
     public CustomerAttackState s_attackState = new CustomerAttackState();
@@ -38,8 +42,7 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
 
     [Header("===== Attack =====")]
     public int i_atkCount;
-    public Collider c_leftHandPunch;
-    public Collider c_rightHandPunch;
+    public Collider c_atkCollider;
 
     [Header("===== RagdollAndDrag =====")]
     public Transform t_hips;
@@ -64,14 +67,17 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     [Header("===== Escape =====")]
     public Image img_progressBar;
     public Image img_icon;
-    public Sprite sprite_escapeIcon;
+    public GameObject text_coin;
+    public Color color_escape;
     public float f_escapeTime;
     public bool b_escape;
     public float f_fightBackPercent;
 
     [Header("===== Pay =====")]
-    public Sprite sprit_payIcon;
+    public Color color_pay;
     public float f_payTime;
+    [HideInInspector] public float f_giveCoin;
+    public Vector2 v_minmaxGiveCoin;
 
     [Header("===== Run Escape =====")]
     public float f_runTime;
@@ -80,6 +86,15 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
 
     [Header("===== Dead State =====")]
     public float f_destroyTime;
+
+    [Header("===== Drunk =====")]
+    public Image img_wakeUpImage;
+    public Image img_BGWakeUpImage;
+    public bool b_isDrunk;
+    public float f_drunkPercent;
+    [HideInInspector] public float f_currentWekeUpPoint;
+    public float f_wekeUpMultiply;
+    public float f_maxWekeUpPoint;
 
     private void Awake()
     {
@@ -93,11 +108,14 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
         s_currentState = s_walkAroundState;
         s_currentState.EnterState(this);
         i_currentHP = i_maxHP;
+        f_giveCoin = UnityEngine.Random.Range(v_minmaxGiveCoin.x, v_minmaxGiveCoin.y);
     }
 
     private void Update()
     {
         s_currentState.UpdateState(this);
+        TextMeshProUGUI text = text_coin.GetComponent<TextMeshProUGUI>();
+        text.text = $"$ {f_giveCoin.ToString("00.00")}";
     }
 
     public void TakeDamage(int damage)
@@ -116,7 +134,10 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
 
     public void Die()
     {
-        if (b_escape) GameManager.Instance.AddCoin(10f);
+        if (b_escape) GameManager.Instance.AddCoin(f_giveCoin);
+        if (b_isDrunk) GameManager.Instance.AddCoin(f_giveCoin);
+
+        RestaurantManager.Instance.RemoveRating();
 
         SwitchState(s_deadState);
     }
@@ -137,8 +158,7 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
 
     public void DisablePunch()
     {
-        c_leftHandPunch.enabled = false;
-        c_rightHandPunch.enabled = false;
+        c_atkCollider.enabled = false;
     }
 
     public void Interaction()
@@ -160,10 +180,17 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
         }
         else if (s_currentState == s_frontCounter)
         {
-            GameManager.Instance.AddCoin(10f);
+            GameManager.Instance.AddCoin(f_giveCoin);
             SwitchState(s_goOutState);
         }
-
+        else if (s_currentState == s_drunkState)
+        {
+            f_currentWekeUpPoint += f_wekeUpMultiply;
+            if (f_currentWekeUpPoint >= f_maxWekeUpPoint)
+            {
+                SwitchState(s_giveBackState);
+            }
+        }
     }
 
     public string InteractionText()
@@ -181,7 +208,11 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
         {
             text = "[E] to Take Money";
         }
-
+        else if (s_currentState == s_drunkState)
+        {
+            text = $"[E] to wake up the customer.{Environment.NewLine}" +
+                $"Punch to drive away customers. ";
+        }
         return text;
     }
 
@@ -190,4 +221,8 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
         Destroy(gameObject);
     }
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, f_atkRange);
+    }
 }

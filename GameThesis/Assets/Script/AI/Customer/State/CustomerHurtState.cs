@@ -31,6 +31,8 @@ public class CustomerHurtState : BaseState
 
         customerStateManager.anim.SetBool("fightState", false);
         customerStateManager.anim.SetBool("sit", false);
+        customerStateManager.anim.SetBool("drunk", false);
+
 
         customerStateManager.RagdollOff();
 
@@ -38,7 +40,7 @@ public class CustomerHurtState : BaseState
 
         if (customerStateManager.anim.GetCurrentAnimatorStateInfo(0).IsName("Hurt"))
         {
-            if (customerStateManager.anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.5f)
+            if (customerStateManager.anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.2f)
             {
                 if (s_lastState == customerStateManager.s_walkAroundState)
                 {

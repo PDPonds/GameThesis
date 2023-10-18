@@ -1,5 +1,71 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6961966477435886223
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3456927120693508831}
+  - component: {fileID: 2141206312345033936}
+  - component: {fileID: 179078261382179688}
+  m_Layer: 6
+  m_Name: AtkCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3456927120693508831
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6961966477435886223}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 4, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7823453241002127511}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2141206312345033936
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6961966477435886223}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3.7, y: 6.969489, z: 3.2195725}
+  m_Center: {x: 0.047991343, y: -0.41917893, z: 1.1097854}
+--- !u!114 &179078261382179688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6961966477435886223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e94ac47e440fbee48a680e939a347beb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7717133709726586748
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -663,7 +729,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
+        type: 3}
+      insertIndex: 0
+      addedObject: {fileID: 3456927120693508831}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
@@ -1883,8 +1953,7 @@ MonoBehaviour:
   f_currentAtkDelay: 0
   b_canAtk: 0
   i_atkCount: 0
-  c_leftHandPunch: {fileID: 3837603388199032107}
-  c_rightHandPunch: {fileID: 5872443642433992741}
+  c_atkCollider: {fileID: 2141206312345033936}
   f_pressedOutTime: 5
   rb: []
   anim: {fileID: 0}
@@ -1892,10 +1961,11 @@ MonoBehaviour:
   b_canServe: 0
   b_hasFood: 0
   s_serveTable: {fileID: 0}
+  g_FoodInHand: {fileID: 0}
   b_isWorking: 0
   t_workingPos: {fileID: 0}
   f_timeToSlow: 15
-  f_slowPercent: 5
+  f_slowPercent: 2
   v_minmaxX: {x: -19, y: -14}
   v_minmaxZ: {x: -14, y: 14}
   v_minAndMaxSlowTime: {x: 30, y: 60}
@@ -2003,6 +2073,12 @@ CharacterJoint:
   m_EnablePreprocessing: 0
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!4 &7823453241002127511 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
+    type: 3}
+  m_PrefabInstance: {fileID: 7717133709726586748}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &9124763256418925511 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -7657966619581158213, guid: b204018a8378be5498eb3adc2908f6ab,

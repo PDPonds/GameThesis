@@ -263,7 +263,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d4eba81e4f690d49b083b9b39f22344, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  img_blood: {fileID: 0}
   text_interactText: {fileID: 0}
   s_staminaSlider: {fileID: 0}
   s_hpSlider: {fileID: 0}
@@ -1677,7 +1676,7 @@ PrefabInstance:
     - target: {fileID: 3181872521001101421, guid: 96f4d0f3fd94d484997157dfc3e4535d,
         type: 3}
       propertyPath: m_CastShadows
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

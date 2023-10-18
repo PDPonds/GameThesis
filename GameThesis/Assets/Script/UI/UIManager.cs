@@ -15,19 +15,23 @@ public class UIManager : Auto_Singleton<UIManager>
     [Header("===== Warning =====")]
     public TextMeshProUGUI text_warning;
 
+    [Header("===== Rating =====")]
+    public TextMeshProUGUI text_rating;
+
     private void Update()
     {
-        text_coin.text = $"$ : {GameManager.Instance.f_coin}";
+        text_coin.text = $"$ : {GameManager.Instance.f_coin.ToString("00.00")}";
 
         text_time.text = TimeController.Instance.d_currentTime.ToString("HH:mm");
 
         #region warning
 
         text_warning.text = GetWarningText();
-        text_warning.color = Color.red;
+        text_warning.color = Color.yellow;
 
         #endregion
 
+        text_rating.text = $"{RestaurantManager.Instance.i_rating} / {RestaurantManager.Instance.v_minmaxRating.y}";
     }
 
     string GetWarningText()
@@ -36,12 +40,12 @@ public class UIManager : Auto_Singleton<UIManager>
 
         if (!RestaurantManager.Instance.AllEmployeeWorkingCheckForText())
         {
-            text += $"Someone slacks off. !!{Environment.NewLine}";
+            text += $"• Someone slacks off. !!{Environment.NewLine}";
         }
 
         if (RestaurantManager.Instance.SomeOneEscape())
         {
-            text += $"Someone Escape. !! {Environment.NewLine}";
+            text += $"• Someone Escape. !! {Environment.NewLine}";
         }
 
         return text;
