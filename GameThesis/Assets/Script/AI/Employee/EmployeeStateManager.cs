@@ -12,6 +12,8 @@ public class EmployeeStateManager : StateManager, IDamageable
 
     [HideInInspector] public int i_currentHP;
     public int i_maxHP;
+    public float f_walkSpeed;
+    public float f_runSpeed;
 
     public EmployeeServeAndCookingState s_activityState = new EmployeeServeAndCookingState();
 
@@ -31,8 +33,7 @@ public class EmployeeStateManager : StateManager, IDamageable
 
     [Header("===== Attack =====")]
     public int i_atkCount;
-    public Collider c_leftHandPunch;
-    public Collider c_rightHandPunch;
+    public Collider c_atkCollider;
 
     [Header("===== Pressed Out =====")]
     public float f_pressedOutTime;
@@ -46,10 +47,20 @@ public class EmployeeStateManager : StateManager, IDamageable
     public bool b_canServe;
     public bool b_hasFood;
     public TableObj s_serveTable;
+    public GameObject g_FoodInHand;
 
     [Header("===== Cooking =====")]
     public bool b_isWorking;
     public Transform t_workingPos;
+
+    [Header("===== Slow Down =====")]
+    public float f_timeToSlow;
+    public float f_slowPercent;
+    public Vector2 v_minmaxX;
+    public Vector2 v_minmaxZ;
+    public Vector2 v_minAndMaxSlowTime;
+    [HideInInspector] public Vector3 v_walkPos;
+    [HideInInspector] public float f_slowTime;
 
     private void Awake()
     {
@@ -108,8 +119,8 @@ public class EmployeeStateManager : StateManager, IDamageable
 
     public void DisablePunch()
     {
-        c_leftHandPunch.enabled = false;
-        c_rightHandPunch.enabled = false;
+        c_atkCollider.enabled = false;
+
     }
 
 }

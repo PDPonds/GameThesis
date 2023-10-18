@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,14 +9,15 @@ public class CustomerWalkAroundState : BaseState
 
     public override void EnterState(StateManager ai)
     {
-        Debug.Log("Customer : WalkAround");
         CustomerStateManager customerStateManager = (CustomerStateManager)ai;
         customerStateManager.i_currentHP = customerStateManager.i_maxHP;
         f_currentTimeToWalk = 0;
-        if(customerStateManager.b_escape)
+        if (customerStateManager.b_escape)
         {
             f_currentEscapeTime = customerStateManager.f_escapeTime;
         }
+        customerStateManager.img_BGWakeUpImage.enabled = false;
+        customerStateManager.img_wakeUpImage.enabled = false;
     }
 
     public override void UpdateState(StateManager ai)
@@ -26,7 +28,10 @@ public class CustomerWalkAroundState : BaseState
 
         customerStateManager.anim.SetBool("fightState", false);
         customerStateManager.anim.SetBool("sit", false);
+        customerStateManager.anim.SetBool("drunk", false);
         customerStateManager.DisablePunch();
+
+        customerStateManager.agent.speed = customerStateManager.f_walkSpeed;
 
         if (!customerStateManager.b_canAtk)
         {
@@ -65,10 +70,13 @@ public class CustomerWalkAroundState : BaseState
                 customerStateManager.b_escape = false;
             }
 
-            customerStateManager.img_icon.enabled = true;
+            customerStateManager.img_icon.enabled = false;
             customerStateManager.img_progressBar.enabled = true;
 
-            customerStateManager.img_icon.sprite = customerStateManager.sprite_escapeIcon;
+            customerStateManager.text_coin.SetActive(true);
+            TextMeshProUGUI text = customerStateManager.text_coin.GetComponent<TextMeshProUGUI>();
+            text.color = customerStateManager.color_escape;
+
             float progressTime = f_currentEscapeTime / customerStateManager.f_escapeTime;
 
             customerStateManager.img_progressBar.fillAmount = progressTime;
@@ -79,6 +87,8 @@ public class CustomerWalkAroundState : BaseState
         {
             customerStateManager.img_icon.enabled = false;
             customerStateManager.img_progressBar.enabled = false;
+            customerStateManager.text_coin.SetActive(false);
+
         }
     }
 

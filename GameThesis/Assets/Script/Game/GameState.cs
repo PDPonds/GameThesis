@@ -7,7 +7,6 @@ public class GameState : StateManager
 {
     public override BaseState s_currentState { get; set; }
 
-    public BeforeStoreOpenState s_beforeState = new BeforeStoreOpenState();
     public OpenStoreState s_openState = new OpenStoreState();
     public SummaryDayState s_summaryState = new SummaryDayState();
 
@@ -17,30 +16,30 @@ public class GameState : StateManager
     public int i_maxCustomerCount;
 
 
-    private void Start() {
-
+    private void Start()
+    {
         SwitchState(s_openState);
-
     }
-    
-    private void Update() {
+
+    private void Update()
+    {
 
         s_currentState.UpdateState(this);
 
-        SpawnCustomer();
-        
-
-    }
-
-    void SpawnCustomer()
-    {
-        if(s_currentState == s_openState)
+        if (TimeController.Instance.d_currentTime.Hour >= TimeController.Instance.f_endTime)
         {
-            if(RestaurantManager.Instance.allCustomers.Length < i_maxCustomerCount)
-            {
-                Instantiate(g_customerPrefab,t_spawnPoint.position,Quaternion.identity);
-            }
+            SwitchState(s_summaryState);
         }
     }
+
+    public void SpawnCustomer()
+    {
+        if (RestaurantManager.Instance.allCustomers.Length < i_maxCustomerCount)
+        {
+            Instantiate(g_customerPrefab, t_spawnPoint.position, Quaternion.identity);
+        }
+    }
+
+
 
 }

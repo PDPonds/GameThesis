@@ -47,8 +47,6 @@ public class PlayerAnimation : Auto_Singleton<PlayerAnimation>, IObserver
         }
     }
 
-
-
     private void OnEnable()
     {
         s_fistCombat.AddObserver(this);

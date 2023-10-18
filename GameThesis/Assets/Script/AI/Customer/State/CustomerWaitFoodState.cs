@@ -11,6 +11,9 @@ public class CustomerWaitFoodState : BaseState
         customerStateManager.c_tableObj.s_currentCustomer = customerStateManager;
         customerStateManager.img_icon.enabled = false;
         customerStateManager.img_progressBar.enabled = false;
+        customerStateManager.text_coin.SetActive(false);
+        customerStateManager.img_wakeUpImage.enabled = false;
+        customerStateManager.img_BGWakeUpImage.enabled = false;
     }
 
     public override void UpdateState(StateManager ai)
@@ -23,6 +26,7 @@ public class CustomerWaitFoodState : BaseState
                 ChairObj chair = customerStateManager.c_chairObj;
                 customerStateManager.anim.SetBool("walk", false);
                 customerStateManager.anim.SetBool("sit", true);
+                customerStateManager.anim.SetBool("drunk", false);
                 customerStateManager.agent.velocity = Vector3.zero;
                 Vector3 chairPos = new Vector3(chair.t_sitPos.position.x, chair.t_sitPos.position.y - 0.3f, chair.t_sitPos.position.z);
                 customerStateManager.transform.position = chairPos;

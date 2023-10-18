@@ -3,21 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
 
-public enum ServerState
-{
-    None, GoToBar, GoToTable, GoToWaitPoint
-}
-
 public class EmployeeServeAndCookingState : BaseState
 {
-
-    public ServerState serverState = ServerState.None;
+    public float f_currentToSlowTime;
 
     public override void EnterState(StateManager ai)
     {
         EmployeeStateManager employeeStateManager = (EmployeeStateManager)ai;
         employeeStateManager.i_currentHP = employeeStateManager.i_maxHP;
         employeeStateManager.b_isWorking = false;
+        f_currentToSlowTime = employeeStateManager.f_timeToSlow;
+        employeeStateManager.anim.SetBool("fightState", false);
     }
 
     public override void UpdateState(StateManager ai)
@@ -27,61 +23,93 @@ public class EmployeeServeAndCookingState : BaseState
         employeeStateManager.DisablePunch();
         employeeStateManager.RagdollOff();
 
-        switch (employeeStateManager.employeeType)
+        if (GameManager.Instance.s_gameState.s_currentState ==
+            GameManager.Instance.s_gameState.s_openState)
         {
-            case EmployeeType.Cooking:
+            switch (employeeStateManager.employeeType)
+            {
+                case EmployeeType.Cooking:
 
-                if (Vector3.Distance(employeeStateManager.transform.position, employeeStateManager.t_workingPos.position)
-                    <= 0.5f)
-                {
-                    employeeStateManager.b_isWorking = true;
-                    employeeStateManager.agent.velocity = Vector3.zero;
-                    employeeStateManager.anim.SetBool("walk", false);
-                }
-                else
-                {
-                    employeeStateManager.b_isWorking = false;
-                }
-
-                if (!employeeStateManager.b_isWorking)
-                {
-                    employeeStateManager.agent.SetDestination(employeeStateManager.t_workingPos.position);
-                    employeeStateManager.anim.SetBool("walk", true);
-                }
-
-                break;
-            case EmployeeType.Serve:
-
-                if (RestaurantManager.Instance.b_inProcess)
-                {
-                    if (RestaurantManager.Instance.GetCurrentTableFormEmployee(employeeStateManager, out int tableIndex))
+                    if (Vector3.Distance(employeeStateManager.transform.position, employeeStateManager.t_workingPos.position)
+                        <= 1f)
                     {
-                        TableObj table = RestaurantManager.Instance.allTables[tableIndex];
+                        employeeStateManager.b_isWorking = true;
+                        employeeStateManager.agent.velocity = Vector3.zero;
+                        employeeStateManager.anim.SetBool("run", false);
+                        employeeStateManager.anim.SetBool("walk", false);
+                    }
+                    else
+                    {
+                        employeeStateManager.b_isWorking = false;
+                    }
 
-                        if (!employeeStateManager.b_hasFood)
+                    if (!employeeStateManager.b_isWorking)
+                    {
+                        employeeStateManager.agent.SetDestination(employeeStateManager.t_workingPos.position);
+                        employeeStateManager.anim.SetBool("run", true);
+                        employeeStateManager.anim.SetBool("walk", false);
+                    }
+
+                    employeeStateManager.agent.speed = employeeStateManager.f_runSpeed;
+
+                    break;
+                case EmployeeType.Serve:
+
+                    if (RestaurantManager.Instance.b_inProcess)
+                    {
+                        if (RestaurantManager.Instance.GetCurrentTableFormEmployee(employeeStateManager, out int tableIndex))
                         {
-                            employeeStateManager.agent.SetDestination(GameManager.Instance.t_getFoodPos.position);
-                            if (Vector3.Distance(employeeStateManager.transform.position, GameManager.Instance.t_getFoodPos.position)
-                                <= 1f)
+                            TableObj table = RestaurantManager.Instance.allTables[tableIndex];
+
+                            if (!employeeStateManager.b_hasFood)
                             {
-                                employeeStateManager.b_hasFood = true;
-                                employeeStateManager.b_canServe = false;
+                                employeeStateManager.agent.SetDestination(GameManager.Instance.t_getFoodPos.position);
+                                if (Vector3.Distance(employeeStateManager.transform.position, GameManager.Instance.t_getFoodPos.position)
+                                    <= 1f)
+                                {
+                                    employeeStateManager.b_hasFood = true;
+                                    employeeStateManager.b_canServe = false;
+                                }
                             }
+                            else
+                            {
+                                employeeStateManager.agent.SetDestination(table.transform.position);
+                                if (Vector3.Distance(employeeStateManager.transform.position, table.transform.position)
+                                    <= 2f)
+                                {
+                                    employeeStateManager.b_hasFood = false;
+                                    employeeStateManager.b_canServe = false;
+                                    employeeStateManager.s_serveTable = null;
+                                    table.s_currentCustomer.SwitchState(table.s_currentCustomer.s_eatFoodState);
+                                }
+                            }
+
+                            employeeStateManager.agent.speed = employeeStateManager.f_walkSpeed;
+                            employeeStateManager.anim.SetBool("walk", true);
+                            employeeStateManager.anim.SetBool("run", false);
+
                         }
                         else
                         {
-                            employeeStateManager.agent.SetDestination(table.transform.position);
-                            if (Vector3.Distance(employeeStateManager.transform.position, table.transform.position)
-                                <= 2f)
+                            employeeStateManager.agent.SetDestination(GameManager.Instance.t_stayPos.position);
+                            if (Vector3.Distance(employeeStateManager.transform.position, GameManager.Instance.t_stayPos.position)
+                               <= 1f)
                             {
-                                employeeStateManager.b_hasFood = false;
-                                employeeStateManager.b_canServe = false;
-                                employeeStateManager.s_serveTable = null;
-                                table.s_currentCustomer.SwitchState(table.s_currentCustomer.s_eatFoodState);
+                                employeeStateManager.agent.velocity = Vector3.zero;
+                                employeeStateManager.b_canServe = true;
+                                employeeStateManager.anim.SetBool("walk", false);
+                                employeeStateManager.anim.SetBool("run", false);
                             }
-                        }
+                            else
+                            {
+                                employeeStateManager.anim.SetBool("walk", false);
+                                employeeStateManager.agent.speed = employeeStateManager.f_runSpeed;
+                                employeeStateManager.anim.SetBool("run", true);
 
-                        employeeStateManager.anim.SetBool("walk", true);
+                            }
+                            employeeStateManager.b_hasFood = false;
+                            employeeStateManager.s_serveTable = null;
+                        }
 
                     }
                     else
@@ -91,45 +119,168 @@ public class EmployeeServeAndCookingState : BaseState
                            <= 1f)
                         {
                             employeeStateManager.agent.velocity = Vector3.zero;
-                            employeeStateManager.b_canServe = true;
                             employeeStateManager.anim.SetBool("walk", false);
+                            employeeStateManager.anim.SetBool("run", false);
+                        }
+                        else
+                        {
+                            employeeStateManager.anim.SetBool("walk", false);
+                            employeeStateManager.agent.speed = employeeStateManager.f_runSpeed;
+                            employeeStateManager.anim.SetBool("run", true);
+                        }
+
+                        employeeStateManager.b_hasFood = false;
+                        employeeStateManager.b_canServe = true;
+                        employeeStateManager.s_serveTable = null;
+
+                    }
+
+                    if(employeeStateManager.b_hasFood)
+                    {
+                        employeeStateManager.anim.SetLayerWeight(1, 1);
+                        employeeStateManager.g_FoodInHand.SetActive(true);
+                    }
+                    else
+                    {
+                        employeeStateManager.anim.SetLayerWeight(1, 0);
+                        employeeStateManager.g_FoodInHand.SetActive(false);
+                    }
+
+                    employeeStateManager.b_isWorking = true;
+
+                    break;
+                default: break;
+            }
+
+            f_currentToSlowTime -= Time.deltaTime;
+            if (f_currentToSlowTime <= 0)
+            {
+                float p = Random.Range(0f, 100f);
+                if (p <= employeeStateManager.f_slowPercent)
+                {
+                    employeeStateManager.SwitchState(employeeStateManager.s_slowDownState);
+                    f_currentToSlowTime = employeeStateManager.f_timeToSlow;
+                }
+                else
+                {
+                    f_currentToSlowTime = employeeStateManager.f_timeToSlow;
+                }
+            }
+        }
+        if(GameManager.Instance.s_gameState.s_currentState ==
+            GameManager.Instance.s_gameState.s_summaryState)
+        {
+            switch (employeeStateManager.employeeType)
+            {
+                case EmployeeType.Cooking:
+
+                    employeeStateManager.agent.SetDestination(employeeStateManager.t_workingPos.position);
+
+                    employeeStateManager.anim.SetBool("run", true);
+                    employeeStateManager.anim.SetBool("walk", false);
+                    employeeStateManager.agent.speed = employeeStateManager.f_runSpeed;
+
+                    if (Vector3.Distance(employeeStateManager.transform.position, employeeStateManager.t_workingPos.position)
+                        <= 1f)
+                    {
+                        employeeStateManager.agent.velocity = Vector3.zero;
+                        employeeStateManager.anim.SetBool("run", false);
+                        employeeStateManager.anim.SetBool("walk", false);
+                    }
+
+                    break;
+                case EmployeeType.Serve:
+
+                    if(RestaurantManager.Instance.b_summaryButHasCustome)
+                    {
+                        if (RestaurantManager.Instance.GetCurrentTableFormEmployee(employeeStateManager, out int tableIndex))
+                        {
+                            TableObj table = RestaurantManager.Instance.allTables[tableIndex];
+
+                            if (!employeeStateManager.b_hasFood)
+                            {
+                                employeeStateManager.agent.SetDestination(GameManager.Instance.t_getFoodPos.position);
+                                if (Vector3.Distance(employeeStateManager.transform.position, GameManager.Instance.t_getFoodPos.position)
+                                    <= 1f)
+                                {
+                                    employeeStateManager.b_hasFood = true;
+                                    employeeStateManager.b_canServe = false;
+                                }
+                            }
+                            else
+                            {
+                                employeeStateManager.agent.SetDestination(table.transform.position);
+                                if (Vector3.Distance(employeeStateManager.transform.position, table.transform.position)
+                                    <= 2f)
+                                {
+                                    employeeStateManager.b_hasFood = false;
+                                    employeeStateManager.b_canServe = false;
+                                    employeeStateManager.s_serveTable = null;
+                                    table.s_currentCustomer.SwitchState(table.s_currentCustomer.s_eatFoodState);
+                                }
+                            }
+
+                            employeeStateManager.agent.speed = employeeStateManager.f_walkSpeed;
+                            employeeStateManager.anim.SetBool("walk", true);
+                            employeeStateManager.anim.SetBool("run", false);
+
+                        }
+                        else
+                        {
+                            employeeStateManager.agent.SetDestination(GameManager.Instance.t_stayPos.position);
+                            if (Vector3.Distance(employeeStateManager.transform.position, GameManager.Instance.t_stayPos.position)
+                               <= 1f)
+                            {
+                                employeeStateManager.agent.velocity = Vector3.zero;
+                                employeeStateManager.b_canServe = true;
+                                employeeStateManager.anim.SetBool("walk", false);
+                                employeeStateManager.anim.SetBool("run", false);
+                            }
+                            else
+                            {
+                                employeeStateManager.anim.SetBool("walk", false);
+                                employeeStateManager.agent.speed = employeeStateManager.f_runSpeed;
+                                employeeStateManager.anim.SetBool("run", true);
+
+                            }
+                            employeeStateManager.b_hasFood = false;
+                            employeeStateManager.s_serveTable = null;
+                        }
+                    }
+                    else
+                    {
+                        employeeStateManager.agent.SetDestination(GameManager.Instance.t_stayPos.position);
+                        if (Vector3.Distance(employeeStateManager.transform.position, GameManager.Instance.t_stayPos.position)
+                           <= 1f)
+                        {
+                            employeeStateManager.agent.velocity = Vector3.zero;
+                            employeeStateManager.anim.SetBool("walk", false);
+                            employeeStateManager.anim.SetBool("run", false);
                         }
                         else
                         {
                             employeeStateManager.anim.SetBool("walk", true);
+                            employeeStateManager.agent.speed = employeeStateManager.f_walkSpeed;
+                            employeeStateManager.anim.SetBool("run", false);
                         }
-                        employeeStateManager.b_hasFood = false;
-                        employeeStateManager.s_serveTable = null;
                     }
 
-                }
-                else
-                {
-                    employeeStateManager.agent.SetDestination(GameManager.Instance.t_stayPos.position);
-                    if (Vector3.Distance(employeeStateManager.transform.position, GameManager.Instance.t_stayPos.position)
-                       <= 1f)
+                    if (employeeStateManager.b_hasFood)
                     {
-                        employeeStateManager.agent.velocity = Vector3.zero;
-                        employeeStateManager.anim.SetBool("walk", false);
+                        employeeStateManager.anim.SetLayerWeight(1, 1);
+                        employeeStateManager.g_FoodInHand.SetActive(true);
                     }
                     else
                     {
-                        employeeStateManager.anim.SetBool("walk", true);
+                        employeeStateManager.anim.SetLayerWeight(1, 0);
+                        employeeStateManager.g_FoodInHand.SetActive(false);
                     }
 
-                    employeeStateManager.b_hasFood = false;
-                    employeeStateManager.b_canServe = true;
-                    employeeStateManager.s_serveTable = null;
+                    break;
 
-                }
-
-                employeeStateManager.b_isWorking = true;
-
-                break;
-            default: break;
+                default: break;
+            }
         }
-
-        employeeStateManager.anim.SetBool("fightState", false);
 
         if (!employeeStateManager.b_canAtk)
         {
@@ -139,6 +290,8 @@ public class EmployeeServeAndCookingState : BaseState
                 employeeStateManager.b_canAtk = true;
             }
         }
+
+
     }
 
 }

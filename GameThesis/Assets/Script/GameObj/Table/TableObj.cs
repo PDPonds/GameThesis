@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,9 +13,11 @@ public class TableObj : MonoBehaviour
 
     public bool b_isEmtry;
 
-    public float f_cdForNextCustomer;
+    [HideInInspector] public float f_cdForNextCustomer;
+    public Vector2 v_minmaxCDForNextCustomer;
+
     [HideInInspector] public bool b_readyForNextCustomer;
-    float f_currentCDForNextCustomer;
+    [SerializeField] float f_currentCDForNextCustomer;
 
     public CustomerStateManager s_currentCustomer;
     public EmployeeStateManager s_currentEmployee;
@@ -32,7 +33,6 @@ public class TableObj : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(s_currentEmployee + transform.name);
 
         if (b_isEmtry && !b_readyForNextCustomer)
         {
@@ -40,6 +40,7 @@ public class TableObj : MonoBehaviour
             if (f_currentCDForNextCustomer <= 0)
             {
                 b_readyForNextCustomer = true;
+                RandomCDForNextCustomer();
             }
         }
         else if (b_readyForNextCustomer || !b_isEmtry)
@@ -107,5 +108,14 @@ public class TableObj : MonoBehaviour
             foreach (GameObject food in g_foods) food.SetActive(false);
         }
     }
+
+    public void RandomCDForNextCustomer()
+    {
+        float minutRating = RestaurantManager.Instance.v_minmaxRating.y - RestaurantManager.Instance.i_rating;
+        float multiply = 0.2f * minutRating;
+        Vector2 newMinMax = new Vector2(v_minmaxCDForNextCustomer.x + multiply, v_minmaxCDForNextCustomer.y + multiply);
+        f_cdForNextCustomer = Random.Range(newMinMax.x, newMinMax.y);
+    }
+
 
 }

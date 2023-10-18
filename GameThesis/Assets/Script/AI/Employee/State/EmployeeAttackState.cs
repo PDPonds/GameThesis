@@ -14,12 +14,12 @@ public class EmployeeAttackState : BaseState
         if (employeeStateManager.i_atkCount % 2 == 0)
         {
             employeeStateManager.anim.Play("LeftPunch");
-            employeeStateManager.c_leftHandPunch.enabled = true;
+            employeeStateManager.c_atkCollider.enabled = true;
         }
         else
         {
             employeeStateManager.anim.Play("RightPunch");
-            employeeStateManager.c_rightHandPunch.enabled = true;
+            employeeStateManager.c_atkCollider.enabled = true;
         }
         employeeStateManager.b_isWorking = false;
 
@@ -35,7 +35,6 @@ public class EmployeeAttackState : BaseState
         {
             employeeStateManager.SwitchState(employeeStateManager.s_fightState);
         }
-
     }
 
 }

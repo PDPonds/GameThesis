@@ -14,12 +14,18 @@ public class CustomerEatFoodState : BaseState
         f_currentEatTime = f_eatTime;
         customerStateManager.img_icon.enabled = false;
         customerStateManager.img_progressBar.enabled = false;
+        customerStateManager.text_coin.SetActive(false);
+        customerStateManager.img_wakeUpImage.enabled = false;
+        customerStateManager.img_BGWakeUpImage.enabled = false;
 
     }
 
     public override void UpdateState(StateManager ai)
     {
         CustomerStateManager customerStateManager = (CustomerStateManager)ai;
+
+        customerStateManager.RagdollOff();
+
         if (customerStateManager.c_tableObj != null)
         {
             if (customerStateManager.c_chairObj != null)
@@ -27,11 +33,11 @@ public class CustomerEatFoodState : BaseState
                 ChairObj chair = customerStateManager.c_chairObj;
                 customerStateManager.anim.SetBool("walk", false);
                 customerStateManager.anim.SetBool("sit", true);
+                customerStateManager.anim.SetBool("drunk", false);
                 customerStateManager.agent.velocity = Vector3.zero;
                 Vector3 chairPos = new Vector3(chair.t_sitPos.position.x, chair.t_sitPos.position.y - 0.3f, chair.t_sitPos.position.z);
                 customerStateManager.transform.position = chairPos;
                 customerStateManager.transform.rotation = Quaternion.Euler(0, -chair.transform.localEulerAngles.z, 0);
-
             }
 
         }
@@ -39,16 +45,30 @@ public class CustomerEatFoodState : BaseState
         f_currentEatTime -= Time.deltaTime;
         if (f_currentEatTime <= 0)
         {
-            float ran = Random.Range(0, 100f);
+            float drunkRan = Random.Range(0f, 100f);
 
-            if (ran <= customerStateManager.f_randomEventPercent)
+            RestaurantManager.Instance.AddRating();
+
+            if (drunkRan <= customerStateManager.f_drunkPercent)
             {
-                customerStateManager.SwitchState(customerStateManager.s_escapeState);
+                customerStateManager.SwitchState(customerStateManager.s_drunkState);
             }
             else
             {
-                customerStateManager.SwitchState(customerStateManager.s_goToCounterState);
+                float ran = Random.Range(0, 100f);
+
+                if (ran <= customerStateManager.f_randomEventPercent)
+                {
+                    customerStateManager.c_tableObj.b_isEmtry = true;
+                    customerStateManager.SwitchState(customerStateManager.s_escapeState);
+                }
+                else
+                {
+                    customerStateManager.c_tableObj.b_isEmtry = true;
+                    customerStateManager.SwitchState(customerStateManager.s_goToCounterState);
+                }
             }
+
         }
 
     }

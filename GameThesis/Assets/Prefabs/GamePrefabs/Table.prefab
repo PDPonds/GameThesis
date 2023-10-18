@@ -446,7 +446,8 @@ MonoBehaviour:
   - {fileID: 8002833674193139045}
   f_dirtyCount: 0
   b_isEmtry: 0
-  f_cdForNextCustomer: 5
+  f_cdForNextCustomer: 10
+  v_minmaxCDForNextCustomer: {x: 8, y: 10}
   b_readyForNextCustomer: 0
   s_currentCustomer: {fileID: 0}
   s_currentEmployee: {fileID: 0}

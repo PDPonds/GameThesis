@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerManager : Auto_Singleton<PlayerManager>
@@ -31,12 +32,18 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
     public float f_softPunchTime;
     public Collider c_leftHandPunch;
     public Collider c_rightHandPunch;
+
+    public bool b_inFighting;
+    public float f_maxInFightingTime;
+    [HideInInspector] public float f_currentInFightingTime;
+
     [HideInInspector] public bool b_canPunch;
     [HideInInspector] public bool b_isHold;
     [HideInInspector] public float f_currentHoldTime;
     [HideInInspector] public float f_currentPunchDelay;
     [HideInInspector] public int i_atkCount;
     [HideInInspector] public Vector3 v_punchHitPoint;
+
 
     [Header("===== Player Gaurd =====")]
     public float f_guardTime;
@@ -51,10 +58,10 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
     public float f_interacRange;
     public LayerMask lm_interacMask;
     public Transform t_holdObjPoint;
-    public GameObject g_interactiveObj;
+    [HideInInspector] public GameObject g_interactiveObj;
 
     [Header("===== Player Drag =====")]
-    public GameObject g_dragObj;
+    [HideInInspector] public GameObject g_dragObj;
     public Transform t_dragPos;
     public float f_dragAngle;
 
@@ -66,6 +73,9 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
     [Header("===== Player Sprint =====")]
     public float f_runSpeed;
     public bool b_isSprint;
+    public float f_staminaMultiply;
+    public float f_maxStamina;
+    [HideInInspector] public float f_currentStamina;
 
     private void Awake()
     {
@@ -81,6 +91,36 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
         i_currentHP = i_maxHP;
     }
 
+    private void Update()
+    {
+        if (b_inFighting)
+        {
+            f_currentInFightingTime -= Time.deltaTime;
+            if (f_currentInFightingTime < 0)
+            {
+                i_currentHP = i_maxHP;
+                b_inFighting = false;
+
+                CameraTrigger camTrigger = Camera.main.GetComponent<CameraTrigger>();
+                camTrigger.Vignette_StepDown();
+                camTrigger.DOF_StepDown();
+            }
+            //SetAnimation
+            t_playerMesh.GetChild(0).gameObject.SetActive(true);
+        }
+        else
+        {
+            //SetAnimation
+            t_playerMesh.GetChild(0).gameObject.SetActive(false);
+        }
+
+        if (RestaurantManager.Instance.HasCustomerInFightState())
+        {
+            b_inFighting = true;
+            f_currentInFightingTime = f_maxInFightingTime;
+        }
+
+    }
 
     IEnumerator DeadState()
     {
@@ -96,19 +136,37 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
         b_canMove = true;
         b_isDead = false;
         i_currentHP = i_maxHP;
+
+        CameraTrigger camTrigger = Camera.main.GetComponent<CameraTrigger>();
+        camTrigger.Vignette_StepDown();
+        camTrigger.DOF_StepDown();
+
+        f_currentStamina = 0;
+        GameManager.Instance.RemoveCoint(10);
     }
 
     public bool TakeDamageAndDead()
     {
         i_currentHP--;
+
+        b_inFighting = true;
+        f_currentInFightingTime = f_maxInFightingTime;
+
+        CameraTrigger camTrigger = Camera.main.GetComponent<CameraTrigger>();
+        StartCoroutine(camTrigger.Shake(camTrigger.duration, camTrigger.magnitude));
+        camTrigger.Vignette_StepUp();
+        camTrigger.DOF_StepUp();
+
         if (i_currentHP <= 0)
         {
             StartCoroutine(DeadState());
             a_cameraAnim.enabled = true;
             return true;
         }
-
-        return false;
+        else
+        {
+            return false;
+        }
     }
 
 }

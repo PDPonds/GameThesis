@@ -6,23 +6,19 @@ using UnityEngine.UI;
 
 public class PlayerUI : Auto_Singleton<PlayerUI>
 {
-    [Header("===== Player UI =====")]
-    public Image img_blood;
-
     [Header("===== Interactive =====")]
     public TextMeshProUGUI text_interactText;
 
+    [Header("===== Stamina =====")]
+    public Slider s_staminaSlider;
+
+    [Header("===== Player HP =====")]
+    public Slider s_hpSlider;
+
     private void Update()
     {
-        if (PlayerManager.Instance.i_currentHP < PlayerManager.Instance.i_maxHP)
-        {
-            img_blood.gameObject.SetActive(true);
-            img_blood.color = new Color(img_blood.color.r, img_blood.color.g, img_blood.color.b, 1f / PlayerManager.Instance.i_currentHP);
-        }
-        else
-        {
-            img_blood.gameObject.SetActive(false);
-        }
+
+
 
         if (PlayerManager.Instance.g_dragObj == null)
         {
@@ -55,5 +51,13 @@ public class PlayerUI : Auto_Singleton<PlayerUI>
         {
             text_interactText.text = "[E] to Drop";
         }
+
+        float staminaPercent = PlayerManager.Instance.f_currentStamina / PlayerManager.Instance.f_maxStamina;
+        s_staminaSlider.value = staminaPercent;
+
+        float hpPercent = ((float)PlayerManager.Instance.i_maxHP - (float)PlayerManager.Instance.i_currentHP) 
+            / PlayerManager.Instance.i_maxHP;
+        s_hpSlider.value = hpPercent;
+
     }
 }
