@@ -18,8 +18,6 @@ public class CustomerDrunkState : BaseState
         customerStateManager.b_isDrunk = true;
         customerStateManager.img_wakeUpImage.enabled = true;
 
-        float percent = customerStateManager.f_currentWekeUpPoint / customerStateManager.f_maxWekeUpPoint;
-        customerStateManager.img_wakeUpImage.fillAmount = percent;
         customerStateManager.img_BGWakeUpImage.enabled = true;
 
     }
@@ -46,11 +44,14 @@ public class CustomerDrunkState : BaseState
             }
         }
 
-        customerStateManager.f_currentWekeUpPoint -= Time.deltaTime;
+        customerStateManager.f_currentWekeUpPoint -= 2 * Time.deltaTime;
         if (customerStateManager.f_currentWekeUpPoint < 0)
         {
             customerStateManager.f_currentWekeUpPoint = 0;
         }
+
+        float percent = customerStateManager.f_currentWekeUpPoint / customerStateManager.f_maxWekeUpPoint;
+        customerStateManager.img_wakeUpImage.fillAmount = percent;
 
     }
 }

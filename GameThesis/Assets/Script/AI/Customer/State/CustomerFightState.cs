@@ -12,6 +12,7 @@ public class CustomerFightState : BaseState
         customerStateManager.text_coin.SetActive(false);
         customerStateManager.img_wakeUpImage.enabled = false;
         customerStateManager.img_BGWakeUpImage.enabled = false;
+
     }
 
 

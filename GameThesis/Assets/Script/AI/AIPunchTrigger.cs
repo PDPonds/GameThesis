@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AIPunchTrigger : MainObserver
 {
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.TryGetComponent(out PlayerManager player))
         {
@@ -20,10 +20,28 @@ public class AIPunchTrigger : MainObserver
                             CustomerStateManager customerStateManager = transform.GetComponentInParent<CustomerStateManager>();
                             customerStateManager.SwitchState(customerStateManager.s_walkAroundState);
                         }
-                        if(state is EmployeeStateManager)
-                         {
+                        if (state is EmployeeStateManager)
+                        {
                             EmployeeStateManager employeeStateManager = transform.GetComponentInParent<EmployeeStateManager>();
                             employeeStateManager.SwitchState(employeeStateManager.s_activityState);
+                        }
+                    }
+                }
+                else
+                {
+                    Debug.Log("TakeDamage");
+                    if (transform.GetComponentInParent<StateManager>())
+                    {
+                        StateManager state = transform.GetComponentInParent<StateManager>();
+                        if (state is CustomerStateManager)
+                        {
+                            CustomerStateManager customerStateManager = transform.GetComponentInParent<CustomerStateManager>();
+                            customerStateManager.SwitchState(customerStateManager.s_fightState);
+                        }
+                        if (state is EmployeeStateManager)
+                        {
+                            EmployeeStateManager employeeStateManager = transform.GetComponentInParent<EmployeeStateManager>();
+                            employeeStateManager.SwitchState(employeeStateManager.s_fightState);
                         }
                     }
                 }
@@ -32,8 +50,23 @@ public class AIPunchTrigger : MainObserver
             else
             {
                 ActiveAllObserver(ActionObserver.AIPunchHitBlock);
+                if (transform.GetComponentInParent<StateManager>())
+                {
+                    StateManager state = transform.GetComponentInParent<StateManager>();
+                    if (state is CustomerStateManager)
+                    {
+                        CustomerStateManager customerStateManager = transform.GetComponentInParent<CustomerStateManager>();
+                        customerStateManager.SwitchState(customerStateManager.s_fightState);
+                    }
+                    if (state is EmployeeStateManager)
+                    {
+                        EmployeeStateManager employeeStateManager = transform.GetComponentInParent<EmployeeStateManager>();
+                        employeeStateManager.SwitchState(employeeStateManager.s_fightState);
+                    }
+                }
             }
         }
+
 
         if (transform.GetComponentInParent<StateManager>())
         {
@@ -44,7 +77,7 @@ public class AIPunchTrigger : MainObserver
 
                 customerStateManager.c_atkCollider.enabled = false;
             }
-            if(state is EmployeeStateManager)
+            if (state is EmployeeStateManager)
             {
                 EmployeeStateManager employeeStateManager = transform.GetComponentInParent<EmployeeStateManager>();
                 employeeStateManager.c_atkCollider.enabled = false;

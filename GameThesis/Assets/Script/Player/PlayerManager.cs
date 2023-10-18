@@ -114,7 +114,7 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
             t_playerMesh.GetChild(0).gameObject.SetActive(false);
         }
 
-        if(RestaurantManager.Instance.HasCustomerInFightState())
+        if (RestaurantManager.Instance.HasCustomerInFightState())
         {
             b_inFighting = true;
             f_currentInFightingTime = f_maxInFightingTime;
@@ -163,8 +163,10 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
             a_cameraAnim.enabled = true;
             return true;
         }
-
-        return false;
+        else
+        {
+            return false;
+        }
     }
 
 }

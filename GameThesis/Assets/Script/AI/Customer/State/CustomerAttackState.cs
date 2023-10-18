@@ -17,11 +17,14 @@ public class CustomerAttackState : BaseState
         else
         {
             customerStateManager.anim.Play("RightPunch");
+
         }
         customerStateManager.img_icon.enabled = false;
         customerStateManager.text_coin.SetActive(false);
         customerStateManager.img_wakeUpImage.enabled = false;
         customerStateManager.img_BGWakeUpImage.enabled = false;
+
+        customerStateManager.c_atkCollider.enabled = true;
     }
 
     public override void UpdateState(StateManager ai)
