@@ -102,8 +102,7 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
                 b_inFighting = false;
 
                 CameraTrigger camTrigger = Camera.main.GetComponent<CameraTrigger>();
-                camTrigger.Vignette_StepDown();
-                camTrigger.DOF_StepDown();
+                camTrigger.ResetVignetteAndFocal();
             }
             //SetAnimation
             t_playerMesh.GetChild(0).gameObject.SetActive(true);
@@ -139,7 +138,7 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
 
         CameraTrigger camTrigger = Camera.main.GetComponent<CameraTrigger>();
         camTrigger.Vignette_StepDown();
-        camTrigger.DOF_StepDown();
+        camTrigger.FocalLength_StepDown();
 
         f_currentStamina = 0;
         GameManager.Instance.RemoveCoint(10);
@@ -155,7 +154,7 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
         CameraTrigger camTrigger = Camera.main.GetComponent<CameraTrigger>();
         StartCoroutine(camTrigger.Shake(camTrigger.duration, camTrigger.magnitude));
         camTrigger.Vignette_StepUp();
-        camTrigger.DOF_StepUp();
+        camTrigger.FocalLength_StepUp();
 
         if (i_currentHP <= 0)
         {

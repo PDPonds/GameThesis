@@ -20,9 +20,9 @@ public class CameraTrigger : MonoBehaviour
 
     [Header("Depht of Field")]
     private DepthOfField depthOfField;
-    public float maxDOF = 0;
-    public float minDOF = 0;
-    public float stepDOF = 0;
+    public float maxFocalLength = 50;
+    public float minFocalLength = 30;
+    public float stepFocalLength = 5;
 
     public float duration;
     public float magnitude;
@@ -32,8 +32,8 @@ public class CameraTrigger : MonoBehaviour
         postProcessing_Volume.profile.TryGet(out vignette);
         postProcessing_Volume.profile.TryGet(out depthOfField);
 
-        Vignette_StepDown();
-        DOF_StepDown();
+        //Vignette_StepDown();
+        //FocalLength_StepDown();
     }
 
     public void Vignette_StepUp()
@@ -46,18 +46,38 @@ public class CameraTrigger : MonoBehaviour
     }
     public void Vignette_StepDown()
     {
+        vignette.intensity.value -= stepVignette;
+        if (vignette.intensity.value <= minVignette)
+        {
+            vignette.intensity.value = minVignette;
+        }
+    }
+
+
+    public void FocalLength_StepUp()
+    {
+        depthOfField.focalLength.value += stepFocalLength;
+
+        if (depthOfField.focalLength.value >= maxFocalLength)
+        {
+            depthOfField.focalLength.value = maxFocalLength;
+        }
+    }
+
+    public void FocalLength_StepDown()
+    {
+        depthOfField.focalLength.value -= stepFocalLength;
+
+        if (depthOfField.focalLength.value <= minFocalLength)
+        {
+            depthOfField.focalLength.value = minFocalLength;
+        }
+    }
+
+    public void ResetVignetteAndFocal()
+    {
+        depthOfField.focalLength.value = minFocalLength;
         vignette.intensity.value = minVignette;
-    }
-
-
-    public void DOF_StepUp()
-    {
-        depthOfField.aperture.value -= stepDOF;
-    }
-
-    public void DOF_StepDown()
-    {
-        depthOfField.aperture.value = maxDOF;
     }
 
     public IEnumerator Shake(float duration, float magnitude)
