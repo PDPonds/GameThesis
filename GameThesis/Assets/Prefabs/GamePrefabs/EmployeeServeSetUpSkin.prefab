@@ -990,7 +990,7 @@ MonoBehaviour:
   i_maxHP: 5
   f_walkSpeed: 2
   f_runSpeed: 4
-  f_atkRange: 0.5
+  f_atkRange: 1.2
   f_atkDelay: 0.5
   f_runRange: 2.5
   f_fightTime: 5
@@ -1009,7 +1009,7 @@ MonoBehaviour:
   g_FoodInHand: {fileID: 572668808332531273}
   b_isWorking: 0
   t_workingPos: {fileID: 0}
-  f_timeToSlow: 15
+  f_timeToSlow: 10
   f_slowPercent: 2
   v_minmaxX: {x: -21, y: -14}
   v_minmaxZ: {x: -7, y: 11}

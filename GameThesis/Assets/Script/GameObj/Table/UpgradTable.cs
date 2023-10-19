@@ -71,7 +71,7 @@ public class UpgradTable : MonoBehaviour, IInteracable
     {
         if (GameManager.Instance.f_coin >= f_costToBuy)
         {
-            GameManager.Instance.RemoveCoint(f_costToBuy);
+            GameManager.Instance.RemoveCoin(f_costToBuy);
             SetUpUseAble();
             b_readyToUse = true;
         }

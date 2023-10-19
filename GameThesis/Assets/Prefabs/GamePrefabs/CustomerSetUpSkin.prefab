@@ -2416,7 +2416,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   i_currentHP: 0
   i_maxHP: 5
-  f_atkRange: 0.7
+  f_atkRange: 1.2
   f_runRange: 2.5
   f_atkDelay: 0.5
   f_fightTime: 8

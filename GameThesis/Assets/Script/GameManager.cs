@@ -27,7 +27,7 @@ public class GameManager : Auto_Singleton<GameManager>
         f_coin += amount;
     }
 
-    public void RemoveCoint(float amount)
+    public void RemoveCoin(float amount)
     {
         f_coin -= amount;
     }
