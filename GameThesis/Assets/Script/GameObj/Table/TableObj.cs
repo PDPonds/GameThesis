@@ -50,6 +50,8 @@ public class TableObj : MonoBehaviour
 
         if (s_currentCustomer != null)
         {
+            if (s_currentCustomer.c_tableObj != this) s_currentCustomer = null;
+
             if (s_currentCustomer.s_currentState == s_currentCustomer.s_waitFoodState)
             {
                 img_progressBar.enabled = true;

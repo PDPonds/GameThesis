@@ -28,6 +28,7 @@ public class EmployeeStateManager : StateManager, IDamageable
     [Header("===== Fight =====")]
     public float f_atkRange;
     public float f_atkDelay;
+    public float f_runRange;
     [HideInInspector] public float f_currentAtkDelay;
     [HideInInspector] public bool b_canAtk;
 

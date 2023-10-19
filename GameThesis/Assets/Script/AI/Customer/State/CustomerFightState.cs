@@ -7,6 +7,7 @@ public class CustomerFightState : BaseState
     public override void EnterState(StateManager ai)
     {
         CustomerStateManager customerStateManager = (CustomerStateManager)ai;
+
         customerStateManager.img_icon.enabled = false;
         customerStateManager.img_progressBar.enabled = false;
         customerStateManager.text_coin.SetActive(false);
@@ -15,18 +16,11 @@ public class CustomerFightState : BaseState
 
     }
 
-
     public override void UpdateState(StateManager ai)
     {
         CustomerStateManager customerStateManager = (CustomerStateManager)ai;
 
         customerStateManager.RagdollOff();
-
-        customerStateManager.agent.SetDestination(PlayerManager.Instance.transform.position);
-        customerStateManager.agent.speed = customerStateManager.f_walkSpeed;
-        customerStateManager.anim.SetBool("fightState", true);
-        customerStateManager.anim.SetBool("sit", false);
-        customerStateManager.anim.SetBool("drunk", false);
 
         customerStateManager.DisablePunch();
 
@@ -39,15 +33,41 @@ public class CustomerFightState : BaseState
             }
         }
 
-        Collider[] player = Physics.OverlapSphere(ai.transform.position, customerStateManager.f_atkRange, GameManager.Instance.lm_playerMask);
+
+        customerStateManager.agent.SetDestination(PlayerManager.Instance.transform.position);
+
+        Collider[] player = Physics.OverlapSphere(ai.transform.position, customerStateManager.f_runRange, GameManager.Instance.lm_playerMask);
         if (player.Length > 0)
         {
-            customerStateManager.agent.velocity = Vector2.zero;
-            if (customerStateManager.b_canAtk)
+            customerStateManager.agent.speed = customerStateManager.f_walkSpeed;
+
+            customerStateManager.anim.SetBool("fightState", true);
+            customerStateManager.anim.SetBool("walk", false);
+            customerStateManager.anim.SetBool("run", false);
+            customerStateManager.anim.SetBool("sit", false);
+            customerStateManager.anim.SetBool("drunk", false);
+
+            if (Vector3.Distance(PlayerManager.Instance.transform.position, customerStateManager.transform.position) <=
+                customerStateManager.f_atkRange)
             {
-                customerStateManager.SwitchState(customerStateManager.s_attackState);
+                customerStateManager.agent.velocity = Vector2.zero;
+                if (customerStateManager.b_canAtk)
+                {
+                    customerStateManager.SwitchState(customerStateManager.s_attackState);
+                }
             }
+
         }
+        else
+        {
+            customerStateManager.agent.speed = customerStateManager.f_runSpeed;
+            customerStateManager.anim.SetBool("fightState", false);
+            customerStateManager.anim.SetBool("walk", false);
+            customerStateManager.anim.SetBool("run", true);
+            customerStateManager.anim.SetBool("sit", false);
+            customerStateManager.anim.SetBool("drunk", false);
+        }
+
 
     }
 

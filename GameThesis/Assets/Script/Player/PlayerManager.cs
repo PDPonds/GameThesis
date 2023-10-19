@@ -114,11 +114,6 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
             t_playerMesh.GetChild(0).gameObject.SetActive(false);
         }
 
-        if (RestaurantManager.Instance.HasCustomerInFightState())
-        {
-            b_inFighting = true;
-            f_currentInFightingTime = f_maxInFightingTime;
-        }
 
     }
 

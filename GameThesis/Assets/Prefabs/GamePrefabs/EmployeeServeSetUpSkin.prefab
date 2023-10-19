@@ -992,6 +992,7 @@ MonoBehaviour:
   f_runSpeed: 4
   f_atkRange: 0.5
   f_atkDelay: 0.5
+  f_runRange: 2.5
   f_currentAtkDelay: 0
   b_canAtk: 0
   i_atkCount: 0

@@ -62,7 +62,7 @@ public class CustomerWalkAroundState : BaseState
 
         if (customerStateManager.b_escape)
         {
-            customerStateManager.agent.SetDestination(GameManager.Instance.s_gameState.t_spawnPoint.position);
+            customerStateManager.agent.SetDestination(GameManager.Instance.s_gameState.t_spawnPoint[customerStateManager.i_spawnPosIndex].position);
             f_currentEscapeTime -= Time.deltaTime;
             if (f_currentEscapeTime <= 0)
             {

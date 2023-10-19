@@ -57,7 +57,7 @@ public class PlayerSprint : MonoBehaviour
                         customerStateManager.transform.LookAt(transform.position);
                         customerStateManager.SwitchState(customerStateManager.s_pushState);
                         StartCoroutine(StopPlayer());
-
+                        
                     }
                 }
             }

@@ -29,7 +29,6 @@ public class AIPunchTrigger : MainObserver
                 }
                 else
                 {
-                    Debug.Log("TakeDamage");
                     if (transform.GetComponentInParent<StateManager>())
                     {
                         StateManager state = transform.GetComponentInParent<StateManager>();
