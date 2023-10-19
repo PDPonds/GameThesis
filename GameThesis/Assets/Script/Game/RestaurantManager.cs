@@ -19,16 +19,29 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
     public int i_ratingToRemove;
     public int i_ratingToAdd;
 
+    [Header("===== Upgrade Table Manager =====")]
+    public int i_startTable;
+
     private void Awake()
     {
         i_rating = v_minmaxRating.y;
+
+    }
+
+    private void Start()
+    {
+        for (int i = 0; i < i_startTable; i++)
+        {
+            UpgradTable up = allTables[i].transform.GetComponent<UpgradTable>();
+            up.b_readyToUse = true;
+            up.SetUpUseAble();
+        }
     }
 
     void Update()
     {
         allCustomers = FindObjectsOfType<CustomerStateManager>();
         allEmployees = FindObjectsOfType<EmployeeStateManager>();
-        allTables = FindObjectsOfType<TableObj>();
 
         if (AllEmployeeWorkingCheckProcess())
         {
