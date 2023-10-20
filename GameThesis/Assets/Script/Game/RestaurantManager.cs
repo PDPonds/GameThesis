@@ -1,7 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using Unity.Mathematics;
 using UnityEngine;
 
 public class RestaurantManager : Auto_Singleton<RestaurantManager>
@@ -9,26 +7,43 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
     public CustomerStateManager[] allCustomers;
     public EmployeeStateManager[] allEmployees;
     public TableObj[] allTables;
+    public SheriffStateManager[] allSheriffs;
 
     public bool b_inProcess;
 
     [HideInInspector] public bool b_summaryButHasCustome;
 
+    [Header("===== Start Rating =====")]
     public int i_rating;
     public Vector2Int v_minmaxRating;
+    public int i_startRating;
     public int i_ratingToRemove;
     public int i_ratingToAdd;
 
+    [Header("===== Upgrade Table Manager =====")]
+    public int i_startTable;
+
+
     private void Awake()
     {
-        i_rating = v_minmaxRating.y;
+        i_rating = i_startRating;
+    }
+
+    private void Start()
+    {
+        for (int i = 0; i < i_startTable; i++)
+        {
+            UpgradTable up = allTables[i].transform.GetComponent<UpgradTable>();
+            up.b_readyToUse = true;
+            up.SetUpUseAble();
+        }
     }
 
     void Update()
     {
         allCustomers = FindObjectsOfType<CustomerStateManager>();
         allEmployees = FindObjectsOfType<EmployeeStateManager>();
-        allTables = FindObjectsOfType<TableObj>();
+        allSheriffs = FindObjectsOfType<SheriffStateManager>();
 
         if (AllEmployeeWorkingCheckProcess())
         {
@@ -67,6 +82,29 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
             }
         }
 
+    }
+
+    public int ReqRatToBuyTable()
+    {
+        int rating = 0;
+
+        int currentStep = (allTableIsReady() - i_startTable) + 1;
+        rating = currentStep * 10;
+        return rating;
+    }
+
+    int allTableIsReady()
+    {
+        int ready = 0;
+        for (int i = 0; i < allTables.Length; i++)
+        {
+            UpgradTable up = allTables[i].transform.GetComponent<UpgradTable>();
+            if (up.b_readyToUse)
+            {
+                ready++;
+            }
+        }
+        return ready;
     }
 
     bool AllEmployeeWorkingCheckProcess()
@@ -247,10 +285,23 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
             for (int i = 0; i < allCustomers.Length; i++)
             {
                 if (allCustomers[i].s_currentState == allCustomers[i].s_fightState ||
-                    allCustomers[i].s_currentState == allCustomers[i].s_attackState)
+                    allCustomers[i].s_currentState == allCustomers[i].s_attackState ||
+                    allCustomers[i].s_currentState == allCustomers[i].s_hurtState)
                 {
                     return true;
                 }
+            }
+        }
+        return false;
+    }
+
+    public bool HasGangToTeachYou()
+    {
+        for (int i = 0; i < allCustomers.Length; i++)
+        {
+            if (allCustomers[i].s_currentState == allCustomers[i].s_aggressive)
+            {
+                return true;
             }
         }
         return false;

@@ -25,6 +25,8 @@ public class InputSystem : MonoBehaviour
             ia_action.Action.Sprint.performed += i => SprintPerformed();
             ia_action.Action.Sprint.canceled += i => PlayerManager.Instance.b_isSprint = false;
 
+            ia_action.Action.Pause.performed += i => Pause.isPause = !Pause.isPause;
+
             ia_action.Enable();
         }
     }
@@ -114,7 +116,7 @@ public class InputSystem : MonoBehaviour
 
     void SprintPerformed()
     {
-        if(!PlayerManager.Instance.b_isDead)
+        if (!PlayerManager.Instance.b_isDead)
         {
             PlayerManager.Instance.b_isSprint = true;
         }

@@ -27,6 +27,8 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
 
     public CustomerAggressiveChaseState s_aggressive = new CustomerAggressiveChaseState();
 
+    public CustomerThrongState s_throngState = new CustomerThrongState();
+
     public CustomerFightState s_fightState = new CustomerFightState();
     public CustomerPushState s_pushState = new CustomerPushState();
     public CustomerAttackState s_attackState = new CustomerAttackState();
@@ -112,6 +114,9 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     [HideInInspector] public int i_prefabIndex;
     [HideInInspector] public int i_spawnPosIndex;
 
+    [Header("===== Area =====")]
+    public AreaType currentAreaStay;
+
     private void Awake()
     {
         anim = GetComponent<Animator>();
@@ -176,7 +181,6 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
 
         if (b_hasGang)
         {
-            Debug.Log("Gang");
             i_gangCount = UnityEngine.Random.Range(v_minmaxGangCount.x, v_minmaxGangCount.y);
             for (int i = 0; i < i_gangCount; i++)
             {
@@ -184,7 +188,10 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
             }
         }
 
-        RestaurantManager.Instance.RemoveRating();
+        if (currentAreaStay == AreaType.InRestaurant)
+        {
+            RestaurantManager.Instance.RemoveRating();
+        }
 
         SwitchState(s_deadState);
     }
@@ -267,7 +274,6 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     {
         Destroy(gameObject);
     }
-
 
     private void OnDrawGizmos()
     {

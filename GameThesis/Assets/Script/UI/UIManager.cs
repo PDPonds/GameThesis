@@ -13,7 +13,9 @@ public class UIManager : Auto_Singleton<UIManager>
     public TextMeshProUGUI text_time;
 
     [Header("===== Warning =====")]
-    public TextMeshProUGUI text_warning;
+    public GameObject g_escape;
+    public GameObject g_slockOff;
+    public GameObject g_gang;
 
     [Header("===== Rating =====")]
     public TextMeshProUGUI text_rating;
@@ -21,6 +23,10 @@ public class UIManager : Auto_Singleton<UIManager>
     [Header("===== Leave Area Text =====")]
     public GameObject text_leaveArea;
     public bool b_leaveTrigger;
+
+    [Header("===== TutorialTask =====")]
+    public GameObject g_tutorial;
+
     private void Update()
     {
         text_coin.text = $"$ : {GameManager.Instance.f_coin.ToString("00.00")}";
@@ -29,8 +35,16 @@ public class UIManager : Auto_Singleton<UIManager>
 
         #region warning
 
-        text_warning.text = GetWarningText();
-        text_warning.color = Color.yellow;
+        if (!RestaurantManager.Instance.AllEmployeeWorkingCheckForText()) g_slockOff.SetActive(true);
+        else g_slockOff.SetActive(false);
+
+        if (RestaurantManager.Instance.SomeOneEscape()) g_escape.SetActive(true);
+        else g_escape.SetActive(false);
+
+        if (RestaurantManager.Instance.HasGangToTeachYou()) g_gang.SetActive(true);
+        else g_gang.SetActive(false);
+
+
 
         #endregion
 
@@ -48,21 +62,5 @@ public class UIManager : Auto_Singleton<UIManager>
 
     }
 
-    string GetWarningText()
-    {
-        string text = string.Empty;
-
-        if (!RestaurantManager.Instance.AllEmployeeWorkingCheckForText())
-        {
-            text += $"• Someone slacks off. !!{Environment.NewLine}";
-        }
-
-        if (RestaurantManager.Instance.SomeOneEscape())
-        {
-            text += $"• Someone Escape. !! {Environment.NewLine}";
-        }
-
-        return text;
-    }
 
 }

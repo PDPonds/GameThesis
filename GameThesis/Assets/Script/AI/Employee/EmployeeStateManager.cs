@@ -29,6 +29,10 @@ public class EmployeeStateManager : StateManager, IDamageable
     public float f_atkRange;
     public float f_atkDelay;
     public float f_runRange;
+
+    public float f_fightTime;
+    [HideInInspector] public float f_currentFightTime;
+
     [HideInInspector] public float f_currentAtkDelay;
     [HideInInspector] public bool b_canAtk;
 
@@ -63,6 +67,9 @@ public class EmployeeStateManager : StateManager, IDamageable
     [HideInInspector] public Vector3 v_walkPos;
     [HideInInspector] public float f_slowTime;
 
+    [Header("===== Area =====")]
+    public AreaType currentAreaStay;
+
     private void Awake()
     {
         anim = GetComponent<Animator>();
@@ -82,6 +89,22 @@ public class EmployeeStateManager : StateManager, IDamageable
     void Update()
     {
         s_currentState.UpdateState(this);
+
+        if (s_currentState == s_fightState || s_currentState == s_attackState)
+        {
+            if (PlayerManager.Instance.b_inFighting)
+            {
+                f_currentFightTime = f_fightTime;
+            }
+            else
+            {
+                f_currentFightTime -= Time.deltaTime;
+                if (f_currentFightTime < 0)
+                {
+                    SwitchState(s_activityState);
+                }
+            }
+        }
     }
 
     public void TakeDamage(int damage)

@@ -23,7 +23,6 @@ public class GameState : StateManager
 
     private void Update()
     {
-
         s_currentState.UpdateState(this);
 
         if (TimeController.Instance.d_currentTime.Hour >= TimeController.Instance.f_endTime)
