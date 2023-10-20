@@ -242,6 +242,13 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
             f_currentWekeUpPoint += f_wekeUpMultiply;
             if (f_currentWekeUpPoint >= f_maxWekeUpPoint)
             {
+                c_tableObj.b_isEmtry = true;
+                c_tableObj.b_readyForNextCustomer = false;
+                c_tableObj.s_currentCustomer = null;
+
+                c_tableObj = null;
+                c_chairObj = null;
+
                 SwitchState(s_giveBackState);
             }
         }

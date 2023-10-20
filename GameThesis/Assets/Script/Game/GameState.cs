@@ -25,10 +25,10 @@ public class GameState : StateManager
     {
         s_currentState.UpdateState(this);
 
-        if (TimeController.Instance.d_currentTime.Hour >= TimeController.Instance.f_endTime)
-        {
-            SwitchState(s_summaryState);
-        }
+        //if (TimeController.Instance.d_currentTime.Hour >= TimeController.Instance.f_endTime)
+        //{
+        //    SwitchState(s_summaryState);
+        //}
     }
 
     public void SpawnCustomer()

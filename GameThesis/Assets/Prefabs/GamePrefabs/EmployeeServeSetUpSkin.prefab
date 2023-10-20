@@ -102,17 +102,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3
+      value: 5.24
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.50000095
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -36
+      value: 3.8999996
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
@@ -759,6 +759,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2063728290122027743}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b204018a8378be5498eb3adc2908f6ab,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 294399606315348641}
     - targetCorrespondingSourceObject: {fileID: 1082271958561512970, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
       insertIndex: -1
@@ -963,9 +967,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   s_leftPunchTrigger: {fileID: 499400756921806036}
   s_rightPunchTrigger: {fileID: 499400756921806036}
+  s_aiMainObserver: {fileID: 294399606315348641}
   as_punchHitBlock: {fileID: 0}
   as_punchHit: {fileID: 0}
   as_punch: {fileID: 0}
+  as_walk: {fileID: 0}
+  as_eat: {fileID: 0}
+  as_cheer: {fileID: 0}
   ac_punchHitBlock:
   - {fileID: 8300000, guid: d5c053a7ec92db043bc298a9aef6cb07, type: 3}
   ac_punchHit:
@@ -973,6 +981,12 @@ MonoBehaviour:
   ac_punch:
   - {fileID: 8300000, guid: 064bfb791da2cd84da06f681afa030fb, type: 3}
   - {fileID: 8300000, guid: 68783a421d1b0c94cbc46ba90d14c69d, type: 3}
+  ac_walk:
+  - {fileID: 8300000, guid: d2b3f8ac4680ab648ac589df84748dc7, type: 3}
+  ac_eat:
+  - {fileID: 8300000, guid: 8450de32ea6d45042b2c2e2b317e3719, type: 3}
+  ac_cheer:
+  - {fileID: 8300000, guid: 0a1ce24372915674db2064f8e1dc52c6, type: 3}
 --- !u!114 &2063728290122027743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1017,6 +1031,18 @@ MonoBehaviour:
   v_walkPos: {x: 0, y: 0, z: 0}
   f_slowTime: 0
   currentAreaStay: 0
+--- !u!114 &294399606315348641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 77312692720945650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f073c0d5f1f1fba47b47ea6263ffacab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &204564350380485289 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1082271958561512970, guid: b204018a8378be5498eb3adc2908f6ab,

@@ -1430,6 +1430,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 4548816158027124120}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b204018a8378be5498eb3adc2908f6ab,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8240269092284624982}
     - targetCorrespondingSourceObject: {fileID: 1082271958561512970, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
       insertIndex: -1
@@ -2481,9 +2485,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   s_leftPunchTrigger: {fileID: 9087400398838001864}
   s_rightPunchTrigger: {fileID: 9087400398838001864}
+  s_aiMainObserver: {fileID: 8240269092284624982}
   as_punchHitBlock: {fileID: 0}
   as_punchHit: {fileID: 0}
   as_punch: {fileID: 0}
+  as_walk: {fileID: 0}
+  as_eat: {fileID: 0}
+  as_cheer: {fileID: 0}
   ac_punchHitBlock:
   - {fileID: 8300000, guid: d5c053a7ec92db043bc298a9aef6cb07, type: 3}
   ac_punchHit:
@@ -2491,6 +2499,24 @@ MonoBehaviour:
   ac_punch:
   - {fileID: 8300000, guid: 064bfb791da2cd84da06f681afa030fb, type: 3}
   - {fileID: 8300000, guid: 68783a421d1b0c94cbc46ba90d14c69d, type: 3}
+  ac_walk:
+  - {fileID: 8300000, guid: d2b3f8ac4680ab648ac589df84748dc7, type: 3}
+  ac_eat:
+  - {fileID: 8300000, guid: 8450de32ea6d45042b2c2e2b317e3719, type: 3}
+  ac_cheer:
+  - {fileID: 8300000, guid: 0a1ce24372915674db2064f8e1dc52c6, type: 3}
+--- !u!114 &8240269092284624982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6815341079782304034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f073c0d5f1f1fba47b47ea6263ffacab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7248808129185857848 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3948933247560734027, guid: b204018a8378be5498eb3adc2908f6ab,

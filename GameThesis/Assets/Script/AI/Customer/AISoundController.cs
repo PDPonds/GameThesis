@@ -7,25 +7,40 @@ public class AISoundController : MonoBehaviour, IObserver
 {
     public MainObserver s_leftPunchTrigger;
     public MainObserver s_rightPunchTrigger;
+    public MainObserver s_aiMainObserver;
 
     public AudioSource as_punchHitBlock;
     public AudioSource as_punchHit;
     public AudioSource as_punch;
+    public AudioSource as_eat;
+    public AudioSource as_cheer;
 
     public List<AudioClip> ac_punchHitBlock = new List<AudioClip>();
     public List<AudioClip> ac_punchHit = new List<AudioClip>();
     public List<AudioClip> ac_punch = new List<AudioClip>();
+    public List<AudioClip> ac_eat = new List<AudioClip>();
+    public List<AudioClip> ac_cheer = new List<AudioClip>();
 
     private void OnEnable()
     {
-        s_rightPunchTrigger.AddObserver(this);
-        s_leftPunchTrigger.AddObserver(this);
+        StateManager state = transform.GetComponent<StateManager>();
+        if (state is EmployeeStateManager || state is CustomerStateManager)
+        {
+            s_rightPunchTrigger.AddObserver(this);
+            s_leftPunchTrigger.AddObserver(this);
+        }
+        s_aiMainObserver.AddObserver(this);
     }
 
     private void OnDisable()
     {
-        s_rightPunchTrigger.RemoveObserver(this);
-        s_leftPunchTrigger.RemoveObserver(this);
+        StateManager state = transform.GetComponent<StateManager>();
+        if (state is EmployeeStateManager || state is CustomerStateManager)
+        {
+            s_rightPunchTrigger.RemoveObserver(this);
+            s_leftPunchTrigger.RemoveObserver(this);
+        }
+        s_aiMainObserver.RemoveObserver(this);
     }
 
     private void Awake()
@@ -33,6 +48,8 @@ public class AISoundController : MonoBehaviour, IObserver
         as_punch = InitializedAudioSource(false);
         as_punchHit = InitializedAudioSource(false);
         as_punchHitBlock = InitializedAudioSource(false);
+        as_eat = InitializedAudioSource(true);
+        as_cheer = InitializedAudioSource(true);
     }
 
     public void FuncToDo(ActionObserver action)
@@ -54,6 +71,29 @@ public class AISoundController : MonoBehaviour, IObserver
                 PlaySound(as_punch, ac_punch);
 
                 break;
+
+            case ActionObserver.AIEat:
+
+                as_eat.volume = 0.05f;
+                PlaySound(as_eat, ac_eat);
+
+                break;
+            case ActionObserver.AICheer:
+
+                as_cheer.volume = 0.1f;
+                PlaySound(as_cheer, ac_cheer);
+
+                break;
+            case ActionObserver.AIExitEat:
+
+                PauseSound(as_eat);
+
+                break;
+            case ActionObserver.AIExitCheer:
+
+                PauseSound(as_cheer);
+
+                break;
             default: break;
         }
     }
@@ -69,14 +109,42 @@ public class AISoundController : MonoBehaviour, IObserver
     {
         if (clips.Count > 0)
         {
-            if (clips.Count > 1)
+            if (!source.loop)
             {
-                PlayRandomAudio(source, clips);
+                if (clips.Count > 1)
+                {
+                    PlayRandomAudio(source, clips);
+                }
+                else
+                {
+                    PlaySelectAudio(source, clips, 0);
+                }
             }
             else
             {
-                PlaySelectAudio(source, clips, 0);
+                if (clips.Count > 1)
+                {
+                    if (!source.isPlaying)
+                    {
+                        PlayRandomAudioLoop(source, clips);
+                    }
+                }
+                else
+                {
+                    if (!source.isPlaying)
+                    {
+                        PlaySelectAudioLoop(source, clips, 0);
+                    }
+                }
             }
+        }
+    }
+
+    void PauseSound(AudioSource source)
+    {
+        if (source.isPlaying)
+        {
+            source.Pause();
         }
     }
 
@@ -93,4 +161,15 @@ public class AISoundController : MonoBehaviour, IObserver
         source.PlayOneShot(clips[soundPlayIndex]);
     }
 
+    void PlayRandomAudioLoop(AudioSource source, List<AudioClip> clips)
+    {
+        int soundPlayIndex = Random.Range(0, clips.Count);
+        source.clip = clips[soundPlayIndex];
+        source.Play();
+    }
+    void PlaySelectAudioLoop(AudioSource source, List<AudioClip> clips, int index)
+    {
+        source.clip = clips[index];
+        source.Play();
+    }
 }

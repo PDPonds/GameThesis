@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MainObserver
 {
     Vector3 v_moveDir;
     private void Start()
@@ -29,6 +29,15 @@ public class PlayerMovement : MonoBehaviour
             {
                 transform.Translate(v_moveDir * PlayerManager.Instance.f_moveSpeed * Time.deltaTime, Space.World);
             }
+
+            if (v_dir != Vector3.zero)
+            {
+                if (PlayerManager.Instance.currentAreaStay == AreaType.InRestaurant)
+                    ActiveAllObserver(ActionObserver.PlayerWalkInRestaurant);
+                if (PlayerManager.Instance.currentAreaStay == AreaType.OutRestaurant)
+                    ActiveAllObserver(ActionObserver.PlayerWalkOutRestaurant);
+            }
+            else ActiveAllObserver(ActionObserver.PlayerStopWalk);
         }
 
     }

@@ -13,10 +13,10 @@ public class TableObj : MonoBehaviour
 
     public bool b_isEmtry;
 
-    [HideInInspector] public float f_cdForNextCustomer;
+    /*[HideInInspector]*/ public float f_cdForNextCustomer;
     public Vector2 v_minmaxCDForNextCustomer;
 
-    [HideInInspector] public bool b_readyForNextCustomer;
+    /*[HideInInspector]*/ public bool b_readyForNextCustomer;
     [SerializeField] float f_currentCDForNextCustomer;
 
     public CustomerStateManager s_currentCustomer;
