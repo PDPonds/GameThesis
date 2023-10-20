@@ -41,6 +41,7 @@ public class CustomerWaitFoodState : BaseState
         if (customerStateManager.f_currentOrderTime <= 0)
         {
             customerStateManager.SwitchState(customerStateManager.s_goOutState);
+            RestaurantManager.Instance.RemoveRating();
         }
 
     }

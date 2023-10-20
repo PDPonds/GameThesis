@@ -30,7 +30,8 @@ public class ActiveThrong : MonoBehaviour
                         SheriffStateManager shrMan = cus[i].GetComponentInParent<SheriffStateManager>();
                         if (shrMan != null)
                         {
-                            if (shrMan.s_currentState == shrMan.s_activityState)
+                            if (shrMan.s_currentState == shrMan.s_activityState &&
+                                PlayerManager.Instance.currentAreaStay == AreaType.OutRestaurant)
                             {
                                 shrMan.SwitchState(shrMan.s_waitForFightEnd);
                             }
@@ -48,7 +49,8 @@ public class ActiveThrong : MonoBehaviour
                         }
                         else if (cus[i].TryGetComponent<SheriffStateManager>(out SheriffStateManager shrMan))
                         {
-                            if (shrMan.s_currentState == shrMan.s_activityState)
+                            if (shrMan.s_currentState == shrMan.s_activityState &&
+                                PlayerManager.Instance.currentAreaStay == AreaType.OutRestaurant)
                             {
                                 shrMan.SwitchState(shrMan.s_waitForFightEnd);
                             }
