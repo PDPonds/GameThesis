@@ -1,7 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using Unity.Mathematics;
 using UnityEngine;
 
 public class RestaurantManager : Auto_Singleton<RestaurantManager>
@@ -9,6 +7,7 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
     public CustomerStateManager[] allCustomers;
     public EmployeeStateManager[] allEmployees;
     public TableObj[] allTables;
+    public SheriffStateManager[] allSheriffs;
 
     public bool b_inProcess;
 
@@ -42,6 +41,7 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
     {
         allCustomers = FindObjectsOfType<CustomerStateManager>();
         allEmployees = FindObjectsOfType<EmployeeStateManager>();
+        allSheriffs = FindObjectsOfType<SheriffStateManager>();
 
         if (AllEmployeeWorkingCheckProcess())
         {
@@ -260,7 +260,8 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
             for (int i = 0; i < allCustomers.Length; i++)
             {
                 if (allCustomers[i].s_currentState == allCustomers[i].s_fightState ||
-                    allCustomers[i].s_currentState == allCustomers[i].s_attackState)
+                    allCustomers[i].s_currentState == allCustomers[i].s_attackState ||
+                    allCustomers[i].s_currentState == allCustomers[i].s_hurtState)
                 {
                     return true;
                 }

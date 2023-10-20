@@ -2466,6 +2466,8 @@ MonoBehaviour:
   i_gangCount: 0
   i_prefabIndex: 0
   i_spawnPosIndex: 0
+  currentAreaStay: 0
+  f_throngDistance: 8
 --- !u!114 &4548816158027124120
 MonoBehaviour:
   m_ObjectHideFlags: 0

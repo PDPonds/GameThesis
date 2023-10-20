@@ -67,6 +67,9 @@ public class EmployeeStateManager : StateManager, IDamageable
     [HideInInspector] public Vector3 v_walkPos;
     [HideInInspector] public float f_slowTime;
 
+    [Header("===== Area =====")]
+    public AreaType currentAreaStay;
+
     private void Awake()
     {
         anim = GetComponent<Animator>();

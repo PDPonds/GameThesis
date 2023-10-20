@@ -78,6 +78,9 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
     public float f_maxStamina;
     [HideInInspector] public float f_currentStamina;
 
+    [Header("===== Area =====")]
+    public AreaType currentAreaStay;
+
     private void Awake()
     {
         c_collider = GetComponent<CapsuleCollider>();

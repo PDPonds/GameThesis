@@ -29,6 +29,8 @@ public class CustomerWalkAroundState : BaseState
         customerStateManager.anim.SetBool("fightState", false);
         customerStateManager.anim.SetBool("sit", false);
         customerStateManager.anim.SetBool("drunk", false);
+        customerStateManager.anim.SetBool("cheer", false);
+
         customerStateManager.DisablePunch();
 
         customerStateManager.agent.speed = customerStateManager.f_walkSpeed;
