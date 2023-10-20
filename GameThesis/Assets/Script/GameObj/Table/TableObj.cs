@@ -83,22 +83,6 @@ public class TableObj : MonoBehaviour
 
             }
 
-
-        }
-        else
-        {
-            img_progressBar.enabled = false;
-            img_icon.enabled = false;
-
-        }
-
-        if (s_currentCustomer == null || s_currentCustomer.s_currentState != s_currentCustomer.s_waitFoodState)
-        {
-            s_currentEmployee = null;
-        }
-
-        if (s_currentCustomer != null)
-        {
             if (s_currentCustomer.s_currentState == s_currentCustomer.s_eatFoodState)
             {
                 foreach (GameObject food in g_foods) food.SetActive(true);
@@ -108,10 +92,20 @@ public class TableObj : MonoBehaviour
             {
                 foreach (GameObject food in g_foods) food.SetActive(false);
             }
+
         }
         else
         {
             foreach (GameObject food in g_foods) food.SetActive(false);
+
+            img_progressBar.enabled = false;
+            img_icon.enabled = false;
+
+        }
+
+        if (s_currentCustomer == null || s_currentCustomer.s_currentState != s_currentCustomer.s_waitFoodState)
+        {
+            s_currentEmployee = null;
         }
     }
 

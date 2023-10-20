@@ -295,6 +295,18 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
         return false;
     }
 
+    public bool HasGangToTeachYou()
+    {
+        for (int i = 0; i < allCustomers.Length; i++)
+        {
+            if (allCustomers[i].s_currentState == allCustomers[i].s_aggressive)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void RemoveRating()
     {
         i_rating -= i_ratingToRemove;
