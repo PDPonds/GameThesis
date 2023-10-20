@@ -13,18 +13,20 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
 
     [HideInInspector] public bool b_summaryButHasCustome;
 
+    [Header("===== Start Rating =====")]
     public int i_rating;
     public Vector2Int v_minmaxRating;
+    public int i_startRating;
     public int i_ratingToRemove;
     public int i_ratingToAdd;
 
     [Header("===== Upgrade Table Manager =====")]
     public int i_startTable;
 
+
     private void Awake()
     {
-        i_rating = v_minmaxRating.y;
-
+        i_rating = i_startRating;
     }
 
     private void Start()
@@ -80,6 +82,29 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
             }
         }
 
+    }
+
+    public int ReqRatToBuyTable()
+    {
+        int rating = 0;
+
+        int currentStep = (allTableIsReady() - i_startTable) + 1;
+        rating = currentStep * 10;
+        return rating;
+    }
+
+    int allTableIsReady()
+    {
+        int ready = 0;
+        for (int i = 0; i < allTables.Length; i++)
+        {
+            UpgradTable up = allTables[i].transform.GetComponent<UpgradTable>();
+            if (up.b_readyToUse)
+            {
+                ready++;
+            }
+        }
+        return ready;
     }
 
     bool AllEmployeeWorkingCheckProcess()

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -69,7 +70,8 @@ public class UpgradTable : MonoBehaviour, IInteracable
 
     public void BuyTable()
     {
-        if (GameManager.Instance.f_coin >= f_costToBuy)
+        if (GameManager.Instance.f_coin >= f_costToBuy &&
+            RestaurantManager.Instance.i_rating >= RestaurantManager.Instance.ReqRatToBuyTable())
         {
             GameManager.Instance.RemoveCoin(f_costToBuy);
             SetUpUseAble();
@@ -87,7 +89,8 @@ public class UpgradTable : MonoBehaviour, IInteracable
         string text = string.Empty;
         if (!b_readyToUse)
         {
-            text = $"[E] Use {f_costToBuy} to Unlocke Table.";
+            text = $"[E] Use {f_costToBuy}$ And{Environment.NewLine} " +
+                $"Atleast {RestaurantManager.Instance.ReqRatToBuyTable()} Rating to Unlock Table.";
         }
         return text;
     }
