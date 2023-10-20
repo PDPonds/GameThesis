@@ -14,6 +14,7 @@ public class GameManager : Auto_Singleton<GameManager>
     public Transform t_stayPos;
 
     public float f_coin;
+    public float f_startCoin;
 
     [HideInInspector] public GameState s_gameState;
 
@@ -25,6 +26,7 @@ public class GameManager : Auto_Singleton<GameManager>
     private void Awake()
     {
         s_gameState = GetComponent<GameState>();
+        f_coin = f_startCoin;
     }
 
     public void AddCoin(float amount)

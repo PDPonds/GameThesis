@@ -102,17 +102,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.24
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.1
+      value: -0.50000095
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.8999996
+      value: -36
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
@@ -263,7 +263,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 820f0ce701f4da249a1ce54504de6223, type: 2}
+      objectReference: {fileID: 2100000, guid: c4dc2a7bec14398498082b7c94453e36, type: 2}
     - target: {fileID: -5561550452697079657, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
       propertyPath: m_Layer
@@ -1016,6 +1016,7 @@ MonoBehaviour:
   v_minAndMaxSlowTime: {x: 30, y: 60}
   v_walkPos: {x: 0, y: 0, z: 0}
   f_slowTime: 0
+  currentAreaStay: 0
 --- !u!1 &204564350380485289 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1082271958561512970, guid: b204018a8378be5498eb3adc2908f6ab,

@@ -769,17 +769,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 16.663258
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.50000024
+      value: -0.50000095
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -24.06139
+      value: -36
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
@@ -1947,7 +1947,6 @@ MonoBehaviour:
   i_prefabIndex: 0
   i_spawnPosIndex: 0
   currentAreaStay: 0
-  f_throngDistance: 8
 --- !u!114 &833660542507109519
 MonoBehaviour:
   m_ObjectHideFlags: 0
