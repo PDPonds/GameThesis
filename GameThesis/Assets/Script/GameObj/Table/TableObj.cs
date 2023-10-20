@@ -50,6 +50,12 @@ public class TableObj : MonoBehaviour
 
         if (s_currentCustomer != null)
         {
+            if (s_currentCustomer.c_tableObj != this)
+            {
+                s_currentCustomer = null;
+                return;
+            }
+
             if (s_currentCustomer.s_currentState == s_currentCustomer.s_waitFoodState)
             {
                 img_progressBar.enabled = true;
@@ -77,22 +83,6 @@ public class TableObj : MonoBehaviour
 
             }
 
-
-        }
-        else
-        {
-            img_progressBar.enabled = false;
-            img_icon.enabled = false;
-
-        }
-
-        if (s_currentCustomer == null || s_currentCustomer.s_currentState != s_currentCustomer.s_waitFoodState)
-        {
-            s_currentEmployee = null;
-        }
-
-        if (s_currentCustomer != null)
-        {
             if (s_currentCustomer.s_currentState == s_currentCustomer.s_eatFoodState)
             {
                 foreach (GameObject food in g_foods) food.SetActive(true);
@@ -102,19 +92,31 @@ public class TableObj : MonoBehaviour
             {
                 foreach (GameObject food in g_foods) food.SetActive(false);
             }
+
         }
         else
         {
             foreach (GameObject food in g_foods) food.SetActive(false);
+
+            img_progressBar.enabled = false;
+            img_icon.enabled = false;
+
+        }
+
+        if (s_currentCustomer == null || s_currentCustomer.s_currentState != s_currentCustomer.s_waitFoodState)
+        {
+            s_currentEmployee = null;
         }
     }
 
     public void RandomCDForNextCustomer()
     {
-        float minutRating = RestaurantManager.Instance.v_minmaxRating.y - RestaurantManager.Instance.i_rating;
-        float multiply = 0.2f * minutRating;
-        Vector2 newMinMax = new Vector2(v_minmaxCDForNextCustomer.x + multiply, v_minmaxCDForNextCustomer.y + multiply);
-        f_cdForNextCustomer = Random.Range(newMinMax.x, newMinMax.y);
+        //float minutRating = RestaurantManager.Instance.v_minmaxRating.y - RestaurantManager.Instance.i_rating;
+        //float multiply = 0.2f * minutRating;
+        //Vector2 newMinMax = new Vector2(v_minmaxCDForNextCustomer.x + multiply, v_minmaxCDForNextCustomer.y + multiply);
+        //f_cdForNextCustomer = Random.Range(newMinMax.x, newMinMax.y);
+
+        f_cdForNextCustomer = Random.Range(v_minmaxCDForNextCustomer.x, v_minmaxCDForNextCustomer.y);
     }
 
 

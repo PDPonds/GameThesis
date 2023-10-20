@@ -25,6 +25,10 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
 
     public CustomerDrunkState s_drunkState = new CustomerDrunkState();
 
+    public CustomerAggressiveChaseState s_aggressive = new CustomerAggressiveChaseState();
+
+    public CustomerThrongState s_throngState = new CustomerThrongState();
+
     public CustomerFightState s_fightState = new CustomerFightState();
     public CustomerPushState s_pushState = new CustomerPushState();
     public CustomerAttackState s_attackState = new CustomerAttackState();
@@ -36,7 +40,12 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
 
     [Header("===== Fight =====")]
     public float f_atkRange;
+    public float f_runRange;
+
     public float f_atkDelay;
+    public float f_fightTime;
+    [HideInInspector] public float f_currentFightTime;
+
     [HideInInspector] public float f_currentAtkDelay;
     [HideInInspector] public bool b_canAtk;
 
@@ -57,8 +66,8 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     [Header("===== Order Food =====")]
     public float f_orderTime;
     [HideInInspector] public float f_currentOrderTime;
-    [HideInInspector] public TableObj c_tableObj;
-    [HideInInspector] public ChairObj c_chairObj;
+    public TableObj c_tableObj;
+    public ChairObj c_chairObj;
 
     [Header("===== Eat Food =====")]
     public Vector2 v_minAndMaxEatFood;
@@ -96,6 +105,18 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     public float f_wekeUpMultiply;
     public float f_maxWekeUpPoint;
 
+    [Header("===== Gangster =====")]
+    public float f_isGangsterPercent;
+    public bool b_hasGang;
+    public Vector2Int v_minmaxGangCount;
+    [HideInInspector] public bool b_isGang;
+    [HideInInspector] public int i_gangCount;
+    [HideInInspector] public int i_prefabIndex;
+    [HideInInspector] public int i_spawnPosIndex;
+
+    [Header("===== Area =====")]
+    public AreaType currentAreaStay;
+
     private void Awake()
     {
         anim = GetComponent<Animator>();
@@ -105,10 +126,15 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
 
     private void Start()
     {
-        s_currentState = s_walkAroundState;
-        s_currentState.EnterState(this);
+        if (!b_isGang)
+        {
+            s_currentState = s_walkAroundState;
+            s_currentState.EnterState(this);
+        }
+
         i_currentHP = i_maxHP;
         f_giveCoin = UnityEngine.Random.Range(v_minmaxGiveCoin.x, v_minmaxGiveCoin.y);
+
     }
 
     private void Update()
@@ -116,6 +142,22 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
         s_currentState.UpdateState(this);
         TextMeshProUGUI text = text_coin.GetComponent<TextMeshProUGUI>();
         text.text = $"$ {f_giveCoin.ToString("00.00")}";
+
+        if (s_currentState == s_fightState || s_currentState == s_attackState)
+        {
+            if (PlayerManager.Instance.b_inFighting)
+            {
+                f_currentFightTime = f_fightTime;
+            }
+            else
+            {
+                f_currentFightTime -= Time.deltaTime;
+                if (f_currentFightTime < 0)
+                {
+                    SwitchState(s_walkAroundState);
+                }
+            }
+        }
     }
 
     public void TakeDamage(int damage)
@@ -137,7 +179,19 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
         if (b_escape) GameManager.Instance.AddCoin(f_giveCoin);
         if (b_isDrunk) GameManager.Instance.AddCoin(f_giveCoin);
 
-        RestaurantManager.Instance.RemoveRating();
+        if (b_hasGang)
+        {
+            i_gangCount = UnityEngine.Random.Range(v_minmaxGangCount.x, v_minmaxGangCount.y);
+            for (int i = 0; i < i_gangCount; i++)
+            {
+                GameManager.Instance.s_gameState.SpawnCustomerGang(i_prefabIndex);
+            }
+        }
+
+        if (currentAreaStay == AreaType.InRestaurant)
+        {
+            RestaurantManager.Instance.RemoveRating();
+        }
 
         SwitchState(s_deadState);
     }
@@ -223,6 +277,10 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
 
     private void OnDrawGizmos()
     {
+        Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, f_atkRange);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, f_runRange);
+
     }
 }

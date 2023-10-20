@@ -754,32 +754,32 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.27
+      value: 0.31
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.27
+      value: 0.31
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.27
+      value: 0.31
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.02
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.043150425
+      value: -0.50000095
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -34.64
+      value: -32
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
@@ -926,6 +926,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: -5631189763476694412, guid: b204018a8378be5498eb3adc2908f6ab,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 820f0ce701f4da249a1ce54504de6223, type: 2}
     - target: {fileID: -5561550452697079657, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
       propertyPath: m_Layer
@@ -2411,8 +2416,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   i_currentHP: 0
   i_maxHP: 5
-  f_atkRange: 0.7
+  f_atkRange: 1.2
+  f_runRange: 2.5
   f_atkDelay: 0.5
+  f_fightTime: 8
+  f_currentFightTime: 0
   f_currentAtkDelay: 0
   b_canAtk: 0
   i_atkCount: 0
@@ -2451,6 +2459,14 @@ MonoBehaviour:
   f_currentWekeUpPoint: 0
   f_wekeUpMultiply: 1
   f_maxWekeUpPoint: 7
+  f_isGangsterPercent: 30
+  b_hasGang: 0
+  v_minmaxGangCount: {x: 2, y: 5}
+  b_isGang: 0
+  i_gangCount: 0
+  i_prefabIndex: 0
+  i_spawnPosIndex: 0
+  currentAreaStay: 0
 --- !u!114 &4548816158027124120
 MonoBehaviour:
   m_ObjectHideFlags: 0

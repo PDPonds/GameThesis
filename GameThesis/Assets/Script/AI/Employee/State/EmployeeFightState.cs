@@ -7,7 +7,7 @@ public class EmployeeFightState : BaseState
     public override void EnterState(StateManager ai)
     {
         EmployeeStateManager employeeStateManager = (EmployeeStateManager)ai;
-        employeeStateManager.b_isWorking = false;
+
     }
 
     public override void UpdateState(StateManager ai)
@@ -15,12 +15,6 @@ public class EmployeeFightState : BaseState
         EmployeeStateManager employeeStateManager = (EmployeeStateManager)ai;
 
         employeeStateManager.RagdollOff();
-
-        employeeStateManager.agent.speed = employeeStateManager.f_walkSpeed;
-
-        employeeStateManager.agent.SetDestination(PlayerManager.Instance.transform.position);
-
-        employeeStateManager.anim.SetBool("fightState", true);
 
         employeeStateManager.DisablePunch();
 
@@ -33,15 +27,41 @@ public class EmployeeFightState : BaseState
             }
         }
 
-        Collider[] player = Physics.OverlapSphere(ai.transform.position, employeeStateManager.f_atkRange, GameManager.Instance.lm_playerMask);
+
+        employeeStateManager.agent.SetDestination(PlayerManager.Instance.transform.position);
+
+        Collider[] player = Physics.OverlapSphere(ai.transform.position, employeeStateManager.f_runRange, GameManager.Instance.lm_playerMask);
         if (player.Length > 0)
         {
-            employeeStateManager.agent.velocity = Vector2.zero;
-            if (employeeStateManager.b_canAtk)
+            employeeStateManager.agent.speed = employeeStateManager.f_walkSpeed;
+
+            employeeStateManager.anim.SetBool("fightState", true);
+            employeeStateManager.anim.SetBool("walk", false);
+            employeeStateManager.anim.SetBool("run", false);
+            employeeStateManager.anim.SetBool("sit", false);
+            employeeStateManager.anim.SetBool("drunk", false);
+
+            if (Vector3.Distance(PlayerManager.Instance.transform.position, employeeStateManager.transform.position) <=
+                employeeStateManager.f_atkRange)
             {
-                employeeStateManager.SwitchState(employeeStateManager.s_attackState);
+                employeeStateManager.agent.velocity = Vector2.zero;
+                if (employeeStateManager.b_canAtk)
+                {
+                    employeeStateManager.SwitchState(employeeStateManager.s_attackState);
+                }
             }
+
         }
+        else
+        {
+            employeeStateManager.agent.speed = employeeStateManager.f_runSpeed;
+            employeeStateManager.anim.SetBool("fightState", false);
+            employeeStateManager.anim.SetBool("walk", false);
+            employeeStateManager.anim.SetBool("run", true);
+            employeeStateManager.anim.SetBool("sit", false);
+            employeeStateManager.anim.SetBool("drunk", false);
+        }
+
 
     }
 }

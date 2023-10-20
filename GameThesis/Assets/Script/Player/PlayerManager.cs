@@ -69,6 +69,7 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
     public Animator a_cameraAnim;
     public Animator a_fadeAnim;
     public bool b_isDead;
+    int couter = 0;
 
     [Header("===== Player Sprint =====")]
     public float f_runSpeed;
@@ -76,6 +77,9 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
     public float f_staminaMultiply;
     public float f_maxStamina;
     [HideInInspector] public float f_currentStamina;
+
+    [Header("===== Area =====")]
+    public AreaType currentAreaStay;
 
     private void Awake()
     {
@@ -113,11 +117,6 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
             t_playerMesh.GetChild(0).gameObject.SetActive(false);
         }
 
-        if (RestaurantManager.Instance.HasCustomerInFightState())
-        {
-            b_inFighting = true;
-            f_currentInFightingTime = f_maxInFightingTime;
-        }
 
     }
 
@@ -135,13 +134,13 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
         b_canMove = true;
         b_isDead = false;
         i_currentHP = i_maxHP;
-
+        couter = 0;
         CameraTrigger camTrigger = Camera.main.GetComponent<CameraTrigger>();
         camTrigger.Vignette_StepDown();
         camTrigger.FocalLength_StepDown();
 
         f_currentStamina = 0;
-        GameManager.Instance.RemoveCoint(10);
+
     }
 
     public bool TakeDamageAndDead()
@@ -158,9 +157,15 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
 
         if (i_currentHP <= 0)
         {
-            StartCoroutine(DeadState());
-            a_cameraAnim.enabled = true;
-            return true;
+            if (couter == 0)
+            {
+                a_cameraAnim.enabled = true;
+                GameManager.Instance.RemoveCoin(10);
+                StartCoroutine(DeadState());
+                couter++;
+                return true;
+            }
+            else return false;
         }
         else
         {

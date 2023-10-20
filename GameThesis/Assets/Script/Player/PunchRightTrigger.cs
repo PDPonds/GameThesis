@@ -11,7 +11,7 @@ public class PunchRightTrigger : MainObserver
             IDamageable damageAble = other.GetComponentInParent<IDamageable>();
             if (damageAble != null)
             {
-                if(PlayerAnimation.Instance.animator.GetCurrentAnimatorStateInfo(0).IsName("HeavyPunch"))
+                if (PlayerAnimation.Instance.animator.GetCurrentAnimatorStateInfo(0).IsName("HeavyPunch"))
                 {
                     damageAble.TakeDamage(2);
                 }
@@ -27,6 +27,11 @@ public class PunchRightTrigger : MainObserver
                     {
                         collider.enabled = false;
                     }
+                }
+
+                if (!GameManager.Instance.isThrongEnable())
+                {
+                    GameManager.Instance.EnableThrong(transform.position);
                 }
 
                 Vector3 hitpoint = other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);

@@ -17,9 +17,6 @@ public class PlayerUI : Auto_Singleton<PlayerUI>
 
     private void Update()
     {
-
-
-
         if (PlayerManager.Instance.g_dragObj == null)
         {
             if (PlayerManager.Instance.g_interactiveObj != null)

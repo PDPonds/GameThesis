@@ -12,24 +12,19 @@ public class AIPunchTrigger : MainObserver
             {
                 if (player.TakeDamageAndDead())
                 {
-                    if (transform.GetComponentInParent<StateManager>())
+                    for (int i = 0; i < RestaurantManager.Instance.allCustomers.Length; i++)
                     {
-                        StateManager state = transform.GetComponentInParent<StateManager>();
-                        if (state is CustomerStateManager)
+                        CustomerStateManager cus = RestaurantManager.Instance.allCustomers[i];
+                        if (cus.s_currentState == cus.s_fightState ||
+                            cus.s_currentState == cus.s_attackState ||
+                            cus.s_currentState == cus.s_aggressive)
                         {
-                            CustomerStateManager customerStateManager = transform.GetComponentInParent<CustomerStateManager>();
-                            customerStateManager.SwitchState(customerStateManager.s_walkAroundState);
-                        }
-                        if (state is EmployeeStateManager)
-                        {
-                            EmployeeStateManager employeeStateManager = transform.GetComponentInParent<EmployeeStateManager>();
-                            employeeStateManager.SwitchState(employeeStateManager.s_activityState);
+                            cus.SwitchState(cus.s_walkAroundState);
                         }
                     }
                 }
                 else
                 {
-                    Debug.Log("TakeDamage");
                     if (transform.GetComponentInParent<StateManager>())
                     {
                         StateManager state = transform.GetComponentInParent<StateManager>();

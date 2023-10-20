@@ -29,6 +29,8 @@ public class CustomerWalkAroundState : BaseState
         customerStateManager.anim.SetBool("fightState", false);
         customerStateManager.anim.SetBool("sit", false);
         customerStateManager.anim.SetBool("drunk", false);
+        customerStateManager.anim.SetBool("cheer", false);
+
         customerStateManager.DisablePunch();
 
         customerStateManager.agent.speed = customerStateManager.f_walkSpeed;
@@ -62,7 +64,7 @@ public class CustomerWalkAroundState : BaseState
 
         if (customerStateManager.b_escape)
         {
-            customerStateManager.agent.SetDestination(GameManager.Instance.s_gameState.t_spawnPoint.position);
+            customerStateManager.agent.SetDestination(GameManager.Instance.s_gameState.t_spawnPoint[customerStateManager.i_spawnPosIndex].position);
             f_currentEscapeTime -= Time.deltaTime;
             if (f_currentEscapeTime <= 0)
             {

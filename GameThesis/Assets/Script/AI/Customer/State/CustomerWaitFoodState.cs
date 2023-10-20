@@ -29,7 +29,7 @@ public class CustomerWaitFoodState : BaseState
                 customerStateManager.anim.SetBool("sit", true);
                 customerStateManager.anim.SetBool("drunk", false);
                 customerStateManager.agent.velocity = Vector3.zero;
-                Vector3 chairPos = new Vector3(chair.t_sitPos.position.x, chair.t_sitPos.position.y - 0.3f, chair.t_sitPos.position.z);
+                Vector3 chairPos = new Vector3(chair.t_sitPos.position.x, chair.t_sitPos.position.y - 0.4f, chair.t_sitPos.position.z);
                 customerStateManager.transform.position = chairPos;
                 customerStateManager.transform.rotation = Quaternion.Euler(0, -chair.transform.localEulerAngles.z, 0);
 
@@ -41,6 +41,7 @@ public class CustomerWaitFoodState : BaseState
         if (customerStateManager.f_currentOrderTime <= 0)
         {
             customerStateManager.SwitchState(customerStateManager.s_goOutState);
+            RestaurantManager.Instance.RemoveRating();
         }
 
     }
