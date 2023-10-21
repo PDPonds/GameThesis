@@ -8,27 +8,26 @@ public class GameState : StateManager
     public override BaseState s_currentState { get; set; }
 
     public OpenStoreState s_openState = new OpenStoreState();
-    public SummaryDayState s_summaryState = new SummaryDayState();
+    public CloseStoreState s_closeState = new CloseStoreState();
 
     public List<GameObject> g_customerPrefab = new List<GameObject>();
     public List<Transform> t_spawnPoint = new List<Transform>();
 
     public int i_maxCustomerCount;
 
+    public GameObject g_frontDoor;
 
     private void Start()
     {
-        SwitchState(s_openState);
+        SwitchState(s_closeState);
     }
 
     private void Update()
     {
         s_currentState.UpdateState(this);
 
-        //if (TimeController.Instance.d_currentTime.Hour >= TimeController.Instance.f_endTime)
-        //{
-        //    SwitchState(s_summaryState);
-        //}
+        SpawnCustomer();
+
     }
 
     public void SpawnCustomer()
@@ -61,5 +60,14 @@ public class GameState : StateManager
         state.SwitchState(state.s_aggressive);
 
     }
+
+    public void OpenCloseRestaurant()
+    {
+        if (s_currentState == s_openState)
+            SwitchState(s_closeState);
+        else if (s_currentState == s_closeState)
+            SwitchState(s_openState);
+    }
+
 
 }

@@ -44,6 +44,7 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
         allCustomers = FindObjectsOfType<CustomerStateManager>();
         allEmployees = FindObjectsOfType<EmployeeStateManager>();
         allSheriffs = FindObjectsOfType<SheriffStateManager>();
+        allTables = FindObjectsOfType<TableObj>();
 
         if (AllEmployeeWorkingCheckProcess())
         {
@@ -72,13 +73,15 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
                     }
                 }
             }
+
+            //CanClose
         }
 
-        if (GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_summaryState)
+        if (GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_closeState)
         {
             if (RestaurantIsEmpty())
             {
-                Debug.Log("Summary");
+                //CanOpen
             }
         }
 

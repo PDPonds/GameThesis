@@ -27,6 +27,9 @@ public class UIManager : Auto_Singleton<UIManager>
     [Header("===== TutorialTask =====")]
     public GameObject g_tutorial;
 
+    [Header("===== Close Warning ====")]
+    public GameObject g_closeWarning;
+
     private void Update()
     {
         text_coin.text = $"$ : {GameManager.Instance.f_coin.ToString("00.00")}";
@@ -58,6 +61,15 @@ public class UIManager : Auto_Singleton<UIManager>
         {
             text_leaveArea.SetActive(false);
 
+        }
+
+        if (GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_closeState)
+        {
+            g_closeWarning.SetActive(true);
+        }
+        else
+        {
+            g_closeWarning.SetActive(false);
         }
 
     }

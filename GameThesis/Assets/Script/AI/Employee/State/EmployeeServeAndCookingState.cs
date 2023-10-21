@@ -168,7 +168,7 @@ public class EmployeeServeAndCookingState : BaseState
             }
         }
         if(GameManager.Instance.s_gameState.s_currentState ==
-            GameManager.Instance.s_gameState.s_summaryState)
+            GameManager.Instance.s_gameState.s_closeState)
         {
             switch (employeeStateManager.employeeType)
             {

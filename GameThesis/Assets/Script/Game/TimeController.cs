@@ -60,7 +60,7 @@ public class TimeController : Auto_Singleton<TimeController>
 
             sunRotationX = Mathf.Lerp(180, 360, (float)percentage);
         }
-        Debug.Log(sunRotationX);
+
         sun.transform.rotation = Quaternion.Euler(new Vector3(sunRotationX, 0, 0));
     }
 
