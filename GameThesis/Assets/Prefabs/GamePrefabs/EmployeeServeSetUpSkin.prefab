@@ -102,7 +102,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.24
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
@@ -112,7 +112,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.8999996
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
@@ -971,7 +971,6 @@ MonoBehaviour:
   as_punchHitBlock: {fileID: 0}
   as_punchHit: {fileID: 0}
   as_punch: {fileID: 0}
-  as_walk: {fileID: 0}
   as_eat: {fileID: 0}
   as_cheer: {fileID: 0}
   ac_punchHitBlock:
@@ -981,8 +980,6 @@ MonoBehaviour:
   ac_punch:
   - {fileID: 8300000, guid: 064bfb791da2cd84da06f681afa030fb, type: 3}
   - {fileID: 8300000, guid: 68783a421d1b0c94cbc46ba90d14c69d, type: 3}
-  ac_walk:
-  - {fileID: 8300000, guid: d2b3f8ac4680ab648ac589df84748dc7, type: 3}
   ac_eat:
   - {fileID: 8300000, guid: 8450de32ea6d45042b2c2e2b317e3719, type: 3}
   ac_cheer:
@@ -1024,7 +1021,7 @@ MonoBehaviour:
   b_isWorking: 0
   t_workingPos: {fileID: 0}
   f_timeToSlow: 10
-  f_slowPercent: 2
+  f_slowPercent: 3
   v_minmaxX: {x: -21, y: -14}
   v_minmaxZ: {x: -7, y: 11}
   v_minAndMaxSlowTime: {x: 30, y: 60}

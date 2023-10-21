@@ -9,7 +9,7 @@ public class CustomerGoOutFormRestaurantState : BaseState
         CustomerStateManager customerStateManager = (CustomerStateManager)ai;
         if (customerStateManager.c_tableObj != null)
         {
-            customerStateManager.c_tableObj.b_isEmtry = true;
+            customerStateManager.c_tableObj.b_isEmpty = true;
             customerStateManager.c_tableObj.b_readyForNextCustomer = false;
             customerStateManager.c_tableObj.s_currentCustomer = null;
         }

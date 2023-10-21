@@ -11,7 +11,7 @@ public class TableObj : MonoBehaviour
 
     public float f_dirtyCount;
 
-    public bool b_isEmtry;
+    public bool b_isEmpty;
 
     /*[HideInInspector]*/ public float f_cdForNextCustomer;
     public Vector2 v_minmaxCDForNextCustomer;
@@ -28,13 +28,13 @@ public class TableObj : MonoBehaviour
 
     private void Awake()
     {
-        b_isEmtry = true;
+        b_isEmpty = true;
     }
 
     private void Update()
     {
 
-        if (b_isEmtry && !b_readyForNextCustomer)
+        if (b_isEmpty && !b_readyForNextCustomer)
         {
             f_currentCDForNextCustomer -= Time.deltaTime;
             if (f_currentCDForNextCustomer <= 0)
@@ -43,7 +43,7 @@ public class TableObj : MonoBehaviour
                 RandomCDForNextCustomer();
             }
         }
-        else if (b_readyForNextCustomer || !b_isEmtry)
+        else if (b_readyForNextCustomer || !b_isEmpty)
         {
             f_currentCDForNextCustomer = f_cdForNextCustomer;
         }

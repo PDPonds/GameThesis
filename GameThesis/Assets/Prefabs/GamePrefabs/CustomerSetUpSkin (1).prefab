@@ -2638,14 +2638,14 @@ MonoBehaviour:
   c_tableObj: {fileID: 0}
   c_chairObj: {fileID: 0}
   v_minAndMaxEatFood: {x: 10, y: 15}
-  f_randomEventPercent: 50
+  f_randomEventPercent: 35
   img_progressBar: {fileID: 4060242818329161563}
   img_icon: {fileID: 4933111164708017941}
   text_coin: {fileID: 8630593464455435667}
   color_escape: {r: 1, g: 0, b: 0, a: 1}
   f_escapeTime: 30
   b_escape: 0
-  f_fightBackPercent: 30
+  f_fightBackPercent: 40
   color_pay: {r: 0.22167945, g: 1, b: 0, a: 1}
   f_payTime: 30
   f_giveCoin: 0
@@ -2687,7 +2687,6 @@ MonoBehaviour:
   as_punchHitBlock: {fileID: 0}
   as_punchHit: {fileID: 0}
   as_punch: {fileID: 0}
-  as_walk: {fileID: 0}
   as_eat: {fileID: 0}
   as_cheer: {fileID: 0}
   ac_punchHitBlock:
@@ -2697,8 +2696,6 @@ MonoBehaviour:
   ac_punch:
   - {fileID: 8300000, guid: 064bfb791da2cd84da06f681afa030fb, type: 3}
   - {fileID: 8300000, guid: 68783a421d1b0c94cbc46ba90d14c69d, type: 3}
-  ac_walk:
-  - {fileID: 8300000, guid: d2b3f8ac4680ab648ac589df84748dc7, type: 3}
   ac_eat:
   - {fileID: 8300000, guid: 8450de32ea6d45042b2c2e2b317e3719, type: 3}
   ac_cheer:

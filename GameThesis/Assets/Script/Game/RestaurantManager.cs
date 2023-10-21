@@ -61,13 +61,13 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
             {
                 for (int i = 0; i < allTables.Length; i++)
                 {
-                    if (allTables[i].b_isEmtry && allTables[i].b_readyForNextCustomer)
+                    if (allTables[i].b_isEmpty && allTables[i].b_readyForNextCustomer)
                     {
                         if (GetCustomerIndexCanOrder(out int customerIndex))
                         {
                             allCustomers[customerIndex].SwitchState(allCustomers[customerIndex].s_goToChairState);
                             allCustomers[customerIndex].c_tableObj = allTables[i];
-                            allTables[i].b_isEmtry = false;
+                            allTables[i].b_isEmpty = false;
                             allTables[i].b_readyForNextCustomer = false;
                         }
                     }
@@ -136,7 +136,7 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
         {
             for (int i = 0; i < allTables.Length; i++)
             {
-                if (allTables[i].b_isEmtry)
+                if (allTables[i].b_isEmpty)
                 {
                     return false;
                 }

@@ -159,10 +159,11 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
         {
             if (couter == 0)
             {
+                couter++;
                 a_cameraAnim.enabled = true;
                 GameManager.Instance.RemoveCoin(10);
                 StartCoroutine(DeadState());
-                couter++;
+                
                 return true;
             }
             else return false;

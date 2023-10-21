@@ -25,7 +25,7 @@ public class GameState : StateManager
     private void Update()
     {
         s_currentState.UpdateState(this);
-
+        
         SpawnCustomer();
 
     }
@@ -68,6 +68,4 @@ public class GameState : StateManager
         else if (s_currentState == s_closeState)
             SwitchState(s_openState);
     }
-
-
 }
