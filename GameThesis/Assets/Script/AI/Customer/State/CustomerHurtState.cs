@@ -19,6 +19,7 @@ public class CustomerHurtState : BaseState
         customerStateManager.c_chairObj = null;
 
         f_fightBackPercent = Random.Range(0f, 100f);
+
     }
 
     public override void UpdateState(StateManager ai)

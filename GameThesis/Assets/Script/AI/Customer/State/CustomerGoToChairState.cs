@@ -12,9 +12,10 @@ public class CustomerGoToChairState : BaseState
         {
             chairIndex = Random.Range(0, customerStateManager.c_tableObj.g_chairs.Count);
         }
-        customerStateManager.img_icon.enabled = false;
-        customerStateManager.img_progressBar.enabled = false;
-        customerStateManager.text_coin.SetActive(false);
+
+        Color noColor = new Color(0, 0, 0, 0);
+        customerStateManager.ApplyOutlineColor(noColor, 0f);
+
         customerStateManager.img_wakeUpImage.enabled = false;
         customerStateManager.img_BGWakeUpImage.enabled = false;
     }

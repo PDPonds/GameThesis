@@ -18,6 +18,9 @@ public class CustomerEscapeState : BaseState
 
         customerStateManager.b_escape = true;
         customerStateManager.SwitchState(customerStateManager.s_walkAroundState);
+
+        customerStateManager.ApplyOutlineColor(customerStateManager.color_punch, customerStateManager.f_outlineScale);
+
     }
 
     public override void UpdateState(StateManager ai)

@@ -71,25 +71,13 @@ public class CustomerWalkAroundState : BaseState
                 customerStateManager.b_escape = false;
             }
 
-            customerStateManager.img_icon.enabled = false;
-            customerStateManager.img_progressBar.enabled = true;
-
-            customerStateManager.text_coin.SetActive(true);
-            TextMeshProUGUI text = customerStateManager.text_coin.GetComponent<TextMeshProUGUI>();
-            text.color = customerStateManager.color_escape;
-
-            float progressTime = f_currentEscapeTime / customerStateManager.f_escapeTime;
-
-            customerStateManager.img_progressBar.fillAmount = progressTime;
-            customerStateManager.img_progressBar.color = new Color(1 - progressTime, progressTime, 0, 1);
+            customerStateManager.ApplyOutlineColor(customerStateManager.color_punch, customerStateManager.f_outlineScale);
         }
         else
         {
-            customerStateManager.img_icon.enabled = false;
-            customerStateManager.img_progressBar.enabled = false;
-            customerStateManager.text_coin.SetActive(false);
             customerStateManager.agent.SetDestination(customerStateManager.v_walkPos);
-
+            Color noColor = new Color(0,0,0,0);
+            customerStateManager.ApplyOutlineColor(noColor, 0f);
         }
     }
 

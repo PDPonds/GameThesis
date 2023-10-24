@@ -10,13 +10,9 @@ public class CustomerFrontOfCounterState : BaseState
     public override void EnterState(StateManager ai)
     {
         CustomerStateManager customerStateManager = (CustomerStateManager)ai;
-        customerStateManager.img_icon.enabled = false;
 
-        customerStateManager.text_coin.SetActive(true);
-        TextMeshProUGUI text = customerStateManager.text_coin.GetComponent<TextMeshProUGUI>();
-        text.color = customerStateManager.color_pay;
+        customerStateManager.ApplyOutlineColor(customerStateManager.color_interact, customerStateManager.f_outlineScale);
 
-        customerStateManager.img_progressBar.enabled = true;
         f_currentPayTime = customerStateManager.f_payTime;
 
         customerStateManager.img_wakeUpImage.enabled = false;
@@ -37,12 +33,6 @@ public class CustomerFrontOfCounterState : BaseState
         {
             customerStateManager.SwitchState(customerStateManager.s_goOutState);
         }
-
-        float progressTime = f_currentPayTime / customerStateManager.f_payTime;
-
-        customerStateManager.img_progressBar.color = new Color(1 - progressTime, progressTime, 0, 1);
-
-        customerStateManager.img_progressBar.fillAmount = progressTime;
 
     }
 

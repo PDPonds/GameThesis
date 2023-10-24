@@ -15,12 +15,11 @@ public class CustomerRunEscapeState : BaseState
         float zPos = Random.Range(-13f, 13f);
         v_walkPos = new Vector3(xPos, 0, zPos);
 
+        Color noColor = new Color(0, 0, 0, 0);
+        customerStateManager.ApplyOutlineColor(noColor, 0f);
 
-        customerStateManager.img_icon.enabled = false;
-        customerStateManager.img_progressBar.enabled = false;
         customerStateManager.b_escape = false;
         customerStateManager.b_isDrunk = false;
-        customerStateManager.text_coin.SetActive(false);
         customerStateManager.img_wakeUpImage.enabled = false;
         customerStateManager.img_BGWakeUpImage.enabled = false;
     }

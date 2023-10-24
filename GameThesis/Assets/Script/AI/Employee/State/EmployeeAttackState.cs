@@ -23,6 +23,8 @@ public class EmployeeAttackState : BaseState
         }
         employeeStateManager.b_isWorking = false;
 
+        employeeStateManager.ApplyOutlineColor(employeeStateManager.color_punch, employeeStateManager.f_outlineScale);
+
     }
 
     public override void UpdateState(StateManager ai)

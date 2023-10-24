@@ -9,9 +9,10 @@ public class CustomerWaitFoodState : BaseState
         CustomerStateManager customerStateManager = (CustomerStateManager)ai;
         customerStateManager.f_currentOrderTime = customerStateManager.f_orderTime;
         customerStateManager.c_tableObj.s_currentCustomer = customerStateManager;
-        customerStateManager.img_icon.enabled = false;
-        customerStateManager.img_progressBar.enabled = false;
-        customerStateManager.text_coin.SetActive(false);
+
+        Color noColor = new Color(0, 0, 0, 0);
+        customerStateManager.ApplyOutlineColor(noColor, 0f);
+
         customerStateManager.img_wakeUpImage.enabled = false;
         customerStateManager.img_BGWakeUpImage.enabled = false;
     }

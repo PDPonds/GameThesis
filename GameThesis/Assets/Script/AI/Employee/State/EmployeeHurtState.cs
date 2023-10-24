@@ -10,6 +10,8 @@ public class EmployeeHurtState : BaseState
     {
         EmployeeStateManager employeeStateManager = (EmployeeStateManager)ai;
         employeeStateManager.b_isWorking = false;
+        employeeStateManager.ApplyOutlineColor(employeeStateManager.color_punch, employeeStateManager.f_outlineScale);
+
     }
 
     public override void UpdateState(StateManager ai)

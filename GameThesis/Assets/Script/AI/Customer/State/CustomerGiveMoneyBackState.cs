@@ -8,6 +8,8 @@ public class CustomerGiveMoneyBackState : BaseState
     {
         CustomerStateManager customerStateManager = (CustomerStateManager)ai;
 
+        Color noColor = new Color(0, 0, 0, 0);
+        customerStateManager.ApplyOutlineColor(noColor, 0f);
     }
 
     public override void UpdateState(StateManager ai)

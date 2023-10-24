@@ -102,7 +102,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7
+      value: 5.24
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
@@ -112,7 +112,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3
+      value: 2.3999996
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
@@ -261,9 +261,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -5631189763476694412, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -5631189763476694412, guid: b204018a8378be5498eb3adc2908f6ab,
+        type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: c4dc2a7bec14398498082b7c94453e36, type: 2}
+    - target: {fileID: -5631189763476694412, guid: b204018a8378be5498eb3adc2908f6ab,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3f38b416fdf20c941900ff5aaa1b3ebc, type: 2}
     - target: {fileID: -5561550452697079657, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
       propertyPath: m_Layer
@@ -1020,14 +1030,17 @@ MonoBehaviour:
   g_FoodInHand: {fileID: 572668808332531273}
   b_isWorking: 0
   t_workingPos: {fileID: 0}
-  f_timeToSlow: 10
-  f_slowPercent: 3
+  f_timeToSlackOff: 0
+  f_slackOffPercent: 0
   v_minmaxX: {x: -21, y: -14}
   v_minmaxZ: {x: -7, y: 11}
-  v_minAndMaxSlowTime: {x: 30, y: 60}
+  v_minAndMaxSlackOffTime: {x: 0, y: 0}
   v_walkPos: {x: 0, y: 0, z: 0}
-  f_slowTime: 0
+  f_slackOffTime: 0
   currentAreaStay: 0
+  t_mesh: {fileID: 225060414221003970}
+  f_outlineScale: 0.01
+  color_punch: {r: 1, g: 0.5019608, b: 0, a: 1}
 --- !u!114 &294399606315348641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1094,6 +1107,12 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!4 &225060414221003970 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8157054746777429919, guid: b204018a8378be5498eb3adc2908f6ab,
+    type: 3}
+  m_PrefabInstance: {fileID: 996353994728141987}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &745763349155976008 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,

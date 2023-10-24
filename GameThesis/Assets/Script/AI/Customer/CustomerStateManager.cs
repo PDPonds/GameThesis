@@ -74,16 +74,11 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     public float f_randomEventPercent;
 
     [Header("===== Escape =====")]
-    public Image img_progressBar;
-    public Image img_icon;
-    public GameObject text_coin;
-    public Color color_escape;
     public float f_escapeTime;
     public bool b_escape;
     public float f_fightBackPercent;
 
     [Header("===== Pay =====")]
-    public Color color_pay;
     public float f_payTime;
     [HideInInspector] public float f_giveCoin;
     public Vector2 v_minmaxGiveCoin;
@@ -117,11 +112,44 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     [Header("===== Area =====")]
     public AreaType currentAreaStay;
 
+    [Header("===== Outline =====")]
+    public Transform t_mesh;
+    public Color color_punch;
+    public Color color_interact;
+    public float f_outlineScale;
+
+    MaterialPropertyBlock mpb;
+    public MaterialPropertyBlock Mpb
+    {
+        get
+        {
+            if (mpb == null)
+            {
+                mpb = new MaterialPropertyBlock();
+            }
+            return mpb;
+        }
+    }
+
+    public void ApplyOutlineColor(Color color, float scale)
+    {
+        SkinnedMeshRenderer rnd = t_mesh.GetComponent<SkinnedMeshRenderer>();
+        Mpb.SetColor("_Color", color);
+        Mpb.SetFloat("_Scale", scale);
+        rnd.SetPropertyBlock(mpb);
+
+        //rnd.materials[1].SetColor("_Color", color);
+        //rnd.materials[1].SetFloat("_Scale", scale);
+    }
+
     private void Awake()
     {
         anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponentsInChildren<Rigidbody>();
+
+        Color noColor = new Color(0, 0, 0, 0);
+        ApplyOutlineColor(noColor, 0f);
     }
 
     private void Start()
@@ -140,8 +168,6 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     private void Update()
     {
         s_currentState.UpdateState(this);
-        TextMeshProUGUI text = text_coin.GetComponent<TextMeshProUGUI>();
-        text.text = $"$ {f_giveCoin.ToString("00.00")}";
 
         if (s_currentState == s_fightState || s_currentState == s_attackState)
         {
@@ -290,4 +316,5 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
         Gizmos.DrawWireSphere(transform.position, f_runRange);
 
     }
+
 }
