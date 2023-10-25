@@ -74,7 +74,8 @@ public class EmployeeStateManager : StateManager, IDamageable
     [Header("===== Outline =====")]
     public Transform t_mesh;
     public float f_outlineScale;
-    public Color color_punch;
+    public Color color_warning;
+    public Color color_fighting;
 
     MaterialPropertyBlock mpb;
     public MaterialPropertyBlock Mpb
@@ -88,6 +89,8 @@ public class EmployeeStateManager : StateManager, IDamageable
             return mpb;
         }
     }
+
+    
 
     public void ApplyOutlineColor(Color color, float scale)
     {

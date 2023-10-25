@@ -38,7 +38,7 @@ public class CustomerWaitFoodState : BaseState
 
         }
 
-        customerStateManager.f_currentOrderTime -= Time.deltaTime;
+
         if (customerStateManager.f_currentOrderTime <= 0)
         {
             customerStateManager.SwitchState(customerStateManager.s_goOutState);

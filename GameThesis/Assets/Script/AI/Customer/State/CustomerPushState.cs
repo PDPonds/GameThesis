@@ -16,7 +16,7 @@ public class CustomerPushState : BaseState
         customerStateManager.c_tableObj = null;
         customerStateManager.c_chairObj = null;
         customerStateManager.anim.Play("Push");
-        customerStateManager.ApplyOutlineColor(customerStateManager.color_punch, customerStateManager.f_outlineScale);
+        customerStateManager.ApplyOutlineColor(customerStateManager.color_warning, customerStateManager.f_outlineScale);
 
     }
 

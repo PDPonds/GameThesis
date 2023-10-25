@@ -8,7 +8,7 @@ public class CustomerFightState : BaseState
     {
         CustomerStateManager customerStateManager = (CustomerStateManager)ai;
 
-        customerStateManager.ApplyOutlineColor(customerStateManager.color_punch, customerStateManager.f_outlineScale);
+        customerStateManager.ApplyOutlineColor(customerStateManager.color_fighting, customerStateManager.f_outlineScale);
 
         customerStateManager.img_wakeUpImage.enabled = false;
         customerStateManager.img_BGWakeUpImage.enabled = false;

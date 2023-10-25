@@ -2052,10 +2052,9 @@ MonoBehaviour:
   c_chairObj: {fileID: 0}
   v_minAndMaxEatFood: {x: 10, y: 15}
   f_randomEventPercent: 50
-  f_escapeTime: 30
   b_escape: 0
   f_fightBackPercent: 30
-  f_payTime: 30
+  f_payTime: 25
   f_giveCoin: 0
   v_minmaxGiveCoin: {x: 10, y: 20}
   f_runTime: 10
@@ -2078,9 +2077,10 @@ MonoBehaviour:
   i_spawnPosIndex: 0
   currentAreaStay: 0
   t_mesh: {fileID: 6672589341822995474}
-  color_punch: {r: 1, g: 0.5019608, b: 0, a: 1}
+  color_warning: {r: 0.93333334, g: 0.7058824, b: 0.37254903, a: 1}
   color_interact: {r: 1, g: 1, b: 1, a: 1}
-  f_outlineScale: 0.01
+  color_fighting: {r: 0.9622642, g: 0.45843717, b: 0.45843717, a: 0}
+  f_outlineScale: 0.005
 --- !u!114 &4548816158027124120
 MonoBehaviour:
   m_ObjectHideFlags: 0

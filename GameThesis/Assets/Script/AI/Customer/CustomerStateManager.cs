@@ -74,7 +74,6 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     public float f_randomEventPercent;
 
     [Header("===== Escape =====")]
-    public float f_escapeTime;
     public bool b_escape;
     public float f_fightBackPercent;
 
@@ -114,8 +113,9 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
 
     [Header("===== Outline =====")]
     public Transform t_mesh;
-    public Color color_punch;
+    public Color color_warning;
     public Color color_interact;
+    public Color color_fighting;
     public float f_outlineScale;
 
     MaterialPropertyBlock mpb;
@@ -137,9 +137,6 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
         Mpb.SetColor("_Color", color);
         Mpb.SetFloat("_Scale", scale);
         rnd.SetPropertyBlock(mpb);
-
-        //rnd.materials[1].SetColor("_Color", color);
-        //rnd.materials[1].SetFloat("_Scale", scale);
     }
 
     private void Awake()

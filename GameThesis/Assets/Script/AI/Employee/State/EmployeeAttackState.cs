@@ -23,7 +23,7 @@ public class EmployeeAttackState : BaseState
         }
         employeeStateManager.b_isWorking = false;
 
-        employeeStateManager.ApplyOutlineColor(employeeStateManager.color_punch, employeeStateManager.f_outlineScale);
+        employeeStateManager.ApplyOutlineColor(employeeStateManager.color_fighting, employeeStateManager.f_outlineScale);
 
     }
 

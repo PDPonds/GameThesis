@@ -5,17 +5,13 @@ using UnityEngine.AI;
 public class CustomerWalkAroundState : BaseState
 {
     float f_currentTimeToWalk;
-    float f_currentEscapeTime;
 
     public override void EnterState(StateManager ai)
     {
         CustomerStateManager customerStateManager = (CustomerStateManager)ai;
         customerStateManager.i_currentHP = customerStateManager.i_maxHP;
         f_currentTimeToWalk = 0;
-        if (customerStateManager.b_escape)
-        {
-            f_currentEscapeTime = customerStateManager.f_escapeTime;
-        }
+
         customerStateManager.img_BGWakeUpImage.enabled = false;
         customerStateManager.img_wakeUpImage.enabled = false;
     }
@@ -65,13 +61,7 @@ public class CustomerWalkAroundState : BaseState
         if (customerStateManager.b_escape)
         {
             customerStateManager.agent.SetDestination(GameManager.Instance.s_gameState.t_spawnPoint[customerStateManager.i_spawnPosIndex].position);
-            f_currentEscapeTime -= Time.deltaTime;
-            if (f_currentEscapeTime <= 0)
-            {
-                customerStateManager.b_escape = false;
-            }
-
-            customerStateManager.ApplyOutlineColor(customerStateManager.color_punch, customerStateManager.f_outlineScale);
+            customerStateManager.ApplyOutlineColor(customerStateManager.color_warning, customerStateManager.f_outlineScale);
         }
         else
         {

@@ -1039,8 +1039,9 @@ MonoBehaviour:
   f_slackOffTime: 0
   currentAreaStay: 0
   t_mesh: {fileID: 225060414221003970}
-  f_outlineScale: 0.01
-  color_punch: {r: 1, g: 0.5019608, b: 0, a: 1}
+  f_outlineScale: 0.005
+  color_warning: {r: 0.93333334, g: 0.7058824, b: 0.37254903, a: 1}
+  color_fighting: {r: 0.9607843, g: 0.45882353, b: 0.45882353, a: 0}
 --- !u!114 &294399606315348641
 MonoBehaviour:
   m_ObjectHideFlags: 0

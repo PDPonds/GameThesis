@@ -23,7 +23,7 @@ public class EmployeeSlackOffState : BaseState
             employeeStateManager.b_hasFood = false;
         }
 
-        employeeStateManager.ApplyOutlineColor(employeeStateManager.color_punch, employeeStateManager.f_outlineScale);
+        employeeStateManager.ApplyOutlineColor(employeeStateManager.color_warning, employeeStateManager.f_outlineScale);
 
     }
 
