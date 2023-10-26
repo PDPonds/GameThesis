@@ -16,7 +16,7 @@ public class AIMainObserverTrigger : MainObserver
             if (cus.s_currentState == cus.s_eatFoodState) ActiveAllObserver(ActionObserver.AIEat);
             else ActiveAllObserver(ActionObserver.AIExitEat);
 
-            if (cus.s_currentState == cus.s_throngState) ActiveAllObserver(ActionObserver.AICheer);
+            if (cus.s_currentState == cus.s_crowdState) ActiveAllObserver(ActionObserver.AICheer);
             else ActiveAllObserver(ActionObserver.AIExitCheer);
 
         }

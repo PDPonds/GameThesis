@@ -29,9 +29,9 @@ public class PunchRightTrigger : MainObserver
                     }
                 }
 
-                if (!GameManager.Instance.isThrongEnable())
+                if (!GameManager.Instance.isCrowdEnable())
                 {
-                    GameManager.Instance.EnableThrong(transform.position);
+                    GameManager.Instance.EnableCrowd(transform.position);
                 }
 
                 Vector3 hitpoint = other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
