@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UIElements;
 
 public enum EmployeeType { Cooking, Serve }
 
@@ -17,7 +18,7 @@ public class EmployeeStateManager : StateManager, IDamageable
 
     public EmployeeServeAndCookingState s_activityState = new EmployeeServeAndCookingState();
 
-    public EmployeeSlowDownState s_slowDownState = new EmployeeSlowDownState();
+    public EmployeeSlackOffState s_slowDownState = new EmployeeSlackOffState();
 
     public EmployeePassedOutState s_passedOutState = new EmployeePassedOutState();
 
@@ -58,17 +59,45 @@ public class EmployeeStateManager : StateManager, IDamageable
     public bool b_isWorking;
     public Transform t_workingPos;
 
-    [Header("===== Slow Down =====")]
-    public float f_timeToSlow;
-    public float f_slowPercent;
+    [Header("===== Slack Off =====")]
+    public float f_timeToSlackOff;
+    public float f_slackOffPercent;
     public Vector2 v_minmaxX;
     public Vector2 v_minmaxZ;
-    public Vector2 v_minAndMaxSlowTime;
+    public Vector2 v_minAndMaxSlackOffTime;
     [HideInInspector] public Vector3 v_walkPos;
-    [HideInInspector] public float f_slowTime;
+    [HideInInspector] public float f_slackOffTime;
 
     [Header("===== Area =====")]
     public AreaType currentAreaStay;
+
+    [Header("===== Outline =====")]
+    public Transform t_mesh;
+    public float f_outlineScale;
+    public Color color_warning;
+    public Color color_fighting;
+
+    MaterialPropertyBlock mpb;
+    public MaterialPropertyBlock Mpb
+    {
+        get
+        {
+            if (mpb == null)
+            {
+                mpb = new MaterialPropertyBlock();
+            }
+            return mpb;
+        }
+    }
+
+    public void ApplyOutlineColor(Color color, float scale)
+    {
+        SkinnedMeshRenderer rnd = t_mesh.GetComponent<SkinnedMeshRenderer>();
+        Mpb.SetColor("_Color", color);
+        Mpb.SetFloat("_Scale", scale);
+        rnd.SetPropertyBlock(mpb);
+
+    }
 
     private void Awake()
     {
@@ -78,6 +107,8 @@ public class EmployeeStateManager : StateManager, IDamageable
 
         if (employeeType == EmployeeType.Serve) b_canServe = true;
 
+        Color noColor = new Color(0, 0, 0, 0);
+        ApplyOutlineColor(noColor, 0f);
     }
 
     void Start()

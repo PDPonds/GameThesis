@@ -12,9 +12,10 @@ public class CustomerEatFoodState : BaseState
         CustomerStateManager customerStateManager = (CustomerStateManager)ai;
         f_eatTime = Random.Range(customerStateManager.v_minAndMaxEatFood.x, customerStateManager.v_minAndMaxEatFood.y);
         f_currentEatTime = f_eatTime;
-        customerStateManager.img_icon.enabled = false;
-        customerStateManager.img_progressBar.enabled = false;
-        customerStateManager.text_coin.SetActive(false);
+
+        Color noColor = new Color(0, 0, 0, 0);
+        customerStateManager.ApplyOutlineColor(noColor,0f);
+
         customerStateManager.img_wakeUpImage.enabled = false;
         customerStateManager.img_BGWakeUpImage.enabled = false;
 

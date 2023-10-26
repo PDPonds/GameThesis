@@ -5,17 +5,13 @@ using UnityEngine.AI;
 public class CustomerWalkAroundState : BaseState
 {
     float f_currentTimeToWalk;
-    float f_currentEscapeTime;
 
     public override void EnterState(StateManager ai)
     {
         CustomerStateManager customerStateManager = (CustomerStateManager)ai;
         customerStateManager.i_currentHP = customerStateManager.i_maxHP;
         f_currentTimeToWalk = 0;
-        if (customerStateManager.b_escape)
-        {
-            f_currentEscapeTime = customerStateManager.f_escapeTime;
-        }
+
         customerStateManager.img_BGWakeUpImage.enabled = false;
         customerStateManager.img_wakeUpImage.enabled = false;
     }
@@ -32,8 +28,6 @@ public class CustomerWalkAroundState : BaseState
         customerStateManager.anim.SetBool("cheer", false);
 
         customerStateManager.DisablePunch();
-
-        customerStateManager.agent.speed = customerStateManager.f_walkSpeed;
 
         if (!customerStateManager.b_canAtk)
         {
@@ -53,43 +47,43 @@ public class CustomerWalkAroundState : BaseState
             f_currentTimeToWalk = customerStateManager.f_findNextPositionTime;
         }
 
-        if (customerStateManager.agent.velocity != Vector3.zero)
-        {
-            customerStateManager.anim.SetBool("walk", true);
-        }
-        else
-        {
-            customerStateManager.anim.SetBool("walk", false);
-        }
-
         if (customerStateManager.b_escape)
         {
+            customerStateManager.agent.speed = customerStateManager.f_runSpeed;
             customerStateManager.agent.SetDestination(GameManager.Instance.s_gameState.t_spawnPoint[customerStateManager.i_spawnPosIndex].position);
-            f_currentEscapeTime -= Time.deltaTime;
-            if (f_currentEscapeTime <= 0)
+            customerStateManager.ApplyOutlineColor(customerStateManager.color_warning, customerStateManager.f_outlineScale);
+            if (customerStateManager.agent.velocity != Vector3.zero)
+            {
+                customerStateManager.anim.SetBool("run", true);
+            }
+            else
+            {
+                customerStateManager.anim.SetBool("run", false);
+            }
+
+            if (Vector3.Distance(customerStateManager.transform.position, GameManager.Instance.s_gameState.t_spawnPoint[customerStateManager.i_spawnPosIndex].position)
+                <= 1f)
             {
                 customerStateManager.b_escape = false;
             }
 
-            customerStateManager.img_icon.enabled = false;
-            customerStateManager.img_progressBar.enabled = true;
-
-            customerStateManager.text_coin.SetActive(true);
-            TextMeshProUGUI text = customerStateManager.text_coin.GetComponent<TextMeshProUGUI>();
-            text.color = customerStateManager.color_escape;
-
-            float progressTime = f_currentEscapeTime / customerStateManager.f_escapeTime;
-
-            customerStateManager.img_progressBar.fillAmount = progressTime;
-            customerStateManager.img_progressBar.color = new Color(1 - progressTime, progressTime, 0, 1);
         }
         else
         {
-            customerStateManager.img_icon.enabled = false;
-            customerStateManager.img_progressBar.enabled = false;
-            customerStateManager.text_coin.SetActive(false);
+            customerStateManager.agent.speed = customerStateManager.f_walkSpeed;
             customerStateManager.agent.SetDestination(customerStateManager.v_walkPos);
+            Color noColor = new Color(0, 0, 0, 0);
+            customerStateManager.ApplyOutlineColor(noColor, 0f);
 
+            if (customerStateManager.agent.velocity != Vector3.zero)
+            {
+                customerStateManager.anim.SetBool("walk", true);
+                customerStateManager.anim.SetBool("run", false);
+            }
+            else
+            {
+                customerStateManager.anim.SetBool("walk", false);
+            }
         }
     }
 

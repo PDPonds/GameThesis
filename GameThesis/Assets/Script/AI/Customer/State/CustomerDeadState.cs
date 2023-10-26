@@ -9,9 +9,10 @@ public class CustomerDeadState : BaseState
         f_currentDestroyTime = customerStateManager.f_destroyTime;
         customerStateManager.b_escape = false;
         customerStateManager.b_isDrunk = false;
-        customerStateManager.img_icon.enabled = false;
-        customerStateManager.text_coin.SetActive(false);
-        customerStateManager.img_progressBar.enabled = false;
+
+        Color noColor = new Color(0, 0, 0, 0);
+        customerStateManager.ApplyOutlineColor(noColor, 0f);
+
         customerStateManager.img_wakeUpImage.enabled = false;
         customerStateManager.img_BGWakeUpImage.enabled = false;
 

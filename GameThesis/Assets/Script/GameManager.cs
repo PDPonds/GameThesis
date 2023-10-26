@@ -23,10 +23,10 @@ public class GameManager : Auto_Singleton<GameManager>
 
     [HideInInspector] public GameState s_gameState;
 
-    [Header("===== Throng Customer =====")]
-    public Transform t_thongCenterPoint;
-    public float f_throngDistance;
-    public float f_throngArea;
+    [Header("===== Crowd Customer =====")]
+    public Transform t_crowdCenterPoint;
+    public float f_crowdDistance;
+    public float f_crowdArea;
 
     private void Awake()
     {
@@ -39,12 +39,10 @@ public class GameManager : Auto_Singleton<GameManager>
         if (amount < 0) amount = amount * -1;
 
         f_coin += amount;
-        Debug.Log(amount+" $");
 
         moneyTracker += amount;
         if(moneyTracker > 200)
         {
-            Debug.Log("Collected a total of 200$");
             money_objective.SetActive(false);
             money_objective_done.SetActive(true);
         }
@@ -55,22 +53,22 @@ public class GameManager : Auto_Singleton<GameManager>
         f_coin -= amount;
     }
 
-    public void EnableThrong(Vector3 worldPos)
+    public void EnableCrowd(Vector3 worldPos)
     {
-        t_thongCenterPoint.transform.position = worldPos;
-        ActiveThrong at = t_thongCenterPoint.GetComponent<ActiveThrong>();
+        t_crowdCenterPoint.transform.position = worldPos;
+        ActiveCrowd at = t_crowdCenterPoint.GetComponent<ActiveCrowd>();
         at.enabled = true;
     }
 
-    public void DisableThrong()
+    public void DisableCrowd()
     {
-        ActiveThrong at = t_thongCenterPoint.GetComponent<ActiveThrong>();
+        ActiveCrowd at = t_crowdCenterPoint.GetComponent<ActiveCrowd>();
         at.enabled = false;
     }
 
-    public bool isThrongEnable()
+    public bool isCrowdEnable()
     {
-        ActiveThrong at = t_thongCenterPoint.GetComponent<ActiveThrong>();
+        ActiveCrowd at = t_crowdCenterPoint.GetComponent<ActiveCrowd>();
         return at.enabled;
     }
 

@@ -19,8 +19,9 @@ public class CustomerAttackState : BaseState
             customerStateManager.anim.Play("RightPunch");
 
         }
-        customerStateManager.img_icon.enabled = false;
-        customerStateManager.text_coin.SetActive(false);
+
+        customerStateManager.ApplyOutlineColor(customerStateManager.color_fighting, customerStateManager.f_outlineScale);
+
         customerStateManager.img_wakeUpImage.enabled = false;
         customerStateManager.img_BGWakeUpImage.enabled = false;
 

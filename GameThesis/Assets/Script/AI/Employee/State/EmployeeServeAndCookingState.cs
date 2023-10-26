@@ -12,8 +12,12 @@ public class EmployeeServeAndCookingState : BaseState
         EmployeeStateManager employeeStateManager = (EmployeeStateManager)ai;
         employeeStateManager.i_currentHP = employeeStateManager.i_maxHP;
         employeeStateManager.b_isWorking = false;
-        f_currentToSlowTime = employeeStateManager.f_timeToSlow;
+        f_currentToSlowTime = employeeStateManager.f_timeToSlackOff;
         employeeStateManager.anim.SetBool("fightState", false);
+
+        Color noColor = new Color(0, 0, 0, 0);
+        employeeStateManager.ApplyOutlineColor(noColor, 0f);
+
     }
 
     public override void UpdateState(StateManager ai)
@@ -156,14 +160,14 @@ public class EmployeeServeAndCookingState : BaseState
             if (f_currentToSlowTime <= 0)
             {
                 float p = Random.Range(0f, 100f);
-                if (p <= employeeStateManager.f_slowPercent)
+                if (p <= employeeStateManager.f_slackOffPercent)
                 {
                     employeeStateManager.SwitchState(employeeStateManager.s_slowDownState);
-                    f_currentToSlowTime = employeeStateManager.f_timeToSlow;
+                    f_currentToSlowTime = employeeStateManager.f_timeToSlackOff;
                 }
                 else
                 {
-                    f_currentToSlowTime = employeeStateManager.f_timeToSlow;
+                    f_currentToSlowTime = employeeStateManager.f_timeToSlackOff;
                 }
             }
         }

@@ -64,8 +64,6 @@ public class UpgradTable : MonoBehaviour, IInteracable
             }
         }
 
-        tableObj.img_progressBar.enabled = false;
-        tableObj.img_icon.enabled = false;
     }
 
     public void BuyTable()

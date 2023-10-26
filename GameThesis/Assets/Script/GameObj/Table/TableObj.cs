@@ -13,18 +13,14 @@ public class TableObj : MonoBehaviour
 
     public bool b_isEmpty;
 
-    /*[HideInInspector]*/ public float f_cdForNextCustomer;
+    [HideInInspector] public float f_cdForNextCustomer;
     public Vector2 v_minmaxCDForNextCustomer;
 
-    /*[HideInInspector]*/ public bool b_readyForNextCustomer;
+    [HideInInspector] public bool b_readyForNextCustomer;
     [SerializeField] float f_currentCDForNextCustomer;
 
     public CustomerStateManager s_currentCustomer;
     public EmployeeStateManager s_currentEmployee;
-
-    public Image img_icon;
-    public Image img_progressBar;
-    public Sprite sprit_waitFood;
 
     private void Awake()
     {
@@ -58,15 +54,6 @@ public class TableObj : MonoBehaviour
 
             if (s_currentCustomer.s_currentState == s_currentCustomer.s_waitFoodState)
             {
-                img_progressBar.enabled = true;
-                img_icon.enabled = true;
-                img_icon.sprite = sprit_waitFood;
-
-                float progressTime = s_currentCustomer.f_currentOrderTime / s_currentCustomer.f_orderTime;
-
-                img_progressBar.color = new Color(1 - progressTime, progressTime, 0, 1);
-
-                img_progressBar.fillAmount = progressTime;
 
                 if (RestaurantManager.Instance.GetCanEmployeeServe(out int index) &&
                     s_currentEmployee == null)
@@ -76,12 +63,7 @@ public class TableObj : MonoBehaviour
                     s_currentEmployee = RestaurantManager.Instance.allEmployees[index];
                 }
             }
-            else
-            {
-                img_progressBar.enabled = false;
-                img_icon.enabled = false;
 
-            }
 
             if (s_currentCustomer.s_currentState == s_currentCustomer.s_eatFoodState)
             {
@@ -97,9 +79,6 @@ public class TableObj : MonoBehaviour
         else
         {
             foreach (GameObject food in g_foods) food.SetActive(false);
-
-            img_progressBar.enabled = false;
-            img_icon.enabled = false;
 
         }
 

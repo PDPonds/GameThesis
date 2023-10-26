@@ -8,18 +8,15 @@ public class CustomerDrunkState : BaseState
     public override void EnterState(StateManager ai)
     {
         CustomerStateManager customerStateManager = (CustomerStateManager)ai;
-        customerStateManager.img_icon.enabled = false;
 
-        customerStateManager.text_coin.SetActive(true);
-        TextMeshProUGUI text = customerStateManager.text_coin.GetComponent<TextMeshProUGUI>();
-        text.color = customerStateManager.color_escape;
+        customerStateManager.ApplyOutlineColor(customerStateManager.color_interact, customerStateManager.f_outlineScale);
 
-        customerStateManager.img_progressBar.enabled = false;
         customerStateManager.b_isDrunk = true;
         customerStateManager.img_wakeUpImage.enabled = true;
 
         customerStateManager.img_BGWakeUpImage.enabled = true;
 
+        customerStateManager.f_currentWekeUpPoint = 0;  
     }
 
     public override void UpdateState(StateManager ai)

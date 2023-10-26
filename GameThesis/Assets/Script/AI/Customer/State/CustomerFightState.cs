@@ -8,9 +8,8 @@ public class CustomerFightState : BaseState
     {
         CustomerStateManager customerStateManager = (CustomerStateManager)ai;
 
-        customerStateManager.img_icon.enabled = false;
-        customerStateManager.img_progressBar.enabled = false;
-        customerStateManager.text_coin.SetActive(false);
+        customerStateManager.ApplyOutlineColor(customerStateManager.color_fighting, customerStateManager.f_outlineScale);
+
         customerStateManager.img_wakeUpImage.enabled = false;
         customerStateManager.img_BGWakeUpImage.enabled = false;
 

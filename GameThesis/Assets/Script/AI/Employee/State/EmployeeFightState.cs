@@ -7,6 +7,7 @@ public class EmployeeFightState : BaseState
     public override void EnterState(StateManager ai)
     {
         EmployeeStateManager employeeStateManager = (EmployeeStateManager)ai;
+        employeeStateManager.ApplyOutlineColor(employeeStateManager.color_fighting, employeeStateManager.f_outlineScale);
 
     }
 

@@ -261,9 +261,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -5631189763476694412, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -5631189763476694412, guid: b204018a8378be5498eb3adc2908f6ab,
+        type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: c4dc2a7bec14398498082b7c94453e36, type: 2}
+    - target: {fileID: -5631189763476694412, guid: b204018a8378be5498eb3adc2908f6ab,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3f38b416fdf20c941900ff5aaa1b3ebc, type: 2}
     - target: {fileID: -5561550452697079657, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
       propertyPath: m_Layer
@@ -1756,6 +1766,12 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!4 &7337654431474306845 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8157054746777429919, guid: b204018a8378be5498eb3adc2908f6ab,
+    type: 3}
+  m_PrefabInstance: {fileID: 7717133709726586748}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7483203472771197485 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: b204018a8378be5498eb3adc2908f6ab,
@@ -1884,14 +1900,18 @@ MonoBehaviour:
   g_FoodInHand: {fileID: 0}
   b_isWorking: 0
   t_workingPos: {fileID: 0}
-  f_timeToSlow: 10
-  f_slowPercent: 3
+  f_timeToSlackOff: 0
+  f_slackOffPercent: 0
   v_minmaxX: {x: -21, y: -14}
   v_minmaxZ: {x: -7, y: 11}
-  v_minAndMaxSlowTime: {x: 30, y: 60}
+  v_minAndMaxSlackOffTime: {x: 0, y: 0}
   v_walkPos: {x: 0, y: 0, z: 0}
-  f_slowTime: 0
+  f_slackOffTime: 0
   currentAreaStay: 0
+  t_mesh: {fileID: 7337654431474306845}
+  f_outlineScale: 0.005
+  color_warning: {r: 0.93333334, g: 0.7058824, b: 0.37254903, a: 1}
+  color_fighting: {r: 0.9607843, g: 0.45882353, b: 0.45882353, a: 0}
 --- !u!114 &3101097738747627747
 MonoBehaviour:
   m_ObjectHideFlags: 0
