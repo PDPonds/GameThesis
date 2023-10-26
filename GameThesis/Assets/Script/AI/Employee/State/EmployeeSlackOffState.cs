@@ -34,7 +34,7 @@ public class EmployeeSlackOffState : BaseState
 
         employeeStateManager.agent.SetDestination(employeeStateManager.v_walkPos);
         if (Vector3.Distance(employeeStateManager.transform.position, employeeStateManager.v_walkPos)
-            <= 0.1f)
+            <= 1f)
         {
             employeeStateManager.anim.SetBool("walk", false);
             f_currentSlowTime -= Time.deltaTime;

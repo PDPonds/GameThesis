@@ -90,8 +90,6 @@ public class EmployeeStateManager : StateManager, IDamageable
         }
     }
 
-    
-
     public void ApplyOutlineColor(Color color, float scale)
     {
         SkinnedMeshRenderer rnd = t_mesh.GetComponent<SkinnedMeshRenderer>();

@@ -14,7 +14,7 @@ public class OpenCloseRestaurantInterac : MonoBehaviour, IInteracable
         openCounter++;
         if(openCounter ==1)
         {
-            Debug.Log("Obj Complete sdsdsdasdasd");
+
             //tutorialManager.SetObjectiveToComplete();
         }
     }

@@ -16,6 +16,7 @@ public class CustomerDrunkState : BaseState
 
         customerStateManager.img_BGWakeUpImage.enabled = true;
 
+        customerStateManager.f_currentWekeUpPoint = 0;  
     }
 
     public override void UpdateState(StateManager ai)

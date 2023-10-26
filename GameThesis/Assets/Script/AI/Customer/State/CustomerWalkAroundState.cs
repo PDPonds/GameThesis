@@ -29,8 +29,6 @@ public class CustomerWalkAroundState : BaseState
 
         customerStateManager.DisablePunch();
 
-        customerStateManager.agent.speed = customerStateManager.f_walkSpeed;
-
         if (!customerStateManager.b_canAtk)
         {
             customerStateManager.f_currentAtkDelay -= Time.deltaTime;
@@ -49,25 +47,43 @@ public class CustomerWalkAroundState : BaseState
             f_currentTimeToWalk = customerStateManager.f_findNextPositionTime;
         }
 
-        if (customerStateManager.agent.velocity != Vector3.zero)
-        {
-            customerStateManager.anim.SetBool("walk", true);
-        }
-        else
-        {
-            customerStateManager.anim.SetBool("walk", false);
-        }
-
         if (customerStateManager.b_escape)
         {
+            customerStateManager.agent.speed = customerStateManager.f_runSpeed;
             customerStateManager.agent.SetDestination(GameManager.Instance.s_gameState.t_spawnPoint[customerStateManager.i_spawnPosIndex].position);
             customerStateManager.ApplyOutlineColor(customerStateManager.color_warning, customerStateManager.f_outlineScale);
+            if (customerStateManager.agent.velocity != Vector3.zero)
+            {
+                customerStateManager.anim.SetBool("run", true);
+            }
+            else
+            {
+                customerStateManager.anim.SetBool("run", false);
+            }
+
+            if (Vector3.Distance(customerStateManager.transform.position, GameManager.Instance.s_gameState.t_spawnPoint[customerStateManager.i_spawnPosIndex].position)
+                <= 1f)
+            {
+                customerStateManager.b_escape = false;
+            }
+
         }
         else
         {
+            customerStateManager.agent.speed = customerStateManager.f_walkSpeed;
             customerStateManager.agent.SetDestination(customerStateManager.v_walkPos);
-            Color noColor = new Color(0,0,0,0);
+            Color noColor = new Color(0, 0, 0, 0);
             customerStateManager.ApplyOutlineColor(noColor, 0f);
+
+            if (customerStateManager.agent.velocity != Vector3.zero)
+            {
+                customerStateManager.anim.SetBool("walk", true);
+                customerStateManager.anim.SetBool("run", false);
+            }
+            else
+            {
+                customerStateManager.anim.SetBool("walk", false);
+            }
         }
     }
 

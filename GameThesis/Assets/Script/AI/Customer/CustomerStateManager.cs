@@ -27,7 +27,7 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
 
     public CustomerAggressiveChaseState s_aggressive = new CustomerAggressiveChaseState();
 
-    public CustomerThrongState s_throngState = new CustomerThrongState();
+    public CustomerCrowdState s_crowdState = new CustomerCrowdState();
 
     public CustomerFightState s_fightState = new CustomerFightState();
     public CustomerPushState s_pushState = new CustomerPushState();
@@ -130,6 +130,9 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
             return mpb;
         }
     }
+
+    [Header("===== Throng =====")]
+    [HideInInspector] public Vector3 v_crowdPos;
 
     public void ApplyOutlineColor(Color color, float scale)
     {
