@@ -16,7 +16,11 @@ public class CustomerDrunkState : BaseState
 
         customerStateManager.img_BGWakeUpImage.enabled = true;
 
-        customerStateManager.f_currentWekeUpPoint = 0;  
+        customerStateManager.f_currentWekeUpPoint = 0;
+
+        customerStateManager.g_sleepVFX.SetActive(true);
+        customerStateManager.g_stunVFX.SetActive(false);
+
     }
 
     public override void UpdateState(StateManager ai)

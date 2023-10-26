@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SheriffActiveThrongState : BaseState
+public class SheriffActiveCrowdState : BaseState
 {
     public override void EnterState(StateManager ai)
     {

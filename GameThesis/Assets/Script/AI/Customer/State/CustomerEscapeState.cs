@@ -20,6 +20,8 @@ public class CustomerEscapeState : BaseState
         customerStateManager.SwitchState(customerStateManager.s_walkAroundState);
 
         customerStateManager.ApplyOutlineColor(customerStateManager.color_warning, customerStateManager.f_outlineScale);
+        customerStateManager.g_sleepVFX.SetActive(false);
+        customerStateManager.g_stunVFX.SetActive(false);
 
     }
 

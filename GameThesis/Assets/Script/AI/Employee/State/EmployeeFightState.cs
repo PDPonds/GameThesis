@@ -8,6 +8,7 @@ public class EmployeeFightState : BaseState
     {
         EmployeeStateManager employeeStateManager = (EmployeeStateManager)ai;
         employeeStateManager.ApplyOutlineColor(employeeStateManager.color_fighting, employeeStateManager.f_outlineScale);
+        employeeStateManager.g_stunVFX.SetActive(false);
 
     }
 

@@ -22,6 +22,9 @@ public class CustomerGoToCounterState : BaseState
 
         customerStateManager.img_wakeUpImage.enabled = false;
         customerStateManager.img_BGWakeUpImage.enabled = false;
+        customerStateManager.g_sleepVFX.SetActive(false);
+        customerStateManager.g_stunVFX.SetActive(false);
+
     }
 
     public override void UpdateState(StateManager ai)

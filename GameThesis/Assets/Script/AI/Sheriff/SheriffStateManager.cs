@@ -9,7 +9,7 @@ public class SheriffStateManager : StateManager
 
     public SheriffActivityState s_activityState = new SheriffActivityState();
     public SheriffVisibleState s_visibleState = new SheriffVisibleState();
-    public SheriffActiveThrongState s_activeThrong = new SheriffActiveThrongState();
+    public SheriffActiveCrowdState s_activeThrong = new SheriffActiveCrowdState();
     public SheriffWaitForFightEndState s_waitForFightEnd = new SheriffWaitForFightEndState();
 
     //[HideInInspector] public Rigidbody[] rb;

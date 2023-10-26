@@ -14,6 +14,9 @@ public class CustomerWalkAroundState : BaseState
 
         customerStateManager.img_BGWakeUpImage.enabled = false;
         customerStateManager.img_wakeUpImage.enabled = false;
+        customerStateManager.g_sleepVFX.SetActive(false);
+        customerStateManager.g_stunVFX.SetActive(false);
+
     }
 
     public override void UpdateState(StateManager ai)

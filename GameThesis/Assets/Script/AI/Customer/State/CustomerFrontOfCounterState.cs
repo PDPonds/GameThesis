@@ -20,6 +20,10 @@ public class CustomerFrontOfCounterState : BaseState
         customerStateManager.img_wakeUpImage.enabled = false;
         customerStateManager.img_BGWakeUpImage.enabled = false;
         f_outlineTime = 0.25f;
+
+        customerStateManager.g_sleepVFX.SetActive(false);
+        customerStateManager.g_stunVFX.SetActive(false);
+
     }
 
     public override void UpdateState(StateManager ai)

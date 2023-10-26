@@ -24,6 +24,7 @@ public class EmployeeSlackOffState : BaseState
         }
 
         employeeStateManager.ApplyOutlineColor(employeeStateManager.color_warning, employeeStateManager.f_outlineScale);
+        employeeStateManager.g_stunVFX.SetActive(false);
 
     }
 

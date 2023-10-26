@@ -18,6 +18,8 @@ public class CustomerEatFoodState : BaseState
 
         customerStateManager.img_wakeUpImage.enabled = false;
         customerStateManager.img_BGWakeUpImage.enabled = false;
+        customerStateManager.g_stunVFX.SetActive(false);
+        customerStateManager.g_sleepVFX.SetActive(false);
 
     }
 

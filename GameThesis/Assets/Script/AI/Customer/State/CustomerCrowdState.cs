@@ -9,6 +9,9 @@ public class CustomerCrowdState : BaseState
         CustomerStateManager customerStateManager = (CustomerStateManager)ai;
         Color noColor = new Color(0, 0, 0, 0);
         customerStateManager.ApplyOutlineColor(noColor, 0f);
+        customerStateManager.g_sleepVFX.SetActive(false);
+        customerStateManager.g_stunVFX.SetActive(false);
+
     }
 
     public override void UpdateState(StateManager ai)

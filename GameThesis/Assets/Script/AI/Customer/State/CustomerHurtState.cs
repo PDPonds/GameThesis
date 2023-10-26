@@ -20,6 +20,9 @@ public class CustomerHurtState : BaseState
 
         f_fightBackPercent = Random.Range(0f, 100f);
 
+        customerStateManager.g_sleepVFX.SetActive(false);
+        customerStateManager.g_stunVFX.SetActive(false);
+
     }
 
     public override void UpdateState(StateManager ai)

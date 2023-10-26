@@ -17,6 +17,7 @@ public class EmployeeServeAndCookingState : BaseState
 
         Color noColor = new Color(0, 0, 0, 0);
         employeeStateManager.ApplyOutlineColor(noColor, 0f);
+        employeeStateManager.g_stunVFX.SetActive(false);
 
     }
 

@@ -10,6 +10,7 @@ public class EmployeeHurtState : BaseState
     {
         EmployeeStateManager employeeStateManager = (EmployeeStateManager)ai;
         employeeStateManager.b_isWorking = false;
+        employeeStateManager.g_stunVFX.SetActive(false);
 
     }
 

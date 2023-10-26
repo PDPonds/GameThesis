@@ -43,7 +43,7 @@ public class EmployeeStateManager : StateManager, IDamageable
 
     [Header("===== Pressed Out =====")]
     public float f_pressedOutTime;
-
+    public GameObject g_stunVFX;
     [HideInInspector] public Rigidbody[] rb;
     [HideInInspector] public Animator anim;
     [HideInInspector] public NavMeshAgent agent;

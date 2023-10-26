@@ -89,6 +89,7 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
 
     [Header("===== Dead State =====")]
     public float f_destroyTime;
+    public GameObject g_stunVFX;
 
     [Header("===== Drunk =====")]
     public Image img_wakeUpImage;
@@ -98,6 +99,7 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     [HideInInspector] public float f_currentWekeUpPoint;
     public float f_wekeUpMultiply;
     public float f_maxWekeUpPoint;
+    public GameObject g_sleepVFX;
 
     [Header("===== Gangster =====")]
     public float f_isGangsterPercent;
