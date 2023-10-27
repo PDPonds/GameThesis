@@ -127,18 +127,18 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""HoldPunch"",
+                    ""name"": ""Pause"",
                     ""type"": ""Button"",
-                    ""id"": ""ee879c45-43e9-453d-b0b7-ec7a3285344a"",
+                    ""id"": ""7d4f3bc9-b0d5-49b6-b91c-6965c6c7b8bb"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Pause"",
+                    ""name"": ""Punch"",
                     ""type"": ""Button"",
-                    ""id"": ""7d4f3bc9-b0d5-49b6-b91c-6965c6c7b8bb"",
+                    ""id"": ""8c50ea44-bad9-46cd-84ba-13a1ab4a162f"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -181,23 +181,23 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""1df17efe-d48a-49bc-85ec-eab4c3539a67"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": ""Press"",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""HoldPunch"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""45f3c172-2c12-4561-b968-81f560e4aadf"",
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bdd826e3-3966-446a-8425-ebde9eca5896"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Punch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -214,8 +214,8 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         m_Action_Sprint = m_Action.FindAction("Sprint", throwIfNotFound: true);
         m_Action_Interactive = m_Action.FindAction("Interactive", throwIfNotFound: true);
         m_Action_Guard = m_Action.FindAction("Guard", throwIfNotFound: true);
-        m_Action_HoldPunch = m_Action.FindAction("HoldPunch", throwIfNotFound: true);
         m_Action_Pause = m_Action.FindAction("Pause", throwIfNotFound: true);
+        m_Action_Punch = m_Action.FindAction("Punch", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -326,8 +326,8 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     private readonly InputAction m_Action_Sprint;
     private readonly InputAction m_Action_Interactive;
     private readonly InputAction m_Action_Guard;
-    private readonly InputAction m_Action_HoldPunch;
     private readonly InputAction m_Action_Pause;
+    private readonly InputAction m_Action_Punch;
     public struct ActionActions
     {
         private @PlayerInputAction m_Wrapper;
@@ -335,8 +335,8 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         public InputAction @Sprint => m_Wrapper.m_Action_Sprint;
         public InputAction @Interactive => m_Wrapper.m_Action_Interactive;
         public InputAction @Guard => m_Wrapper.m_Action_Guard;
-        public InputAction @HoldPunch => m_Wrapper.m_Action_HoldPunch;
         public InputAction @Pause => m_Wrapper.m_Action_Pause;
+        public InputAction @Punch => m_Wrapper.m_Action_Punch;
         public InputActionMap Get() { return m_Wrapper.m_Action; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -355,12 +355,12 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @Guard.started += instance.OnGuard;
             @Guard.performed += instance.OnGuard;
             @Guard.canceled += instance.OnGuard;
-            @HoldPunch.started += instance.OnHoldPunch;
-            @HoldPunch.performed += instance.OnHoldPunch;
-            @HoldPunch.canceled += instance.OnHoldPunch;
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
+            @Punch.started += instance.OnPunch;
+            @Punch.performed += instance.OnPunch;
+            @Punch.canceled += instance.OnPunch;
         }
 
         private void UnregisterCallbacks(IActionActions instance)
@@ -374,12 +374,12 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @Guard.started -= instance.OnGuard;
             @Guard.performed -= instance.OnGuard;
             @Guard.canceled -= instance.OnGuard;
-            @HoldPunch.started -= instance.OnHoldPunch;
-            @HoldPunch.performed -= instance.OnHoldPunch;
-            @HoldPunch.canceled -= instance.OnHoldPunch;
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
+            @Punch.started -= instance.OnPunch;
+            @Punch.performed -= instance.OnPunch;
+            @Punch.canceled -= instance.OnPunch;
         }
 
         public void RemoveCallbacks(IActionActions instance)
@@ -406,7 +406,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         void OnSprint(InputAction.CallbackContext context);
         void OnInteractive(InputAction.CallbackContext context);
         void OnGuard(InputAction.CallbackContext context);
-        void OnHoldPunch(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnPunch(InputAction.CallbackContext context);
     }
 }

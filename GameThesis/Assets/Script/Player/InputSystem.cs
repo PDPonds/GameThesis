@@ -14,8 +14,7 @@ public class InputSystem : MonoBehaviour
         {
             ia_action.PlayerMovement.Move.performed += i => PlayerManager.Instance.v_moveInput = i.ReadValue<Vector2>();
 
-            ia_action.Action.HoldPunch.performed += i => HoldPerformed();
-            ia_action.Action.HoldPunch.canceled += i => PlayerManager.Instance.b_isHold = false;
+            ia_action.Action.Punch.performed += i => Punch();
 
             ia_action.Action.Guard.performed += i => GuardPerformed();
             ia_action.Action.Guard.canceled += i => GuardCanceled();
@@ -80,20 +79,6 @@ public class InputSystem : MonoBehaviour
 
     }
 
-    void HoldPerformed()
-    {
-        if (!PlayerManager.Instance.b_isDead)
-        {
-            if (PlayerManager.Instance.b_canPunch)
-            {
-                PlayerManager.Instance.b_isHold = true;
-                PlayerManager.Instance.b_inFighting = true;
-                PlayerManager.Instance.f_currentInFightingTime = PlayerManager.Instance.f_maxInFightingTime;
-            }
-        }
-
-    }
-
     void GuardPerformed()
     {
         if (!PlayerManager.Instance.b_isDead)
@@ -120,6 +105,11 @@ public class InputSystem : MonoBehaviour
         {
             PlayerManager.Instance.b_isSprint = true;
         }
+    }
+
+    void Punch()
+    {
+        PlayerManager.Instance.s_playerFistCombat.Punch();
     }
 
 }

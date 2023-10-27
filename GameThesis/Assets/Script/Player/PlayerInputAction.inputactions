@@ -105,18 +105,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "HoldPunch",
+                    "name": "Pause",
                     "type": "Button",
-                    "id": "ee879c45-43e9-453d-b0b7-ec7a3285344a",
+                    "id": "7d4f3bc9-b0d5-49b6-b91c-6965c6c7b8bb",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Pause",
+                    "name": "Punch",
                     "type": "Button",
-                    "id": "7d4f3bc9-b0d5-49b6-b91c-6965c6c7b8bb",
+                    "id": "8c50ea44-bad9-46cd-84ba-13a1ab4a162f",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -159,23 +159,23 @@
                 },
                 {
                     "name": "",
-                    "id": "1df17efe-d48a-49bc-85ec-eab4c3539a67",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "Press",
-                    "processors": "",
-                    "groups": "",
-                    "action": "HoldPunch",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "45f3c172-2c12-4561-b968-81f560e4aadf",
                     "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bdd826e3-3966-446a-8425-ebde9eca5896",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Punch",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

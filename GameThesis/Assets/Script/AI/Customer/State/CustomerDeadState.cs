@@ -19,7 +19,17 @@ public class CustomerDeadState : BaseState
         customerStateManager.g_sleepVFX.SetActive(false);
         customerStateManager.g_stunVFX.SetActive(true);
 
-
+        if (!RestaurantManager.Instance.HasCustomerInFightState())
+        {
+            for (int i = 0; i < RestaurantManager.Instance.allSheriffs.Length; i++)
+            {
+                SheriffStateManager shrSM = RestaurantManager.Instance.allSheriffs[i];
+                if (shrSM.s_currentState == shrSM.s_waitForFightEnd)
+                {
+                    shrSM.SwitchState(shrSM.s_activeThrong);
+                }
+            }
+        }
     }
 
     public override void UpdateState(StateManager ai)

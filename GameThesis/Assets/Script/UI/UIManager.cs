@@ -24,9 +24,6 @@ public class UIManager : Auto_Singleton<UIManager>
     public GameObject text_leaveArea;
     public bool b_leaveTrigger;
 
-    [Header("===== TutorialTask =====")]
-    public GameObject g_tutorial;
-
     [Header("===== Close Warning ====")]
     public GameObject g_closeWarning;
 

@@ -89,14 +89,7 @@ public class ActiveCrowd : MonoBehaviour
                     cusSM.SwitchState(cusSM.s_walkAroundState);
                 }
             }
-            for (int i = 0; i < RestaurantManager.Instance.allSheriffs.Length; i++)
-            {
-                SheriffStateManager shrSM = RestaurantManager.Instance.allSheriffs[i];
-                if (shrSM.s_currentState == shrSM.s_waitForFightEnd)
-                {
-                    shrSM.SwitchState(shrSM.s_activeThrong);
-                }
-            }
+
             GameManager.Instance.DisableCrowd();
         }
 
