@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -18,6 +19,10 @@ public class GameManager : Auto_Singleton<GameManager>
     public float f_coin;
     public float f_startCoin;
 
+    public TextMeshProUGUI addCash;
+    public TextMeshProUGUI removeCash;
+    public UI_animmationController uiAnimCon;
+
     [HideInInspector] public GameState s_gameState;
 
     [Header("===== Crowd Customer =====")]
@@ -33,6 +38,8 @@ public class GameManager : Auto_Singleton<GameManager>
 
     public void AddCoin(float amount)
     {
+        uiAnimCon.AddCashAnim();
+
         if (amount < 0) return;
 
         f_coin += amount;
@@ -41,6 +48,7 @@ public class GameManager : Auto_Singleton<GameManager>
 
     public void RemoveCoin(float amount)
     {
+        uiAnimCon.RemoveCashAnim();
         f_coin -= amount;
     }
 

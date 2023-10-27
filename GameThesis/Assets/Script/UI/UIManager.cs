@@ -8,7 +8,10 @@ using UnityEngine.UI;
 public class UIManager : Auto_Singleton<UIManager>
 {
     [Header("===== Coin =====")]
-    public TextMeshProUGUI text_coin;
+    public TextMeshProUGUI text_Cash;
+    public TextMeshProUGUI addCash;
+    public TextMeshProUGUI removeCash;
+    public UI_animmationController uiAnimCon;    
 
     [Header("===== Time =====")]
     public TextMeshProUGUI text_time;
@@ -36,7 +39,7 @@ public class UIManager : Auto_Singleton<UIManager>
 
     private void Update()
     {
-        text_coin.text = $"$ : {GameManager.Instance.f_coin.ToString("00.00")}";
+        text_Cash.text = $"{GameManager.Instance.f_coin.ToString("00.00")}$";
 
         text_time.text = TimeController.Instance.d_currentTime.ToString("HH:mm");
 

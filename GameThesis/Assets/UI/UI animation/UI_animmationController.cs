@@ -8,6 +8,9 @@ public class UI_animmationController : MonoBehaviour
     [SerializeField] private Animator addCashAnim;
     [SerializeField] private Animator removeCashAnim;
 
+    [SerializeField] private Animator ratingTextAnim;
+    [SerializeField] private Animator ratingStarAnim;
+
     void Start()
     {
         cashAnim = GetComponent<Animator>();
@@ -23,15 +26,27 @@ public class UI_animmationController : MonoBehaviour
         }
     }
 
-    private void AddCashAnim()
+    public void AddCashAnim()
     {
         addCashAnim.Play("Add Cash");
+        cashAnim.Play("Add Cash Blink");        
+    }
+
+    public void RemoveCashAnim()
+    {
+        removeCashAnim.Play("Deduct Cash");
         cashAnim.Play("Deduct Cash Blink");
     }
 
-    private void RemoveCashAnim()
+    public void AddRatingAnim()
     {
-        removeCashAnim.Play("Deduct Cash");
-        cashAnim.Play("Add Cash Blink");
+        ratingTextAnim.Play("Add Rating");
+        ratingStarAnim.Play("Add Rating Star");
+    }
+
+    public void RemoveRatingAnim()
+    {
+        ratingTextAnim.Play("Remove Rating");
+        ratingStarAnim.Play("Remove Rating Star");
     }
 }

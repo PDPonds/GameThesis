@@ -20,6 +20,7 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
     public int i_startRating;
     public int i_ratingToRemove;
     public int i_ratingToAdd;
+    public UI_animmationController uiAnimCon;
 
     [Header("===== Upgrade Table Manager =====")]
     public int i_startTable;
@@ -315,7 +316,9 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
 
     public void RemoveRating()
     {
-        i_rating -= i_ratingToRemove;
+        uiAnimCon.RemoveRatingAnim(); // Waann
+
+        i_rating -= i_ratingToRemove;        
         if (i_rating <= v_minmaxRating.x)
         {
             i_rating = v_minmaxRating.x;
@@ -324,7 +327,9 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
 
     public void AddRating()
     {
-        i_rating += i_ratingToAdd;
+        uiAnimCon.AddRatingAnim(); //Waann
+
+        i_rating += i_ratingToAdd;        
         if (i_rating >= v_minmaxRating.y)
         {
             i_rating = v_minmaxRating.y;
