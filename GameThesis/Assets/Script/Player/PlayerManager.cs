@@ -96,8 +96,7 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
     {
         if (b_inFighting)
         {
-            //SetAnimation
-
+            PlayerAnimation.Instance.animator.SetBool("isFight", true);
             f_currentInFightingTime -= Time.deltaTime;
             if (f_currentInFightingTime < 0)
             {
@@ -110,8 +109,7 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
         }
         else
         {
-            //SetAnimation
-
+            PlayerAnimation.Instance.animator.SetBool("isFight", false);
         }
 
     }
@@ -122,19 +120,6 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
         b_canMove = false;
         a_cameraAnim.SetBool("dead", true);
         a_fadeAnim.SetBool("black", true);
-        yield return new WaitForSeconds(3f);
-        a_cameraAnim.SetBool("dead", false);
-        a_fadeAnim.SetBool("black", false);
-        yield return new WaitForSeconds(0.5f);
-        CameraTrigger camTrigger = Camera.main.GetComponent<CameraTrigger>();
-        camTrigger.Vignette_StepDown();
-        camTrigger.FocalLength_StepDown();
-        a_cameraAnim.enabled = false;
-        a_cameraAnim.transform.localPosition = Vector3.zero;
-        b_canMove = true;
-        b_isDead = false;
-        i_currentHP = i_maxHP;
-        couter = 0;
 
         for (int i = 0; i < RestaurantManager.Instance.allSheriffs.Length; i++)
         {
@@ -156,6 +141,31 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
             }
         }
 
+        for (int i = 0; i < RestaurantManager.Instance.allEmployees.Length; i++)
+        {
+            EmployeeStateManager emp = RestaurantManager.Instance.allEmployees[i];
+            if (emp.s_currentState == emp.s_fightState ||
+                emp.s_currentState == emp.s_attackState)
+            {
+                emp.SwitchState(emp.s_activityState);
+            }
+        }
+
+        yield return new WaitForSeconds(3f);
+        a_cameraAnim.SetBool("dead", false);
+        a_fadeAnim.SetBool("black", false);
+        yield return new WaitForSeconds(0.5f);
+        CameraTrigger camTrigger = Camera.main.GetComponent<CameraTrigger>();
+        camTrigger.Vignette_StepDown();
+        camTrigger.FocalLength_StepDown();
+        a_cameraAnim.enabled = false;
+        a_cameraAnim.transform.localPosition = Vector3.zero;
+        b_canMove = true;
+        b_isDead = false;
+        i_currentHP = i_maxHP;
+        couter = 0;
+
+        
         f_currentStamina = 0;
 
     }

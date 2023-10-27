@@ -1723,7 +1723,7 @@ MonoBehaviour:
   i_maxHP: 5
   f_atkRange: 1.2
   f_runRange: 2.5
-  f_atkDelay: 0.5
+  f_atkDelay: 0.7
   f_fightTime: 8
   f_currentFightTime: 0
   f_currentAtkDelay: 0
