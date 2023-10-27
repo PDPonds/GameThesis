@@ -23,6 +23,10 @@ public class UpgradTable : MonoBehaviour, IInteracable
     {
         MeshRenderer rndTable = tableObj.g_table.GetComponent<MeshRenderer>();
         rndTable.material = m_readyToUse;
+
+        //Collider taCol = tableObj.g_table.GetComponent<Collider>();
+        //taCol.enabled = true;
+
         if (tableObj.g_chairs.Count > 0)
         {
             for (int i = 0; i < tableObj.g_chairs.Count; i++)
@@ -32,6 +36,9 @@ public class UpgradTable : MonoBehaviour, IInteracable
                 {
                     rnd.material = m_readyToUse;
                 }
+
+                //Collider chairCol = tableObj.g_chairs[i].GetComponent<Collider>();
+                //chairCol.enabled = true;
             }
         }
         tableObj.enabled = true;
@@ -41,6 +48,10 @@ public class UpgradTable : MonoBehaviour, IInteracable
     {
         MeshRenderer rndTable = tableObj.g_table.GetComponent<MeshRenderer>();
         rndTable.material = m_waitForBuy;
+
+        //Collider taCol = tableObj.g_table.GetComponent<Collider>();
+        //taCol.enabled = false;
+
         if (tableObj.g_chairs.Count > 0)
         {
             for (int i = 0; i < tableObj.g_chairs.Count; i++)
@@ -50,6 +61,9 @@ public class UpgradTable : MonoBehaviour, IInteracable
                 {
                     rnd.material = m_waitForBuy;
                 }
+
+                //Collider chairCol = tableObj.g_chairs[i].GetComponent<Collider>();
+                //chairCol.enabled = false;
             }
         }
         tableObj.enabled = false;

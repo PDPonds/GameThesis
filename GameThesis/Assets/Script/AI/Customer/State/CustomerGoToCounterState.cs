@@ -35,7 +35,7 @@ public class CustomerGoToCounterState : BaseState
         customerStateManager.agent.SetDestination(GameManager.Instance.t_counterPos.position);
         customerStateManager.agent.speed = customerStateManager.f_walkSpeed;
         if (Vector3.Distance(customerStateManager.transform.position, GameManager.Instance.t_counterPos.position)
-            <= 1f)
+            <= 0.5f)
         {
             customerStateManager.SwitchState(customerStateManager.s_frontCounter);
         }
