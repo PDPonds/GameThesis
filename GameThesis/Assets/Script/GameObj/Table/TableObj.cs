@@ -9,89 +9,43 @@ public class TableObj : MonoBehaviour
     public List<GameObject> g_chairs = new List<GameObject>();
     public List<GameObject> g_foods = new List<GameObject>();
 
-    public float f_dirtyCount;
-
-    public bool b_isEmpty;
-
-    [HideInInspector] public float f_cdForNextCustomer;
-    public Vector2 v_minmaxCDForNextCustomer;
-
-    [HideInInspector] public bool b_readyForNextCustomer;
-    [SerializeField] float f_currentCDForNextCustomer;
-
-    public CustomerStateManager s_currentCustomer;
-    public EmployeeStateManager s_currentEmployee;
-
-    private void Awake()
-    {
-        b_isEmpty = true;
-    }
-
     private void Update()
     {
-
-        if (b_isEmpty && !b_readyForNextCustomer)
+        if (transform.TryGetComponent<UpgradTable>(out UpgradTable up))
         {
-            f_currentCDForNextCustomer -= Time.deltaTime;
-            if (f_currentCDForNextCustomer <= 0)
+            if (up.b_readyToUse)
             {
-                b_readyForNextCustomer = true;
-                RandomCDForNextCustomer();
-            }
-        }
-        else if (b_readyForNextCustomer || !b_isEmpty)
-        {
-            f_currentCDForNextCustomer = f_cdForNextCustomer;
-        }
-
-        if (s_currentCustomer != null)
-        {
-            if (s_currentCustomer.c_tableObj != this)
-            {
-                s_currentCustomer = null;
-                return;
-            }
-
-            if (s_currentCustomer.s_currentState == s_currentCustomer.s_waitFoodState)
-            {
-
-                if (RestaurantManager.Instance.GetCanEmployeeServe(out int index) &&
-                    s_currentEmployee == null)
+                if (g_chairs.Count > 0)
                 {
-                    RestaurantManager.Instance.allEmployees[index].s_serveTable = this;
-                    RestaurantManager.Instance.allEmployees[index].b_canServe = false;
-                    s_currentEmployee = RestaurantManager.Instance.allEmployees[index];
+                    for (int i = 0; i < g_chairs.Count; i++)
+                    {
+                        ChairObj chair = g_chairs[i].GetComponent<ChairObj>();
+                        chair.b_canUse = true;
+                    }
                 }
-            }
-
-
-            if (s_currentCustomer.s_currentState == s_currentCustomer.s_eatFoodState)
-            {
-                foreach (GameObject food in g_foods) food.SetActive(true);
-
             }
             else
             {
-                foreach (GameObject food in g_foods) food.SetActive(false);
+                if (g_chairs.Count > 0)
+                {
+                    for (int i = 0; i < g_chairs.Count; i++)
+                    {
+                        ChairObj chair = g_chairs[i].GetComponent<ChairObj>();
+                        chair.b_canUse = false;
+                    }
+                }
             }
-
         }
         else
         {
-            foreach (GameObject food in g_foods) food.SetActive(false);
-
-        }
-
-        if (s_currentCustomer == null || s_currentCustomer.s_currentState != s_currentCustomer.s_waitFoodState)
-        {
-            s_currentEmployee = null;
+            if (g_chairs.Count > 0)
+            {
+                for (int i = 0; i < g_chairs.Count; i++)
+                {
+                    ChairObj chair = g_chairs[i].GetComponent<ChairObj>();
+                    chair.b_canUse = false;
+                }
+            }
         }
     }
-
-    public void RandomCDForNextCustomer()
-    {
-        f_cdForNextCustomer = Random.Range(v_minmaxCDForNextCustomer.x, v_minmaxCDForNextCustomer.y);
-    }
-
-
 }

@@ -179,14 +179,6 @@ MonoBehaviour:
   g_foods:
   - {fileID: 8002833674193139045}
   - {fileID: 8105947308938689171}
-  f_dirtyCount: 0
-  b_isEmpty: 0
-  f_cdForNextCustomer: 10
-  v_minmaxCDForNextCustomer: {x: 8, y: 10}
-  b_readyForNextCustomer: 0
-  f_currentCDForNextCustomer: 0
-  s_currentCustomer: {fileID: 0}
-  s_currentEmployee: {fileID: 0}
 --- !u!114 &6721617517460288986
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -490,6 +482,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   t_sitPos: {fileID: 3689684253594982125}
+  b_isEmpty: 0
+  f_cdForNextCustomer: 0
+  v_minmaxCDForNextCustomer: {x: 8, y: 10}
+  b_readyForNextCustomer: 0
+  f_currentCDForNextCustomer: 0
+  s_currentCustomer: {fileID: 0}
+  s_currentEmployee: {fileID: 0}
 --- !u!1 &5163487021661812704 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 266718010610741092, guid: 81170f9d3c8b2df4186c4414cd8039ee,
@@ -509,6 +508,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   t_sitPos: {fileID: 7971512944550618382}
+  b_isEmpty: 0
+  f_cdForNextCustomer: 0
+  v_minmaxCDForNextCustomer: {x: 8, y: 10}
+  b_readyForNextCustomer: 0
+  f_currentCDForNextCustomer: 0
+  s_currentCustomer: {fileID: 0}
+  s_currentEmployee: {fileID: 0}
 --- !u!1 &5171451366040264388 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 279039657169307200, guid: 81170f9d3c8b2df4186c4414cd8039ee,
@@ -558,6 +564,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   t_sitPos: {fileID: 143228138757125866}
+  b_isEmpty: 0
+  f_cdForNextCustomer: 0
+  v_minmaxCDForNextCustomer: {x: 8, y: 10}
+  b_readyForNextCustomer: 0
+  f_currentCDForNextCustomer: 0
+  s_currentCustomer: {fileID: 0}
+  s_currentEmployee: {fileID: 0}
 --- !u!1 &7961113538118897559 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3053572615957010195, guid: 81170f9d3c8b2df4186c4414cd8039ee,
@@ -577,6 +590,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   t_sitPos: {fileID: 8150671421481954561}
+  b_isEmpty: 0
+  f_cdForNextCustomer: 0
+  v_minmaxCDForNextCustomer: {x: 8, y: 10}
+  b_readyForNextCustomer: 0
+  f_currentCDForNextCustomer: 0
+  s_currentCustomer: {fileID: 0}
+  s_currentEmployee: {fileID: 0}
 --- !u!4 &7970731795177835615 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3064221115366216923, guid: 81170f9d3c8b2df4186c4414cd8039ee,

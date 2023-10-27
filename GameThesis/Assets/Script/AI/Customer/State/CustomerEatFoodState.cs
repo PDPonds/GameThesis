@@ -27,7 +27,7 @@ public class CustomerEatFoodState : BaseState
 
         customerStateManager.RagdollOff();
 
-        if (customerStateManager.c_tableObj != null)
+        if (customerStateManager.c_chairObj != null)
         {
             if (customerStateManager.c_chairObj != null)
             {
@@ -60,12 +60,12 @@ public class CustomerEatFoodState : BaseState
 
                 if (ran <= customerStateManager.f_randomEventPercent)
                 {
-                    customerStateManager.c_tableObj.b_isEmpty = true;
+                    customerStateManager.c_chairObj.b_isEmpty = true;
                     customerStateManager.SwitchState(customerStateManager.s_escapeState);
                 }
                 else
                 {
-                    customerStateManager.c_tableObj.b_isEmpty = true;
+                    customerStateManager.c_chairObj.b_isEmpty = true;
                     customerStateManager.SwitchState(customerStateManager.s_goToCounterState);
                 }
             }

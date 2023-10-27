@@ -8,13 +8,12 @@ public class CustomerGoToCounterState : BaseState
     public override void EnterState(StateManager ai)
     {
         CustomerStateManager customerStateManager = (CustomerStateManager)ai;
-        if (customerStateManager.c_tableObj != null)
+        if (customerStateManager.c_chairObj != null)
         {
-            customerStateManager.c_tableObj.b_isEmpty = true;
-            customerStateManager.c_tableObj.b_readyForNextCustomer = false;
-            customerStateManager.c_tableObj.s_currentCustomer = null;
+            customerStateManager.c_chairObj.b_isEmpty = true;
+            customerStateManager.c_chairObj.b_readyForNextCustomer = false;
+            customerStateManager.c_chairObj.s_currentCustomer = null;
         }
-        customerStateManager.c_tableObj = null;
         customerStateManager.c_chairObj = null;
 
         Color noColor = new Color(0, 0, 0, 0);
@@ -35,7 +34,7 @@ public class CustomerGoToCounterState : BaseState
         customerStateManager.agent.SetDestination(GameManager.Instance.t_counterPos.position);
         customerStateManager.agent.speed = customerStateManager.f_walkSpeed;
         if (Vector3.Distance(customerStateManager.transform.position, GameManager.Instance.t_counterPos.position)
-            <= 0.5f)
+            <= 1f)
         {
             customerStateManager.SwitchState(customerStateManager.s_frontCounter);
         }

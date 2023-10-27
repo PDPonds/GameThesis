@@ -66,7 +66,6 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     [Header("===== Order Food =====")]
     public float f_orderTime;
     [HideInInspector] public float f_currentOrderTime;
-    public TableObj c_tableObj;
     public ChairObj c_chairObj;
 
     [Header("===== Eat Food =====")]
@@ -269,11 +268,11 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
             f_currentWekeUpPoint += f_wekeUpMultiply;
             if (f_currentWekeUpPoint >= f_maxWekeUpPoint)
             {
-                c_tableObj.b_isEmpty = true;
-                c_tableObj.b_readyForNextCustomer = false;
-                c_tableObj.s_currentCustomer = null;
+                c_chairObj.b_isEmpty = true;
+                c_chairObj.b_readyForNextCustomer = false;
+                c_chairObj.s_currentCustomer = null;
 
-                c_tableObj = null;
+                c_chairObj = null;
                 c_chairObj = null;
 
                 SwitchState(s_giveBackState);

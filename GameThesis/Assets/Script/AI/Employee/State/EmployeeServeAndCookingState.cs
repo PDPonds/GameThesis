@@ -62,9 +62,9 @@ public class EmployeeServeAndCookingState : BaseState
 
                     if (RestaurantManager.Instance.b_inProcess)
                     {
-                        if (RestaurantManager.Instance.GetCurrentTableFormEmployee(employeeStateManager, out int tableIndex))
+                        if (RestaurantManager.Instance.GetCurrentChairFormEmployee(employeeStateManager, out int chairIndex))
                         {
-                            TableObj table = RestaurantManager.Instance.allTables[tableIndex];
+                            ChairObj chair = RestaurantManager.Instance.allChairs[chairIndex];
 
                             if (!employeeStateManager.b_hasFood)
                             {
@@ -78,14 +78,14 @@ public class EmployeeServeAndCookingState : BaseState
                             }
                             else
                             {
-                                employeeStateManager.agent.SetDestination(table.transform.position);
-                                if (Vector3.Distance(employeeStateManager.transform.position, table.transform.position)
+                                employeeStateManager.agent.SetDestination(chair.transform.position);
+                                if (Vector3.Distance(employeeStateManager.transform.position, chair.transform.position)
                                     <= 2f)
                                 {
                                     employeeStateManager.b_hasFood = false;
                                     employeeStateManager.b_canServe = false;
-                                    employeeStateManager.s_serveTable = null;
-                                    table.s_currentCustomer.SwitchState(table.s_currentCustomer.s_eatFoodState);
+                                    employeeStateManager.s_serveChair = null;
+                                    chair.s_currentCustomer.SwitchState(chair.s_currentCustomer.s_eatFoodState);
                                 }
                             }
 
@@ -113,7 +113,7 @@ public class EmployeeServeAndCookingState : BaseState
 
                             }
                             employeeStateManager.b_hasFood = false;
-                            employeeStateManager.s_serveTable = null;
+                            employeeStateManager.s_serveChair = null;
                         }
 
                     }
@@ -136,7 +136,7 @@ public class EmployeeServeAndCookingState : BaseState
 
                         employeeStateManager.b_hasFood = false;
                         employeeStateManager.b_canServe = true;
-                        employeeStateManager.s_serveTable = null;
+                        employeeStateManager.s_serveChair = null;
 
                     }
 
@@ -198,9 +198,9 @@ public class EmployeeServeAndCookingState : BaseState
 
                     if(RestaurantManager.Instance.b_summaryButHasCustome)
                     {
-                        if (RestaurantManager.Instance.GetCurrentTableFormEmployee(employeeStateManager, out int tableIndex))
+                        if (RestaurantManager.Instance.GetCurrentChairFormEmployee(employeeStateManager, out int chairIndex))
                         {
-                            TableObj table = RestaurantManager.Instance.allTables[tableIndex];
+                            ChairObj chair = RestaurantManager.Instance.allChairs[chairIndex];
 
                             if (!employeeStateManager.b_hasFood)
                             {
@@ -214,14 +214,14 @@ public class EmployeeServeAndCookingState : BaseState
                             }
                             else
                             {
-                                employeeStateManager.agent.SetDestination(table.transform.position);
-                                if (Vector3.Distance(employeeStateManager.transform.position, table.transform.position)
+                                employeeStateManager.agent.SetDestination(chair.transform.position);
+                                if (Vector3.Distance(employeeStateManager.transform.position, chair.transform.position)
                                     <= 2f)
                                 {
                                     employeeStateManager.b_hasFood = false;
                                     employeeStateManager.b_canServe = false;
-                                    employeeStateManager.s_serveTable = null;
-                                    table.s_currentCustomer.SwitchState(table.s_currentCustomer.s_eatFoodState);
+                                    employeeStateManager.s_serveChair = null;
+                                    chair.s_currentCustomer.SwitchState(chair.s_currentCustomer.s_eatFoodState);
                                 }
                             }
 
@@ -249,7 +249,7 @@ public class EmployeeServeAndCookingState : BaseState
 
                             }
                             employeeStateManager.b_hasFood = false;
-                            employeeStateManager.s_serveTable = null;
+                            employeeStateManager.s_serveChair = null;
                         }
                     }
                     else

@@ -8,7 +8,7 @@ public class CustomerWaitFoodState : BaseState
     {
         CustomerStateManager customerStateManager = (CustomerStateManager)ai;
         customerStateManager.f_currentOrderTime = customerStateManager.f_orderTime;
-        customerStateManager.c_tableObj.s_currentCustomer = customerStateManager;
+        customerStateManager.c_chairObj.s_currentCustomer = customerStateManager;
 
         Color noColor = new Color(0, 0, 0, 0);
         customerStateManager.ApplyOutlineColor(noColor, 0f);
@@ -21,7 +21,7 @@ public class CustomerWaitFoodState : BaseState
     public override void UpdateState(StateManager ai)
     {
         CustomerStateManager customerStateManager = (CustomerStateManager)ai;
-        if (customerStateManager.c_tableObj != null)
+        if (customerStateManager.c_chairObj != null)
         {
             if (customerStateManager.c_chairObj != null)
             {

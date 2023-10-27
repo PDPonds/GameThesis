@@ -8,10 +8,6 @@ public class CustomerGoToChairState : BaseState
     public override void EnterState(StateManager ai)
     {
         CustomerStateManager customerStateManager = (CustomerStateManager)ai;
-        if (customerStateManager.c_tableObj != null)
-        {
-            chairIndex = Random.Range(0, customerStateManager.c_tableObj.g_chairs.Count);
-        }
 
         Color noColor = new Color(0, 0, 0, 0);
         customerStateManager.ApplyOutlineColor(noColor, 0f);
@@ -29,9 +25,9 @@ public class CustomerGoToChairState : BaseState
         customerStateManager.anim.SetBool("fightState", false);
         customerStateManager.anim.SetBool("walk", true);
         customerStateManager.agent.speed = customerStateManager.f_walkSpeed;
-        if (customerStateManager.c_tableObj != null)
+        if (customerStateManager.c_chairObj != null)
         {
-            ChairObj chair = customerStateManager.c_tableObj.g_chairs[chairIndex].GetComponent<ChairObj>();
+            ChairObj chair = customerStateManager.c_chairObj;
             customerStateManager.agent.SetDestination(chair.t_sitPos.position);
             if (Vector3.Distance(customerStateManager.transform.position, chair.t_sitPos.position) <= 1f)
             {

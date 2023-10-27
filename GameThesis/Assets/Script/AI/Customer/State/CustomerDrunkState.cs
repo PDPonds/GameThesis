@@ -26,7 +26,7 @@ public class CustomerDrunkState : BaseState
 
         customerStateManager.RagdollOff();
 
-        if (customerStateManager.c_tableObj != null)
+        if (customerStateManager.c_chairObj != null)
         {
             if (customerStateManager.c_chairObj != null)
             {

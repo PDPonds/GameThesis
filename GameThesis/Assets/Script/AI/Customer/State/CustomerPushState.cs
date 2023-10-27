@@ -7,13 +7,12 @@ public class CustomerPushState : BaseState
     public override void EnterState(StateManager ai)
     {
         CustomerStateManager customerStateManager = (CustomerStateManager)ai;
-        if (customerStateManager.c_tableObj != null)
+        if (customerStateManager.c_chairObj != null)
         {
-            customerStateManager.c_tableObj.b_isEmpty = true;
-            customerStateManager.c_tableObj.b_readyForNextCustomer = false;
-            customerStateManager.c_tableObj.s_currentCustomer = null;
+            customerStateManager.c_chairObj.b_isEmpty = true;
+            customerStateManager.c_chairObj.b_readyForNextCustomer = false;
+            customerStateManager.c_chairObj.s_currentCustomer = null;
         }
-        customerStateManager.c_tableObj = null;
         customerStateManager.c_chairObj = null;
         customerStateManager.anim.Play("Push");
         customerStateManager.ApplyOutlineColor(customerStateManager.color_warning, customerStateManager.f_outlineScale);
