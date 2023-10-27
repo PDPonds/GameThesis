@@ -24,7 +24,8 @@ public class CustomerDeadState : BaseState
             for (int i = 0; i < RestaurantManager.Instance.allSheriffs.Length; i++)
             {
                 SheriffStateManager shrSM = RestaurantManager.Instance.allSheriffs[i];
-                if (shrSM.s_currentState == shrSM.s_waitForFightEnd)
+                if (shrSM.s_currentState == shrSM.s_waitForFightEnd &&
+                    customerStateManager.currentAreaStay == AreaType.OutRestaurant)
                 {
                     shrSM.SwitchState(shrSM.s_activeThrong);
                 }

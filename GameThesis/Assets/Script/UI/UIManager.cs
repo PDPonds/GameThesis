@@ -27,6 +27,11 @@ public class UIManager : Auto_Singleton<UIManager>
     [Header("===== Close Warning ====")]
     public GameObject g_closeWarning;
 
+    [Header("===== Objective =====")]
+    public GameObject g_objective;
+    public TextMeshProUGUI text_objectiveName;
+    public TextMeshProUGUI text_objectiveDis;
+
     private void Update()
     {
         text_coin.text = $"$ : {GameManager.Instance.f_coin.ToString("00.00")}";
@@ -68,6 +73,20 @@ public class UIManager : Auto_Singleton<UIManager>
         {
             g_closeWarning.SetActive(false);
         }
+
+        if (ObjectiveManager.Instance.GetCurrentObjective(out int index) &&
+            index < ObjectiveManager.Instance.allObjectives.Count)
+        {
+            g_objective.SetActive(true);
+            ObjectiveSO objective = ObjectiveManager.Instance.allObjectives[index];
+            text_objectiveName.text = objective.s_objectiveName;
+            text_objectiveDis.text = objective.s_objectiveDescription;
+        }
+        else
+        {
+            g_objective.SetActive(false);
+        }
+
 
     }
 

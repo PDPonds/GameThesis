@@ -97,7 +97,6 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
         if (b_inFighting)
         {
             //SetAnimation
-            Debug.Log("inFight");
 
             f_currentInFightingTime -= Time.deltaTime;
             if (f_currentInFightingTime < 0)
@@ -112,7 +111,6 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
         else
         {
             //SetAnimation
-            Debug.Log("outFight");
 
         }
 
