@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : Auto_Singleton<UIManager>
 {
@@ -31,6 +32,7 @@ public class UIManager : Auto_Singleton<UIManager>
     public GameObject g_objective;
     public TextMeshProUGUI text_objectiveName;
     public TextMeshProUGUI text_objectiveDis;
+
 
     private void Update()
     {

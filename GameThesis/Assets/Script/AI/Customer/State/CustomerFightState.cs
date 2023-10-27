@@ -10,8 +10,6 @@ public class CustomerFightState : BaseState
 
         customerStateManager.ApplyOutlineColor(customerStateManager.color_fighting, customerStateManager.f_outlineScale);
 
-        customerStateManager.img_wakeUpImage.enabled = false;
-        customerStateManager.img_BGWakeUpImage.enabled = false;
         customerStateManager.g_sleepVFX.SetActive(false);
         customerStateManager.g_stunVFX.SetActive(false);
 

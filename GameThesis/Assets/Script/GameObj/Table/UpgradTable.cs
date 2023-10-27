@@ -69,7 +69,8 @@ public class UpgradTable : MonoBehaviour, IInteracable
     public void BuyTable()
     {
         if (GameManager.Instance.f_coin >= f_costToBuy &&
-            RestaurantManager.Instance.i_rating >= RestaurantManager.Instance.ReqRateToBuyTable())
+            RestaurantManager.Instance.i_rating >= RestaurantManager.Instance.ReqRateToBuyTable()
+            && !b_readyToUse)
         {
             GameManager.Instance.RemoveCoin(f_costToBuy);
             SetUpUseAble();

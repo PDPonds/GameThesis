@@ -17,8 +17,6 @@ public class CustomerFrontOfCounterState : BaseState
 
         f_currentPayTime = customerStateManager.f_payTime;
 
-        customerStateManager.img_wakeUpImage.enabled = false;
-        customerStateManager.img_BGWakeUpImage.enabled = false;
         f_outlineTime = 0.25f;
 
         customerStateManager.g_sleepVFX.SetActive(false);

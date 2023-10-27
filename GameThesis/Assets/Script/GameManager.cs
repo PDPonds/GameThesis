@@ -37,11 +37,6 @@ public class GameManager : Auto_Singleton<GameManager>
 
         f_coin += amount;
 
-        //ObjectiveSO currentObjective = ObjectiveManager.Instance.allObjectives[ObjectiveManager.Instance.GetCurrentObjective()];
-        //if (currentObjective.e_type == ObjectiveType.CollectMoney)
-        //{
-        //    ObjectiveManager.Instance.f_objCoin += amount;
-        //}
     }
 
     public void RemoveCoin(float amount)

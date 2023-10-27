@@ -15,6 +15,10 @@ public class PlayerUI : Auto_Singleton<PlayerUI>
     [Header("===== Player HP =====")]
     public Slider s_hpSlider;
 
+    [Header("===== WakeUpDrunkCustomer =====")]
+    public GameObject g_wekeUp;
+    public Image image_fillAmouny;
+
     private void Update()
     {
         if (PlayerManager.Instance.g_dragObj == null)
@@ -28,8 +32,30 @@ public class PlayerUI : Auto_Singleton<PlayerUI>
                     if (interactive != null)
                     {
                         text_interactText.text = interactive.InteractionText();
+                        CustomerStateManager cus = PlayerManager.Instance.g_interactiveObj.GetComponentInParent<CustomerStateManager>();
+                        if (cus != null)
+                        {
+                            if (cus.s_currentState == cus.s_drunkState)
+                            {
+                                g_wekeUp.SetActive(true);
+                                float percent = cus.f_currentWekeUpPoint / cus.f_maxWekeUpPoint;
+                                image_fillAmouny.fillAmount = percent;
+                            }
+                            else
+                            {
+                                g_wekeUp.SetActive(false);
+                            }
+                        }
+                        else
+                        {
+                            g_wekeUp.SetActive(false);
+                        }
                     }
-                    else text_interactText.text = string.Empty;
+                    else
+                    {
+                        g_wekeUp.SetActive(false);
+                        text_interactText.text = string.Empty;
+                    }
                 }
                 else
                 {
@@ -52,7 +78,7 @@ public class PlayerUI : Auto_Singleton<PlayerUI>
         float staminaPercent = PlayerManager.Instance.f_currentStamina / PlayerManager.Instance.f_maxStamina;
         s_staminaSlider.value = staminaPercent;
 
-        float hpPercent = ((float)PlayerManager.Instance.i_maxHP - (float)PlayerManager.Instance.i_currentHP) 
+        float hpPercent = ((float)PlayerManager.Instance.i_maxHP - (float)PlayerManager.Instance.i_currentHP)
             / PlayerManager.Instance.i_maxHP;
         s_hpSlider.value = hpPercent;
 

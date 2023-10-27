@@ -12,8 +12,6 @@ public class CustomerWalkAroundState : BaseState
         customerStateManager.i_currentHP = customerStateManager.i_maxHP;
         f_currentTimeToWalk = 0;
 
-        customerStateManager.img_BGWakeUpImage.enabled = false;
-        customerStateManager.img_wakeUpImage.enabled = false;
         customerStateManager.g_sleepVFX.SetActive(false);
         customerStateManager.g_stunVFX.SetActive(false);
 
