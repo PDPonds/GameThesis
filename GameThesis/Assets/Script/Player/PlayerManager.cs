@@ -28,7 +28,6 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
 
     [Header("===== Player Fist Combat =====")]
     public float f_punchDelay;
-    public float f_heavyPunchTime;
     public float f_softPunchTime;
     public Collider c_leftHandPunch;
     public Collider c_rightHandPunch;
@@ -38,8 +37,6 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
     [HideInInspector] public float f_currentInFightingTime;
 
     [HideInInspector] public bool b_canPunch;
-    [HideInInspector] public bool b_isHold;
-    [HideInInspector] public float f_currentHoldTime;
     [HideInInspector] public float f_currentPunchDelay;
     [HideInInspector] public int i_atkCount;
     [HideInInspector] public Vector3 v_punchHitPoint;
@@ -99,6 +96,7 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
     {
         if (b_inFighting)
         {
+            PlayerAnimation.Instance.animator.SetBool("isFight", true);
             f_currentInFightingTime -= Time.deltaTime;
             if (f_currentInFightingTime < 0)
             {
@@ -108,15 +106,11 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
                 CameraTrigger camTrigger = Camera.main.GetComponent<CameraTrigger>();
                 camTrigger.ResetVignetteAndFocal();
             }
-            //SetAnimation
-            t_playerMesh.GetChild(0).gameObject.SetActive(true);
         }
         else
         {
-            //SetAnimation
-            t_playerMesh.GetChild(0).gameObject.SetActive(false);
+            PlayerAnimation.Instance.animator.SetBool("isFight", false);
         }
-
 
     }
 
@@ -126,19 +120,52 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
         b_canMove = false;
         a_cameraAnim.SetBool("dead", true);
         a_fadeAnim.SetBool("black", true);
+
+        for (int i = 0; i < RestaurantManager.Instance.allSheriffs.Length; i++)
+        {
+            SheriffStateManager shrSM = RestaurantManager.Instance.allSheriffs[i];
+            if (shrSM.s_currentState == shrSM.s_waitForFightEnd)
+            {
+                shrSM.SwitchState(shrSM.s_activityState);
+            }
+        }
+
+        for (int i = 0; i < RestaurantManager.Instance.allCustomers.Length; i++)
+        {
+            CustomerStateManager cus = RestaurantManager.Instance.allCustomers[i];
+            if (cus.s_currentState == cus.s_fightState ||
+                cus.s_currentState == cus.s_attackState ||
+                cus.s_currentState == cus.s_aggressive)
+            {
+                cus.SwitchState(cus.s_walkAroundState);
+            }
+        }
+
+        for (int i = 0; i < RestaurantManager.Instance.allEmployees.Length; i++)
+        {
+            EmployeeStateManager emp = RestaurantManager.Instance.allEmployees[i];
+            if (emp.s_currentState == emp.s_fightState ||
+                emp.s_currentState == emp.s_attackState)
+            {
+                emp.SwitchState(emp.s_activityState);
+            }
+        }
+
         yield return new WaitForSeconds(3f);
         a_cameraAnim.SetBool("dead", false);
         a_fadeAnim.SetBool("black", false);
         yield return new WaitForSeconds(0.5f);
+        CameraTrigger camTrigger = Camera.main.GetComponent<CameraTrigger>();
+        camTrigger.Vignette_StepDown();
+        camTrigger.FocalLength_StepDown();
         a_cameraAnim.enabled = false;
+        a_cameraAnim.transform.localPosition = Vector3.zero;
         b_canMove = true;
         b_isDead = false;
         i_currentHP = i_maxHP;
         couter = 0;
-        CameraTrigger camTrigger = Camera.main.GetComponent<CameraTrigger>();
-        camTrigger.Vignette_StepDown();
-        camTrigger.FocalLength_StepDown();
 
+        
         f_currentStamina = 0;
 
     }
@@ -163,7 +190,7 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
                 a_cameraAnim.enabled = true;
                 GameManager.Instance.RemoveCoin(10);
                 StartCoroutine(DeadState());
-                
+
                 return true;
             }
             else return false;

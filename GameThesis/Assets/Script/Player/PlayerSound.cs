@@ -13,13 +13,11 @@ public class PlayerSound : Auto_Singleton<PlayerSound>, IObserver
 
     [Header("===== Audio Source =====")]
     public AudioSource as_playerPunchSource;
-    public AudioSource as_playerHoldSource;
     public AudioSource as_playerHitSource;
     public AudioSource as_playerWalk;
 
     [Header("===== Audio Clip =====")]
     public List<AudioClip> ac_playerPunchClip = new List<AudioClip>();
-    public List<AudioClip> ac_playerHeavyPunchClip = new List<AudioClip>();
     public List<AudioClip> ac_hitClip = new List<AudioClip>();
     public AudioClip ac_walkDirt;
     public AudioClip ac_walkWood;
@@ -42,7 +40,6 @@ public class PlayerSound : Auto_Singleton<PlayerSound>, IObserver
     private void Awake()
     {
         as_playerPunchSource = InitializedAudioSource(false);
-        as_playerHoldSource = InitializedAudioSource(false);
         as_playerHitSource = InitializedAudioSource(false);
         as_playerWalk = InitializedAudioSource(true);
     }
@@ -60,11 +57,7 @@ public class PlayerSound : Auto_Singleton<PlayerSound>, IObserver
                 PlaySound(as_playerPunchSource, ac_playerPunchClip);
 
                 break;
-            case ActionObserver.PlayerHeavyPunch:
 
-                PlaySound(as_playerHoldSource, ac_playerHeavyPunchClip);
-
-                break;
             case ActionObserver.PlayerAttackRightHit:
 
                 PlaySound(as_playerHitSource, ac_hitClip);

@@ -14,6 +14,9 @@ public class PlayerSprint : MonoBehaviour
             {
                 PlayerManager.Instance.f_currentStamina += PlayerManager.Instance.f_staminaMultiply * Time.deltaTime;
             }
+
+            PlayerAnimation.Instance.animator.SetBool("isRun", false);
+
         }
         else
         {
@@ -26,6 +29,8 @@ public class PlayerSprint : MonoBehaviour
             {
                 PlayerManager.Instance.b_isSprint = false;
             }
+            PlayerAnimation.Instance.animator.SetBool("isRun", true);
+
         }
     }
 
@@ -57,7 +62,7 @@ public class PlayerSprint : MonoBehaviour
                         customerStateManager.transform.LookAt(transform.position);
                         customerStateManager.SwitchState(customerStateManager.s_pushState);
                         StartCoroutine(StopPlayer());
-                        
+
                     }
                 }
             }

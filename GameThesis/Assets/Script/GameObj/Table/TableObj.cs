@@ -90,11 +90,6 @@ public class TableObj : MonoBehaviour
 
     public void RandomCDForNextCustomer()
     {
-        //float minutRating = RestaurantManager.Instance.v_minmaxRating.y - RestaurantManager.Instance.i_rating;
-        //float multiply = 0.2f * minutRating;
-        //Vector2 newMinMax = new Vector2(v_minmaxCDForNextCustomer.x + multiply, v_minmaxCDForNextCustomer.y + multiply);
-        //f_cdForNextCustomer = Random.Range(newMinMax.x, newMinMax.y);
-
         f_cdForNextCustomer = Random.Range(v_minmaxCDForNextCustomer.x, v_minmaxCDForNextCustomer.y);
     }
 

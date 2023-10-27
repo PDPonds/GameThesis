@@ -10,20 +10,7 @@ public class AIPunchTrigger : MainObserver
         {
             if (!player.b_isGuard)
             {
-                if (player.TakeDamageAndDead())
-                {
-                    for (int i = 0; i < RestaurantManager.Instance.allCustomers.Length; i++)
-                    {
-                        CustomerStateManager cus = RestaurantManager.Instance.allCustomers[i];
-                        if (cus.s_currentState == cus.s_fightState ||
-                            cus.s_currentState == cus.s_attackState ||
-                            cus.s_currentState == cus.s_aggressive)
-                        {
-                            cus.SwitchState(cus.s_walkAroundState);
-                        }
-                    }
-                }
-                else
+                if (!player.TakeDamageAndDead())
                 {
                     if (transform.GetComponentInParent<StateManager>())
                     {
@@ -40,6 +27,7 @@ public class AIPunchTrigger : MainObserver
                         }
                     }
                 }
+
                 ActiveAllObserver(ActionObserver.AIPunchHit);
             }
             else

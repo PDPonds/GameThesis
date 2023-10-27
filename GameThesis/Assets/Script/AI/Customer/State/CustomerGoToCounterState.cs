@@ -20,8 +20,6 @@ public class CustomerGoToCounterState : BaseState
         Color noColor = new Color(0, 0, 0, 0);
         customerStateManager.ApplyOutlineColor(noColor, 0f);
 
-        customerStateManager.img_wakeUpImage.enabled = false;
-        customerStateManager.img_BGWakeUpImage.enabled = false;
         customerStateManager.g_sleepVFX.SetActive(false);
         customerStateManager.g_stunVFX.SetActive(false);
 
@@ -37,7 +35,7 @@ public class CustomerGoToCounterState : BaseState
         customerStateManager.agent.SetDestination(GameManager.Instance.t_counterPos.position);
         customerStateManager.agent.speed = customerStateManager.f_walkSpeed;
         if (Vector3.Distance(customerStateManager.transform.position, GameManager.Instance.t_counterPos.position)
-            <= 1f)
+            <= 0.5f)
         {
             customerStateManager.SwitchState(customerStateManager.s_frontCounter);
         }

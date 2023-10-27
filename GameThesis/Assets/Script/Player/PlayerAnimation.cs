@@ -18,11 +18,7 @@ public class PlayerAnimation : Auto_Singleton<PlayerAnimation>, IObserver
     {
         switch (action)
         {
-            case ActionObserver.PlayerHeavyPunch:
 
-                animator.Play("HeavyPunch");
-
-                break;
             case ActionObserver.PlayerLeftSoftPunch:
 
                 animator.Play("LeftPunch");

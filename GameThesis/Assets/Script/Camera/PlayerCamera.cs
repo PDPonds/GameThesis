@@ -9,6 +9,8 @@ public class PlayerCamera : MonoBehaviour
 
     private void Update()
     {
+        transform.localPosition = Vector3.zero;
+
         float f_mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * CameraController.Instance.f_senX;
         float f_mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * CameraController.Instance.f_senY;
 

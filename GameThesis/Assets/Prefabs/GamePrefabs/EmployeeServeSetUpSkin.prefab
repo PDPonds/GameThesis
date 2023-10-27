@@ -1035,11 +1035,11 @@ MonoBehaviour:
   g_FoodInHand: {fileID: 572668808332531273}
   b_isWorking: 0
   t_workingPos: {fileID: 0}
-  f_timeToSlackOff: 0
-  f_slackOffPercent: 0
+  f_timeToSlackOff: 10
+  f_slackOffPercent: 2.5
   v_minmaxX: {x: -21, y: -14}
   v_minmaxZ: {x: -7, y: 11}
-  v_minAndMaxSlackOffTime: {x: 0, y: 0}
+  v_minAndMaxSlackOffTime: {x: 30, y: 60}
   v_walkPos: {x: 0, y: 0, z: 0}
   f_slackOffTime: 0
   currentAreaStay: 0

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : Auto_Singleton<UIManager>
 {
@@ -24,11 +25,14 @@ public class UIManager : Auto_Singleton<UIManager>
     public GameObject text_leaveArea;
     public bool b_leaveTrigger;
 
-    [Header("===== TutorialTask =====")]
-    public GameObject g_tutorial;
-
     [Header("===== Close Warning ====")]
     public GameObject g_closeWarning;
+
+    [Header("===== Objective =====")]
+    public GameObject g_objective;
+    public TextMeshProUGUI text_objectiveName;
+    public TextMeshProUGUI text_objectiveDis;
+
 
     private void Update()
     {
@@ -71,6 +75,20 @@ public class UIManager : Auto_Singleton<UIManager>
         {
             g_closeWarning.SetActive(false);
         }
+
+        if (ObjectiveManager.Instance.GetCurrentObjective(out int index) &&
+            index < ObjectiveManager.Instance.allObjectives.Count)
+        {
+            g_objective.SetActive(true);
+            ObjectiveSO objective = ObjectiveManager.Instance.allObjectives[index];
+            text_objectiveName.text = objective.s_objectiveName;
+            text_objectiveDis.text = objective.s_objectiveDescription;
+        }
+        else
+        {
+            g_objective.SetActive(false);
+        }
+
 
     }
 

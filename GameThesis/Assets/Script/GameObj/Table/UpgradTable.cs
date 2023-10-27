@@ -23,6 +23,10 @@ public class UpgradTable : MonoBehaviour, IInteracable
     {
         MeshRenderer rndTable = tableObj.g_table.GetComponent<MeshRenderer>();
         rndTable.material = m_readyToUse;
+
+        //Collider taCol = tableObj.g_table.GetComponent<Collider>();
+        //taCol.enabled = true;
+
         if (tableObj.g_chairs.Count > 0)
         {
             for (int i = 0; i < tableObj.g_chairs.Count; i++)
@@ -32,6 +36,9 @@ public class UpgradTable : MonoBehaviour, IInteracable
                 {
                     rnd.material = m_readyToUse;
                 }
+
+                //Collider chairCol = tableObj.g_chairs[i].GetComponent<Collider>();
+                //chairCol.enabled = true;
             }
         }
         tableObj.enabled = true;
@@ -41,6 +48,10 @@ public class UpgradTable : MonoBehaviour, IInteracable
     {
         MeshRenderer rndTable = tableObj.g_table.GetComponent<MeshRenderer>();
         rndTable.material = m_waitForBuy;
+
+        //Collider taCol = tableObj.g_table.GetComponent<Collider>();
+        //taCol.enabled = false;
+
         if (tableObj.g_chairs.Count > 0)
         {
             for (int i = 0; i < tableObj.g_chairs.Count; i++)
@@ -50,6 +61,9 @@ public class UpgradTable : MonoBehaviour, IInteracable
                 {
                     rnd.material = m_waitForBuy;
                 }
+
+                //Collider chairCol = tableObj.g_chairs[i].GetComponent<Collider>();
+                //chairCol.enabled = false;
             }
         }
         tableObj.enabled = false;
@@ -69,7 +83,8 @@ public class UpgradTable : MonoBehaviour, IInteracable
     public void BuyTable()
     {
         if (GameManager.Instance.f_coin >= f_costToBuy &&
-            RestaurantManager.Instance.i_rating >= RestaurantManager.Instance.ReqRatToBuyTable())
+            RestaurantManager.Instance.i_rating >= RestaurantManager.Instance.ReqRateToBuyTable()
+            && !b_readyToUse)
         {
             GameManager.Instance.RemoveCoin(f_costToBuy);
             SetUpUseAble();
@@ -88,7 +103,7 @@ public class UpgradTable : MonoBehaviour, IInteracable
         if (!b_readyToUse)
         {
             text = $"[E] Use {f_costToBuy}$ And{Environment.NewLine} " +
-                $"Atleast {RestaurantManager.Instance.ReqRatToBuyTable()} Rating to Unlock Table.";
+                $"Atleast {RestaurantManager.Instance.ReqRateToBuyTable()} Rating to Unlock Table.";
         }
         return text;
     }

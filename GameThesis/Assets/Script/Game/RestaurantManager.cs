@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class RestaurantManager : Auto_Singleton<RestaurantManager>
@@ -23,6 +24,8 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
     [Header("===== Upgrade Table Manager =====")]
     public int i_startTable;
 
+    [Header("===== Level =====")]
+    public int i_level = 1;
 
     private void Awake()
     {
@@ -87,7 +90,7 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
 
     }
 
-    public int ReqRatToBuyTable()
+    public int ReqRateToBuyTable()
     {
         int rating = 0;
 
@@ -326,6 +329,19 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
         {
             i_rating = v_minmaxRating.y;
         }
+    }
+
+    public int GetCurrentTableIsReadyCount()
+    {
+        int redyCount = 0;
+
+        for (int i = 0; i < allTables.Length; i++)
+        {
+            UpgradTable up = allTables[i].transform.GetComponent<UpgradTable>();
+            if (up.b_readyToUse) redyCount++;
+        }
+
+        return redyCount;
     }
 
 }

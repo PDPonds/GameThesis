@@ -12,9 +12,6 @@ public class CustomerDrunkState : BaseState
         customerStateManager.ApplyOutlineColor(customerStateManager.color_interact, customerStateManager.f_outlineScale);
 
         customerStateManager.b_isDrunk = true;
-        customerStateManager.img_wakeUpImage.enabled = true;
-
-        customerStateManager.img_BGWakeUpImage.enabled = true;
 
         customerStateManager.f_currentWekeUpPoint = 0;
 
@@ -50,9 +47,6 @@ public class CustomerDrunkState : BaseState
         {
             customerStateManager.f_currentWekeUpPoint = 0;
         }
-
-        float percent = customerStateManager.f_currentWekeUpPoint / customerStateManager.f_maxWekeUpPoint;
-        customerStateManager.img_wakeUpImage.fillAmount = percent;
 
     }
 }

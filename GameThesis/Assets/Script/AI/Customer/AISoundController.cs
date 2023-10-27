@@ -80,7 +80,7 @@ public class AISoundController : MonoBehaviour, IObserver
                 break;
             case ActionObserver.AICheer:
 
-                as_cheer.volume = 0.1f;
+                as_cheer.volume = 0.05f;
                 PlaySound(as_cheer, ac_cheer);
 
                 break;

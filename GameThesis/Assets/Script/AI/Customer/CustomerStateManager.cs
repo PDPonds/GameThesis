@@ -92,8 +92,6 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     public GameObject g_stunVFX;
 
     [Header("===== Drunk =====")]
-    public Image img_wakeUpImage;
-    public Image img_BGWakeUpImage;
     public bool b_isDrunk;
     public float f_drunkPercent;
     [HideInInspector] public float f_currentWekeUpPoint;
@@ -186,6 +184,7 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
                 }
             }
         }
+
     }
 
     public void TakeDamage(int damage)
