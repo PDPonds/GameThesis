@@ -20,19 +20,20 @@ public class PlayerMovement : MainObserver
     {
         if (PlayerManager.Instance.b_canMove)
         {
-            Vector3 currentVelocity = PlayerManager.Instance.c_rb.velocity;
             Vector3 v_dir = new Vector3(PlayerManager.Instance.v_moveInput.x, 0, PlayerManager.Instance.v_moveInput.y);
 
-            v_moveDir = v_dir.z * PlayerManager.Instance.t_orientation.forward +
-                v_dir.x * PlayerManager.Instance.t_orientation.right;
+            Vector3 forward = v_dir.z * PlayerManager.Instance.t_orientation.forward;
+            Vector3 right = v_dir.x * PlayerManager.Instance.t_orientation.right;
+            forward = forward.normalized;
+            right = right.normalized;
+            v_moveDir = forward + right;
+            v_moveDir.Normalize();
 
-            v_moveDir *= PlayerManager.Instance.f_moveSpeed;
-            v_moveDir = transform.TransformDirection(v_moveDir);
-
-            Vector3 velocityChange = (v_moveDir - currentVelocity);
-            velocityChange = new Vector3(velocityChange.x, 0, velocityChange.z);
-            Vector3.ClampMagnitude(velocityChange, 2);
-            PlayerManager.Instance.c_rb.AddForce(velocityChange, ForceMode.VelocityChange);
+            if (v_dir.magnitude > 0)
+            {
+                PlayerManager.Instance.c_rb.velocity = new Vector3(v_moveDir.x * PlayerManager.Instance.f_moveSpeed,
+                PlayerManager.Instance.c_rb.velocity.y, v_moveDir.z * PlayerManager.Instance.f_moveSpeed);
+            }
 
             if (v_dir != Vector3.zero)
             {

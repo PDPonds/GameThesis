@@ -18,10 +18,6 @@ public class CustomerDrunkState : BaseState
         customerStateManager.g_sleepVFX.SetActive(true);
         customerStateManager.g_stunVFX.SetActive(false);
 
-        if (customerStateManager.c_chairObj != null)
-        {
-            customerStateManager.c_chairObj.EnableAllFood();
-        }
     }
 
     public override void UpdateState(StateManager ai)
@@ -41,7 +37,7 @@ public class CustomerDrunkState : BaseState
                 customerStateManager.agent.velocity = Vector3.zero;
                 Vector3 chairPos = new Vector3(chair.t_sitPos.position.x, chair.t_sitPos.position.y - 0.4f, chair.t_sitPos.position.z);
                 customerStateManager.transform.position = chairPos;
-                customerStateManager.transform.rotation = Quaternion.Euler(0, -chair.transform.localEulerAngles.z, 0);
+                customerStateManager.transform.rotation = Quaternion.Euler(0, chair.transform.localEulerAngles.z + 90f, 0);
 
             }
         }
