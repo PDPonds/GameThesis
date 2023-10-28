@@ -10,8 +10,10 @@ public class TableObj : MonoBehaviour
 
     private void Update()
     {
+
         if (transform.TryGetComponent<UpgradTable>(out UpgradTable up))
         {
+
             if (up.b_readyToUse)
             {
                 if (g_chairs.Count > 0)
@@ -33,6 +35,7 @@ public class TableObj : MonoBehaviour
                         chair.b_canUse = false;
                     }
                 }
+                
             }
         }
         else
