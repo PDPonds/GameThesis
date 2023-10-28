@@ -28,6 +28,8 @@ public class CustomerDeadState : BaseState
                 }
             }
         }
+
+
     }
 
     public override void UpdateState(StateManager ai)

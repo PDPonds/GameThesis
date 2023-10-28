@@ -68,7 +68,11 @@ public class PlayerUI : Auto_Singleton<PlayerUI>
                 }
 
             }
-            else text_interactText.text = string.Empty;
+            else
+            {
+                g_wekeUp.SetActive(false);
+                text_interactText.text = string.Empty;
+            }
         }
         else
         {

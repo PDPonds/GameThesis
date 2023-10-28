@@ -12,6 +12,8 @@ public class CustomerPushState : BaseState
             customerStateManager.c_chairObj.b_isEmpty = true;
             customerStateManager.c_chairObj.b_readyForNextCustomer = false;
             customerStateManager.c_chairObj.s_currentCustomer = null;
+            customerStateManager.c_chairObj.DisableAllFood();
+
         }
         customerStateManager.c_chairObj = null;
         customerStateManager.anim.Play("Push");

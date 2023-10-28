@@ -9,6 +9,7 @@ public class CustomerEscapeState : BaseState
         CustomerStateManager customerStateManager = (CustomerStateManager)ai;
         if (customerStateManager.c_chairObj != null)
         {
+            customerStateManager.c_chairObj.DisableAllFood();
             customerStateManager.c_chairObj.b_isEmpty = true;
             customerStateManager.c_chairObj.b_readyForNextCustomer = false;
             customerStateManager.c_chairObj.s_currentCustomer = null;

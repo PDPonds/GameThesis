@@ -5,20 +5,29 @@ using UnityEngine;
 public class ChairObj : MonoBehaviour
 {
     public Transform t_sitPos;
-
-    public bool b_isEmpty;
-
-    [HideInInspector] public float f_cdForNextCustomer;
     public Vector2 v_minmaxCDForNextCustomer;
 
-    [HideInInspector] public bool b_readyForNextCustomer;
-    [SerializeField] float f_currentCDForNextCustomer;
+    [HideInInspector] public bool b_isEmpty;
 
-    public CustomerStateManager s_currentCustomer;
-    public EmployeeStateManager s_currentEmployee;
+    [HideInInspector] public float f_cdForNextCustomer;
+
+    [HideInInspector] public bool b_readyForNextCustomer;
+    float f_currentCDForNextCustomer;
+
+    [HideInInspector] public CustomerStateManager s_currentCustomer;
+    [HideInInspector] public EmployeeStateManager s_currentEmployee;
 
     TableObj table;
     [HideInInspector] public bool b_canUse;
+
+    [Header("===== Food =====")]
+    [Header("- Main Dish")]
+    public GameObject g_foodPlate;
+    public GameObject g_stew;
+    public GameObject g_beanAndBacon;
+    [Header("- Drinks")]
+    public GameObject g_beerGlass;
+    public GameObject g_glass;
 
     private void Awake()
     {
@@ -64,27 +73,37 @@ public class ChairObj : MonoBehaviour
             }
 
 
-            if (s_currentCustomer.s_currentState == s_currentCustomer.s_eatFoodState)
-            {
-                foreach (GameObject food in table.g_foods) food.SetActive(true);
-
-            }
-            else
-            {
-                foreach (GameObject food in table.g_foods) food.SetActive(false);
-            }
-
         }
-        else
-        {
-            foreach (GameObject food in table.g_foods) food.SetActive(false);
 
-        }
 
         if (s_currentCustomer == null || s_currentCustomer.s_currentState != s_currentCustomer.s_waitFoodState)
         {
             s_currentEmployee = null;
         }
+
+        if (!b_canUse || s_currentCustomer == null)
+        {
+            DisableAllFood();
+        }
+
+    }
+
+    public void EnableAllFood()
+    {
+        if (!g_beanAndBacon.activeSelf) g_beanAndBacon.SetActive(true);
+        if (!g_beerGlass.activeSelf) g_beerGlass.SetActive(true);
+        if (!g_foodPlate.activeSelf) g_foodPlate.SetActive(true);
+        if (!g_glass.activeSelf) g_glass.SetActive(true);
+        if (!g_stew.activeSelf) g_stew.SetActive(true);
+    }
+
+    public void DisableAllFood()
+    {
+        if (g_beanAndBacon.activeSelf) g_beanAndBacon.SetActive(false);
+        if (g_beerGlass.activeSelf) g_beerGlass.SetActive(false);
+        if (g_foodPlate.activeSelf) g_foodPlate.SetActive(false);
+        if (g_glass.activeSelf) g_glass.SetActive(false);
+        if (g_stew.activeSelf) g_stew.SetActive(false);
     }
 
     public void RandomCDForNextCustomer()

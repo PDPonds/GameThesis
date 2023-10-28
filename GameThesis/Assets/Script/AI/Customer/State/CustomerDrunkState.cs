@@ -18,6 +18,10 @@ public class CustomerDrunkState : BaseState
         customerStateManager.g_sleepVFX.SetActive(true);
         customerStateManager.g_stunVFX.SetActive(false);
 
+        if (customerStateManager.c_chairObj != null)
+        {
+            customerStateManager.c_chairObj.EnableAllFood();
+        }
     }
 
     public override void UpdateState(StateManager ai)

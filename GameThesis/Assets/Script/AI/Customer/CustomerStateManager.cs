@@ -297,8 +297,7 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
         }
         else if (s_currentState == s_drunkState)
         {
-            text = $"[E] to wake up the customer.{Environment.NewLine}" +
-                $"Punch to drive away customers. ";
+            text = $"[E] to wake up the customer.";
         }
         return text;
     }

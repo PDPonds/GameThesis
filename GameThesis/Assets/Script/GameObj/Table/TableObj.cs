@@ -7,7 +7,6 @@ public class TableObj : MonoBehaviour
 {
     public GameObject g_table;
     public List<GameObject> g_chairs = new List<GameObject>();
-    public List<GameObject> g_foods = new List<GameObject>();
 
     private void Update()
     {

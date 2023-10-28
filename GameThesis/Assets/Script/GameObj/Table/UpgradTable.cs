@@ -16,6 +16,10 @@ public class UpgradTable : MonoBehaviour, IInteracable
     {
         tableObj = GetComponent<TableObj>();
         b_readyToUse = false;
+    }
+
+    private void Update()
+    {
         SetUpBuy();
     }
 
@@ -24,8 +28,8 @@ public class UpgradTable : MonoBehaviour, IInteracable
         MeshRenderer rndTable = tableObj.g_table.GetComponent<MeshRenderer>();
         rndTable.material = m_readyToUse;
 
-        //Collider taCol = tableObj.g_table.GetComponent<Collider>();
-        //taCol.enabled = true;
+        Collider taCol = tableObj.g_table.GetComponent<Collider>();
+        taCol.enabled = true;
 
         if (tableObj.g_chairs.Count > 0)
         {
@@ -37,8 +41,8 @@ public class UpgradTable : MonoBehaviour, IInteracable
                     rnd.material = m_readyToUse;
                 }
 
-                //Collider chairCol = tableObj.g_chairs[i].GetComponent<Collider>();
-                //chairCol.enabled = true;
+                Collider chairCol = tableObj.g_chairs[i].GetComponent<Collider>();
+                chairCol.enabled = true;
             }
         }
         tableObj.enabled = true;
@@ -46,36 +50,52 @@ public class UpgradTable : MonoBehaviour, IInteracable
 
     void SetUpBuy()
     {
-        MeshRenderer rndTable = tableObj.g_table.GetComponent<MeshRenderer>();
-        rndTable.material = m_waitForBuy;
-
-        //Collider taCol = tableObj.g_table.GetComponent<Collider>();
-        //taCol.enabled = false;
-
-        if (tableObj.g_chairs.Count > 0)
+        if (!b_readyToUse)
         {
-            for (int i = 0; i < tableObj.g_chairs.Count; i++)
-            {
-                MeshRenderer rnd = tableObj.g_chairs[i].GetComponent<MeshRenderer>();
-                if (rnd.material != m_waitForBuy)
-                {
-                    rnd.material = m_waitForBuy;
-                }
+            MeshRenderer rndTable = tableObj.g_table.GetComponent<MeshRenderer>();
+            if (rndTable.material != m_readyToUse)
+                rndTable.material = m_waitForBuy;
 
-                //Collider chairCol = tableObj.g_chairs[i].GetComponent<Collider>();
-                //chairCol.enabled = false;
-            }
-        }
-        tableObj.enabled = false;
-        if (tableObj.g_foods.Count > 0)
-        {
-            for (int i = 0; i < tableObj.g_foods.Count; i++)
+            GameState state = GameManager.Instance.s_gameState;
+
+            if (state.s_currentState == state.s_closeState)
             {
-                if (tableObj.g_foods[i].activeSelf)
+                Collider[] taCol = tableObj.g_table.GetComponents<Collider>();
+                foreach (Collider col in taCol) if (!col.enabled) col.enabled = true;
+            }
+            else if (state.s_currentState == state.s_openState)
+            {
+                Collider[] taCol = tableObj.g_table.GetComponents<Collider>();
+                foreach (Collider col in taCol) if (col.enabled) col.enabled = false;
+
+            }
+
+
+            if (tableObj.g_chairs.Count > 0)
+            {
+                for (int i = 0; i < tableObj.g_chairs.Count; i++)
                 {
-                    tableObj.g_foods[i].SetActive(false);
+                    MeshRenderer rnd = tableObj.g_chairs[i].GetComponent<MeshRenderer>();
+                    if (rnd.material != m_waitForBuy)
+                    {
+                        rnd.material = m_waitForBuy;
+                    }
+
+                    if (state.s_currentState == state.s_closeState)
+                    {
+                        Collider[] chairCol = tableObj.g_chairs[i].GetComponents<Collider>();
+                        foreach (Collider col in chairCol) if (!col.enabled) col.enabled = true;
+
+                    }
+                    else if (state.s_currentState == state.s_openState)
+                    {
+                        Collider[] chairCol = tableObj.g_chairs[i].GetComponents<Collider>();
+                        foreach (Collider col in chairCol) if (col.enabled) col.enabled = false;
+                    }
+
                 }
             }
+            tableObj.enabled = false;
         }
 
     }

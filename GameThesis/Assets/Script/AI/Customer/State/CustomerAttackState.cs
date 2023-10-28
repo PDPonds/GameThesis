@@ -28,6 +28,7 @@ public class CustomerAttackState : BaseState
 
         customerStateManager.c_atkCollider.enabled = true;
 
+
     }
 
     public override void UpdateState(StateManager ai)

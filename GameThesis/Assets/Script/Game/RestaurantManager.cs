@@ -80,14 +80,13 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
                 }
             }
 
-            //CanClose
-        }
+        } 
 
         if (GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_closeState)
         {
             if (RestaurantIsEmpty())
             {
-                //CanOpen
+                
             }
         }
 

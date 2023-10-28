@@ -10,6 +10,11 @@ public class CustomerWaitFoodState : BaseState
         customerStateManager.f_currentOrderTime = customerStateManager.f_orderTime;
         customerStateManager.c_chairObj.s_currentCustomer = customerStateManager;
 
+        if(customerStateManager.c_chairObj != null )
+        {
+            customerStateManager.c_chairObj.DisableAllFood();
+        }
+
         Color noColor = new Color(0, 0, 0, 0);
         customerStateManager.ApplyOutlineColor(noColor, 0f);
 
@@ -31,9 +36,10 @@ public class CustomerWaitFoodState : BaseState
                 customerStateManager.anim.SetBool("sit", true);
                 customerStateManager.anim.SetBool("drunk", false);
                 customerStateManager.agent.velocity = Vector3.zero;
+
                 Vector3 chairPos = new Vector3(chair.t_sitPos.position.x, chair.t_sitPos.position.y - 0.4f, chair.t_sitPos.position.z);
                 customerStateManager.transform.position = chairPos;
-                customerStateManager.transform.rotation = Quaternion.Euler(0, -chair.transform.localEulerAngles.z, 0);
+                customerStateManager.transform.rotation = Quaternion.Euler(0,chair.transform.localEulerAngles.z + 90f, 0);
 
             }
 

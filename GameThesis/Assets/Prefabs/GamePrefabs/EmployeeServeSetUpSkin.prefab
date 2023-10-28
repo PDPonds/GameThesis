@@ -107,7 +107,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.1
+      value: -0.474
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
@@ -1031,14 +1031,14 @@ MonoBehaviour:
   agent: {fileID: 0}
   b_canServe: 1
   b_hasFood: 0
-  s_serveTable: {fileID: 0}
+  s_serveChair: {fileID: 0}
   g_FoodInHand: {fileID: 572668808332531273}
   b_isWorking: 0
   t_workingPos: {fileID: 0}
   f_timeToSlackOff: 10
   f_slackOffPercent: 2.5
-  v_minmaxX: {x: -21, y: -14}
-  v_minmaxZ: {x: -7, y: 11}
+  v_minmaxX: {x: -21, y: -15}
+  v_minmaxZ: {x: -1, y: 7}
   v_minAndMaxSlackOffTime: {x: 30, y: 60}
   v_walkPos: {x: 0, y: 0, z: 0}
   f_slackOffTime: 0
