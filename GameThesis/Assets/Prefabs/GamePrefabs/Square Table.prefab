@@ -410,6 +410,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 4005746737227592837}
+    - targetCorrespondingSourceObject: {fileID: 5829835745667095667, guid: bb6920a9508f7d14b95e137da8049be5,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4864510776847484108}
   m_SourcePrefab: {fileID: 100100000, guid: bb6920a9508f7d14b95e137da8049be5, type: 3}
 --- !u!1 &2397676267491778499 stripped
 GameObject:
@@ -466,6 +470,22 @@ MonoBehaviour:
   g_beanAndBacon: {fileID: 2397676267491778499}
   g_beerGlass: {fileID: 7194361045454421395}
   g_glass: {fileID: 4359414049554131125}
+--- !u!208 &4864510776847484108
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6964226184247216090}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.003, y: 0.003, z: 0.007}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0.007}
+  m_TimeToStationary: 0.5
 --- !u!1 &7194361045454421395 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6022961045498029626, guid: bb6920a9508f7d14b95e137da8049be5,
@@ -642,10 +662,18 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 8068458789347815368}
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3381428388395208176, guid: 3b1f3eefa9d1d944195f3f370ac00371,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5376301233896657633}
     - targetCorrespondingSourceObject: {fileID: 7218313240057859453, guid: 3b1f3eefa9d1d944195f3f370ac00371,
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 31202196062706280}
+    - targetCorrespondingSourceObject: {fileID: 7218313240057859453, guid: 3b1f3eefa9d1d944195f3f370ac00371,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 42662624895998317}
   m_SourcePrefab: {fileID: 100100000, guid: 3b1f3eefa9d1d944195f3f370ac00371, type: 3}
 --- !u!4 &1621040898194367727 stripped
 Transform:
@@ -684,6 +712,22 @@ MonoBehaviour:
   g_beanAndBacon: {fileID: 6689938618423567948}
   g_beerGlass: {fileID: 2181623650711585820}
   g_glass: {fileID: 4750894761340293434}
+--- !u!208 &42662624895998317
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2104527614964219477}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.003, y: 0.003, z: 0.007}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0.007}
+  m_TimeToStationary: 0.5
 --- !u!1 &2181623650711585820 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7448670333622925108, guid: 3b1f3eefa9d1d944195f3f370ac00371,
@@ -714,6 +758,22 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 8725813419721421608}
   m_PrefabAsset: {fileID: 0}
+--- !u!208 &5376301233896657633
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6338093163460378328}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.006, y: 0.0050000004, z: 0.006}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0.006}
+  m_TimeToStationary: 0.5
 --- !u!4 &6682988398385521762 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2713119264755652426, guid: 3b1f3eefa9d1d944195f3f370ac00371,

@@ -8,7 +8,6 @@ public class OpenCloseRestaurantInterac : MonoBehaviour, IInteracable
     public void Interaction()
     {
         GameManager.Instance.s_gameState.OpenCloseRestaurant();
-
     }
 
     public string InteractionText()

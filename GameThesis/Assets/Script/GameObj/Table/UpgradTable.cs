@@ -61,13 +61,23 @@ public class UpgradTable : MonoBehaviour, IInteracable
             if (state.s_currentState == state.s_closeState)
             {
                 Collider[] taCol = tableObj.g_table.GetComponents<Collider>();
-                foreach (Collider col in taCol) if (!col.enabled) col.enabled = true;
+                foreach (Collider col in taCol)
+                {
+                    if (!col.enabled) col.enabled = true;
+                }
+
+                if (!tableObj.gameObject.activeSelf) tableObj.gameObject.SetActive(true);
+
             }
             else if (state.s_currentState == state.s_openState)
             {
                 Collider[] taCol = tableObj.g_table.GetComponents<Collider>();
-                foreach (Collider col in taCol) if (col.enabled) col.enabled = false;
+                foreach (Collider col in taCol)
+                {
+                    if (col.enabled) col.enabled = false;
+                }
 
+                if (tableObj.gameObject.activeSelf) tableObj.gameObject.SetActive(false);
             }
 
 
@@ -86,11 +96,15 @@ public class UpgradTable : MonoBehaviour, IInteracable
                         Collider[] chairCol = tableObj.g_chairs[i].GetComponents<Collider>();
                         foreach (Collider col in chairCol) if (!col.enabled) col.enabled = true;
 
+                        if (!tableObj.g_chairs[i].gameObject.activeSelf) tableObj.g_chairs[i].gameObject.SetActive(true);
+
                     }
                     else if (state.s_currentState == state.s_openState)
                     {
                         Collider[] chairCol = tableObj.g_chairs[i].GetComponents<Collider>();
                         foreach (Collider col in chairCol) if (col.enabled) col.enabled = false;
+
+                        if (tableObj.g_chairs[i].gameObject.activeSelf) tableObj.g_chairs[i].gameObject.SetActive(false);
                     }
 
                 }

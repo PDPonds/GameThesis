@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 967303093062407330}
   - component: {fileID: 6083169958891841789}
   - component: {fileID: 3908837299557097551}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -82,7 +82,7 @@ GameObject:
   - component: {fileID: 5799605865025880074}
   - component: {fileID: 7725168764169312589}
   - component: {fileID: 3278531588575533003}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Door Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,13 +97,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4643988722423080827}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.7071068, z: -0.7071068, w: 0}
+  m_LocalRotation: {x: -0.7070847, y: -0.0055880244, z: -0.0055880244, w: 0.7070847}
   m_LocalPosition: {x: 0.77920437, y: 0.044455823, z: 0}
   m_LocalScale: {x: 99.999985, y: 99.999985, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 967303093062407330}
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: -180}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: -0.906}
 --- !u!33 &2207173238786736525
 MeshFilter:
   m_ObjectHideFlags: 0

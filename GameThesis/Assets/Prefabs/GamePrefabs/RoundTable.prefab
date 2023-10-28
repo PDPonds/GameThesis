@@ -435,22 +435,42 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 3689684253594982125}
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 279039657169307200, guid: 81170f9d3c8b2df4186c4414cd8039ee,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 11340594255126855}
     - targetCorrespondingSourceObject: {fileID: 2435774987120397921, guid: 81170f9d3c8b2df4186c4414cd8039ee,
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 7581668807104695938}
+    - targetCorrespondingSourceObject: {fileID: 2435774987120397921, guid: 81170f9d3c8b2df4186c4414cd8039ee,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3495171999875830670}
     - targetCorrespondingSourceObject: {fileID: 266718010610741092, guid: 81170f9d3c8b2df4186c4414cd8039ee,
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 7442863271597348931}
+    - targetCorrespondingSourceObject: {fileID: 266718010610741092, guid: 81170f9d3c8b2df4186c4414cd8039ee,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3154214595615087888}
     - targetCorrespondingSourceObject: {fileID: 3053572615957010195, guid: 81170f9d3c8b2df4186c4414cd8039ee,
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 9122641755791194237}
+    - targetCorrespondingSourceObject: {fileID: 3053572615957010195, guid: 81170f9d3c8b2df4186c4414cd8039ee,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4505015717747298896}
     - targetCorrespondingSourceObject: {fileID: 9532535695449913, guid: 81170f9d3c8b2df4186c4414cd8039ee,
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 8328652553102499359}
+    - targetCorrespondingSourceObject: {fileID: 9532535695449913, guid: 81170f9d3c8b2df4186c4414cd8039ee,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2348431423061135664}
   m_SourcePrefab: {fileID: 100100000, guid: 81170f9d3c8b2df4186c4414cd8039ee, type: 3}
 --- !u!1 &101222189132305694 stripped
 GameObject:
@@ -579,6 +599,22 @@ MonoBehaviour:
   g_beanAndBacon: {fileID: 1784378662774388474}
   g_beerGlass: {fileID: 213307863049119043}
   g_glass: {fileID: 797048984337467787}
+--- !u!208 &2348431423061135664
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4916289508887267261}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.113000005, y: 0.115, z: 0.164}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: -0.016, z: 0.165}
+  m_TimeToStationary: 0.5
 --- !u!1 &5163487021661812704 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 266718010610741092, guid: 81170f9d3c8b2df4186c4414cd8039ee,
@@ -610,12 +646,44 @@ MonoBehaviour:
   g_beanAndBacon: {fileID: 1968404698515719847}
   g_beerGlass: {fileID: 101222189132305694}
   g_glass: {fileID: 620899165925030358}
+--- !u!208 &3154214595615087888
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5163487021661812704}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.113000005, y: 0.115, z: 0.164}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: -0.016, z: 0.165}
+  m_TimeToStationary: 0.5
 --- !u!1 &5171451366040264388 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 279039657169307200, guid: 81170f9d3c8b2df4186c4414cd8039ee,
     type: 3}
   m_PrefabInstance: {fileID: 4907787286514178180}
   m_PrefabAsset: {fileID: 0}
+--- !u!208 &11340594255126855
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5171451366040264388}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.010000001, y: 0.010000001, z: 0.006}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0.006}
+  m_TimeToStationary: 0.5
 --- !u!4 &5516767924309296254 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 618270482447375610, guid: 81170f9d3c8b2df4186c4414cd8039ee,
@@ -683,6 +751,22 @@ MonoBehaviour:
   g_beanAndBacon: {fileID: 4120550980314752930}
   g_beerGlass: {fileID: 2529215287890244635}
   g_glass: {fileID: 3090575918741919955}
+--- !u!208 &3495171999875830670
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7338170268475250405}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.113000005, y: 0.115, z: 0.164}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: -0.016, z: 0.165}
+  m_TimeToStationary: 0.5
 --- !u!1 &7961113538118897559 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3053572615957010195, guid: 81170f9d3c8b2df4186c4414cd8039ee,
@@ -714,6 +798,22 @@ MonoBehaviour:
   g_beanAndBacon: {fileID: 3639690420887355088}
   g_beerGlass: {fileID: 2933100687531371881}
   g_glass: {fileID: 2399866663631618465}
+--- !u!208 &4505015717747298896
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7961113538118897559}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.113000005, y: 0.115, z: 0.164}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: -0.016, z: 0.165}
+  m_TimeToStationary: 0.5
 --- !u!4 &7970731795177835615 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3064221115366216923, guid: 81170f9d3c8b2df4186c4414cd8039ee,
