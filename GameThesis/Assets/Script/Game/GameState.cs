@@ -15,8 +15,6 @@ public class GameState : StateManager
 
     public int i_maxCustomerCount;
 
-    public GameObject g_frontDoor;
-
     private void Start()
     {
         SwitchState(s_closeState);

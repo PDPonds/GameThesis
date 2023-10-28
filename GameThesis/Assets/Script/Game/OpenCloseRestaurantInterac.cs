@@ -4,19 +4,11 @@ using UnityEngine;
 
 public class OpenCloseRestaurantInterac : MonoBehaviour, IInteracable
 {
-    private int openCounter = 0;
-    public TutorialsManager tutorialManager;
 
     public void Interaction()
     {
         GameManager.Instance.s_gameState.OpenCloseRestaurant();
 
-        openCounter++;
-        if(openCounter ==1)
-        {
-
-            //tutorialManager.SetObjectiveToComplete();
-        }
     }
 
     public string InteractionText()

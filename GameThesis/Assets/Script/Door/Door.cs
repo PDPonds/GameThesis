@@ -1,99 +1,48 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    public bool IsOpen = false;
-    [SerializeField] private bool IsRotationDoor = true;
-    [SerializeField] private float speed = 1f;
+    public Transform t_doorMesh;
+    Animator anim;
 
-    [SerializeField] private float rotationAmount = 90f;
-    [SerializeField] private float ForwardDirection = 0f;
-
-    private Vector3 startRotation;
-    private Vector3 forward;
-
-    private Coroutine animationCoroutine;
+    public bool b_isOpen;
 
     private void Awake()
     {
-        startRotation = transform.rotation.eulerAngles;
-        forward = transform.right;
+        anim = t_doorMesh.GetComponent<Animator>();
+    }
+    private void Update()
+    {
+        anim.SetBool("isOpen", b_isOpen);
     }
 
-    public void OpenDoor(Vector3 UserPosition)
+    
+    private void OnTriggerStay(Collider other)
     {
-        if(animationCoroutine != null)
+        if (other.CompareTag("Player") || other.CompareTag("Enemy"))
         {
-            StopCoroutine(animationCoroutine);
-        }
-        if(IsRotationDoor)
-        {
-            float dot = Vector3.Dot(forward, (UserPosition - transform.position).normalized);
-            Debug.Log($"Dot: {dot.ToString("N3")}");
-            animationCoroutine = StartCoroutine(DoRotationOpen(dot));
-        }
-    }
+            Vector3 forward = transform.TransformDirection(Vector3.forward);
+            Vector3 toOther = other.transform.position - transform.position;
 
-    public void CloseDoor()
-    {
-        if (IsOpen)
-        {
-            if(animationCoroutine != null)
+            float dot = Vector3.Dot(forward, toOther);
+            if (dot < 0)
             {
-                StopCoroutine(animationCoroutine);
+                anim.SetBool("Behind", true);
+                anim.SetBool("Fornt", false);
             }
-            if (IsRotationDoor)
+            else
             {
-                animationCoroutine = StartCoroutine(DoRotationClose());
+                anim.SetBool("Behind", false);
+                anim.SetBool("Fornt", true);
             }
+            b_isOpen = true;
         }
+
     }
-
-    private IEnumerator DoRotationOpen(float forwardAmount)
+    private void OnTriggerExit(Collider other)
     {
-        Quaternion startRotation = transform.rotation;
-        Quaternion endRotation;
-
-        if (forwardAmount >= ForwardDirection)
-        {
-            Debug.Log("1");
-            endRotation = Quaternion.Euler(new Vector3(-90, startRotation.y - rotationAmount, -90));
-        }
-        else
-        {
-            Debug.Log("2");
-            endRotation = Quaternion.Euler(new Vector3(-90, startRotation.y + rotationAmount, -90));
-        }
-
-        Debug.Log("start rotation: " + startRotation);
-        Debug.Log("end rotation: " + endRotation);
-
-        IsOpen = true;
-        float time = 0;
-        while(time < 1)
-        {
-            transform.rotation = Quaternion.Slerp(startRotation, endRotation, time);
-            yield return null;
-            time += Time.deltaTime * speed;
-        }
-    }
-
-    private IEnumerator DoRotationClose()
-    {
-        Quaternion _startRotation = transform.rotation;
-        Quaternion endRotation = Quaternion.Euler(startRotation);
-        
-        IsOpen = false;
-
-        float time = 0;
-        while(time < 1)
-        {
-            transform.rotation = Quaternion.Slerp(_startRotation, endRotation, time);
-            yield return null;
-            time += Time.deltaTime * speed;
-        }
+        b_isOpen = false;
     }
 }
