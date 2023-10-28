@@ -39,7 +39,7 @@ public class CustomerFrontOfCounterState : BaseState
             customerStateManager.SwitchState(customerStateManager.s_goOutState);
         }
 
-        if (f_currentPayTime <= 5)
+        if (f_currentPayTime <= 10)
         {
             if (f_outlineTime > 0)
             {
