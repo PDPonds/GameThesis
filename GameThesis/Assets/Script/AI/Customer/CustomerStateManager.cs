@@ -153,7 +153,6 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     private void Update()
     {
         s_currentState.UpdateState(this);
-
     }
 
     public void TakeDamage(int damage)
@@ -162,17 +161,15 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
 
         s_hurtState.s_lastState = s_currentState;
 
-        SwitchState(s_hurtState);
+        if (i_currentHP <= 0) Die();
+        else SwitchState(s_hurtState);
 
-        if (i_currentHP <= 0)
-        {
-            b_inFight = false;
-            Die();
-        }
     }
 
     public void Die()
     {
+        b_inFight = false;
+
         if (b_escape) GameManager.Instance.AddCoin(f_giveCoin);
         if (b_isDrunk) GameManager.Instance.AddCoin(f_giveCoin);
 

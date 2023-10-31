@@ -50,7 +50,7 @@ public class CustomerHurtState : BaseState
                         if (f_fightBackPercent <= customerStateManager.f_fightBackPercent)
                         {
                             customerStateManager.b_inFight = true;
-                            customerStateManager.SwitchState(customerStateManager.s_walkAroundState);
+                            customerStateManager.SwitchState(customerStateManager.s_fightState);
                         }
                         else
                         {
@@ -60,7 +60,8 @@ public class CustomerHurtState : BaseState
                     else
                     {
                         customerStateManager.b_inFight = true;
-                        customerStateManager.SwitchState(customerStateManager.s_walkAroundState);
+                        customerStateManager.SwitchState(customerStateManager.s_fightState);
+
 
                     }
                 }
@@ -70,14 +71,14 @@ public class CustomerHurtState : BaseState
                 }
                 else
                 {
+
                     customerStateManager.b_inFight = true;
-                    customerStateManager.SwitchState(customerStateManager.s_walkAroundState);
+                    customerStateManager.SwitchState(customerStateManager.s_fightState);
 
                 }
 
             }
 
         }
-
     }
 }

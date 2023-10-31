@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FightingManager : MonoBehaviour
+public class FightingManager : Auto_Singleton<FightingManager>
 {
     public List<CustomerStateManager> fighter = new List<CustomerStateManager>();
 
@@ -23,12 +23,12 @@ public class FightingManager : MonoBehaviour
 
         foreach (CustomerStateManager cus in fighter)
         {
-            if (cus.s_currentState != cus.s_fightState && cus.s_currentState != cus.s_hurtState)
+            if (cus.s_currentState != cus.s_fightState && cus.s_currentState != cus.s_hurtState
+                && cus.s_currentState != cus.s_deadState)
             {
                 cus.SwitchState(cus.s_fightState);
             }
         }
-        
 
 
     }

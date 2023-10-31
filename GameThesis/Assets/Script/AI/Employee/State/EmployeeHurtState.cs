@@ -29,7 +29,6 @@ public class EmployeeHurtState : BaseState
             if(employeeStateManager.anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.5f)
             {
                 employeeStateManager.SwitchState(employeeStateManager.s_activityState);
-
             }
         }
     }
