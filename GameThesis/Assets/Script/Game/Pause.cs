@@ -8,6 +8,14 @@ public class Pause : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            PauseGame();
+        }        
+    }
+
+    private static void PauseGame()
+    {
         if (isPause)
         {
             Time.timeScale = 0f;
@@ -23,5 +31,4 @@ public class Pause : MonoBehaviour
             Cursor.visible = false;
         }
     }
-
 }
