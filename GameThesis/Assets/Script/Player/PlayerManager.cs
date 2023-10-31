@@ -133,21 +133,10 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
         for (int i = 0; i < RestaurantManager.Instance.allCustomers.Length; i++)
         {
             CustomerStateManager cus = RestaurantManager.Instance.allCustomers[i];
-            if (cus.s_currentState == cus.s_fightState ||
-                cus.s_currentState == cus.s_attackState ||
-                cus.s_currentState == cus.s_aggressive)
+            if (cus.b_inFight)
             {
+                cus.b_inFight = false;
                 cus.SwitchState(cus.s_walkAroundState);
-            }
-        }
-
-        for (int i = 0; i < RestaurantManager.Instance.allEmployees.Length; i++)
-        {
-            EmployeeStateManager emp = RestaurantManager.Instance.allEmployees[i];
-            if (emp.s_currentState == emp.s_fightState ||
-                emp.s_currentState == emp.s_attackState)
-            {
-                emp.SwitchState(emp.s_activityState);
             }
         }
 

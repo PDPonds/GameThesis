@@ -25,7 +25,6 @@ public class EmployeeServeAndCookingState : BaseState
     {
         EmployeeStateManager employeeStateManager = (EmployeeStateManager)ai;
 
-        employeeStateManager.DisablePunch();
         employeeStateManager.RagdollOff();
 
         if (GameManager.Instance.s_gameState.s_currentState ==
@@ -284,15 +283,6 @@ public class EmployeeServeAndCookingState : BaseState
                     break;
 
                 default: break;
-            }
-        }
-
-        if (!employeeStateManager.b_canAtk)
-        {
-            employeeStateManager.f_currentAtkDelay -= Time.deltaTime;
-            if (employeeStateManager.f_currentAtkDelay <= 0)
-            {
-                employeeStateManager.b_canAtk = true;
             }
         }
 

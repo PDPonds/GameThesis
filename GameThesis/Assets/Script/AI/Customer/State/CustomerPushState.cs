@@ -37,8 +37,6 @@ public class CustomerPushState : BaseState
 
         customerStateManager.RagdollOff();
 
-        customerStateManager.DisablePunch();
-
         if (customerStateManager.anim.GetCurrentAnimatorStateInfo(0).IsName("Push"))
         {
             if (customerStateManager.anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.5f)

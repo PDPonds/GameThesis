@@ -23,23 +23,9 @@ public class EmployeeStateManager : StateManager, IDamageable
     public EmployeePassedOutState s_passedOutState = new EmployeePassedOutState();
 
     public EmployeeHurtState s_hurtState = new EmployeeHurtState();
-    public EmployeeFightState s_fightState = new EmployeeFightState();
-    public EmployeeAttackState s_attackState = new EmployeeAttackState();
-
-    [Header("===== Fight =====")]
-    public float f_atkRange;
-    public float f_atkDelay;
-    public float f_runRange;
-
-    public float f_fightTime;
-    [HideInInspector] public float f_currentFightTime;
-
-    [HideInInspector] public float f_currentAtkDelay;
-    [HideInInspector] public bool b_canAtk;
 
     [Header("===== Attack =====")]
     public int i_atkCount;
-    public Collider c_atkCollider;
 
     [Header("===== Pressed Out =====")]
     public float f_pressedOutTime;
@@ -52,7 +38,7 @@ public class EmployeeStateManager : StateManager, IDamageable
     [Header("===== Serve =====")]
     public bool b_canServe;
     public bool b_hasFood;
-    public ChairObj s_serveChair;
+    [HideInInspector] public ChairObj s_serveChair;
     public GameObject g_FoodInHand;
 
     [Header("===== Cooking =====")]
@@ -121,21 +107,6 @@ public class EmployeeStateManager : StateManager, IDamageable
     {
         s_currentState.UpdateState(this);
 
-        if (s_currentState == s_fightState || s_currentState == s_attackState)
-        {
-            if (PlayerManager.Instance.b_inFighting)
-            {
-                f_currentFightTime = f_fightTime;
-            }
-            else
-            {
-                f_currentFightTime -= Time.deltaTime;
-                if (f_currentFightTime < 0)
-                {
-                    SwitchState(s_activityState);
-                }
-            }
-        }
     }
 
     public void TakeDamage(int damage)
@@ -172,10 +143,5 @@ public class EmployeeStateManager : StateManager, IDamageable
         foreach (Rigidbody rb in rb) { rb.isKinematic = true; }
     }
 
-    public void DisablePunch()
-    {
-        c_atkCollider.enabled = false;
-
-    }
 
 }

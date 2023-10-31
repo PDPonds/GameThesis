@@ -25,13 +25,10 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
 
     public CustomerDrunkState s_drunkState = new CustomerDrunkState();
 
-    public CustomerAggressiveChaseState s_aggressive = new CustomerAggressiveChaseState();
-
     public CustomerCrowdState s_crowdState = new CustomerCrowdState();
 
     public CustomerFightState s_fightState = new CustomerFightState();
     public CustomerPushState s_pushState = new CustomerPushState();
-    public CustomerAttackState s_attackState = new CustomerAttackState();
     public CustomerDeadState s_deadState = new CustomerDeadState();
     public CustomerHurtState s_hurtState = new CustomerHurtState();
 
@@ -40,19 +37,7 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
 
     [Header("===== Fight =====")]
     public bool b_inFight;
-    public float f_atkRange;
-    public float f_runRange;
 
-    public float f_atkDelay;
-    public float f_fightTime;
-    [HideInInspector] public float f_currentFightTime;
-
-    [HideInInspector] public float f_currentAtkDelay;
-    [HideInInspector] public bool b_canAtk;
-
-    [Header("===== Attack =====")]
-    public int i_atkCount;
-    public Collider c_atkCollider;
 
     [Header("===== RagdollAndDrag =====")]
     public Transform t_hips;
@@ -169,28 +154,6 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     {
         s_currentState.UpdateState(this);
 
-        if (s_currentState == s_fightState || s_currentState == s_attackState)
-        {
-            if (PlayerManager.Instance.b_inFighting)
-            {
-                f_currentFightTime = f_fightTime;
-            }
-            else
-            {
-                f_currentFightTime -= Time.deltaTime;
-                if (f_currentFightTime < 0)
-                {
-                    SwitchState(s_walkAroundState);
-                }
-            }
-        }
-
-        if (s_currentState == s_attackState || s_currentState == s_aggressive
-            || s_currentState == s_fightState)
-        {
-            b_inFight = true;
-        }
-        else b_inFight = false;
     }
 
     public void TakeDamage(int damage)
@@ -203,6 +166,7 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
 
         if (i_currentHP <= 0)
         {
+            b_inFight = false;
             Die();
         }
     }
@@ -241,11 +205,6 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
         anim.enabled = true;
         agent.enabled = true;
         foreach (Rigidbody rb in rb) { rb.isKinematic = true; }
-    }
-
-    public void DisablePunch()
-    {
-        c_atkCollider.enabled = false;
     }
 
     public void Interaction()
@@ -312,15 +271,6 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     public void DestroyAI()
     {
         Destroy(gameObject);
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, f_atkRange);
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, f_runRange);
-
     }
 
 }

@@ -240,7 +240,6 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
                     allCustomers[i].s_currentState == allCustomers[i].s_goToChairState ||
                     allCustomers[i].s_currentState == allCustomers[i].s_frontCounter ||
                     allCustomers[i].s_currentState == allCustomers[i].s_fightState ||
-                    allCustomers[i].s_currentState == allCustomers[i].s_attackState ||
                     allCustomers[i].b_escape)
                 {
                     b_summaryButHasCustome = true;
@@ -292,9 +291,7 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
         {
             for (int i = 0; i < allCustomers.Length; i++)
             {
-                if (allCustomers[i].s_currentState == allCustomers[i].s_fightState ||
-                    allCustomers[i].s_currentState == allCustomers[i].s_attackState ||
-                    allCustomers[i].s_currentState == allCustomers[i].s_hurtState)
+                if (allCustomers[i].b_inFight)
                 {
                     return true;
                 }
@@ -303,17 +300,17 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
         return false;
     }
 
-    public bool HasGangToTeachYou()
-    {
-        for (int i = 0; i < allCustomers.Length; i++)
-        {
-            if (allCustomers[i].s_currentState == allCustomers[i].s_aggressive)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
+    //public bool HasGangToTeachYou()
+    //{
+    //    for (int i = 0; i < allCustomers.Length; i++)
+    //    {
+    //        if (allCustomers[i].s_currentState == allCustomers[i].s_aggressive)
+    //        {
+    //            return true;
+    //        }
+    //    }
+    //    return false;
+    //}
 
     public void RemoveRating()
     {

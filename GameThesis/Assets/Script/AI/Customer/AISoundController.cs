@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class AISoundController : MonoBehaviour, IObserver
 {
-    public MainObserver s_leftPunchTrigger;
-    public MainObserver s_rightPunchTrigger;
     public MainObserver s_aiMainObserver;
 
     public AudioSource as_punchHitBlock;
@@ -23,23 +21,11 @@ public class AISoundController : MonoBehaviour, IObserver
 
     private void OnEnable()
     {
-        StateManager state = transform.GetComponent<StateManager>();
-        if (state is EmployeeStateManager || state is CustomerStateManager)
-        {
-            s_rightPunchTrigger.AddObserver(this);
-            s_leftPunchTrigger.AddObserver(this);
-        }
         s_aiMainObserver.AddObserver(this);
     }
 
     private void OnDisable()
     {
-        StateManager state = transform.GetComponent<StateManager>();
-        if (state is EmployeeStateManager || state is CustomerStateManager)
-        {
-            s_rightPunchTrigger.RemoveObserver(this);
-            s_leftPunchTrigger.RemoveObserver(this);
-        }
         s_aiMainObserver.RemoveObserver(this);
     }
 

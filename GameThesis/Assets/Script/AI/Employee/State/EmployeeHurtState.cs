@@ -24,24 +24,12 @@ public class EmployeeHurtState : BaseState
 
         employeeStateManager.RagdollOff();
 
-        employeeStateManager.DisablePunch();
-
         if (employeeStateManager.anim.GetCurrentAnimatorStateInfo(0).IsName("Hurt"))
         {
             if(employeeStateManager.anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.5f)
             {
-                if(s_lastState == employeeStateManager.s_passedOutState)
-                {
-                    employeeStateManager.SwitchState(employeeStateManager.s_activityState);
-                }
-                else if(s_lastState == employeeStateManager.s_slowDownState)
-                {
-                    employeeStateManager.SwitchState(employeeStateManager.s_activityState);
-                }
-                else
-                {
-                    employeeStateManager.SwitchState(employeeStateManager.s_fightState);
-                }
+                employeeStateManager.SwitchState(employeeStateManager.s_activityState);
+
             }
         }
     }

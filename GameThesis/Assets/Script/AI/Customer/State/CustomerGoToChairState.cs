@@ -21,7 +21,6 @@ public class CustomerGoToChairState : BaseState
     public override void UpdateState(StateManager ai)
     {
         CustomerStateManager customerStateManager = (CustomerStateManager)ai;
-        customerStateManager.DisablePunch();
 
         customerStateManager.anim.SetBool("fightState", false);
         customerStateManager.anim.SetBool("walk", true);

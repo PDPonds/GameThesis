@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1834107797732434071}
   - component: {fileID: 5220354832609275813}
-  - component: {fileID: 9087400398838001864}
   m_Layer: 8
   m_Name: AtkCollider
   m_TagString: Enemy
@@ -54,18 +53,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3.7, y: 6.969489, z: 3.2195725}
   m_Center: {x: 0.047991343, y: -0.41917893, z: 1.1097854}
---- !u!114 &9087400398838001864
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2047162628270003577}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e94ac47e440fbee48a680e939a347beb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1561644431269628577
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1929,15 +1916,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   i_currentHP: 0
   i_maxHP: 5
-  f_atkRange: 1.2
-  f_runRange: 2.5
-  f_atkDelay: 0.7
-  f_fightTime: 8
-  f_currentFightTime: 0
-  f_currentAtkDelay: 0
-  b_canAtk: 0
-  i_atkCount: 0
-  c_atkCollider: {fileID: 5220354832609275813}
+  b_inFight: 0
   t_hips: {fileID: 1841821590660256524}
   rb: []
   anim: {fileID: 0}
@@ -1946,7 +1925,6 @@ MonoBehaviour:
   v_walkPos: {x: 0, y: 0, z: 0}
   f_orderTime: 60
   f_currentOrderTime: 0
-  c_tableObj: {fileID: 0}
   c_chairObj: {fileID: 0}
   v_minAndMaxEatFood: {x: 10, y: 15}
   f_randomEventPercent: 50
@@ -1992,8 +1970,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75c4eab561ae1924faf28b7bcf6f82a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  s_leftPunchTrigger: {fileID: 9087400398838001864}
-  s_rightPunchTrigger: {fileID: 9087400398838001864}
+  s_leftPunchTrigger: {fileID: 0}
+  s_rightPunchTrigger: {fileID: 0}
   s_aiMainObserver: {fileID: 8240269092284624982}
   as_punchHitBlock: {fileID: 0}
   as_punchHit: {fileID: 0}

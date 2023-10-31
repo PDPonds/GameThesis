@@ -21,6 +21,15 @@ public class FightingManager : MonoBehaviour
             }
         }
 
+        foreach (CustomerStateManager cus in fighter)
+        {
+            if (cus.s_currentState != cus.s_fightState && cus.s_currentState != cus.s_hurtState)
+            {
+                cus.SwitchState(cus.s_fightState);
+            }
+        }
+        
+
 
     }
 

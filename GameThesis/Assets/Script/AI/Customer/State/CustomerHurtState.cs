@@ -37,10 +37,7 @@ public class CustomerHurtState : BaseState
         customerStateManager.anim.SetBool("sit", false);
         customerStateManager.anim.SetBool("drunk", false);
 
-
         customerStateManager.RagdollOff();
-
-        customerStateManager.DisablePunch();
 
         if (customerStateManager.anim.GetCurrentAnimatorStateInfo(0).IsName("Hurt"))
         {
@@ -52,7 +49,8 @@ public class CustomerHurtState : BaseState
                     {
                         if (f_fightBackPercent <= customerStateManager.f_fightBackPercent)
                         {
-                            customerStateManager.SwitchState(customerStateManager.s_fightState);
+                            customerStateManager.b_inFight = true;
+                            customerStateManager.SwitchState(customerStateManager.s_walkAroundState);
                         }
                         else
                         {
@@ -61,7 +59,9 @@ public class CustomerHurtState : BaseState
                     }
                     else
                     {
-                        customerStateManager.SwitchState(customerStateManager.s_fightState);
+                        customerStateManager.b_inFight = true;
+                        customerStateManager.SwitchState(customerStateManager.s_walkAroundState);
+
                     }
                 }
                 else if (s_lastState == customerStateManager.s_giveBackState)
@@ -70,7 +70,9 @@ public class CustomerHurtState : BaseState
                 }
                 else
                 {
-                    customerStateManager.SwitchState(customerStateManager.s_fightState);
+                    customerStateManager.b_inFight = true;
+                    customerStateManager.SwitchState(customerStateManager.s_walkAroundState);
+
                 }
 
             }
