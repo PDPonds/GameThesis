@@ -58,7 +58,7 @@ ModelImporter:
       curves: []
       events:
       - time: 0.37610608
-        functionName: EnableRightCollider
+        functionName: EnableCollider
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: 3fde07f359a463a4987c58267e2b219b,
           type: 3}

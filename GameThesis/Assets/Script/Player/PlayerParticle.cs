@@ -5,24 +5,22 @@ using UnityEngine;
 public class PlayerParticle : Auto_Singleton<PlayerParticle>, IObserver
 {
     [Header("===== MainObserver =====")]
-    public MainObserver s_punchRightTrigger;
-    public MainObserver s_punchLeftTrigger;
+    public MainObserver s_punchTrigger;
 
     [Header("===== PlayerPunch =====")]
     public GameObject g_hitShockWave;
 
 
-
     private void OnEnable()
     {
-        s_punchRightTrigger.AddObserver(this);
-        s_punchLeftTrigger.AddObserver(this);
+        s_punchTrigger.AddObserver(this);
+
     }
 
     private void OnDisable()
     {
-        s_punchRightTrigger.RemoveObserver(this);
-        s_punchLeftTrigger.RemoveObserver(this);
+        s_punchTrigger.RemoveObserver(this);
+
     }
 
     public void FuncToDo(ActionObserver action)

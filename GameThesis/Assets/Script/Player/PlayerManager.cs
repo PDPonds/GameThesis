@@ -29,8 +29,7 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
     [Header("===== Player Fist Combat =====")]
     public float f_punchDelay;
     public float f_softPunchTime;
-    public Collider c_leftHandPunch;
-    public Collider c_rightHandPunch;
+    public Collider c_punchCol;
 
     public bool b_inFighting;
     public float f_maxInFightingTime;

@@ -7,8 +7,7 @@ public class PlayerSound : Auto_Singleton<PlayerSound>, IObserver
 {
     [Header("===== Main Observer =====")]
     public MainObserver s_fistCombat;
-    public MainObserver s_rightHit;
-    public MainObserver s_leftHit;
+    public MainObserver s_punchHit;
     public MainObserver s_movement;
 
     [Header("===== Audio Source =====")]
@@ -25,16 +24,14 @@ public class PlayerSound : Auto_Singleton<PlayerSound>, IObserver
     private void OnEnable()
     {
         s_fistCombat.AddObserver(this);
-        s_rightHit.AddObserver(this);
-        s_leftHit.AddObserver(this);
+        s_punchHit.AddObserver(this);
         s_movement.AddObserver(this);
     }
 
     private void OnDisable()
     {
         s_fistCombat.RemoveObserver(this);
-        s_rightHit.RemoveObserver(this);
-        s_leftHit.RemoveObserver(this);
+        s_punchHit.RemoveObserver(this);
         s_movement.RemoveObserver(this);
     }
     private void Awake()
