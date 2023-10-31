@@ -39,6 +39,7 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     public int i_maxHP;
 
     [Header("===== Fight =====")]
+    public bool b_inFight;
     public float f_atkRange;
     public float f_runRange;
 
@@ -184,6 +185,12 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
             }
         }
 
+        if (s_currentState == s_attackState || s_currentState == s_aggressive
+            || s_currentState == s_fightState)
+        {
+            b_inFight = true;
+        }
+        else b_inFight = false;
     }
 
     public void TakeDamage(int damage)

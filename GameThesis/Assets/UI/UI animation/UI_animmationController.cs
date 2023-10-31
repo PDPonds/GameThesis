@@ -16,16 +16,6 @@ public class UI_animmationController : MonoBehaviour
         cashAnim = GetComponent<Animator>();
     }
 
-    
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            AddCashAnim();
-            RemoveCashAnim();
-        }
-    }
-
     public void AddCashAnim()
     {
         addCashAnim.Play("Add Cash");
