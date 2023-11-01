@@ -51,9 +51,9 @@ public class UIManager : Auto_Singleton<UIManager>
         if (RestaurantManager.Instance.SomeOneEscape()) g_escape.SetActive(true);
         else g_escape.SetActive(false);
 
-        if (RestaurantManager.Instance.HasGangToTeachYou()) g_gang.SetActive(true);
-        else g_gang.SetActive(false);
-
+        //if (RestaurantManager.Instance.HasGangToTeachYou()) g_gang.SetActive(true);
+        //else 
+        g_gang.SetActive(false);
 
 
         #endregion

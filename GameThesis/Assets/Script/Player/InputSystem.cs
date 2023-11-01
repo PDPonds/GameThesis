@@ -86,8 +86,6 @@ public class InputSystem : MonoBehaviour
             if (PlayerManager.Instance.b_canGuard)
             {
                 PlayerManager.Instance.b_isGuard = true;
-                PlayerManager.Instance.b_inFighting = true;
-                PlayerManager.Instance.f_currentInFightingTime = PlayerManager.Instance.f_maxInFightingTime;
             }
         }
 

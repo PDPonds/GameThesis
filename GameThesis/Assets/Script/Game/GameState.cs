@@ -23,7 +23,7 @@ public class GameState : StateManager
     private void Update()
     {
         s_currentState.UpdateState(this);
-        
+
         SpawnCustomer();
 
     }
@@ -55,7 +55,7 @@ public class GameState : StateManager
         cus.name = "Gang";
         CustomerStateManager state = cus.GetComponent<CustomerStateManager>();
         state.b_isGang = true;
-        state.SwitchState(state.s_aggressive);
+        state.SwitchState(state.s_fightState);
 
     }
 

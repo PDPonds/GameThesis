@@ -28,17 +28,6 @@ public class CustomerWalkAroundState : BaseState
         customerStateManager.anim.SetBool("drunk", false);
         customerStateManager.anim.SetBool("cheer", false);
 
-        customerStateManager.DisablePunch();
-
-        if (!customerStateManager.b_canAtk)
-        {
-            customerStateManager.f_currentAtkDelay -= Time.deltaTime;
-            if (customerStateManager.f_currentAtkDelay <= 0)
-            {
-                customerStateManager.b_canAtk = true;
-            }
-        }
-
         f_currentTimeToWalk -= Time.deltaTime;
         if (f_currentTimeToWalk <= 0)
         {

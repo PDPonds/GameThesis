@@ -5,9 +5,8 @@ using UnityEngine;
 
 public class AISoundController : MonoBehaviour, IObserver
 {
-    public MainObserver s_leftPunchTrigger;
-    public MainObserver s_rightPunchTrigger;
     public MainObserver s_aiMainObserver;
+    public MainObserver s_aiPunchTrigger;
 
     public AudioSource as_punchHitBlock;
     public AudioSource as_punchHit;
@@ -23,24 +22,23 @@ public class AISoundController : MonoBehaviour, IObserver
 
     private void OnEnable()
     {
-        StateManager state = transform.GetComponent<StateManager>();
-        if (state is EmployeeStateManager || state is CustomerStateManager)
-        {
-            s_rightPunchTrigger.AddObserver(this);
-            s_leftPunchTrigger.AddObserver(this);
-        }
         s_aiMainObserver.AddObserver(this);
+
+        StateManager state = transform.GetComponent<StateManager>();
+        if (state is CustomerStateManager)
+        {
+            s_aiPunchTrigger.AddObserver(this);
+        }
     }
 
     private void OnDisable()
     {
-        StateManager state = transform.GetComponent<StateManager>();
-        if (state is EmployeeStateManager || state is CustomerStateManager)
-        {
-            s_rightPunchTrigger.RemoveObserver(this);
-            s_leftPunchTrigger.RemoveObserver(this);
-        }
         s_aiMainObserver.RemoveObserver(this);
+        StateManager state = transform.GetComponent<StateManager>();
+        if (state is CustomerStateManager)
+        {
+            s_aiPunchTrigger.RemoveObserver(this);
+        }
     }
 
     private void Awake()
@@ -150,26 +148,40 @@ public class AISoundController : MonoBehaviour, IObserver
 
     void PlaySelectAudio(AudioSource source, List<AudioClip> clips, int index)
     {
-        source.clip = clips[index];
-        source.PlayOneShot(clips[index]);
+        if (!source.isPlaying)
+        {
+            source.clip = clips[index];
+            source.PlayOneShot(clips[index]);
+        }
+
     }
 
     void PlayRandomAudio(AudioSource source, List<AudioClip> clips)
     {
         int soundPlayIndex = Random.Range(0, clips.Count);
-        source.clip = clips[soundPlayIndex];
-        source.PlayOneShot(clips[soundPlayIndex]);
+        if (!source.isPlaying)
+        {
+            source.clip = clips[soundPlayIndex];
+            source.PlayOneShot(clips[soundPlayIndex]);
+        }
     }
 
     void PlayRandomAudioLoop(AudioSource source, List<AudioClip> clips)
     {
         int soundPlayIndex = Random.Range(0, clips.Count);
-        source.clip = clips[soundPlayIndex];
-        source.Play();
+        if (!source.isPlaying)
+        {
+            source.clip = clips[soundPlayIndex];
+            source.Play();
+        }
+
     }
     void PlaySelectAudioLoop(AudioSource source, List<AudioClip> clips, int index)
     {
-        source.clip = clips[index];
-        source.Play();
+        if (!source.isPlaying)
+        {
+            source.clip = clips[index];
+            source.Play();
+        }
     }
 }
