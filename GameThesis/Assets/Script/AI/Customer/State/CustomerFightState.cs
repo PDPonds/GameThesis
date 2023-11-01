@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -43,6 +44,7 @@ public class CustomerFightState : BaseState
             }
 
             //Attack Range
+
             if (Vector3.Distance(cus.transform.position, playerPos) < cus.f_attackRange)
             {
                 f_currentDelay -= Time.deltaTime;
@@ -51,7 +53,7 @@ public class CustomerFightState : BaseState
             //Attack
             if (f_currentDelay <= 0)
             {
-                Debug.Log("Attack");
+                Attack(cus);
                 f_currentDelay = cus.f_atkDelay;
             }
         }
@@ -80,5 +82,22 @@ public class CustomerFightState : BaseState
         cus.anim.SetBool("run", false);
         cus.anim.SetBool("sit", false);
     }
+
+    void Attack(CustomerStateManager cus)
+    {
+        cus.i_atkCount++;
+
+        if (cus.i_atkCount % 2 == 0)
+        {
+            cus.anim.Play("LeftPunch");
+        }
+        else
+        {
+            cus.anim.Play("RightPunch");
+        }
+        cus.agent.velocity = Vector3.zero;
+
+    }
+
 
 }
