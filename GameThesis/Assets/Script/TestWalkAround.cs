@@ -22,8 +22,9 @@ public class TestWalkAround : MonoBehaviour
         else
         {
             Vector3 waitPos = pivot.position - (transform.forward * waitDis);
+
             Vector3 moveAround = waitPos + transform.right;
-            transform.position = Vector3.Lerp(transform.position, moveAround, 2 * Time.deltaTime);
+            transform.position = moveAround;
 
         }
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class FightingManager : Auto_Singleton<FightingManager>
 {
@@ -30,6 +31,18 @@ public class FightingManager : Auto_Singleton<FightingManager>
             }
         }
 
+        if (fighter.Count > 0)
+        {
+            for (int i = 0; i < fighter.Count; i++)
+            {
+                CustomerStateManager cus = fighter[i];
+                if (!HasFightWithPlayer())
+                {
+                    cus.b_fightWithPlayer = true;
+                }
+            }
+        }
+
 
     }
 
@@ -51,4 +64,18 @@ public class FightingManager : Auto_Singleton<FightingManager>
         return fighterCount;
     }
 
+    public bool HasFightWithPlayer()
+    {
+        if (fighter.Count > 0)
+        {
+            for (int i = 0; i < fighter.Count; i++)
+            {
+                if (fighter[i].b_fightWithPlayer)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }

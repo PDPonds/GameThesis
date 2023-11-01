@@ -1917,6 +1917,10 @@ MonoBehaviour:
   i_currentHP: 0
   i_maxHP: 5
   b_inFight: 0
+  b_fightWithPlayer: 0
+  f_waitDis: 3
+  f_fightDis: 1
+  f_atkDelay: 2
   t_hips: {fileID: 1841821590660256524}
   rb: []
   anim: {fileID: 0}
@@ -1970,8 +1974,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75c4eab561ae1924faf28b7bcf6f82a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  s_leftPunchTrigger: {fileID: 0}
-  s_rightPunchTrigger: {fileID: 0}
   s_aiMainObserver: {fileID: 8240269092284624982}
   as_punchHitBlock: {fileID: 0}
   as_punchHit: {fileID: 0}

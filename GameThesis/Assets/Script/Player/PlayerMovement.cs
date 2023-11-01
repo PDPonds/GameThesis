@@ -31,8 +31,10 @@ public class PlayerMovement : MainObserver
 
             if (v_dir.magnitude > 0)
             {
-                PlayerManager.Instance.c_rb.velocity = new Vector3(v_moveDir.x * PlayerManager.Instance.f_moveSpeed,
-                PlayerManager.Instance.c_rb.velocity.y, v_moveDir.z * PlayerManager.Instance.f_moveSpeed);
+                float moveSpeed = PlayerManager.Instance.f_moveSpeed;
+                Rigidbody rb = PlayerManager.Instance.c_rb;
+                if (PlayerManager.Instance.b_inFighting) moveSpeed = moveSpeed * 0.7f;
+                rb.velocity = new Vector3(v_moveDir.x * moveSpeed, rb.velocity.y, v_moveDir.z * moveSpeed);
             }
 
             if (v_dir != Vector3.zero)

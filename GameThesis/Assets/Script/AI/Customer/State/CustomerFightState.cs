@@ -4,29 +4,81 @@ using UnityEngine.AI;
 
 public class CustomerFightState : BaseState
 {
+    Vector3 playerPos;
+    float f_currentDelay;
+
     public override void EnterState(StateManager ai)
     {
-        CustomerStateManager customerStateManager = (CustomerStateManager)ai;
+        CustomerStateManager cus = (CustomerStateManager)ai;
 
-        customerStateManager.ApplyOutlineColor(customerStateManager.color_fighting, customerStateManager.f_outlineScale);
+        cus.ApplyOutlineColor(cus.color_fighting, cus.f_outlineScale);
 
-        customerStateManager.g_sleepVFX.SetActive(false);
-        customerStateManager.g_stunVFX.SetActive(false);
+        cus.g_sleepVFX.SetActive(false);
+        cus.g_stunVFX.SetActive(false);
+
+        f_currentDelay = cus.f_atkDelay;
 
     }
 
     public override void UpdateState(StateManager ai)
     {
-        CustomerStateManager customerStateManager = (CustomerStateManager)ai;
+        CustomerStateManager cus = (CustomerStateManager)ai;
 
-        customerStateManager.RagdollOff();
+        cus.RagdollOff();
 
-        //customerStateManager.agent.speed = customerStateManager.f_walkSpeed;
+        cus.agent.speed = cus.f_walkSpeed;
 
-        customerStateManager.anim.SetBool("fightState", true);
-        customerStateManager.anim.SetBool("walk", false);
-        customerStateManager.anim.SetBool("run", false);
-        customerStateManager.anim.SetBool("sit", false);
+        playerPos = PlayerManager.Instance.transform.position;
+        Vector3 fightPos = playerPos - (cus.transform.forward * cus.f_fightDis);
+
+        Vector3 rightSpeed = cus.transform.right * cus.f_walkSpeed;
+        Vector3 waitPos = playerPos - (cus.transform.forward * cus.f_waitDis) + rightSpeed;
+
+        if (cus.b_fightWithPlayer)
+        {
+            //Set Position
+            if (cus.transform.position != fightPos)
+            {
+                cus.agent.SetDestination(fightPos);
+            }
+
+            //Attack Range
+            if (Vector3.Distance(cus.transform.position, playerPos) < cus.f_attackRange)
+            {
+                f_currentDelay -= Time.deltaTime;
+            }
+
+            //Attack
+            if (f_currentDelay <= 0)
+            {
+                Debug.Log("Attack");
+                f_currentDelay = cus.f_atkDelay;
+            }
+        }
+        else
+        {
+            if (cus.transform.position != waitPos)
+            {
+                cus.agent.SetDestination(waitPos);
+            }
+        }
+
+        Vector3 lookDir = playerPos - cus.transform.position;
+        lookDir = lookDir.normalized;
+        if (lookDir != Vector3.zero)
+        {
+            Quaternion targetRot = Quaternion.LookRotation(lookDir);
+            Quaternion rot = Quaternion.Slerp(cus.transform.rotation, targetRot, 10 * Time.deltaTime);
+            rot.x = 0f;
+            rot.z = 0f;
+            cus.transform.rotation = rot;
+        }
+
+
+        cus.anim.SetBool("fightState", true);
+        cus.anim.SetBool("walk", false);
+        cus.anim.SetBool("run", false);
+        cus.anim.SetBool("sit", false);
     }
 
 }

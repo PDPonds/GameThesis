@@ -36,45 +36,59 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     public int i_maxHP;
 
     [Header("===== Fight =====")]
-    public bool b_inFight;
-
+    [HideInInspector] public bool b_inFight;
+    [HideInInspector] public bool b_fightWithPlayer;
+    public float f_waitDis;
+    public float f_fightDis;
+    [Header("- Fight")]
+    public float f_atkDelay;
+    public float f_attackRange;
+    [Space(10f)]
 
     [Header("===== RagdollAndDrag =====")]
     public Transform t_hips;
     [HideInInspector] public Rigidbody[] rb;
     [HideInInspector] public Animator anim;
     [HideInInspector] public NavMeshAgent agent;
+    [Space(10f)]
 
     [Header("===== WalkAround =====")]
     public float f_findNextPositionTime;
     public Vector3 v_walkPos;
+    [Space(10f)]
 
     [Header("===== Order Food =====")]
     public float f_orderTime;
     [HideInInspector] public float f_currentOrderTime;
     public ChairObj c_chairObj;
+    [Space(10f)]
 
     [Header("===== Eat Food =====")]
     public Vector2 v_minAndMaxEatFood;
     public float f_randomEventPercent;
+    [Space(10f)]
 
     [Header("===== Escape =====")]
     public bool b_escape;
     public float f_fightBackPercent;
+    [Space(10f)]
 
     [Header("===== Pay =====")]
     public float f_payTime;
     [HideInInspector] public float f_giveCoin;
     public Vector2 v_minmaxGiveCoin;
+    [Space(10f)]
 
     [Header("===== Run Escape =====")]
     public float f_runTime;
     public float f_runSpeed;
     public float f_walkSpeed;
+    [Space(10f)]
 
     [Header("===== Dead State =====")]
     public float f_destroyTime;
     public GameObject g_stunVFX;
+    [Space(10f)]
 
     [Header("===== Drunk =====")]
     public bool b_isDrunk;
@@ -83,6 +97,7 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     public float f_wekeUpMultiply;
     public float f_maxWekeUpPoint;
     public GameObject g_sleepVFX;
+    [Space(10f)]
 
     [Header("===== Gangster =====")]
     public float f_isGangsterPercent;
@@ -92,9 +107,11 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     [HideInInspector] public int i_gangCount;
     [HideInInspector] public int i_prefabIndex;
     [HideInInspector] public int i_spawnPosIndex;
+    [Space(10f)]
 
     [Header("===== Area =====")]
     public AreaType currentAreaStay;
+    [Space(10f)]
 
     [Header("===== Outline =====")]
     public Transform t_mesh;
@@ -115,6 +132,7 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
             return mpb;
         }
     }
+    [Space(10f)]
 
     [Header("===== Throng =====")]
     [HideInInspector] public Vector3 v_crowdPos;
