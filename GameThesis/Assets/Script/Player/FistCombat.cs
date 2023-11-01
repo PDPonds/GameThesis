@@ -18,11 +18,9 @@ public class FistCombat : MainObserver
 
     public void Punch()
     {
-        if(PlayerManager.Instance.b_canPunch)
+
+        if (PlayerManager.Instance.b_canPunch)
         {
-            PlayerManager.Instance.b_inFighting = true;
-            PlayerManager.Instance.f_currentInFightingTime = PlayerManager.Instance.f_maxInFightingTime;
-            
             PlayerManager.Instance.i_atkCount++;
 
             if (PlayerManager.Instance.i_atkCount % 2 == 0)
@@ -37,7 +35,8 @@ public class FistCombat : MainObserver
             PlayerManager.Instance.b_canPunch = false;
             PlayerManager.Instance.f_currentPunchDelay = PlayerManager.Instance.f_punchDelay;
         }
-        
+
+
     }
 
 }

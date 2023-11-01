@@ -23,7 +23,6 @@ public class EmployeePassedOutState : BaseState
     {
         EmployeeStateManager employeeStateManager = (EmployeeStateManager)ai;
         employeeStateManager.RagdollOn();
-        employeeStateManager.DisablePunch();
 
         f_currentPressedOutTime -= Time.deltaTime;
         if (f_currentPressedOutTime <= 0)

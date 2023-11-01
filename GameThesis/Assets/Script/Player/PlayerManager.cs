@@ -14,6 +14,7 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
     [HideInInspector] public FistCombat s_playerFistCombat;
     [HideInInspector] public PlayerGuard s_playerGuard;
     [HideInInspector] public PlayerSprint s_playerSprint;
+    [Space(10f)]
 
     [Header("===== Player Movement =====")]
     public float f_walkSpeed;
@@ -25,21 +26,23 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
     public Transform t_orientation;
     public Transform t_cameraPosition;
     public bool b_canMove;
+    [Space(10f)]
 
     [Header("===== Player Fist Combat =====")]
     public float f_punchDelay;
     public float f_softPunchTime;
-    public Collider c_leftHandPunch;
-    public Collider c_rightHandPunch;
+    public Collider c_punchCol;
 
     public bool b_inFighting;
     public float f_maxInFightingTime;
+    public float f_fightingCheckDis;
     [HideInInspector] public float f_currentInFightingTime;
 
     [HideInInspector] public bool b_canPunch;
     [HideInInspector] public float f_currentPunchDelay;
     [HideInInspector] public int i_atkCount;
     [HideInInspector] public Vector3 v_punchHitPoint;
+    [Space(10f)]
 
 
     [Header("===== Player Gaurd =====")]
@@ -50,23 +53,27 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
     [HideInInspector] public bool b_isGuard;
     [HideInInspector] public float f_currentGuardDelay;
     [HideInInspector] public float f_currentGuardTime;
+    [Space(10f)]
 
     [Header("===== Player Interactive =====")]
     public float f_interacRange;
     public LayerMask lm_interacMask;
     public Transform t_holdObjPoint;
     [HideInInspector] public GameObject g_interactiveObj;
+    [Space(10f)]
 
     [Header("===== Player Drag =====")]
     [HideInInspector] public GameObject g_dragObj;
     public Transform t_dragPos;
     public float f_dragAngle;
+    [Space(10f)]
 
     [Header("===== Player Dead =====")]
     public Animator a_cameraAnim;
     public Animator a_fadeAnim;
     public bool b_isDead;
     int couter = 0;
+    [Space(10f)]
 
     [Header("===== Player Sprint =====")]
     public float f_runSpeed;
@@ -74,6 +81,7 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
     public float f_staminaMultiply;
     public float f_maxStamina;
     [HideInInspector] public float f_currentStamina;
+    [Space(10f)]
 
     [Header("===== Area =====")]
     public AreaType currentAreaStay;
@@ -97,21 +105,60 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
         if (b_inFighting)
         {
             PlayerAnimation.Instance.animator.SetBool("isFight", true);
-            f_currentInFightingTime -= Time.deltaTime;
-            if (f_currentInFightingTime < 0)
-            {
-                i_currentHP = i_maxHP;
-                b_inFighting = false;
-
-                CameraTrigger camTrigger = Camera.main.GetComponent<CameraTrigger>();
-                camTrigger.ResetVignetteAndFocal();
-            }
         }
         else
         {
             PlayerAnimation.Instance.animator.SetBool("isFight", false);
         }
 
+        Collider[] allCus = Physics.OverlapSphere(transform.position, f_fightingCheckDis, GameManager.Instance.lm_enemyMask);
+        if (hasCusInFight(allCus))
+        {
+            f_currentInFightingTime = f_maxInFightingTime;
+            b_inFighting = true;
+        }
+        else
+        {
+
+            if (b_inFighting)
+            {
+                f_currentInFightingTime -= Time.deltaTime;
+                if (f_currentInFightingTime < 0)
+                {
+                    i_currentHP = i_maxHP;
+                    b_inFighting = false;
+
+                    CameraTrigger camTrigger = Camera.main.GetComponent<CameraTrigger>();
+                    camTrigger.ResetVignetteAndFocal();
+                }
+            }
+
+        }
+
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, f_fightingCheckDis);
+    }
+
+    bool hasCusInFight(Collider[] allCus)
+    {
+        if (allCus.Length > 0)
+        {
+            for (int i = 0; i < allCus.Length; i++)
+            {
+                CustomerStateManager cus = allCus[i].transform.GetComponentInParent<CustomerStateManager>();
+                if (cus != null)
+                {
+                    if (cus.b_inFight)
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     IEnumerator DeadState()
@@ -120,36 +167,6 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
         b_canMove = false;
         a_cameraAnim.SetBool("dead", true);
         a_fadeAnim.SetBool("black", true);
-
-        for (int i = 0; i < RestaurantManager.Instance.allSheriffs.Length; i++)
-        {
-            SheriffStateManager shrSM = RestaurantManager.Instance.allSheriffs[i];
-            if (shrSM.s_currentState == shrSM.s_waitForFightEnd)
-            {
-                shrSM.SwitchState(shrSM.s_activityState);
-            }
-        }
-
-        for (int i = 0; i < RestaurantManager.Instance.allCustomers.Length; i++)
-        {
-            CustomerStateManager cus = RestaurantManager.Instance.allCustomers[i];
-            if (cus.s_currentState == cus.s_fightState ||
-                cus.s_currentState == cus.s_attackState ||
-                cus.s_currentState == cus.s_aggressive)
-            {
-                cus.SwitchState(cus.s_walkAroundState);
-            }
-        }
-
-        for (int i = 0; i < RestaurantManager.Instance.allEmployees.Length; i++)
-        {
-            EmployeeStateManager emp = RestaurantManager.Instance.allEmployees[i];
-            if (emp.s_currentState == emp.s_fightState ||
-                emp.s_currentState == emp.s_attackState)
-            {
-                emp.SwitchState(emp.s_activityState);
-            }
-        }
 
         yield return new WaitForSeconds(3f);
         a_cameraAnim.SetBool("dead", false);
@@ -165,7 +182,7 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
         i_currentHP = i_maxHP;
         couter = 0;
 
-        
+
         f_currentStamina = 0;
 
     }
@@ -174,7 +191,6 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
     {
         i_currentHP--;
 
-        b_inFighting = true;
         f_currentInFightingTime = f_maxInFightingTime;
 
         CameraTrigger camTrigger = Camera.main.GetComponent<CameraTrigger>();

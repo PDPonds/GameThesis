@@ -25,13 +25,10 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
 
     public CustomerDrunkState s_drunkState = new CustomerDrunkState();
 
-    public CustomerAggressiveChaseState s_aggressive = new CustomerAggressiveChaseState();
-
     public CustomerCrowdState s_crowdState = new CustomerCrowdState();
 
     public CustomerFightState s_fightState = new CustomerFightState();
     public CustomerPushState s_pushState = new CustomerPushState();
-    public CustomerAttackState s_attackState = new CustomerAttackState();
     public CustomerDeadState s_deadState = new CustomerDeadState();
     public CustomerHurtState s_hurtState = new CustomerHurtState();
 
@@ -39,57 +36,62 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     public int i_maxHP;
 
     [Header("===== Fight =====")]
-    public bool b_inFight;
-    public float f_atkRange;
-    public float f_runRange;
-
+    [HideInInspector] public bool b_inFight;
+    [HideInInspector] public bool b_fightWithPlayer;
+    public Collider c_atkCol;
+    public float f_waitDis;
+    public float f_fightDis;
+    [Header("- Fight")]
     public float f_atkDelay;
-    public float f_fightTime;
-    [HideInInspector] public float f_currentFightTime;
+    public float f_attackRange;
 
-    [HideInInspector] public float f_currentAtkDelay;
-    [HideInInspector] public bool b_canAtk;
-
-    [Header("===== Attack =====")]
-    public int i_atkCount;
-    public Collider c_atkCollider;
+    [HideInInspector] public int i_atkCount;
+    [Space(10f)]
 
     [Header("===== RagdollAndDrag =====")]
     public Transform t_hips;
     [HideInInspector] public Rigidbody[] rb;
     [HideInInspector] public Animator anim;
     [HideInInspector] public NavMeshAgent agent;
+    [Space(10f)]
 
     [Header("===== WalkAround =====")]
     public float f_findNextPositionTime;
     public Vector3 v_walkPos;
+    [Space(10f)]
 
     [Header("===== Order Food =====")]
     public float f_orderTime;
     [HideInInspector] public float f_currentOrderTime;
-    public ChairObj c_chairObj;
+    [HideInInspector] public ChairObj c_chairObj;
+    [Space(10f)]
 
     [Header("===== Eat Food =====")]
     public Vector2 v_minAndMaxEatFood;
     public float f_randomEventPercent;
+    [Space(10f)]
 
     [Header("===== Escape =====")]
     public bool b_escape;
     public float f_fightBackPercent;
+    [Space(10f)]
 
     [Header("===== Pay =====")]
     public float f_payTime;
     [HideInInspector] public float f_giveCoin;
     public Vector2 v_minmaxGiveCoin;
+    [Space(10f)]
 
     [Header("===== Run Escape =====")]
     public float f_runTime;
     public float f_runSpeed;
     public float f_walkSpeed;
+    [Space(10f)]
 
     [Header("===== Dead State =====")]
     public float f_destroyTime;
     public GameObject g_stunVFX;
+    [Space(10f)]
 
     [Header("===== Drunk =====")]
     public bool b_isDrunk;
@@ -98,6 +100,7 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     public float f_wekeUpMultiply;
     public float f_maxWekeUpPoint;
     public GameObject g_sleepVFX;
+    [Space(10f)]
 
     [Header("===== Gangster =====")]
     public float f_isGangsterPercent;
@@ -107,9 +110,11 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     [HideInInspector] public int i_gangCount;
     [HideInInspector] public int i_prefabIndex;
     [HideInInspector] public int i_spawnPosIndex;
+    [Space(10f)]
 
     [Header("===== Area =====")]
     public AreaType currentAreaStay;
+    [Space(10f)]
 
     [Header("===== Outline =====")]
     public Transform t_mesh;
@@ -130,6 +135,7 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
             return mpb;
         }
     }
+    [Space(10f)]
 
     [Header("===== Throng =====")]
     [HideInInspector] public Vector3 v_crowdPos;
@@ -147,6 +153,8 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
         anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponentsInChildren<Rigidbody>();
+
+        c_atkCol.enabled = false;
 
         Color noColor = new Color(0, 0, 0, 0);
         ApplyOutlineColor(noColor, 0f);
@@ -168,29 +176,6 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     private void Update()
     {
         s_currentState.UpdateState(this);
-
-        if (s_currentState == s_fightState || s_currentState == s_attackState)
-        {
-            if (PlayerManager.Instance.b_inFighting)
-            {
-                f_currentFightTime = f_fightTime;
-            }
-            else
-            {
-                f_currentFightTime -= Time.deltaTime;
-                if (f_currentFightTime < 0)
-                {
-                    SwitchState(s_walkAroundState);
-                }
-            }
-        }
-
-        if (s_currentState == s_attackState || s_currentState == s_aggressive
-            || s_currentState == s_fightState)
-        {
-            b_inFight = true;
-        }
-        else b_inFight = false;
     }
 
     public void TakeDamage(int damage)
@@ -199,16 +184,15 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
 
         s_hurtState.s_lastState = s_currentState;
 
-        SwitchState(s_hurtState);
+        if (i_currentHP <= 0) Die();
+        else SwitchState(s_hurtState);
 
-        if (i_currentHP <= 0)
-        {
-            Die();
-        }
     }
 
     public void Die()
     {
+        b_inFight = false;
+
         if (b_escape) GameManager.Instance.AddCoin(f_giveCoin);
         if (b_isDrunk) GameManager.Instance.AddCoin(f_giveCoin);
 
@@ -241,11 +225,6 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
         anim.enabled = true;
         agent.enabled = true;
         foreach (Rigidbody rb in rb) { rb.isKinematic = true; }
-    }
-
-    public void DisablePunch()
-    {
-        c_atkCollider.enabled = false;
     }
 
     public void Interaction()
@@ -312,15 +291,6 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     public void DestroyAI()
     {
         Destroy(gameObject);
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, f_atkRange);
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, f_runRange);
-
     }
 
 }

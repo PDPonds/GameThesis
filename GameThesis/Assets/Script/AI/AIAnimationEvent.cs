@@ -4,30 +4,15 @@ using UnityEngine;
 
 public class AIAnimationEvent : MonoBehaviour
 {
-    public void EnableColliderAtk()
+    public void EC()
     {
-        if(transform.TryGetComponent<CustomerStateManager>(out CustomerStateManager customerStateManager))
-        {
-            customerStateManager.c_atkCollider.enabled = true;
-        }
-        
-        if(transform.TryGetComponent<EmployeeStateManager>(out EmployeeStateManager employeeStateManager))
-        {
-            employeeStateManager.c_atkCollider.enabled = true;
-        }
+        CustomerStateManager cus = GetComponent<CustomerStateManager>();
+        cus.c_atkCol.enabled = true;
     }
 
-    public void DisableColliderHand()
+    public void DC()
     {
-        if(transform.TryGetComponent<CustomerStateManager>(out CustomerStateManager customerStateManager))
-        {
-            customerStateManager.c_atkCollider.enabled = false;
-        }
-        if(transform.TryGetComponent<EmployeeStateManager>(out EmployeeStateManager employeeStateManager))
-        {
-            employeeStateManager.c_atkCollider.enabled = false;
-        }
-        
-
+        CustomerStateManager cus = GetComponent<CustomerStateManager>();
+        cus.c_atkCol.enabled = false;
     }
 }

@@ -36,7 +36,6 @@ public class CustomerDeadState : BaseState
     {
         CustomerStateManager customerStateManager = (CustomerStateManager)ai;
         customerStateManager.RagdollOn();
-        customerStateManager.DisablePunch();
 
         if (PlayerManager.Instance.g_dragObj != ai.transform.gameObject)
         {

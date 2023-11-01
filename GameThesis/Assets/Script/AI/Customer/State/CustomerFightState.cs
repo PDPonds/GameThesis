@@ -1,73 +1,137 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class CustomerFightState : BaseState
 {
+    Vector3 playerPos;
+
+    bool b_isRightDir;
+    float f_reDir;
+    float f_currentReDirection;
+
+    float f_currentDelay;
+
     public override void EnterState(StateManager ai)
     {
-        CustomerStateManager customerStateManager = (CustomerStateManager)ai;
+        CustomerStateManager cus = (CustomerStateManager)ai;
 
-        customerStateManager.ApplyOutlineColor(customerStateManager.color_fighting, customerStateManager.f_outlineScale);
+        cus.ApplyOutlineColor(cus.color_fighting, cus.f_outlineScale);
 
-        customerStateManager.g_sleepVFX.SetActive(false);
-        customerStateManager.g_stunVFX.SetActive(false);
+        cus.g_sleepVFX.SetActive(false);
+        cus.g_stunVFX.SetActive(false);
 
+        f_currentDelay = cus.f_atkDelay;
+
+        f_reDir = Random.Range(5f, 7f);
+        f_currentReDirection = f_reDir;
+
+        
     }
 
     public override void UpdateState(StateManager ai)
     {
-        CustomerStateManager customerStateManager = (CustomerStateManager)ai;
+        CustomerStateManager cus = (CustomerStateManager)ai;
 
-        customerStateManager.RagdollOff();
+        cus.b_inFight = true;
 
-        customerStateManager.DisablePunch();
+        cus.RagdollOff();
 
-        if (!customerStateManager.b_canAtk)
+        cus.agent.speed = cus.f_walkSpeed;
+
+        playerPos = PlayerManager.Instance.transform.position;
+        Vector3 fightPos = playerPos - (cus.transform.forward * cus.f_fightDis);
+
+        Vector3 rightSpeed = cus.transform.right * cus.f_walkSpeed;
+        Vector3 leftSpeed = -cus.transform.right * cus.f_walkSpeed;
+        Vector3 waitPos;
+
+        if (b_isRightDir)
         {
-            customerStateManager.f_currentAtkDelay -= Time.deltaTime;
-            if (customerStateManager.f_currentAtkDelay <= 0)
+            waitPos = playerPos - (cus.transform.forward * cus.f_waitDis) + rightSpeed;
+            f_currentReDirection -= Time.deltaTime;
+            if (f_currentReDirection <= 0)
             {
-                customerStateManager.b_canAtk = true;
+                b_isRightDir = !b_isRightDir;
+                f_reDir = Random.Range(5f, 7f);
+                f_currentReDirection = f_reDir;
             }
-        }
-
-
-        customerStateManager.agent.SetDestination(PlayerManager.Instance.transform.position);
-
-        Collider[] player = Physics.OverlapSphere(ai.transform.position, customerStateManager.f_runRange, GameManager.Instance.lm_playerMask);
-        if (player.Length > 0)
-        {
-            customerStateManager.agent.speed = customerStateManager.f_walkSpeed;
-
-            customerStateManager.anim.SetBool("fightState", true);
-            customerStateManager.anim.SetBool("walk", false);
-            customerStateManager.anim.SetBool("run", false);
-            customerStateManager.anim.SetBool("sit", false);
-            customerStateManager.anim.SetBool("drunk", false);
-
-            if (Vector3.Distance(PlayerManager.Instance.transform.position, customerStateManager.transform.position) <=
-                customerStateManager.f_atkRange)
-            {
-                customerStateManager.agent.velocity = Vector2.zero;
-                if (customerStateManager.b_canAtk)
-                {
-                    customerStateManager.SwitchState(customerStateManager.s_attackState);
-                }
-            }
-
         }
         else
         {
-            customerStateManager.agent.speed = customerStateManager.f_runSpeed;
-            customerStateManager.anim.SetBool("fightState", false);
-            customerStateManager.anim.SetBool("walk", false);
-            customerStateManager.anim.SetBool("run", true);
-            customerStateManager.anim.SetBool("sit", false);
-            customerStateManager.anim.SetBool("drunk", false);
+            waitPos = playerPos - (cus.transform.forward * cus.f_waitDis) + leftSpeed;
+            f_currentReDirection -= Time.deltaTime;
+            if (f_currentReDirection <= 0)
+            {
+                b_isRightDir = !b_isRightDir;
+                f_reDir = Random.Range(5f, 7f);
+                f_currentReDirection = f_reDir;
+            }
         }
 
+        if (cus.b_fightWithPlayer)
+        {
+            //Set Position
+            if (cus.transform.position != fightPos)
+            {
+                cus.agent.SetDestination(fightPos);
+            }
+
+            //Attack Range
+
+            if (Vector3.Distance(cus.transform.position, playerPos) < cus.f_attackRange)
+            {
+                f_currentDelay -= Time.deltaTime;
+            }
+
+            //Attack
+            if (f_currentDelay <= 0)
+            {
+                Attack(cus);
+                f_currentDelay = cus.f_atkDelay;
+            }
+        }
+        else
+        {
+            if (cus.transform.position != waitPos)
+            {
+                cus.agent.SetDestination(waitPos);
+            }
+        }
+
+        Vector3 lookDir = playerPos - cus.transform.position;
+        lookDir = lookDir.normalized;
+        if (lookDir != Vector3.zero)
+        {
+            Quaternion targetRot = Quaternion.LookRotation(lookDir);
+            Quaternion rot = Quaternion.Slerp(cus.transform.rotation, targetRot, 10 * Time.deltaTime);
+            rot.x = 0f;
+            rot.z = 0f;
+            cus.transform.rotation = rot;
+        }
+
+        cus.anim.SetBool("fightState", true);
+        cus.anim.SetBool("walk", false);
+        cus.anim.SetBool("run", false);
+        cus.anim.SetBool("sit", false);
+    }
+
+    void Attack(CustomerStateManager cus)
+    {
+        cus.i_atkCount++;
+        if (cus.i_atkCount % 2 == 0)
+        {
+            cus.anim.Play("LeftPunch");
+        }
+        else
+        {
+            cus.anim.Play("RightPunch");
+        }
+
+        cus.agent.velocity = Vector3.zero;
 
     }
+
 
 }

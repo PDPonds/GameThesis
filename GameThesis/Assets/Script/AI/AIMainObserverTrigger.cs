@@ -19,6 +19,12 @@ public class AIMainObserverTrigger : MainObserver
             if (cus.s_currentState == cus.s_crowdState) ActiveAllObserver(ActionObserver.AICheer);
             else ActiveAllObserver(ActionObserver.AIExitCheer);
 
+            if (cus.anim.GetCurrentAnimatorStateInfo(0).IsName("RightPunch") ||
+               cus.anim.GetCurrentAnimatorStateInfo(0).IsName("LeftPunch"))
+            {
+                ActiveAllObserver(ActionObserver.AIPunch);
+            }
+
         }
         else if (state is EmployeeStateManager)
         {

@@ -5,17 +5,12 @@ using UnityEngine;
 
 public class ActiveCrowd : MonoBehaviour
 {
-    private void OnEnable()
-    {
-        transform.position = PlayerManager.Instance.transform.position;
-    }
-
     private void Update()
     {
+        transform.position = PlayerManager.Instance.transform.position;
         Collider[] cus = Physics.OverlapSphere(transform.position, GameManager.Instance.f_crowdArea, GameManager.Instance.lm_enemyMask);
         if (RestaurantManager.Instance.HasCustomerInFightState())
         {
-
             if (cus.Length > 0)
             {
                 for (int i = 0; i < cus.Length; i++)
@@ -32,9 +27,8 @@ public class ActiveCrowd : MonoBehaviour
                                 float xPos = Mathf.Sin(theta) * GameManager.Instance.f_crowdDistance;
                                 float yPos = Mathf.Cos(theta) * GameManager.Instance.f_crowdDistance;
                                 Vector3 xyPos = new Vector3(xPos, 0, yPos) + transform.position;
-                                Vector3 throngPos = xyPos;
 
-                                cusMan.v_crowdPos = throngPos;
+                                cusMan.v_crowdPos = xyPos;
 
                                 cusMan.SwitchState(cusMan.s_crowdState);
                             }
