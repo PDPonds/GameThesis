@@ -1866,6 +1866,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   s_aiMainObserver: {fileID: 3101097738747627747}
+  s_aiPunchTrigger: {fileID: 0}
   as_punchHitBlock: {fileID: 0}
   as_punchHit: {fileID: 0}
   as_punch: {fileID: 0}
@@ -1899,15 +1900,7 @@ MonoBehaviour:
   i_maxHP: 5
   f_walkSpeed: 2
   f_runSpeed: 4
-  f_atkRange: 1.2
-  f_atkDelay: 0.5
-  f_runRange: 2.5
-  f_fightTime: 5
-  f_currentFightTime: 0
-  f_currentAtkDelay: 0
-  b_canAtk: 0
   i_atkCount: 0
-  c_atkCollider: {fileID: 0}
   f_pressedOutTime: 5
   g_stunVFX: {fileID: 4929294258231572951}
   rb: []

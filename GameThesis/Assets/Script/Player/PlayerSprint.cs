@@ -34,47 +34,47 @@ public class PlayerSprint : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (PlayerManager.Instance.b_isSprint)
-        {
-            if (collision.transform.parent != null)
-            {
-                if (collision.transform.GetComponentInParent<CustomerStateManager>())
-                {
-                    CustomerStateManager customerStateManager = collision.transform.GetComponentInParent<CustomerStateManager>();
-                    if (customerStateManager.s_currentState == customerStateManager.s_walkAroundState ||
-                        customerStateManager.s_currentState == customerStateManager.s_goOutState)
-                    {
-                        customerStateManager.transform.LookAt(transform.position);
-                        customerStateManager.SwitchState(customerStateManager.s_pushState);
-                        StartCoroutine(StopPlayer());
-                    }
-                }
-            }
-            else
-            {
-                if (collision.transform.TryGetComponent<CustomerStateManager>(out CustomerStateManager customerStateManager))
-                {
-                    if (customerStateManager.s_currentState == customerStateManager.s_walkAroundState ||
-                        customerStateManager.s_currentState == customerStateManager.s_goOutState)
-                    {
-                        customerStateManager.transform.LookAt(transform.position);
-                        customerStateManager.SwitchState(customerStateManager.s_pushState);
-                        StartCoroutine(StopPlayer());
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (PlayerManager.Instance.b_isSprint)
+    //    {
+    //        if (collision.transform.parent != null)
+    //        {
+    //            if (collision.transform.GetComponentInParent<CustomerStateManager>())
+    //            {
+    //                CustomerStateManager cus = collision.transform.GetComponentInParent<CustomerStateManager>();
+    //                if (cus.s_currentState == cus.s_walkAroundState ||
+    //                    cus.s_currentState == cus.s_goOutState)
+    //                {
+    //                    cus.transform.LookAt(transform.position);
+    //                    cus.SwitchState(cus.s_pushState);
+    //                    StartCoroutine(StopPlayer());
+    //                }
+    //            }
+    //        }
+    //        else
+    //        {
+    //            if (collision.transform.TryGetComponent<CustomerStateManager>(out CustomerStateManager cus))
+    //            {
+    //                if (cus.s_currentState == cus.s_walkAroundState ||
+    //                    cus.s_currentState == cus.s_goOutState)
+    //                {
+    //                    cus.transform.LookAt(transform.position);
+    //                    cus.SwitchState(cus.s_pushState);
+    //                    StartCoroutine(StopPlayer());
 
-                    }
-                }
-            }
+    //                }
+    //            }
+    //        }
 
-        }
-    }
+    //    }
+    //}
 
-    IEnumerator StopPlayer()
-    {
-        PlayerManager.Instance.b_canMove = false;
-        yield return new WaitForSeconds(0.5f);
-        PlayerManager.Instance.b_canMove = true;
-    }
+    //IEnumerator StopPlayer()
+    //{
+    //    PlayerManager.Instance.b_canMove = false;
+    //    yield return new WaitForSeconds(0.5f);
+    //    PlayerManager.Instance.b_canMove = true;
+    //}
 
 }

@@ -22,7 +22,10 @@ public class AIMainObserverTrigger : MainObserver
             if (cus.anim.GetCurrentAnimatorStateInfo(0).IsName("RightPunch") ||
                cus.anim.GetCurrentAnimatorStateInfo(0).IsName("LeftPunch"))
             {
-                ActiveAllObserver(ActionObserver.AIPunch);
+                if (cus.anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.2f)
+                {
+                    ActiveAllObserver(ActionObserver.AIPunch);
+                }
             }
 
         }

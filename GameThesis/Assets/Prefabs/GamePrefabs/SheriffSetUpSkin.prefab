@@ -513,20 +513,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75c4eab561ae1924faf28b7bcf6f82a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  s_leftPunchTrigger: {fileID: 0}
-  s_rightPunchTrigger: {fileID: 0}
   s_aiMainObserver: {fileID: 6424066011472892732}
+  s_aiPunchTrigger: {fileID: 0}
   as_punchHitBlock: {fileID: 0}
   as_punchHit: {fileID: 0}
   as_punch: {fileID: 0}
-  as_walk: {fileID: 0}
   as_eat: {fileID: 0}
   as_cheer: {fileID: 0}
   ac_punchHitBlock: []
   ac_punchHit: []
   ac_punch: []
-  ac_walk:
-  - {fileID: 8300000, guid: d2b3f8ac4680ab648ac589df84748dc7, type: 3}
   ac_eat:
   - {fileID: 8300000, guid: 8450de32ea6d45042b2c2e2b317e3719, type: 3}
   ac_cheer:

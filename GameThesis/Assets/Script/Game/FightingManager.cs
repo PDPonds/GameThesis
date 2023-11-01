@@ -7,6 +7,8 @@ public class FightingManager : Auto_Singleton<FightingManager>
 {
     public List<CustomerStateManager> fighter = new List<CustomerStateManager>();
 
+    public WaypointIndicator s_wayPoint;
+
     private void Update()
     {
         if (fighter.Count != FighterCount())
@@ -38,9 +40,23 @@ public class FightingManager : Auto_Singleton<FightingManager>
                 CustomerStateManager cus = fighter[i];
                 if (!HasFightWithPlayer())
                 {
-                    cus.b_fightWithPlayer = true;
+                    GetFighterClose(out CustomerStateManager nextCus);
+                    if(nextCus != null)
+                    {
+                        nextCus.b_fightWithPlayer = true;
+                    }
                 }
             }
+        }
+
+        if (GetCurrentFighter(out CustomerStateManager cusfight))
+        {
+            s_wayPoint.gameObject.SetActive(true);
+            s_wayPoint.target = cusfight.t_mesh;
+        }
+        else
+        {
+            s_wayPoint.gameObject.SetActive(false);
         }
 
     }
@@ -93,5 +109,35 @@ public class FightingManager : Auto_Singleton<FightingManager>
         }
         cus = null;
         return false;
+    }
+
+    void GetFighterClose(out CustomerStateManager cus)
+    {
+        CustomerStateManager close = null;
+        float closeFloat = 0;
+        if (fighter.Count > 0)
+        {
+            for (int i = 0; i < fighter.Count; i++)
+            {
+                Vector3 figterPos = fighter[i].transform.position;
+                Vector3 playerPos = PlayerManager.Instance.transform.position;
+                if (close == null)
+                {
+                    close = fighter[i];
+                    closeFloat = Vector3.Distance(figterPos, playerPos);
+                }
+                else
+                {
+                    float currentDis = Vector3.Distance(figterPos, playerPos);
+                    if (currentDis < closeFloat)
+                    {
+                        close = fighter[i];
+                        closeFloat = currentDis;
+                    }
+                }
+            }
+        }
+
+        cus = close;
     }
 }

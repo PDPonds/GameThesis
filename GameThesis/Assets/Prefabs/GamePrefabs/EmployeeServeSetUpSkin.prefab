@@ -36,7 +36,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 14.49
+      value: 16.25
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
@@ -46,7 +46,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.3999996
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
@@ -910,6 +910,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   s_aiMainObserver: {fileID: 294399606315348641}
+  s_aiPunchTrigger: {fileID: 0}
   as_punchHitBlock: {fileID: 0}
   as_punchHit: {fileID: 0}
   as_punch: {fileID: 0}
@@ -943,15 +944,7 @@ MonoBehaviour:
   i_maxHP: 5
   f_walkSpeed: 2
   f_runSpeed: 4
-  f_atkRange: 1.2
-  f_atkDelay: 0.5
-  f_runRange: 2.5
-  f_fightTime: 5
-  f_currentFightTime: 0
-  f_currentAtkDelay: 0
-  b_canAtk: 0
   i_atkCount: 0
-  c_atkCollider: {fileID: 0}
   f_pressedOutTime: 5
   g_stunVFX: {fileID: 7809601963595759145}
   rb: []

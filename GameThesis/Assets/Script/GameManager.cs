@@ -31,6 +31,7 @@ public class GameManager : Auto_Singleton<GameManager>
     public float f_crowdDistance;
     public float f_crowdArea;
 
+    
     private void Awake()
     {
         s_gameState = GetComponent<GameState>();

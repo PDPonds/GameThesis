@@ -17,8 +17,6 @@ public class CustomerFightState : BaseState
     {
         CustomerStateManager cus = (CustomerStateManager)ai;
 
-        cus.ApplyOutlineColor(cus.color_fighting, cus.f_outlineScale);
-
         cus.g_sleepVFX.SetActive(false);
         cus.g_stunVFX.SetActive(false);
 
@@ -72,6 +70,7 @@ public class CustomerFightState : BaseState
 
         if (cus.b_fightWithPlayer)
         {
+            cus.ApplyOutlineColor(cus.color_fightWithPlayer, cus.f_outlineScale);
             //Set Position
             if (cus.transform.position != fightPos)
             {
@@ -94,6 +93,7 @@ public class CustomerFightState : BaseState
         }
         else
         {
+            cus.ApplyOutlineColor(cus.color_inFighting, cus.f_outlineScale);
             if (cus.transform.position != waitPos)
             {
                 cus.agent.SetDestination(waitPos);
