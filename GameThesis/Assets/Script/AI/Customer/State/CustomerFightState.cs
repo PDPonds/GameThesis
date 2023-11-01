@@ -131,19 +131,6 @@ public class CustomerFightState : BaseState
 
         cus.agent.velocity = Vector3.zero;
 
-        if (Vector3.Distance(cus.transform.position, playerPos) < cus.f_attackRange
-            && !PlayerManager.Instance.b_isGuard)
-        {
-            Debug.Log("Hit");
-
-        }
-        else
-        {
-            Debug.Log("NoHit");
-
-        }
-
-
     }
 
 

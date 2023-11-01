@@ -38,6 +38,7 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     [Header("===== Fight =====")]
     [HideInInspector] public bool b_inFight;
     [HideInInspector] public bool b_fightWithPlayer;
+    public Collider c_atkCol;
     public float f_waitDis;
     public float f_fightDis;
     [Header("- Fight")]
@@ -62,7 +63,7 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     [Header("===== Order Food =====")]
     public float f_orderTime;
     [HideInInspector] public float f_currentOrderTime;
-    public ChairObj c_chairObj;
+    [HideInInspector] public ChairObj c_chairObj;
     [Space(10f)]
 
     [Header("===== Eat Food =====")]
@@ -152,6 +153,8 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
         anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponentsInChildren<Rigidbody>();
+
+        c_atkCol.enabled = false;
 
         Color noColor = new Color(0, 0, 0, 0);
         ApplyOutlineColor(noColor, 0f);

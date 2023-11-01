@@ -168,25 +168,6 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
         a_cameraAnim.SetBool("dead", true);
         a_fadeAnim.SetBool("black", true);
 
-        for (int i = 0; i < RestaurantManager.Instance.allSheriffs.Length; i++)
-        {
-            SheriffStateManager shrSM = RestaurantManager.Instance.allSheriffs[i];
-            if (shrSM.s_currentState == shrSM.s_waitForFightEnd)
-            {
-                shrSM.SwitchState(shrSM.s_activityState);
-            }
-        }
-
-        for (int i = 0; i < RestaurantManager.Instance.allCustomers.Length; i++)
-        {
-            CustomerStateManager cus = RestaurantManager.Instance.allCustomers[i];
-            if (cus.b_inFight)
-            {
-                cus.b_inFight = false;
-                cus.SwitchState(cus.s_walkAroundState);
-            }
-        }
-
         yield return new WaitForSeconds(3f);
         a_cameraAnim.SetBool("dead", false);
         a_fadeAnim.SetBool("black", false);

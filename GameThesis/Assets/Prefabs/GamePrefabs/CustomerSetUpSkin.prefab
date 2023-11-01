@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1834107797732434071}
   - component: {fileID: 5220354832609275813}
+  - component: {fileID: 2750098721055849014}
   m_Layer: 8
   m_Name: AtkCollider
   m_TagString: Enemy
@@ -53,6 +54,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3.7, y: 6.969489, z: 3.2195725}
   m_Center: {x: 0.047991343, y: -0.41917893, z: 1.1097854}
+--- !u!114 &2750098721055849014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2047162628270003577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2838243cf6639b243a4e881637a5d850, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1561644431269628577
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1918,9 +1931,10 @@ MonoBehaviour:
   i_maxHP: 5
   b_inFight: 0
   b_fightWithPlayer: 0
+  c_atkCol: {fileID: 5220354832609275813}
   f_waitDis: 3
   f_fightDis: 1
-  f_atkDelay: 1.5
+  f_atkDelay: 1
   f_attackRange: 1.5
   i_atkCount: 0
   t_hips: {fileID: 1841821590660256524}
@@ -1977,6 +1991,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   s_aiMainObserver: {fileID: 8240269092284624982}
+  s_aiPunchTrigger: {fileID: 2750098721055849014}
   as_punchHitBlock: {fileID: 0}
   as_punchHit: {fileID: 0}
   as_punch: {fileID: 0}
