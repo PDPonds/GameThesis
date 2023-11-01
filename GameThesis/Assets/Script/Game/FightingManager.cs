@@ -43,7 +43,6 @@ public class FightingManager : Auto_Singleton<FightingManager>
             }
         }
 
-
     }
 
     public int FighterCount()
@@ -76,6 +75,23 @@ public class FightingManager : Auto_Singleton<FightingManager>
                 }
             }
         }
+        return false;
+    }
+
+    public bool GetCurrentFighter(out CustomerStateManager cus)
+    {
+        if (fighter.Count > 0)
+        {
+            for (int i = 0; i < fighter.Count; i++)
+            {
+                if (fighter[i].b_fightWithPlayer)
+                {
+                    cus = fighter[i];
+                    return true;
+                }
+            }
+        }
+        cus = null;
         return false;
     }
 }

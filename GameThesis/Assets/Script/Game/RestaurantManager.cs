@@ -291,7 +291,8 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
         {
             for (int i = 0; i < allCustomers.Length; i++)
             {
-                if (allCustomers[i].b_inFight)
+                if (allCustomers[i].b_inFight ||
+                    allCustomers[i].s_currentState == allCustomers[i].s_fightState)
                 {
                     return true;
                 }

@@ -18,27 +18,25 @@ public class FistCombat : MainObserver
 
     public void Punch()
     {
-        //if(!PlayerManager.Instance.b_inFighting)
-        //{
-            if (PlayerManager.Instance.b_canPunch)
+
+        if (PlayerManager.Instance.b_canPunch)
+        {
+            PlayerManager.Instance.i_atkCount++;
+
+            if (PlayerManager.Instance.i_atkCount % 2 == 0)
             {
-                PlayerManager.Instance.i_atkCount++;
-
-                if (PlayerManager.Instance.i_atkCount % 2 == 0)
-                {
-                    ActiveAllObserver(ActionObserver.PlayerRightSoftPunch);
-                }
-                else
-                {
-                    ActiveAllObserver(ActionObserver.PlayerLeftSoftPunch);
-                }
-
-                PlayerManager.Instance.b_canPunch = false;
-                PlayerManager.Instance.f_currentPunchDelay = PlayerManager.Instance.f_punchDelay;
+                ActiveAllObserver(ActionObserver.PlayerRightSoftPunch);
             }
-        //}
-        
-        
+            else
+            {
+                ActiveAllObserver(ActionObserver.PlayerLeftSoftPunch);
+            }
+
+            PlayerManager.Instance.b_canPunch = false;
+            PlayerManager.Instance.f_currentPunchDelay = PlayerManager.Instance.f_punchDelay;
+        }
+
+
     }
 
 }

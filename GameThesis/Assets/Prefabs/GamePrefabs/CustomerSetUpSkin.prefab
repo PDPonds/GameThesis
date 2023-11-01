@@ -1920,7 +1920,9 @@ MonoBehaviour:
   b_fightWithPlayer: 0
   f_waitDis: 3
   f_fightDis: 1
-  f_atkDelay: 2
+  f_atkDelay: 1.5
+  f_attackRange: 1.5
+  i_atkCount: 0
   t_hips: {fileID: 1841821590660256524}
   rb: []
   anim: {fileID: 0}

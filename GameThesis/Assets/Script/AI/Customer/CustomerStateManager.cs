@@ -43,7 +43,8 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     [Header("- Fight")]
     public float f_atkDelay;
     public float f_attackRange;
-    public int i_atkCount;
+
+    [HideInInspector] public int i_atkCount;
     [Space(10f)]
 
     [Header("===== RagdollAndDrag =====")]

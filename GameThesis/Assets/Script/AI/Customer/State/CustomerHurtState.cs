@@ -8,72 +8,75 @@ public class CustomerHurtState : BaseState
     float f_fightBackPercent;
     public override void EnterState(StateManager ai)
     {
-        CustomerStateManager customerStateManager = (CustomerStateManager)ai;
-        if (customerStateManager.c_chairObj != null)
+        CustomerStateManager cus = (CustomerStateManager)ai;
+        if (cus.c_chairObj != null)
         {
-            customerStateManager.c_chairObj.DisableAllFood();
-            customerStateManager.c_chairObj.b_isEmpty = true;
-            customerStateManager.c_chairObj.b_readyForNextCustomer = false;
-            customerStateManager.c_chairObj.s_currentCustomer = null;
+            cus.c_chairObj.DisableAllFood();
+            cus.c_chairObj.b_isEmpty = true;
+            cus.c_chairObj.b_readyForNextCustomer = false;
+            cus.c_chairObj.s_currentCustomer = null;
         }
-        customerStateManager.c_chairObj = null;
+        cus.c_chairObj = null;
 
         f_fightBackPercent = Random.Range(0f, 100f);
 
-        customerStateManager.g_sleepVFX.SetActive(false);
-        customerStateManager.g_stunVFX.SetActive(false);
+        cus.g_sleepVFX.SetActive(false);
+        cus.g_stunVFX.SetActive(false);
 
     }
 
     public override void UpdateState(StateManager ai)
     {
-        CustomerStateManager customerStateManager = (CustomerStateManager)ai;
+        CustomerStateManager cus = (CustomerStateManager)ai;
 
-        customerStateManager.agent.velocity = Vector3.zero;
+        cus.agent.velocity = Vector3.zero;
 
-        customerStateManager.anim.Play("Hurt");
+        cus.anim.Play("Hurt");
 
-        customerStateManager.anim.SetBool("fightState", false);
-        customerStateManager.anim.SetBool("sit", false);
-        customerStateManager.anim.SetBool("drunk", false);
+        cus.anim.SetBool("fightState", false);
+        cus.anim.SetBool("sit", false);
+        cus.anim.SetBool("drunk", false);
 
-        customerStateManager.RagdollOff();
+        cus.RagdollOff();
 
-        if (customerStateManager.anim.GetCurrentAnimatorStateInfo(0).IsName("Hurt"))
+        if (cus.anim.GetCurrentAnimatorStateInfo(0).IsName("Hurt"))
         {
-            if (customerStateManager.anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.2f)
+            if (cus.anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.2f)
             {
-                if (s_lastState == customerStateManager.s_walkAroundState)
+                if (s_lastState == cus.s_walkAroundState)
                 {
-                    if (customerStateManager.b_escape)
+                    if (cus.b_escape)
                     {
-                        if (f_fightBackPercent <= customerStateManager.f_fightBackPercent)
+                        if (f_fightBackPercent <= cus.f_fightBackPercent)
                         {
-                            customerStateManager.b_inFight = true;
-                            customerStateManager.SwitchState(customerStateManager.s_fightState);
+                            cus.b_inFight = true;
+                            cus.SwitchState(cus.s_fightState);
+                            Retarget(cus);
                         }
                         else
                         {
-                            customerStateManager.SwitchState(customerStateManager.s_giveBackState);
+                            cus.SwitchState(cus.s_giveBackState);
                         }
                     }
                     else
                     {
-                        customerStateManager.b_inFight = true;
-                        customerStateManager.SwitchState(customerStateManager.s_fightState);
+                        cus.b_inFight = true;
+                        cus.SwitchState(cus.s_fightState);
+                        Retarget(cus);
 
 
                     }
                 }
-                else if (s_lastState == customerStateManager.s_giveBackState)
+                else if (s_lastState == cus.s_giveBackState)
                 {
-                    customerStateManager.SwitchState(customerStateManager.s_runEscapeState);
+                    cus.SwitchState(cus.s_runEscapeState);
                 }
                 else
                 {
 
-                    customerStateManager.b_inFight = true;
-                    customerStateManager.SwitchState(customerStateManager.s_fightState);
+                    cus.b_inFight = true;
+                    cus.SwitchState(cus.s_fightState);
+                    Retarget(cus);
 
                 }
 
@@ -81,4 +84,14 @@ public class CustomerHurtState : BaseState
 
         }
     }
+
+    void Retarget(CustomerStateManager cus)
+    {
+        foreach (CustomerStateManager fighter in FightingManager.Instance.fighter)
+        {
+            fighter.b_fightWithPlayer = false;
+        }
+        cus.b_fightWithPlayer = true;
+    }
+
 }
