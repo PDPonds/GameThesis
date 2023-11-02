@@ -41,7 +41,7 @@ public class FightingManager : Auto_Singleton<FightingManager>
                 if (!HasFightWithPlayer())
                 {
                     GetFighterClose(out CustomerStateManager nextCus);
-                    if(nextCus != null)
+                    if (nextCus != null)
                     {
                         nextCus.b_fightWithPlayer = true;
                     }
@@ -53,6 +53,7 @@ public class FightingManager : Auto_Singleton<FightingManager>
         {
             s_wayPoint.gameObject.SetActive(true);
             s_wayPoint.target = cusfight.t_mesh;
+            s_wayPoint.image.color = cusfight.color_fightWithPlayer;
         }
         else
         {

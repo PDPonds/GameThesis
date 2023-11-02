@@ -4,6 +4,18 @@ using UnityEngine;
 
 public class OpenCloseRestaurantInterac : MonoBehaviour, IInteracable
 {
+    Animator anim;
+
+    private void Awake()
+    {
+        anim = GetComponent<Animator>();
+    }
+
+    private void Update()
+    {
+        bool isOpen = GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_openState;
+        anim.SetBool("isOpen", isOpen);
+    }
 
     public void Interaction()
     {
