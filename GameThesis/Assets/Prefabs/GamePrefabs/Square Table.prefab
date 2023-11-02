@@ -97,7 +97,7 @@ MonoBehaviour:
   f_costToBuy: 100
   tableObj: {fileID: 0}
   m_waitForBuy: {fileID: 2100000, guid: beb3f41c4fe8b9c48a9b303ee16936a8, type: 2}
-  m_readyToUse: {fileID: 2100000, guid: f3e66dd9cd9f9ae48aeea23d5465a9c0, type: 2}
+  m_readyToUse: {fileID: 2100000, guid: b66344cb11433864fa18dd80899b1152, type: 2}
 --- !u!1 &8871950073587651226
 GameObject:
   m_ObjectHideFlags: 0

@@ -28,17 +28,21 @@ public class AIPunchTrigger : MainObserver
                         {
                             if (cus.b_inFight || cus.s_currentState == cus.s_fightState)
                             {
+                                cus.b_isGang = false;
                                 cus.b_inFight = false;
                                 cus.b_fightWithPlayer = false;
                                 cus.SwitchState(cus.s_walkAroundState);
                             }
                         }
                     }
+
                 }
                 else
                 {
                     ActiveAllObserver(ActionObserver.AIPunchHitBlock);
                 }
+                Collider col = GetComponent<Collider>();
+                col.enabled = false;
             }
         }
     }

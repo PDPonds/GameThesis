@@ -106,9 +106,9 @@ public class EmployeeServeAndCookingState : BaseState
                             }
                             else
                             {
-                                employeeStateManager.anim.SetBool("walk", false);
-                                employeeStateManager.agent.speed = employeeStateManager.f_runSpeed;
-                                employeeStateManager.anim.SetBool("run", true);
+                                employeeStateManager.anim.SetBool("walk", true);
+                                employeeStateManager.agent.speed = employeeStateManager.f_walkSpeed;
+                                employeeStateManager.anim.SetBool("run", false);
 
                             }
                             employeeStateManager.b_hasFood = false;
@@ -139,7 +139,7 @@ public class EmployeeServeAndCookingState : BaseState
 
                     }
 
-                    if(employeeStateManager.b_hasFood)
+                    if (employeeStateManager.b_hasFood)
                     {
                         employeeStateManager.anim.SetLayerWeight(1, 1);
                         employeeStateManager.g_FoodInHand.SetActive(true);
@@ -171,7 +171,7 @@ public class EmployeeServeAndCookingState : BaseState
                 }
             }
         }
-        if(GameManager.Instance.s_gameState.s_currentState ==
+        if (GameManager.Instance.s_gameState.s_currentState ==
             GameManager.Instance.s_gameState.s_closeState)
         {
             switch (employeeStateManager.employeeType)
@@ -195,7 +195,7 @@ public class EmployeeServeAndCookingState : BaseState
                     break;
                 case EmployeeType.Serve:
 
-                    if(RestaurantManager.Instance.b_summaryButHasCustome)
+                    if (RestaurantManager.Instance.b_summaryButHasCustome)
                     {
                         if (RestaurantManager.Instance.GetCurrentChairFormEmployee(employeeStateManager, out int chairIndex))
                         {

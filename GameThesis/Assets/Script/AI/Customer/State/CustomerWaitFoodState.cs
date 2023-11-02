@@ -6,49 +6,49 @@ public class CustomerWaitFoodState : BaseState
 {
     public override void EnterState(StateManager ai)
     {
-        CustomerStateManager customerStateManager = (CustomerStateManager)ai;
-        customerStateManager.f_currentOrderTime = customerStateManager.f_orderTime;
-        customerStateManager.c_chairObj.s_currentCustomer = customerStateManager;
+        CustomerStateManager cus = (CustomerStateManager)ai;
+        cus.f_currentOrderTime = cus.f_orderTime;
+        cus.c_chairObj.s_currentCustomer = cus;
 
-        if(customerStateManager.c_chairObj != null )
+        if(cus.c_chairObj != null )
         {
-            customerStateManager.c_chairObj.DisableAllFood();
+            cus.c_chairObj.DisableAllFood();
         }
 
         Color noColor = new Color(0, 0, 0, 0);
-        customerStateManager.ApplyOutlineColor(noColor, 0f);
+        cus.ApplyOutlineColor(noColor, 0f);
 
-        customerStateManager.g_sleepVFX.SetActive(false);
-        customerStateManager.g_stunVFX.SetActive(false);
+        cus.g_sleepVFX.SetActive(false);
+        cus.g_stunVFX.SetActive(false);
 
     }
 
     public override void UpdateState(StateManager ai)
     {
-        CustomerStateManager customerStateManager = (CustomerStateManager)ai;
-        if (customerStateManager.c_chairObj != null)
+        CustomerStateManager cus = (CustomerStateManager)ai;
+        if (cus.c_chairObj != null)
         {
-            if (customerStateManager.c_chairObj != null)
+            if (cus.c_chairObj != null)
             {
-                ChairObj chair = customerStateManager.c_chairObj;
-                customerStateManager.anim.SetBool("walk", false);
-                customerStateManager.anim.SetBool("run", false);
-                customerStateManager.anim.SetBool("sit", true);
-                customerStateManager.anim.SetBool("drunk", false);
-                customerStateManager.agent.velocity = Vector3.zero;
+                ChairObj chair = cus.c_chairObj;
+                cus.anim.SetBool("walk", false);
+                cus.anim.SetBool("run", false);
+                cus.anim.SetBool("sit", true);
+                cus.anim.SetBool("drunk", false);
+                cus.agent.velocity = Vector3.zero;
 
                 Vector3 chairPos = new Vector3(chair.t_sitPos.position.x, chair.t_sitPos.position.y - 0.4f, chair.t_sitPos.position.z);
-                customerStateManager.transform.position = chairPos;
-                customerStateManager.transform.rotation = Quaternion.Euler(0,chair.transform.localEulerAngles.z + 90f, 0);
+                cus.transform.position = chairPos;
+                cus.transform.rotation = Quaternion.Euler(0,chair.transform.localEulerAngles.z + 90f, 0);
 
             }
 
         }
 
-
-        if (customerStateManager.f_currentOrderTime <= 0)
+        cus.f_currentOrderTime -= Time.deltaTime;
+        if (cus.f_currentOrderTime <= 0)
         {
-            customerStateManager.SwitchState(customerStateManager.s_goOutState);
+            cus.SwitchState(cus.s_goOutState);
             RestaurantManager.Instance.RemoveRating();
         }
 
