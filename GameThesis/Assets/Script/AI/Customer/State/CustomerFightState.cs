@@ -25,7 +25,7 @@ public class CustomerFightState : BaseState
         f_reDir = Random.Range(5f, 7f);
         f_currentReDirection = f_reDir;
 
-        
+
     }
 
     public override void UpdateState(StateManager ai)
@@ -35,8 +35,6 @@ public class CustomerFightState : BaseState
         cus.b_inFight = true;
 
         cus.RagdollOff();
-
-        cus.agent.speed = cus.f_walkSpeed;
 
         playerPos = PlayerManager.Instance.transform.position;
         Vector3 fightPos = playerPos - (cus.transform.forward * cus.f_fightDis);
@@ -74,6 +72,25 @@ public class CustomerFightState : BaseState
             //Set Position
             if (cus.transform.position != fightPos)
             {
+                float cusToPlayer = Vector3.Distance(cus.transform.position, playerPos);
+                float playerRadial = Vector3.Distance(playerPos, fightPos);
+                if (cusToPlayer < playerRadial + 5f)
+                {
+                    cus.agent.speed = cus.f_walkSpeed;
+                    cus.anim.SetBool("fightState", true);
+                    cus.anim.SetBool("walk", false);
+                    cus.anim.SetBool("run", false);
+                    cus.anim.SetBool("sit", false);
+                }
+                else
+                {
+                    cus.agent.speed = cus.f_runSpeed;
+                    cus.anim.SetBool("fightState", false);
+                    cus.anim.SetBool("walk", false);
+                    cus.anim.SetBool("run", true);
+                    cus.anim.SetBool("sit", false);
+                }
+
                 cus.agent.SetDestination(fightPos);
             }
 
@@ -90,13 +107,34 @@ public class CustomerFightState : BaseState
                 Attack(cus);
                 f_currentDelay = cus.f_atkDelay;
             }
+
+
         }
         else
         {
             cus.ApplyOutlineColor(cus.color_inFighting, cus.f_outlineScale);
             if (cus.transform.position != waitPos)
             {
-                cus.agent.SetDestination(waitPos);
+                float cusToPlayer = Vector3.Distance(cus.transform.position, playerPos);
+                float playerRadial = Vector3.Distance(playerPos, waitPos);
+                if (cusToPlayer < playerRadial + 5f)
+                {
+                    cus.agent.speed = cus.f_walkSpeed;
+                    cus.anim.SetBool("fightState", true);
+                    cus.anim.SetBool("walk", false);
+                    cus.anim.SetBool("run", false);
+                    cus.anim.SetBool("sit", false);
+                    cus.agent.SetDestination(waitPos);
+                }
+                else
+                {
+                    cus.agent.speed = cus.f_runSpeed;
+                    cus.anim.SetBool("fightState", false);
+                    cus.anim.SetBool("walk", false);
+                    cus.anim.SetBool("run", true);
+                    cus.anim.SetBool("sit", false);
+                    cus.agent.SetDestination(waitPos);
+                }
             }
         }
 
@@ -111,10 +149,6 @@ public class CustomerFightState : BaseState
             cus.transform.rotation = rot;
         }
 
-        cus.anim.SetBool("fightState", true);
-        cus.anim.SetBool("walk", false);
-        cus.anim.SetBool("run", false);
-        cus.anim.SetBool("sit", false);
     }
 
     void Attack(CustomerStateManager cus)
