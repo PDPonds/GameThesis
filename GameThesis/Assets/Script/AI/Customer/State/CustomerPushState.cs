@@ -6,42 +6,42 @@ public class CustomerPushState : BaseState
 {
     public override void EnterState(StateManager ai)
     {
-        CustomerStateManager customerStateManager = (CustomerStateManager)ai;
-        if (customerStateManager.c_chairObj != null)
+        CustomerStateManager cus = (CustomerStateManager)ai;
+        if (cus.c_chairObj != null)
         {
-            customerStateManager.c_chairObj.b_isEmpty = true;
-            customerStateManager.c_chairObj.b_readyForNextCustomer = false;
-            customerStateManager.c_chairObj.s_currentCustomer = null;
-            customerStateManager.c_chairObj.DisableAllFood();
+            cus.c_chairObj.b_isEmpty = true;
+            cus.c_chairObj.b_readyForNextCustomer = false;
+            cus.c_chairObj.s_currentCustomer = null;
+            cus.c_chairObj.DisableAllFood();
 
         }
-        customerStateManager.c_chairObj = null;
-        customerStateManager.anim.Play("Push");
-        customerStateManager.ApplyOutlineColor(customerStateManager.color_warning, customerStateManager.f_outlineScale);
+        cus.c_chairObj = null;
+        cus.anim.Play("Push");
+        cus.ApplyOutlineColor(cus.color_warning, cus.f_outlineScale);
 
-        customerStateManager.g_sleepVFX.SetActive(false);
-        customerStateManager.g_stunVFX.SetActive(false);
+        cus.g_sleepVFX.SetActive(false);
+        cus.g_stunVFX.SetActive(false);
 
     }
 
     public override void UpdateState(StateManager ai)
     {
 
-        CustomerStateManager customerStateManager = (CustomerStateManager)ai;
+        CustomerStateManager cus = (CustomerStateManager)ai;
 
-        customerStateManager.agent.velocity = Vector3.zero;
+        cus.agent.velocity = Vector3.zero;
 
-        customerStateManager.anim.SetBool("fightState", false);
-        customerStateManager.anim.SetBool("sit", false);
-        customerStateManager.anim.SetBool("drunk", false);
+        cus.anim.SetBool("fightState", false);
+        cus.anim.SetBool("sit", false);
+        cus.anim.SetBool("drunk", false);
 
-        customerStateManager.RagdollOff();
+        cus.RagdollOff();
 
-        if (customerStateManager.anim.GetCurrentAnimatorStateInfo(0).IsName("Push"))
+        if (cus.anim.GetCurrentAnimatorStateInfo(0).IsName("Push"))
         {
-            if (customerStateManager.anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.5f)
+            if (cus.anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.5f)
             {
-                customerStateManager.SwitchState(customerStateManager.s_fightState);
+                cus.SwitchState(cus.s_fightState);
             }
         }
 

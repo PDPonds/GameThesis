@@ -1975,7 +1975,8 @@ MonoBehaviour:
   t_mesh: {fileID: 6672589341822995474}
   color_warning: {r: 0.93333334, g: 0.7058824, b: 0.37254903, a: 1}
   color_interact: {r: 1, g: 1, b: 1, a: 1}
-  color_fighting: {r: 0.9622642, g: 0.45843717, b: 0.45843717, a: 0}
+  color_inFighting: {r: 0.8773585, g: 0.49247953, b: 0.49247953, a: 1}
+  color_fightWithPlayer: {r: 1, g: 0, b: 0, a: 1}
   f_outlineScale: 0.005
   v_crowdPos: {x: 0, y: 0, z: 0}
 --- !u!114 &4548816158027124120

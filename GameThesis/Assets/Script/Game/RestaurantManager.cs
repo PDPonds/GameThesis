@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class RestaurantManager : Auto_Singleton<RestaurantManager>
 {
@@ -267,6 +268,21 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
         return false;
     }
 
+    public bool SomeOneSleep()
+    {
+        if (allCustomers.Length > 0)
+        {
+            for (int i = 0; i < allCustomers.Length; i++)
+            {
+                if (allCustomers[i].s_currentState == allCustomers[i].s_drunkState)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public bool AllEmployeeWorkingCheckForText()
     {
         int allEmployeeProcessing = 0;
@@ -301,18 +317,6 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
         return false;
     }
 
-    //public bool HasGangToTeachYou()
-    //{
-    //    for (int i = 0; i < allCustomers.Length; i++)
-    //    {
-    //        if (allCustomers[i].s_currentState == allCustomers[i].s_aggressive)
-    //        {
-    //            return true;
-    //        }
-    //    }
-    //    return false;
-    //}
-
     public void RemoveRating()
     {
         uiAnimCon.RemoveRatingAnim(); // Waann
@@ -346,6 +350,37 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
         }
 
         return redyCount;
+    }
+
+    public bool HasGangToTeachYou()
+    {
+        if (allCustomers.Length > 0)
+        {
+            for (int i = 0; i < allCustomers.Length; i++)
+            {
+                if (allCustomers[i].b_isGang)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public int GetEscapeCount()
+    {
+        int count = 0;
+        if (allCustomers.Length > 0)
+        {
+            for (int i = 0; i < allCustomers.Length; i++)
+            {
+                if (allCustomers[i].b_escape)
+                {
+                    count++;
+                }
+            }
+        }
+        return count;
     }
 
 }

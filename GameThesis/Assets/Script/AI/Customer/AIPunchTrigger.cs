@@ -10,7 +10,7 @@ public class AIPunchTrigger : MainObserver
         {
             if (other.TryGetComponent<PlayerManager>(out PlayerManager player))
             {
-                if(!player.b_isGuard)
+                if (!player.b_isGuard)
                 {
                     ActiveAllObserver(ActionObserver.AIPunchHit);
                     if (player.TakeDamageAndDead())
@@ -35,7 +35,10 @@ public class AIPunchTrigger : MainObserver
                         }
                     }
                 }
-                
+                else
+                {
+                    ActiveAllObserver(ActionObserver.AIPunchHitBlock);
+                }
             }
         }
     }

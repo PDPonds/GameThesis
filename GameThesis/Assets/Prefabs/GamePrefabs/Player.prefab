@@ -164,6 +164,7 @@ MonoBehaviour:
   c_punchCol: {fileID: 3865675054468007293}
   b_inFighting: 0
   f_maxInFightingTime: 5
+  f_fightingCheckDis: 4
   f_currentInFightingTime: 0
   b_canPunch: 0
   f_currentPunchDelay: 0
@@ -388,8 +389,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 2, z: 1}
-  m_Center: {x: 0, y: 1, z: 0.7}
+  m_Size: {x: 1, y: 2, z: 1.5}
+  m_Center: {x: 0, y: 1, z: 0.9}
 --- !u!114 &7544151712247845750
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -733,7 +734,7 @@ PrefabInstance:
     - target: {fileID: 3181872521001101421, guid: 96f4d0f3fd94d484997157dfc3e4535d,
         type: 3}
       propertyPath: m_CastShadows
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

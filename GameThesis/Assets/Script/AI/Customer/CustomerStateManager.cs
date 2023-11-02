@@ -120,7 +120,8 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     public Transform t_mesh;
     public Color color_warning;
     public Color color_interact;
-    public Color color_fighting;
+    public Color color_inFighting;
+    public Color color_fightWithPlayer;
     public float f_outlineScale;
 
     MaterialPropertyBlock mpb;
@@ -196,7 +197,7 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
         if (b_escape) GameManager.Instance.AddCoin(f_giveCoin);
         if (b_isDrunk) GameManager.Instance.AddCoin(f_giveCoin);
 
-        if (b_hasGang)
+        if (b_hasGang && !b_isGang)
         {
             i_gangCount = UnityEngine.Random.Range(v_minmaxGangCount.x, v_minmaxGangCount.y);
             for (int i = 0; i < i_gangCount; i++)
