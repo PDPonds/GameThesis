@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Burst.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
@@ -144,6 +145,12 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     public Color color_fightWithPlayer;
     public float f_outlineScale;
 
+    SkinnedMeshRenderer meshrnd;
+    SkinnedMeshRenderer hairrnd;
+    SkinnedMeshRenderer shirtrnd;
+    SkinnedMeshRenderer pantrnd;
+    SkinnedMeshRenderer hatrnd;
+
     MaterialPropertyBlock mpb;
     public MaterialPropertyBlock Mpb
     {
@@ -161,13 +168,24 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     [Header("===== Cheer =====")]
     public List<AnimatorOverrideController> allCheerAnim = new List<AnimatorOverrideController>();
     [HideInInspector] public Vector3 v_crowdPos;
-    
+
     public void ApplyOutlineColor(Color color, float scale)
     {
-        SkinnedMeshRenderer rnd = t_mesh.GetComponent<SkinnedMeshRenderer>();
+        meshrnd = t_mesh.GetComponent<SkinnedMeshRenderer>();
+
+        if (CustomerClothes.hair >= 0) hairrnd = hairs[CustomerClothes.hair].GetComponent<SkinnedMeshRenderer>();
+        shirtrnd = shirts[CustomerClothes.shirt].GetComponent<SkinnedMeshRenderer>();
+        pantrnd = pants[CustomerClothes.pant].GetComponent<SkinnedMeshRenderer>();
+        if (CustomerClothes.hat >= 0) hatrnd = hats[CustomerClothes.hat].GetComponent<SkinnedMeshRenderer>();
+
         Mpb.SetColor("_Color", color);
         Mpb.SetFloat("_Scale", scale);
-        rnd.SetPropertyBlock(mpb);
+
+        meshrnd.SetPropertyBlock(mpb);
+        if (hairrnd != null) hairrnd.SetPropertyBlock(mpb);
+        if (shirtrnd != null) shirtrnd.SetPropertyBlock(mpb);
+        if (pantrnd != null) pantrnd.SetPropertyBlock(mpb);
+        if (hatrnd != null) hatrnd.SetPropertyBlock(mpb);
     }
 
     public CustomerClothes GenerateClothes()
