@@ -7,8 +7,24 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
+[Serializable]
+public class CustomerClothes
+{
+    public int hair;
+    public int shirt;
+    public int pant;
+    public int hat;
+}
+
 public class CustomerStateManager : StateManager, IDamageable, IInteracable
 {
+    public CustomerClothes CustomerClothes;
+
+    public List<GameObject> hairs = new List<GameObject>();
+    public List<GameObject> shirts = new List<GameObject>();
+    public List<GameObject> pants = new List<GameObject>();
+    public List<GameObject> hats = new List<GameObject>();
+
     public override BaseState s_currentState { get; set; }
 
     public CustomerWalkAroundState s_walkAroundState = new CustomerWalkAroundState();
@@ -124,6 +140,8 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     public Color color_fightWithPlayer;
     public float f_outlineScale;
 
+
+
     MaterialPropertyBlock mpb;
     public MaterialPropertyBlock Mpb
     {
@@ -147,6 +165,30 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
         Mpb.SetColor("_Color", color);
         Mpb.SetFloat("_Scale", scale);
         rnd.SetPropertyBlock(mpb);
+    }
+
+    public CustomerClothes GenerateClothes()
+    {
+        CustomerClothes clothes = new CustomerClothes();
+        int hair = UnityEngine.Random.Range(-1, hairs.Count);
+        int shirt = UnityEngine.Random.Range(-1, shirts.Count);
+        int pant = UnityEngine.Random.Range(-1, pants.Count); ;
+        int hat = UnityEngine.Random.Range(-1, hats.Count);
+        clothes.hair = hair;
+        clothes.shirt = shirt;
+        clothes.pant = pant;
+        clothes.hat = hat;
+        return clothes;
+    }
+
+    public CustomerClothes SetUpClothes(int hair, int shirt, int pant, int hat)
+    {
+        CustomerClothes clothes = new CustomerClothes();
+        clothes.hair = hair;
+        clothes.shirt = shirt;
+        clothes.pant = pant;
+        clothes.hat = hat;
+        return clothes;
     }
 
     private void Awake()
@@ -177,6 +219,31 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     private void Update()
     {
         s_currentState.UpdateState(this);
+
+        for (int i = 0; i < hairs.Count; i++)
+        {
+            if (i != CustomerClothes.hair) hairs[i].SetActive(false);
+            else hairs[i].SetActive(true);
+        }
+
+        for (int i = 0; i < shirts.Count; i++)
+        {
+            if (i != CustomerClothes.shirt) shirts[i].SetActive(false);
+            else shirts[i].SetActive(true);
+        }
+
+        for (int i = 0; i < pants.Count; i++)
+        {
+            if (i != CustomerClothes.pant) pants[i].SetActive(false);
+            else pants[i].SetActive(true);
+        }
+
+        for (int i = 0; i < hats.Count; i++)
+        {
+            if (i != CustomerClothes.pant) hats[i].SetActive(false);
+            else hats[i].SetActive(true);
+        }
+
     }
 
     public void TakeDamage(int damage)
@@ -202,7 +269,7 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
             i_gangCount = UnityEngine.Random.Range(v_minmaxGangCount.x, v_minmaxGangCount.y);
             for (int i = 0; i < i_gangCount; i++)
             {
-                GameManager.Instance.s_gameState.SpawnCustomerGang(i_prefabIndex);
+                GameManager.Instance.s_gameState.SpawnCustomerGang(i_prefabIndex, CustomerClothes);
             }
         }
 

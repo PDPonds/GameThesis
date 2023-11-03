@@ -38,6 +38,8 @@ public class GameState : StateManager
             GameObject cus = Instantiate(g_customerPrefab[prefabIndex], t_spawnPoint[spawnPosIndex].position, Quaternion.identity);
             CustomerStateManager state = cus.GetComponent<CustomerStateManager>();
 
+            state.CustomerClothes = state.GenerateClothes();
+
             float gangPercent = UnityEngine.Random.Range(0f, 100f);
             if (gangPercent <= state.f_isGangsterPercent) state.b_hasGang = true;
             else state.b_hasGang = false;
@@ -47,13 +49,16 @@ public class GameState : StateManager
         }
     }
 
-    public void SpawnCustomerGang(int prefabIndex)
+    public void SpawnCustomerGang(int prefabIndex, CustomerClothes closth)
     {
         int spawnPosIndex = UnityEngine.Random.Range(0, t_spawnPoint.Count);
 
         GameObject cus = Instantiate(g_customerPrefab[prefabIndex], t_spawnPoint[spawnPosIndex].position, Quaternion.identity);
+
         cus.name = "Gang";
         CustomerStateManager state = cus.GetComponent<CustomerStateManager>();
+        state.SetUpClothes(closth.hair, closth.shirt, closth.pant, closth.hat);
+
         state.b_isGang = true;
         state.SwitchState(state.s_fightState);
 
