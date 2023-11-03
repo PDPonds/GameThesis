@@ -8,27 +8,29 @@ public class EmployeeHurtState : BaseState
 
     public override void EnterState(StateManager ai)
     {
-        EmployeeStateManager employeeStateManager = (EmployeeStateManager)ai;
-        employeeStateManager.b_isWorking = false;
-        employeeStateManager.g_stunVFX.SetActive(false);
+        EmployeeStateManager emp = (EmployeeStateManager)ai;
+        emp.b_isWorking = false;
+        emp.g_stunVFX.SetActive(false);
+        emp.anim.SetBool("slackOff", false);
+        emp.anim.SetBool("cooking", false);
 
     }
 
     public override void UpdateState(StateManager ai)
     {
-        EmployeeStateManager employeeStateManager = (EmployeeStateManager)ai;
+        EmployeeStateManager emp = (EmployeeStateManager)ai;
 
-        employeeStateManager.agent.velocity = Vector3.zero;
+        emp.agent.velocity = Vector3.zero;
 
-        employeeStateManager.anim.Play("Hurt");
+        emp.anim.Play("Hurt");
 
-        employeeStateManager.RagdollOff();
+        emp.RagdollOff();
 
-        if (employeeStateManager.anim.GetCurrentAnimatorStateInfo(0).IsName("Hurt"))
+        if (emp.anim.GetCurrentAnimatorStateInfo(0).IsName("Hurt"))
         {
-            if(employeeStateManager.anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.5f)
+            if(emp.anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.5f)
             {
-                employeeStateManager.SwitchState(employeeStateManager.s_activityState);
+                emp.SwitchState(emp.s_activityState);
             }
         }
     }

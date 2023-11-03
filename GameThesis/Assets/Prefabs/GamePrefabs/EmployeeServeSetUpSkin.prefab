@@ -855,7 +855,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: e5989dbc5e9d720458b027b381b72a8d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -956,11 +956,13 @@ MonoBehaviour:
   g_FoodInHand: {fileID: 572668808332531273}
   b_isWorking: 0
   t_workingPos: {fileID: 0}
+  cookingAnim: {fileID: 0}
   f_timeToSlackOff: 10
   f_slackOffPercent: 2.5
   v_minmaxX: {x: -21, y: -15}
   v_minmaxZ: {x: -1, y: 7}
   v_minAndMaxSlackOffTime: {x: 30, y: 60}
+  allSlackOffAnim: []
   v_walkPos: {x: 0, y: 0, z: 0}
   f_slackOffTime: 0
   currentAreaStay: 0

@@ -8,26 +8,29 @@ public class EmployeePassedOutState : BaseState
 
     public override void EnterState(StateManager ai)
     {
-        EmployeeStateManager employeeStateManager = (EmployeeStateManager)ai;
-        f_currentPressedOutTime = employeeStateManager.f_pressedOutTime;
-        employeeStateManager.b_isWorking = false;
+        EmployeeStateManager emp = (EmployeeStateManager)ai;
+        f_currentPressedOutTime = emp.f_pressedOutTime;
+        emp.b_isWorking = false;
 
         Color noColor = new Color(0, 0, 0, 0);
-        employeeStateManager.ApplyOutlineColor(noColor, 0f);
+        emp.ApplyOutlineColor(noColor, 0f);
 
-        employeeStateManager.g_stunVFX.SetActive(true);
+        emp.g_stunVFX.SetActive(true);
+
+        emp.anim.SetBool("slackOff", false);
+        emp.anim.SetBool("cooking", false);
 
     }
 
     public override void UpdateState(StateManager ai)
     {
-        EmployeeStateManager employeeStateManager = (EmployeeStateManager)ai;
-        employeeStateManager.RagdollOn();
+        EmployeeStateManager emp = (EmployeeStateManager)ai;
+        emp.RagdollOn();
 
         f_currentPressedOutTime -= Time.deltaTime;
         if (f_currentPressedOutTime <= 0)
         {
-            employeeStateManager.SwitchState(employeeStateManager.s_activityState);
+            emp.SwitchState(emp.s_activityState);
         }
 
 

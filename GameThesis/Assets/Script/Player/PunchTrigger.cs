@@ -11,6 +11,7 @@ public class PunchTrigger : MainObserver
             IDamageable damageAble = other.GetComponentInParent<IDamageable>();
             if (damageAble != null)
             {
+                GameManager.Instance.framestop.ActivateFrameStop();
                 damageAble.TakeDamage(1);
 
                 if (transform.TryGetComponent(out Collider collider))

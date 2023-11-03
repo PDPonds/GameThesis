@@ -9,18 +9,9 @@ public class FrameStop : MonoBehaviour
     private float counter = 0;
     private bool isTheWorld = false;
 
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            isTheWorld = !isTheWorld;
-            counter = 0;
-        }
+
 
         if (isTheWorld)
         {
@@ -31,5 +22,11 @@ public class FrameStop : MonoBehaviour
             }
             else { Time.timeScale = 1; isTheWorld = false; }
         }
+    }
+
+    public void ActivateFrameStop()
+    {
+        isTheWorld = !isTheWorld;
+        counter = 0;
     }
 }

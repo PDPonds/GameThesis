@@ -8,7 +8,6 @@ using UnityEngine;
 
 public class GameManager : Auto_Singleton<GameManager>
 {
-
     public LayerMask lm_playerMask;
     public LayerMask lm_enemyMask;
 
@@ -31,7 +30,8 @@ public class GameManager : Auto_Singleton<GameManager>
     public float f_crowdDistance;
     public float f_crowdArea;
 
-    
+    public FrameStop framestop;
+
     private void Awake()
     {
         s_gameState = GetComponent<GameState>();

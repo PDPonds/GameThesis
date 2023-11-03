@@ -99,7 +99,7 @@ public class InputSystem : MonoBehaviour
 
     void SprintPerformed()
     {
-        if (!PlayerManager.Instance.b_isDead)
+        if (!PlayerManager.Instance.b_isDead && !PlayerManager.Instance.b_inFighting)
         {
             PlayerManager.Instance.b_isSprint = true;
         }

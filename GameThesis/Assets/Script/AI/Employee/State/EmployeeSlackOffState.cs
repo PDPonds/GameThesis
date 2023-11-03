@@ -7,50 +7,57 @@ public class EmployeeSlackOffState : BaseState
     float f_currentSlowTime;
     public override void EnterState(StateManager ai)
     {
-        EmployeeStateManager employeeStateManager = (EmployeeStateManager)ai;
-        employeeStateManager.b_isWorking = false;
+        EmployeeStateManager emp = (EmployeeStateManager)ai;
+        emp.b_isWorking = false;
 
-        float xPos = Random.Range(employeeStateManager.v_minmaxX.x, employeeStateManager.v_minmaxX.y);
-        float zPos = Random.Range(employeeStateManager.v_minmaxZ.x, employeeStateManager.v_minmaxZ.y);
-        employeeStateManager.v_walkPos = new Vector3(xPos, 0, zPos);
+        float xPos = Random.Range(emp.v_minmaxX.x, emp.v_minmaxX.y);
+        float zPos = Random.Range(emp.v_minmaxZ.x, emp.v_minmaxZ.y);
+        emp.v_walkPos = new Vector3(xPos, 0, zPos);
 
-        employeeStateManager.f_slackOffTime = Random.Range(employeeStateManager.v_minAndMaxSlackOffTime.x,
-            employeeStateManager.v_minAndMaxSlackOffTime.y);
-        f_currentSlowTime = employeeStateManager.f_slackOffTime;
+        emp.f_slackOffTime = Random.Range(emp.v_minAndMaxSlackOffTime.x,
+            emp.v_minAndMaxSlackOffTime.y);
+        f_currentSlowTime = emp.f_slackOffTime;
 
-        if (employeeStateManager.employeeType == EmployeeType.Serve)
+        if (emp.employeeType == EmployeeType.Serve)
         {
-            employeeStateManager.b_hasFood = false;
+            emp.b_hasFood = false;
         }
 
-        employeeStateManager.ApplyOutlineColor(employeeStateManager.color_warning, employeeStateManager.f_outlineScale);
-        employeeStateManager.g_stunVFX.SetActive(false);
+        emp.ApplyOutlineColor(emp.color_warning, emp.f_outlineScale);
+        emp.g_stunVFX.SetActive(false);
+
+        int slackOffNum = Random.Range(0, emp.allSlackOffAnim.Count);
+        emp.anim.runtimeAnimatorController = emp.allSlackOffAnim[slackOffNum];
+
+        emp.anim.SetBool("cooking", false);
 
     }
 
     public override void UpdateState(StateManager ai)
     {
-        EmployeeStateManager employeeStateManager = (EmployeeStateManager)ai;
-        employeeStateManager.RagdollOff();
+        EmployeeStateManager emp = (EmployeeStateManager)ai;
+        emp.RagdollOff();
 
-        employeeStateManager.agent.SetDestination(employeeStateManager.v_walkPos);
-        if (Vector3.Distance(employeeStateManager.transform.position, employeeStateManager.v_walkPos)
+        emp.agent.SetDestination(emp.v_walkPos);
+        if (Vector3.Distance(emp.transform.position, emp.v_walkPos)
             <= 1f)
         {
-            employeeStateManager.anim.SetBool("walk", false);
+            emp.anim.SetBool("walk", false);
+            emp.anim.SetBool("slackOff", true);
             f_currentSlowTime -= Time.deltaTime;
             if (f_currentSlowTime < 0)
             {
-                employeeStateManager.SwitchState(employeeStateManager.s_activityState);
+                emp.SwitchState(emp.s_activityState);
             }
 
         }
         else
         {
-            employeeStateManager.anim.SetBool("walk", true);
+            emp.anim.SetBool("walk", true);
+            emp.anim.SetBool("slackOff", false);
         }
 
-        employeeStateManager.agent.speed = employeeStateManager.f_walkSpeed;
+        emp.agent.speed = emp.f_walkSpeed;
 
     }
 }

@@ -44,6 +44,7 @@ public class EmployeeStateManager : StateManager, IDamageable
     [Header("===== Cooking =====")]
     public bool b_isWorking;
     public Transform t_workingPos;
+    public AnimatorOverrideController cookingAnim;
 
     [Header("===== Slack Off =====")]
     public float f_timeToSlackOff;
@@ -51,6 +52,7 @@ public class EmployeeStateManager : StateManager, IDamageable
     public Vector2 v_minmaxX;
     public Vector2 v_minmaxZ;
     public Vector2 v_minAndMaxSlackOffTime;
+    public List<AnimatorOverrideController> allSlackOffAnim = new List<AnimatorOverrideController>();
     [HideInInspector] public Vector3 v_walkPos;
     [HideInInspector] public float f_slackOffTime;
 

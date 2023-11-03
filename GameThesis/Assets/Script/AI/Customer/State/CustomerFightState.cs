@@ -13,6 +13,8 @@ public class CustomerFightState : BaseState
 
     float f_currentDelay;
 
+    float f_currentPlayerEscapeTime;
+
     public override void EnterState(StateManager ai)
     {
         CustomerStateManager cus = (CustomerStateManager)ai;
@@ -25,7 +27,7 @@ public class CustomerFightState : BaseState
         f_reDir = Random.Range(5f, 7f);
         f_currentReDirection = f_reDir;
 
-
+        f_currentPlayerEscapeTime = cus.f_playerEscapeTime;
     }
 
     public override void UpdateState(StateManager ai)
@@ -81,9 +83,20 @@ public class CustomerFightState : BaseState
                     cus.anim.SetBool("walk", false);
                     cus.anim.SetBool("run", false);
                     cus.anim.SetBool("sit", false);
+                    f_currentPlayerEscapeTime = cus.f_playerEscapeTime;
+
+                    
                 }
                 else
                 {
+                    f_currentPlayerEscapeTime -= Time.deltaTime;
+                    if (f_currentPlayerEscapeTime < 0)
+                    {
+                        cus.b_inFight = false;
+                        cus.b_fightWithPlayer = false;
+                        cus.b_isGang = false;
+                        cus.SwitchState(cus.s_walkAroundState);
+                    }
                     cus.agent.speed = cus.f_runSpeed;
                     cus.anim.SetBool("fightState", false);
                     cus.anim.SetBool("walk", false);
@@ -125,9 +138,19 @@ public class CustomerFightState : BaseState
                     cus.anim.SetBool("run", false);
                     cus.anim.SetBool("sit", false);
                     cus.agent.SetDestination(waitPos);
+                    f_currentPlayerEscapeTime = cus.f_playerEscapeTime;
+
                 }
                 else
                 {
+                    f_currentPlayerEscapeTime -= Time.deltaTime;
+                    if (f_currentPlayerEscapeTime < 0)
+                    {
+                        cus.b_inFight = false;
+                        cus.b_fightWithPlayer = false;
+                        cus.b_isGang = false;
+                        cus.SwitchState(cus.s_walkAroundState);
+                    }
                     cus.agent.speed = cus.f_runSpeed;
                     cus.anim.SetBool("fightState", false);
                     cus.anim.SetBool("walk", false);

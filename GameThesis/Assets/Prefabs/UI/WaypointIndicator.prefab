@@ -53,7 +53,7 @@ MonoBehaviour:
   target: {fileID: 0}
   distanceText: {fileID: 6400980723836871141}
   visibleDistance: 5
-  offset: {x: 0, y: 0, z: 0}
+  offset: {x: 0, y: 2.7, z: 0}
   isDistanceNeeded: 1
   safeAreaRadius: 2.5
 --- !u!1 &4053446039054487419
@@ -92,7 +92,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 80, y: 80}
+  m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &6763023080543497279
 CanvasRenderer:

@@ -57,9 +57,13 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     public Collider c_atkCol;
     public float f_waitDis;
     public float f_fightDis;
+
     [Header("- Fight")]
     public float f_atkDelay;
     public float f_attackRange;
+
+    [Header("- Player Escape")]
+    public float f_playerEscapeTime;
 
     [HideInInspector] public int i_atkCount;
     [Space(10f)]
@@ -140,8 +144,6 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     public Color color_fightWithPlayer;
     public float f_outlineScale;
 
-
-
     MaterialPropertyBlock mpb;
     public MaterialPropertyBlock Mpb
     {
@@ -156,9 +158,10 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     }
     [Space(10f)]
 
-    [Header("===== Throng =====")]
+    [Header("===== Cheer =====")]
+    public List<AnimatorOverrideController> allCheerAnim = new List<AnimatorOverrideController>();
     [HideInInspector] public Vector3 v_crowdPos;
-
+    
     public void ApplyOutlineColor(Color color, float scale)
     {
         SkinnedMeshRenderer rnd = t_mesh.GetComponent<SkinnedMeshRenderer>();
@@ -171,8 +174,8 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     {
         CustomerClothes clothes = new CustomerClothes();
         int hair = UnityEngine.Random.Range(-1, hairs.Count);
-        int shirt = UnityEngine.Random.Range(-1, shirts.Count);
-        int pant = UnityEngine.Random.Range(-1, pants.Count); ;
+        int shirt = UnityEngine.Random.Range(0, shirts.Count);
+        int pant = UnityEngine.Random.Range(0, pants.Count); ;
         int hat = UnityEngine.Random.Range(-1, hats.Count);
         clothes.hair = hair;
         clothes.shirt = shirt;
@@ -260,6 +263,7 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     public void Die()
     {
         b_inFight = false;
+        b_isGang = false;
 
         if (b_escape) GameManager.Instance.AddCoin(f_giveCoin);
         if (b_isDrunk) GameManager.Instance.AddCoin(f_giveCoin);

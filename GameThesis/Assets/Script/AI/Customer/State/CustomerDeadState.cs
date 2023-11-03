@@ -5,16 +5,16 @@ public class CustomerDeadState : BaseState
     float f_currentDestroyTime;
     public override void EnterState(StateManager ai)
     {
-        CustomerStateManager customerStateManager = (CustomerStateManager)ai;
-        f_currentDestroyTime = customerStateManager.f_destroyTime;
-        customerStateManager.b_escape = false;
-        customerStateManager.b_isDrunk = false;
+        CustomerStateManager cus = (CustomerStateManager)ai;
+        f_currentDestroyTime = cus.f_destroyTime;
+        cus.b_escape = false;
+        cus.b_isDrunk = false;
 
         Color noColor = new Color(0, 0, 0, 0);
-        customerStateManager.ApplyOutlineColor(noColor, 0f);
+        cus.ApplyOutlineColor(noColor, 0f);
 
-        customerStateManager.g_sleepVFX.SetActive(false);
-        customerStateManager.g_stunVFX.SetActive(true);
+        cus.g_sleepVFX.SetActive(false);
+        cus.g_stunVFX.SetActive(true);
 
         if (!RestaurantManager.Instance.HasCustomerInFightState())
         {
@@ -22,7 +22,7 @@ public class CustomerDeadState : BaseState
             {
                 SheriffStateManager shrSM = RestaurantManager.Instance.allSheriffs[i];
                 if (shrSM.s_currentState == shrSM.s_waitForFightEnd &&
-                    customerStateManager.currentAreaStay == AreaType.OutRestaurant)
+                    cus.currentAreaStay == AreaType.OutRestaurant)
                 {
                     shrSM.SwitchState(shrSM.s_activeThrong);
                 }
@@ -34,21 +34,28 @@ public class CustomerDeadState : BaseState
 
     public override void UpdateState(StateManager ai)
     {
-        CustomerStateManager customerStateManager = (CustomerStateManager)ai;
-        customerStateManager.RagdollOn();
+        CustomerStateManager cus = (CustomerStateManager)ai;
+        cus.RagdollOn();
 
         if (PlayerManager.Instance.g_dragObj != ai.transform.gameObject)
         {
             f_currentDestroyTime -= Time.deltaTime;
             if (f_currentDestroyTime <= 0)
             {
-                customerStateManager.DestroyAI();
+                cus.DestroyAI();
             }
         }
         else
         {
-            f_currentDestroyTime = customerStateManager.f_destroyTime;
+            f_currentDestroyTime = cus.f_destroyTime;
         }
+
+        cus.anim.SetBool("fightState", false);
+        cus.anim.SetBool("walk", false);
+        cus.anim.SetBool("run", false);
+        cus.anim.SetBool("sit", false);
+        cus.anim.SetBool("drunk", false);
+        cus.anim.SetBool("cheer", false);
 
     }
 }

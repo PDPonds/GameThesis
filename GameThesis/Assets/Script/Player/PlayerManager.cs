@@ -59,7 +59,7 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
     public float f_interacRange;
     public LayerMask lm_interacMask;
     public Transform t_holdObjPoint;
-    [HideInInspector] public GameObject g_interactiveObj;
+    /*[HideInInspector]*/ public GameObject g_interactiveObj;
     [Space(10f)]
 
     [Header("===== Player Drag =====")]

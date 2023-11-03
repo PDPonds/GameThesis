@@ -6,11 +6,14 @@ public class CustomerCrowdState : BaseState
 {
     public override void EnterState(StateManager ai)
     {
-        CustomerStateManager customerStateManager = (CustomerStateManager)ai;
+        CustomerStateManager cus = (CustomerStateManager)ai;
         Color noColor = new Color(0, 0, 0, 0);
-        customerStateManager.ApplyOutlineColor(noColor, 0f);
-        customerStateManager.g_sleepVFX.SetActive(false);
-        customerStateManager.g_stunVFX.SetActive(false);
+        cus.ApplyOutlineColor(noColor, 0f);
+        cus.g_sleepVFX.SetActive(false);
+        cus.g_stunVFX.SetActive(false);
+
+        int CheerAnimCount = Random.Range(0, cus.allCheerAnim.Count);
+        cus.anim.runtimeAnimatorController = cus.allCheerAnim[CheerAnimCount];
 
     }
 

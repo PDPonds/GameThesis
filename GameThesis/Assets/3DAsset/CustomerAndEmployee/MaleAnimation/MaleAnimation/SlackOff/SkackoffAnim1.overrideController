@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SkackoffAnim1
+  m_Controller: {fileID: 9100000, guid: 1f597078a70e32144868b436cd6d9a65, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: -2208378497853171600, guid: f766a528423a5494f91eee65fb2cc1fb,
+      type: 3}
+    m_OverrideClip: {fileID: -2208378497853171600, guid: f766a528423a5494f91eee65fb2cc1fb,
+      type: 3}
