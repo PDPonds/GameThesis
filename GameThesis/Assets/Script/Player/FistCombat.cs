@@ -27,11 +27,18 @@ public class FistCombat : MainObserver
                 Vector3 playerPos = PlayerManager.Instance.transform.position;
                 if (FightingManager.Instance.GetCurrentFightWithPlayer(out CustomerStateManager cus))
                 {
-                    Rigidbody rb = PlayerManager.Instance.c_rb;
-                    Vector3 dir = cus.transform.position - playerPos;
-                    dir = dir.normalized;
-                    rb.velocity = Vector3.zero;
-                    rb.AddForce(dir * PlayerManager.Instance.f_attackMoveForce, ForceMode.Impulse);
+                    float playerAndCusDistance = Vector3.Distance(cus.transform.position, playerPos);
+                    Collider col = PlayerManager.Instance.c_punchCol;
+                    BoxCollider punchCol = (BoxCollider)col;
+                    PlayerManager.Instance.b_canMove = false;
+
+                    if (playerAndCusDistance > punchCol.size.z)
+                    {
+                        Rigidbody rb = PlayerManager.Instance.c_rb;
+                        Vector3 dir = cus.transform.position - playerPos;
+                        dir = dir.normalized;
+                        rb.AddForce(dir * PlayerManager.Instance.f_attackMoveForce, ForceMode.Impulse);
+                    }
 
                 }
                 PlayerManager.Instance.b_lockTarget = true;
