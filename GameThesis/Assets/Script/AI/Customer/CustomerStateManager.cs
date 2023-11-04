@@ -65,6 +65,11 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
 
     [Header("- Player Escape")]
     public float f_playerEscapeTime;
+    [Header("- Hurt")]
+    public float f_hurtTime;
+    public float f_protectStunTime;
+    float f_currentStunTime;
+    bool b_protectStun;
 
     [HideInInspector] public int i_atkCount;
     [Space(10f)]
@@ -265,6 +270,16 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
             else hats[i].SetActive(true);
         }
 
+        if (b_protectStun)
+        {
+            f_currentStunTime -= Time.deltaTime;
+            if (f_currentStunTime < 0)
+            {
+                b_protectStun = false;
+            }
+        }
+
+
     }
 
     public void TakeDamage(int damage)
@@ -274,8 +289,15 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
         s_hurtState.s_lastState = s_currentState;
 
         if (i_currentHP <= 0) Die();
-        else SwitchState(s_hurtState);
-
+        else
+        {
+            if (!b_protectStun)
+            {
+                b_protectStun = true;
+                f_currentStunTime = f_protectStunTime;
+                SwitchState(s_hurtState);
+            }
+        }
     }
 
     public void Die()

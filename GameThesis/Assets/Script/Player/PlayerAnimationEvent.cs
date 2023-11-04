@@ -15,7 +15,6 @@ public class PlayerAnimationEvent : MonoBehaviour
     {
         PlayerManager.Instance.c_punchCol.enabled = false;
         PlayerManager.Instance.b_lockTarget = false;
-        //PlayerManager.Instance.b_canMove = true;
 
     }
 }

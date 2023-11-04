@@ -41,7 +41,7 @@ public class CustomerHurtState : BaseState
 
         if (cus.anim.GetCurrentAnimatorStateInfo(0).IsName("Hurt"))
         {
-            if (cus.anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.2f)
+            if (cus.anim.GetCurrentAnimatorStateInfo(0).normalizedTime > cus.f_hurtTime)
             {
                 if (s_lastState == cus.s_walkAroundState)
                 {

@@ -29,12 +29,12 @@ public class PlayerParticle : Auto_Singleton<PlayerParticle>, IObserver
         {
             case ActionObserver.PlayerAttackRightHit:
 
-                StartCoroutine(ActiveAndDisableGameObject(g_hitShockWave, .5f, PlayerManager.Instance.v_punchHitPoint));
+                //StartCoroutine(ActiveAndDisableGameObject(g_hitShockWave, .5f, PlayerManager.Instance.v_punchHitPoint));
 
                 break;
             case ActionObserver.PlayerAttackLeftHit:
 
-                StartCoroutine(ActiveAndDisableGameObject(g_hitShockWave, .5f, PlayerManager.Instance.v_punchHitPoint));
+                //StartCoroutine(ActiveAndDisableGameObject(g_hitShockWave, .5f, PlayerManager.Instance.v_punchHitPoint));
 
                 break;
             default: break;

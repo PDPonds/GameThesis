@@ -13,7 +13,7 @@ public class PunchTrigger : MainObserver
             {
                 GameManager.Instance.framestop.ActivateFrameStop();
                 damageAble.TakeDamage(1);
-
+                StartCoroutine(puaseAnim());
                 if (transform.TryGetComponent(out Collider collider))
                 {
                     if (collider.enabled == true)
@@ -32,6 +32,15 @@ public class PunchTrigger : MainObserver
                 ActiveAllObserver(ActionObserver.PlayerAttackRightHit);
             }
         }
+    }
+
+    IEnumerator puaseAnim()
+    {
+        Animator anim = PlayerAnimation.Instance.animator;
+        anim.speed = 0;
+        yield return new WaitForSeconds(0.1f);
+        anim.speed = 1;
+
     }
 
 }

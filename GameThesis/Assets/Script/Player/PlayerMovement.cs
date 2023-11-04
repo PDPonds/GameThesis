@@ -32,6 +32,7 @@ public class PlayerMovement : MainObserver
             if (v_dir.magnitude > 0)
             {
                 float moveSpeed = PlayerManager.Instance.f_moveSpeed;
+                if (PlayerManager.Instance.b_inFighting) moveSpeed = moveSpeed * 0.5f;
                 Rigidbody rb = PlayerManager.Instance.c_rb;
                 rb.velocity = new Vector3(v_moveDir.x * moveSpeed, rb.velocity.y, v_moveDir.z * moveSpeed);
             }
