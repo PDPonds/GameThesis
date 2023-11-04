@@ -49,7 +49,7 @@ public class FightingManager : Auto_Singleton<FightingManager>
             }
         }
 
-        if (GetCurrentFighter(out CustomerStateManager cusfight))
+        if (GetCurrentFightWithPlayer(out CustomerStateManager cusfight))
         {
             s_wayPoint.gameObject.SetActive(true);
             s_wayPoint.target = cusfight.t_mesh;
@@ -95,7 +95,7 @@ public class FightingManager : Auto_Singleton<FightingManager>
         return false;
     }
 
-    public bool GetCurrentFighter(out CustomerStateManager cus)
+    public bool GetCurrentFightWithPlayer(out CustomerStateManager cus)
     {
         if (fighter.Count > 0)
         {

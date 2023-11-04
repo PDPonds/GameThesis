@@ -33,9 +33,13 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
     public float f_softPunchTime;
     public Collider c_punchCol;
 
-    public bool b_inFighting;
     public float f_maxInFightingTime;
     public float f_fightingCheckDis;
+    public float f_targetSmoothRot;
+    public float f_attackMoveForce;
+    [HideInInspector] public bool b_inFighting;
+    [HideInInspector] public bool b_lockTarget;
+
     [HideInInspector] public float f_currentInFightingTime;
 
     [HideInInspector] public bool b_canPunch;
