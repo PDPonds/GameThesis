@@ -37,6 +37,7 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
     public float f_fightingCheckDis;
     public float f_targetSmoothRot;
     public float f_attackMoveForce;
+    [HideInInspector] public float f_cantMoveInFightTime;
     [HideInInspector] public bool b_inFighting;
     [HideInInspector] public bool b_lockTarget;
 
@@ -63,7 +64,8 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
     public float f_interacRange;
     public LayerMask lm_interacMask;
     public Transform t_holdObjPoint;
-    /*[HideInInspector]*/ public GameObject g_interactiveObj;
+    /*[HideInInspector]*/
+    public GameObject g_interactiveObj;
     [Space(10f)]
 
     [Header("===== Player Drag =====")]
@@ -120,22 +122,31 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
         {
             f_currentInFightingTime = f_maxInFightingTime;
             b_inFighting = true;
+
+            
+            if (!b_canMove)
+            {
+                f_cantMoveInFightTime -= Time.deltaTime;
+                if (f_cantMoveInFightTime <= 0)
+                {
+                    b_canMove = true;
+                }
+            }
+            else
+            {
+                f_cantMoveInFightTime = 2;
+
+            }
         }
         else
         {
 
-            if (b_inFighting)
-            {
-                f_currentInFightingTime -= Time.deltaTime;
-                if (f_currentInFightingTime < 0)
-                {
-                    i_currentHP = i_maxHP;
-                    b_inFighting = false;
+            i_currentHP = i_maxHP;
+            b_inFighting = false;
+            b_canMove = true;
 
-                    CameraTrigger camTrigger = Camera.main.GetComponent<CameraTrigger>();
-                    camTrigger.ResetVignetteAndFocal();
-                }
-            }
+            CameraTrigger camTrigger = Camera.main.GetComponent<CameraTrigger>();
+            camTrigger.ResetVignetteAndFocal();
 
         }
 

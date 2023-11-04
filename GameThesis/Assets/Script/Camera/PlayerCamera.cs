@@ -9,15 +9,13 @@ public class PlayerCamera : MonoBehaviour
 
     private void Update()
     {
-        if (!PlayerManager.Instance.b_lockTarget)
-        {
-            //transform.localPosition = Vector3.zero;
 
+        if (!PlayerManager.Instance.b_inFighting)
+        {
             float f_mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * CameraController.Instance.f_senX;
             float f_mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * CameraController.Instance.f_senY;
 
             f_yRotation += f_mouseX;
-
             f_xRotation -= f_mouseY;
 
             if (PlayerManager.Instance.g_dragObj == null)
@@ -44,15 +42,17 @@ public class PlayerCamera : MonoBehaviour
                     dir = dir.normalized;
                     Quaternion lookat = Quaternion.LookRotation(dir);
                     Quaternion rot = Quaternion.Slerp(transform.rotation, lookat, PlayerManager.Instance.f_targetSmoothRot * Time.deltaTime);
+                    
                     rot.x = 0;
                     rot.z = 0;
-
-                    f_yRotation = lookat.y;
-                    f_xRotation = 0;
 
                     transform.rotation = rot;
                     PlayerManager.Instance.t_orientation.rotation = rot;
                     PlayerManager.Instance.t_playerMesh.rotation = rot;
+
+                    f_yRotation = transform.rotation.eulerAngles.y;
+                    f_xRotation = transform.rotation.eulerAngles.x;
+
                 }
             }
         }
