@@ -76,10 +76,7 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
         #region Restaurant is Empty
         if (GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_closeState)
         {
-            if (RestaurantIsEmpty())
-            {
 
-            }
         }
         #endregion
 

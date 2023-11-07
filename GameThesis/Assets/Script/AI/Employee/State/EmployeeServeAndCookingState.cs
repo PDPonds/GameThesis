@@ -213,6 +213,8 @@ public class EmployeeServeAndCookingState : BaseState
                         emp.anim.SetBool("walk", false);
                     }
 
+                    emp.b_canCook = true;
+
                     break;
                 case EmployeeType.Serve:
 

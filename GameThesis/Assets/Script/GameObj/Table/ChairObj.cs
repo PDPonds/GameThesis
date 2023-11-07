@@ -93,8 +93,12 @@ public class ChairObj : MonoBehaviour
         if (s_currentCustomer == null || s_currentCustomer.s_currentState != s_currentCustomer.s_waitFoodState)
         {
             s_currentServerEmployee = null;
-            if(s_currentCookingEmployee != null) s_currentCookingEmployee.b_canCook = true;
-            s_currentCookingEmployee = null;
+            if (s_currentCookingEmployee != null)
+            {
+                s_currentCookingEmployee.s_cookingChair = null;
+                s_currentCookingEmployee.b_canCook = true;
+                s_currentCookingEmployee = null;
+            }
             b_finishCooking = false;
         }
 
