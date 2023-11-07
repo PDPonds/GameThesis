@@ -8,71 +8,71 @@ public class CustomerWalkAroundState : BaseState
 
     public override void EnterState(StateManager ai)
     {
-        CustomerStateManager customerStateManager = (CustomerStateManager)ai;
-        customerStateManager.i_currentHP = customerStateManager.i_maxHP;
+        CustomerStateManager cus = (CustomerStateManager)ai;
+        cus.i_currentHP = cus.i_maxHP;
         f_currentTimeToWalk = 0;
 
-        customerStateManager.g_sleepVFX.SetActive(false);
-        customerStateManager.g_stunVFX.SetActive(false);
+        cus.g_sleepVFX.SetActive(false);
+        cus.g_stunVFX.SetActive(false);
 
     }
 
     public override void UpdateState(StateManager ai)
     {
-        CustomerStateManager customerStateManager = (CustomerStateManager)ai;
+        CustomerStateManager cus = (CustomerStateManager)ai;
 
-        customerStateManager.RagdollOff();
+        cus.RagdollOff();
 
-        customerStateManager.anim.SetBool("fightState", false);
-        customerStateManager.anim.SetBool("sit", false);
-        customerStateManager.anim.SetBool("drunk", false);
-        customerStateManager.anim.SetBool("cheer", false);
+        cus.anim.SetBool("fightState", false);
+        cus.anim.SetBool("sit", false);
+        cus.anim.SetBool("drunk", false);
+        cus.anim.SetBool("cheer", false);
 
         f_currentTimeToWalk -= Time.deltaTime;
         if (f_currentTimeToWalk <= 0)
         {
             float xPos = Random.Range(10f, 20f);
             float zPos = Random.Range(-35f, 25f);
-            customerStateManager.v_walkPos = new Vector3(xPos, 0, zPos);
-            f_currentTimeToWalk = customerStateManager.f_findNextPositionTime;
+            cus.v_walkPos = new Vector3(xPos, 0, zPos);
+            f_currentTimeToWalk = cus.f_findNextPositionTime;
         }
 
-        if (customerStateManager.b_escape)
+        if (cus.b_escape)
         {
-            customerStateManager.agent.speed = customerStateManager.f_runSpeed;
-            customerStateManager.agent.SetDestination(GameManager.Instance.s_gameState.t_spawnPoint[customerStateManager.i_spawnPosIndex].position);
-            customerStateManager.ApplyOutlineColor(customerStateManager.color_warning, customerStateManager.f_outlineScale);
-            if (customerStateManager.agent.velocity != Vector3.zero)
+            cus.agent.speed = cus.f_runSpeed;
+            cus.agent.SetDestination(GameManager.Instance.s_gameState.t_spawnPoint[cus.i_spawnPosIndex].position);
+            cus.ApplyOutlineColor(cus.color_warning, cus.f_outlineScale);
+            if (cus.agent.velocity != Vector3.zero)
             {
-                customerStateManager.anim.SetBool("run", true);
+                cus.anim.SetBool("run", true);
             }
             else
             {
-                customerStateManager.anim.SetBool("run", false);
+                cus.anim.SetBool("run", false);
             }
 
-            if (Vector3.Distance(customerStateManager.transform.position, GameManager.Instance.s_gameState.t_spawnPoint[customerStateManager.i_spawnPosIndex].position)
+            if (Vector3.Distance(cus.transform.position, GameManager.Instance.s_gameState.t_spawnPoint[cus.i_spawnPosIndex].position)
                 <= 1f)
             {
-                customerStateManager.b_escape = false;
+                cus.b_escape = false;
             }
 
         }
         else
         {
-            customerStateManager.agent.speed = customerStateManager.f_walkSpeed;
-            customerStateManager.agent.SetDestination(customerStateManager.v_walkPos);
+            cus.agent.speed = cus.f_walkSpeed;
+            cus.agent.SetDestination(cus.v_walkPos);
             Color noColor = new Color(0, 0, 0, 0);
-            customerStateManager.ApplyOutlineColor(noColor, 0f);
+            cus.ApplyOutlineColor(noColor, 0f);
 
-            if (customerStateManager.agent.velocity != Vector3.zero)
+            if (cus.agent.velocity != Vector3.zero)
             {
-                customerStateManager.anim.SetBool("walk", true);
-                customerStateManager.anim.SetBool("run", false);
+                cus.anim.SetBool("walk", true);
+                cus.anim.SetBool("run", false);
             }
             else
             {
-                customerStateManager.anim.SetBool("walk", false);
+                cus.anim.SetBool("walk", false);
             }
         }
     }

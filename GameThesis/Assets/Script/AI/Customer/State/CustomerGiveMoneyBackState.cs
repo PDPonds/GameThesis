@@ -6,13 +6,13 @@ public class CustomerGiveMoneyBackState : BaseState
 {
     public override void EnterState(StateManager ai)
     {
-        CustomerStateManager customerStateManager = (CustomerStateManager)ai;
+        CustomerStateManager cus = (CustomerStateManager)ai;
 
         Color noColor = new Color(0, 0, 0, 0);
-        customerStateManager.ApplyOutlineColor(noColor, 0f);
+        cus.ApplyOutlineColor(noColor, 0f);
 
-        customerStateManager.g_sleepVFX.SetActive(false);
-        customerStateManager.g_stunVFX.SetActive(false);
+        cus.g_sleepVFX.SetActive(false);
+        cus.g_stunVFX.SetActive(false);
 
         for (int i = 0; i < RestaurantManager.Instance.allSheriffs.Length; i++)
         {
@@ -27,16 +27,16 @@ public class CustomerGiveMoneyBackState : BaseState
 
     public override void UpdateState(StateManager ai)
     {
-        CustomerStateManager customerStateManager = (CustomerStateManager)ai;
-        customerStateManager.transform.LookAt(PlayerManager.Instance.transform.position);
-        customerStateManager.agent.velocity = Vector3.zero;
-        customerStateManager.anim.Play("Searching");
-        if (customerStateManager.anim.GetCurrentAnimatorStateInfo(0).IsName("Searching"))
+        CustomerStateManager cus = (CustomerStateManager)ai;
+        cus.transform.LookAt(PlayerManager.Instance.transform.position);
+        cus.agent.velocity = Vector3.zero;
+        cus.anim.Play("Searching");
+        if (cus.anim.GetCurrentAnimatorStateInfo(0).IsName("Searching"))
         {
-            if (customerStateManager.anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.5f)
+            if (cus.anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.5f)
             {
-                GameManager.Instance.AddCoin(customerStateManager.f_giveCoin);
-                customerStateManager.SwitchState(customerStateManager.s_runEscapeState);
+                GameManager.Instance.AddCoin(cus.f_giveCoin);
+                cus.SwitchState(cus.s_runEscapeState);
             }
         }
     }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,8 +15,10 @@ public class ChairObj : MonoBehaviour
     [HideInInspector] public bool b_readyForNextCustomer;
     float f_currentCDForNextCustomer;
 
-    [HideInInspector] public CustomerStateManager s_currentCustomer;
-    [HideInInspector] public EmployeeStateManager s_currentEmployee;
+    public bool b_finishCooking;
+    public CustomerStateManager s_currentCustomer;
+    public EmployeeStateManager s_currentServerEmployee;
+    public EmployeeStateManager s_currentCookingEmployee;
 
     TableObj table;
     [HideInInspector] public bool b_canUse;
@@ -62,14 +65,25 @@ public class ChairObj : MonoBehaviour
 
             if (s_currentCustomer.s_currentState == s_currentCustomer.s_waitFoodState)
             {
-
-                if (RestaurantManager.Instance.GetCanEmployeeServe(out int index) &&
-                    s_currentEmployee == null)
+                if (RestaurantManager.Instance.GetCanEmployeeCooking(out int cookingIndex) &&
+                    s_currentCookingEmployee == null)
                 {
-                    RestaurantManager.Instance.allEmployees[index].s_serveChair = this;
-                    RestaurantManager.Instance.allEmployees[index].b_canServe = false;
-                    s_currentEmployee = RestaurantManager.Instance.allEmployees[index];
+                    RestaurantManager.Instance.allEmployees[cookingIndex].s_cookingChair = this;
+                    RestaurantManager.Instance.allEmployees[cookingIndex].b_canCook = false;
+                    s_currentCookingEmployee = RestaurantManager.Instance.allEmployees[cookingIndex];
                 }
+
+                if (b_finishCooking)
+                {
+                    if (RestaurantManager.Instance.GetCanEmployeeServe(out int index) &&
+                                        s_currentServerEmployee == null)
+                    {
+                        RestaurantManager.Instance.allEmployees[index].s_serveChair = this;
+                        RestaurantManager.Instance.allEmployees[index].b_canServe = false;
+                        s_currentServerEmployee = RestaurantManager.Instance.allEmployees[index];
+                    }
+                }
+
             }
 
 
@@ -78,7 +92,10 @@ public class ChairObj : MonoBehaviour
 
         if (s_currentCustomer == null || s_currentCustomer.s_currentState != s_currentCustomer.s_waitFoodState)
         {
-            s_currentEmployee = null;
+            s_currentServerEmployee = null;
+            if(s_currentCookingEmployee != null) s_currentCookingEmployee.b_canCook = true;
+            s_currentCookingEmployee = null;
+            b_finishCooking = false;
         }
 
         if (!b_canUse || s_currentCustomer == null)
@@ -108,6 +125,6 @@ public class ChairObj : MonoBehaviour
 
     public void RandomCDForNextCustomer()
     {
-        f_cdForNextCustomer = Random.Range(v_minmaxCDForNextCustomer.x, v_minmaxCDForNextCustomer.y);
+        f_cdForNextCustomer = UnityEngine.Random.Range(v_minmaxCDForNextCustomer.x, v_minmaxCDForNextCustomer.y);
     }
 }

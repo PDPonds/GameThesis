@@ -28,8 +28,9 @@ public class EmployeeHurtState : BaseState
 
         if (emp.anim.GetCurrentAnimatorStateInfo(0).IsName("Hurt"))
         {
-            if(emp.anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.5f)
+            if (emp.anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.5f)
             {
+                if (emp.employeeType == EmployeeType.Cooking) if (!emp.b_canCook) emp.b_canCook = true;
                 emp.SwitchState(emp.s_activityState);
             }
         }

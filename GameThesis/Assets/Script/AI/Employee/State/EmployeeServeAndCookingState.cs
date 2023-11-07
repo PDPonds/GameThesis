@@ -7,6 +7,7 @@ using static UnityEngine.Rendering.DebugUI;
 public class EmployeeServeAndCookingState : BaseState
 {
     public float f_currentToSlowTime;
+    float f_cookingTime;
 
     public override void EnterState(StateManager ai)
     {
@@ -20,7 +21,6 @@ public class EmployeeServeAndCookingState : BaseState
         Color noColor = new Color(0, 0, 0, 0);
         emp.ApplyOutlineColor(noColor, 0f);
         emp.g_stunVFX.SetActive(false);
-
     }
 
     public override void UpdateState(StateManager ai)
@@ -36,39 +36,53 @@ public class EmployeeServeAndCookingState : BaseState
             {
                 case EmployeeType.Cooking:
 
+                    emp.agent.SetDestination(emp.t_workingPos.position);
+
                     if (Vector3.Distance(emp.transform.position, emp.t_workingPos.position)
-                        <= 1f)
+                        <= 1.5f)
                     {
                         emp.b_isWorking = true;
+                        emp.anim.runtimeAnimatorController = emp.cookingAnim;
                         emp.agent.velocity = Vector3.zero;
                         emp.anim.SetBool("run", false);
                         emp.anim.SetBool("walk", false);
                         emp.anim.SetBool("cooking", true);
-                        emp.anim.runtimeAnimatorController = emp.cookingAnim;
                     }
                     else
                     {
                         emp.b_isWorking = false;
-                    }
-
-                    if (!emp.b_isWorking)
-                    {
-                        emp.agent.SetDestination(emp.t_workingPos.position);
                         emp.anim.SetBool("run", true);
                         emp.anim.SetBool("walk", false);
                         emp.anim.SetBool("cooking", false);
-
                     }
 
                     emp.agent.speed = emp.f_runSpeed;
 
+
+                    if (emp.s_cookingChair != null)
+                    {
+                        emp.b_canCook = false;
+                        f_cookingTime -= Time.deltaTime;
+                        if (f_cookingTime < 0)
+                        {
+                            emp.s_cookingChair.b_finishCooking = true;
+                            emp.s_cookingChair = null;
+                        }
+                    }
+                    else
+                    {
+                        f_cookingTime = emp.f_cookingTime;
+
+                    }
+
                     break;
                 case EmployeeType.Serve:
 
-                    if (RestaurantManager.Instance.b_inProcess)
+                    if (!RestaurantManager.Instance.RestaurantIsEmpty())
                     {
-                        if (RestaurantManager.Instance.GetCurrentChairFormEmployee(emp, out int chairIndex))
+                        if (RestaurantManager.Instance.GetCurrentChairFormServeEmployee(emp, out int chairIndex))
                         {
+
                             ChairObj chair = RestaurantManager.Instance.allChairs[chairIndex];
 
                             if (!emp.b_hasFood)
@@ -90,6 +104,7 @@ public class EmployeeServeAndCookingState : BaseState
                                     emp.b_hasFood = false;
                                     emp.b_canServe = false;
                                     emp.s_serveChair = null;
+                                    chair.s_currentCookingEmployee.b_canCook = true;
                                     chair.s_currentCustomer.SwitchState(chair.s_currentCustomer.s_eatFoodState);
                                 }
                             }
@@ -203,7 +218,7 @@ public class EmployeeServeAndCookingState : BaseState
 
                     if (RestaurantManager.Instance.b_summaryButHasCustome)
                     {
-                        if (RestaurantManager.Instance.GetCurrentChairFormEmployee(emp, out int chairIndex))
+                        if (RestaurantManager.Instance.GetCurrentChairFormServeEmployee(emp, out int chairIndex))
                         {
                             ChairObj chair = RestaurantManager.Instance.allChairs[chairIndex];
 

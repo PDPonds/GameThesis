@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static Unity.Burst.Intrinsics.X86.Avx;
 
 public class RestaurantManager : Auto_Singleton<RestaurantManager>
 {
@@ -11,8 +12,6 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
     public TableObj[] allTables;
     public SheriffStateManager[] allSheriffs;
     public ChairObj[] allChairs;
-
-    public bool b_inProcess;
 
     [HideInInspector] public bool b_summaryButHasCustome;
 
@@ -29,11 +28,6 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
 
     [Header("===== Level =====")]
     public int i_level = 1;
-
-    [Header("===== Menu =====")]
-
-    public List<MenuSO> allMenu = new List<MenuSO>();
-    public List<MenuState> currentMenu = new List<MenuState>();
 
     private void Awake()
     {
@@ -58,15 +52,6 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
         allTables = FindObjectsOfType<TableObj>();
         allChairs = FindObjectsOfType<ChairObj>();
 
-        if (AllEmployeeWorkingCheckProcess())
-        {
-            b_inProcess = true;
-        }
-        else
-        {
-            b_inProcess = false;
-        }
-
         if (GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_openState)
         {
             if (!AllChairIsFull())
@@ -88,6 +73,7 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
 
         }
 
+        #region Restaurant is Empty
         if (GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_closeState)
         {
             if (RestaurantIsEmpty())
@@ -95,53 +81,8 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
 
             }
         }
-
-        SetupMenu();
-    }
-
-    void SetupMenu()
-    {
-        #region Form Level
-        //if(getMenuCountInLevel() != currentMenu.Count)
-        //{
-        //    currentMenu.Clear();
-        //    for (int i = 0; i < allMenu.Count; i++)
-        //    {
-        //        if (allMenu[i].i_requiredLevel == i_level)
-        //        {
-        //            MenuState menu = new MenuState();
-        //            menu.menu = allMenu[i];
-        //            currentMenu.Add(menu);
-        //        }
-        //    }
-        //}
         #endregion
 
-        #region Add All
-        if (allMenu.Count != currentMenu.Count)
-        {
-            currentMenu.Clear();
-            for (int i = 0; i < allMenu.Count; i++)
-            {
-                MenuState menuState = new MenuState();
-                menuState.menu = allMenu[i];
-                currentMenu.Add(menuState);
-            }
-        }
-        #endregion
-    }
-
-    int getMenuCountInLevel()
-    {
-        int count = 0;
-        for (int i = 0; i < allMenu.Count; i++)
-        {
-            if (allMenu[i].i_requiredLevel == i_level)
-            {
-                count++;
-            }
-        }
-        return count;
     }
 
     public int ReqRateToBuyTable()
@@ -165,26 +106,6 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
             }
         }
         return ready;
-    }
-
-    bool AllEmployeeWorkingCheckProcess()
-    {
-        int allEmployeeProcessing = 0;
-        if (allEmployees.Length > 0)
-        {
-            for (int i = 0; i < allEmployees.Length; i++)
-            {
-                if (allEmployees[i].s_currentState == allEmployees[i].s_activityState)
-                {
-                    if (allEmployees[i].b_isWorking)
-                    {
-                        allEmployeeProcessing++;
-                    }
-                }
-            }
-        }
-
-        return allEmployees.Length == allEmployeeProcessing;
     }
 
     bool AllChairIsFull()
@@ -233,7 +154,7 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
                     {
                         if (allEmployees[i].s_serveChair == null)
                         {
-                            if (!CheckAIRepleat(allEmployees[i]))
+                            if (!CheckServeAIRepleat(allEmployees[i]))
                             {
                                 serveIndex = i;
                                 return true;
@@ -248,30 +169,57 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
         return false;
     }
 
-    public bool GetCurrentChairFormEmployee(EmployeeStateManager ai, out int tableFormEmployee)
+    public bool GetCanEmployeeCooking(out int cookingIndex)
+    {
+        if (allEmployees.Length > 0)
+        {
+            for (int i = 0; i < allEmployees.Length; i++)
+            {
+                if (allEmployees[i].employeeType == EmployeeType.Cooking)
+                {
+                    if (allEmployees[i].b_canCook)
+                    {
+                        if (allEmployees[i].s_cookingChair == null)
+                        {
+                            if (!CheckCookingAIRepleat(allEmployees[i]))
+                            {
+                                cookingIndex = i;
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        cookingIndex = -1;
+        return false;
+    }
+
+    public bool GetCurrentChairFormServeEmployee(EmployeeStateManager ai, out int chairFormEmployee)
     {
         if (allChairs.Length > 0)
         {
             for (int i = 0; i < allChairs.Length; i++)
             {
-                if (allChairs[i].s_currentEmployee == ai)
+                if (allChairs[i].s_currentServerEmployee == ai)
                 {
-                    tableFormEmployee = i;
+                    chairFormEmployee = i;
                     return true;
                 }
             }
         }
-        tableFormEmployee = -1;
+        chairFormEmployee = -1;
         return false;
     }
 
-    bool CheckAIRepleat(EmployeeStateManager ai)
+    bool CheckServeAIRepleat(EmployeeStateManager ai)
     {
         if (allChairs.Length > 0)
         {
             for (int i = 0; i < allChairs.Length; i++)
             {
-                if (allChairs[i].s_currentEmployee == ai)
+                if (allChairs[i].s_currentServerEmployee == ai)
                 {
                     return true;
                 }
@@ -280,7 +228,22 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
         return false;
     }
 
-    bool RestaurantIsEmpty()
+    bool CheckCookingAIRepleat(EmployeeStateManager ai)
+    {
+        if (allChairs.Length > 0)
+        {
+            for (int i = 0; i < allChairs.Length; i++)
+            {
+                if (allChairs[i].s_currentCookingEmployee == ai)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public bool RestaurantIsEmpty()
     {
         if (allCustomers.Length > 0)
         {
@@ -416,22 +379,6 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
             }
         }
         return false;
-    }
-
-    public int GetEscapeCount()
-    {
-        int count = 0;
-        if (allCustomers.Length > 0)
-        {
-            for (int i = 0; i < allCustomers.Length; i++)
-            {
-                if (allCustomers[i].b_escape)
-                {
-                    count++;
-                }
-            }
-        }
-        return count;
     }
 
 }

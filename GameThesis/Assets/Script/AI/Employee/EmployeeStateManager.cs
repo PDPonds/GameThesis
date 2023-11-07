@@ -42,8 +42,11 @@ public class EmployeeStateManager : StateManager, IDamageable
     public GameObject g_FoodInHand;
 
     [Header("===== Cooking =====")]
+    public bool b_canCook;
     public bool b_isWorking;
     public Transform t_workingPos;
+    public float f_cookingTime;
+    [HideInInspector] public ChairObj s_cookingChair;
     public AnimatorOverrideController cookingAnim;
 
     [Header("===== Slack Off =====")]
@@ -87,9 +90,6 @@ public class EmployeeStateManager : StateManager, IDamageable
 
     }
 
-    [Header("===== MenuHandle =====")]
-    public MenuSO currentCookingHandle;
-
     private void Awake()
     {
         anim = GetComponent<Animator>();
@@ -111,7 +111,6 @@ public class EmployeeStateManager : StateManager, IDamageable
     void Update()
     {
         s_currentState.UpdateState(this);
-
     }
 
     public void TakeDamage(int damage)
