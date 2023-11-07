@@ -87,6 +87,9 @@ public class EmployeeStateManager : StateManager, IDamageable
 
     }
 
+    [Header("===== MenuHandle =====")]
+    public MenuSO currentCookingHandle;
+
     private void Awake()
     {
         anim = GetComponent<Animator>();

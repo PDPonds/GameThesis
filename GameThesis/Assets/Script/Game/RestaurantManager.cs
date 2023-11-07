@@ -30,6 +30,11 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
     [Header("===== Level =====")]
     public int i_level = 1;
 
+    [Header("===== Menu =====")]
+
+    public List<MenuSO> allMenu = new List<MenuSO>();
+    public List<MenuState> currentMenu = new List<MenuState>();
+
     private void Awake()
     {
         i_rating = i_startRating;
@@ -91,6 +96,52 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
             }
         }
 
+        SetupMenu();
+    }
+
+    void SetupMenu()
+    {
+        #region Form Level
+        //if(getMenuCountInLevel() != currentMenu.Count)
+        //{
+        //    currentMenu.Clear();
+        //    for (int i = 0; i < allMenu.Count; i++)
+        //    {
+        //        if (allMenu[i].i_requiredLevel == i_level)
+        //        {
+        //            MenuState menu = new MenuState();
+        //            menu.menu = allMenu[i];
+        //            currentMenu.Add(menu);
+        //        }
+        //    }
+        //}
+        #endregion
+
+        #region Add All
+        if (allMenu.Count != currentMenu.Count)
+        {
+            currentMenu.Clear();
+            for (int i = 0; i < allMenu.Count; i++)
+            {
+                MenuState menuState = new MenuState();
+                menuState.menu = allMenu[i];
+                currentMenu.Add(menuState);
+            }
+        }
+        #endregion
+    }
+
+    int getMenuCountInLevel()
+    {
+        int count = 0;
+        for (int i = 0; i < allMenu.Count; i++)
+        {
+            if (allMenu[i].i_requiredLevel == i_level)
+            {
+                count++;
+            }
+        }
+        return count;
     }
 
     public int ReqRateToBuyTable()
