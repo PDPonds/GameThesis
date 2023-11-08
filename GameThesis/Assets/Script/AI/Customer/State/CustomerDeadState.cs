@@ -29,7 +29,6 @@ public class CustomerDeadState : BaseState
             }
         }
 
-
     }
 
     public override void UpdateState(StateManager ai)
@@ -57,5 +56,20 @@ public class CustomerDeadState : BaseState
         cus.anim.SetBool("drunk", false);
         cus.anim.SetBool("cheer", false);
 
+        DisableAllSound(cus);
+
     }
+
+    void DisableAllSound(CustomerStateManager cus)
+    {
+        AudioSource[] sources = cus.transform.GetComponents<AudioSource>();
+        if (sources.Length > 0)
+        {
+            foreach (AudioSource source in sources)
+            {
+                source.Stop();
+            }
+        }
+    }
+
 }
