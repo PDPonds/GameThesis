@@ -28,6 +28,7 @@ public class CustomerFightState : BaseState
         f_currentReDirection = f_reDir;
 
         f_currentPlayerEscapeTime = cus.f_playerEscapeTime;
+
     }
 
     public override void UpdateState(StateManager ai)

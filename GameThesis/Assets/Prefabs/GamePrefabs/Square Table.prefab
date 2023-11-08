@@ -458,7 +458,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   t_sitPos: {fileID: 1529568447855346968}
-  v_minmaxCDForNextCustomer: {x: 8, y: 10}
+  v_minmaxCDForNextCustomer: {x: 15, y: 20}
   b_isEmpty: 0
   f_cdForNextCustomer: 0
   b_readyForNextCustomer: 0
@@ -700,7 +700,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   t_sitPos: {fileID: 8068458789347815368}
-  v_minmaxCDForNextCustomer: {x: 8, y: 10}
+  v_minmaxCDForNextCustomer: {x: 15, y: 20}
   b_isEmpty: 0
   f_cdForNextCustomer: 0
   b_readyForNextCustomer: 0

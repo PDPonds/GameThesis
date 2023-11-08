@@ -2906,9 +2906,9 @@ MonoBehaviour:
   f_currentOrderTime: 0
   c_chairObj: {fileID: 0}
   v_minAndMaxEatFood: {x: 10, y: 15}
-  f_randomEventPercent: 50
+  f_randomEventPercent: 10
   b_escape: 0
-  f_fightBackPercent: 30
+  f_fightBackPercent: 10
   f_payTime: 25
   f_giveCoin: 0
   v_minmaxGiveCoin: {x: 10, y: 20}
@@ -2923,7 +2923,7 @@ MonoBehaviour:
   f_wekeUpMultiply: 1
   f_maxWekeUpPoint: 7
   g_sleepVFX: {fileID: 3752003684944876555}
-  f_isGangsterPercent: 30
+  f_isGangsterPercent: 5
   b_hasGang: 0
   v_minmaxGangCount: {x: 2, y: 5}
   b_isGang: 0

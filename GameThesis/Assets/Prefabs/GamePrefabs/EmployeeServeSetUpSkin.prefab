@@ -36,17 +36,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 16.25
+      value: -10.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.474
+      value: 0.49999997
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
@@ -954,8 +954,11 @@ MonoBehaviour:
   b_hasFood: 0
   s_serveChair: {fileID: 0}
   g_FoodInHand: {fileID: 572668808332531273}
+  b_canCook: 0
   b_isWorking: 0
   t_workingPos: {fileID: 0}
+  f_cookingTime: 0
+  s_cookingChair: {fileID: 0}
   cookingAnim: {fileID: 0}
   f_timeToSlackOff: 10
   f_slackOffPercent: 2.5

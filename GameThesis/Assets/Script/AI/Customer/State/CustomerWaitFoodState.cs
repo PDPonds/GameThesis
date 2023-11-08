@@ -10,7 +10,7 @@ public class CustomerWaitFoodState : BaseState
         cus.f_currentOrderTime = cus.f_orderTime;
         cus.c_chairObj.s_currentCustomer = cus;
 
-        if(cus.c_chairObj != null )
+        if (cus.c_chairObj != null)
         {
             cus.c_chairObj.DisableAllFood();
         }
@@ -39,7 +39,7 @@ public class CustomerWaitFoodState : BaseState
 
                 Vector3 chairPos = new Vector3(chair.t_sitPos.position.x, chair.t_sitPos.position.y - 0.4f, chair.t_sitPos.position.z);
                 cus.transform.position = chairPos;
-                cus.transform.rotation = Quaternion.Euler(0,chair.transform.localEulerAngles.z + 90f, 0);
+                cus.transform.rotation = Quaternion.Euler(0, chair.transform.localEulerAngles.z + 90f, 0);
 
             }
 

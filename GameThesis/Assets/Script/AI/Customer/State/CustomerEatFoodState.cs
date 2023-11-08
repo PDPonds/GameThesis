@@ -9,40 +9,42 @@ public class CustomerEatFoodState : BaseState
 
     public override void EnterState(StateManager ai)
     {
-        CustomerStateManager customerStateManager = (CustomerStateManager)ai;
-        f_eatTime = Random.Range(customerStateManager.v_minAndMaxEatFood.x, customerStateManager.v_minAndMaxEatFood.y);
+        CustomerStateManager cus = (CustomerStateManager)ai;
+        f_eatTime = Random.Range(cus.v_minAndMaxEatFood.x, cus.v_minAndMaxEatFood.y);
         f_currentEatTime = f_eatTime;
 
         Color noColor = new Color(0, 0, 0, 0);
-        customerStateManager.ApplyOutlineColor(noColor,0f);
+        cus.ApplyOutlineColor(noColor,0f);
 
-        customerStateManager.g_stunVFX.SetActive(false);
-        customerStateManager.g_sleepVFX.SetActive(false);
+        cus.g_stunVFX.SetActive(false);
+        cus.g_sleepVFX.SetActive(false);
 
-        if (customerStateManager.c_chairObj != null)
+        if (cus.c_chairObj != null)
         {
-            customerStateManager.c_chairObj.EnableAllFood();
+            cus.c_chairObj.EnableAllFood();
         }
+       
+
     }
 
     public override void UpdateState(StateManager ai)
     {
-        CustomerStateManager customerStateManager = (CustomerStateManager)ai;
+        CustomerStateManager cus = (CustomerStateManager)ai;
 
-        customerStateManager.RagdollOff();
+        cus.RagdollOff();
 
-        if (customerStateManager.c_chairObj != null)
+        if (cus.c_chairObj != null)
         {
-            if (customerStateManager.c_chairObj != null)
+            if (cus.c_chairObj != null)
             {
-                ChairObj chair = customerStateManager.c_chairObj;
-                customerStateManager.anim.SetBool("walk", false);
-                customerStateManager.anim.SetBool("sit", true);
-                customerStateManager.anim.SetBool("drunk", false);
-                customerStateManager.agent.velocity = Vector3.zero;
+                ChairObj chair = cus.c_chairObj;
+                cus.anim.SetBool("walk", false);
+                cus.anim.SetBool("sit", true);
+                cus.anim.SetBool("drunk", false);
+                cus.agent.velocity = Vector3.zero;
                 Vector3 chairPos = new Vector3(chair.t_sitPos.position.x, chair.t_sitPos.position.y - 0.4f, chair.t_sitPos.position.z);
-                customerStateManager.transform.position = chairPos;
-                customerStateManager.transform.rotation = Quaternion.Euler(0, chair.transform.localEulerAngles.z + 90f, 0);
+                cus.transform.position = chairPos;
+                cus.transform.rotation = Quaternion.Euler(0, chair.transform.localEulerAngles.z + 90f, 0);
             }
 
         }
@@ -54,23 +56,23 @@ public class CustomerEatFoodState : BaseState
 
             RestaurantManager.Instance.AddRating();
 
-            if (drunkRan <= customerStateManager.f_drunkPercent)
+            if (drunkRan <= cus.f_drunkPercent)
             {
-                customerStateManager.SwitchState(customerStateManager.s_drunkState);
+                cus.SwitchState(cus.s_drunkState);
             }
             else
             {
                 float ran = Random.Range(0, 100f);
 
-                if (ran <= customerStateManager.f_randomEventPercent)
+                if (ran <= cus.f_randomEventPercent)
                 {
-                    customerStateManager.c_chairObj.b_isEmpty = true;
-                    customerStateManager.SwitchState(customerStateManager.s_escapeState);
+                    cus.c_chairObj.b_isEmpty = true;
+                    cus.SwitchState(cus.s_escapeState);
                 }
                 else
                 {
-                    customerStateManager.c_chairObj.b_isEmpty = true;
-                    customerStateManager.SwitchState(customerStateManager.s_goToCounterState);
+                    cus.c_chairObj.b_isEmpty = true;
+                    cus.SwitchState(cus.s_goToCounterState);
                 }
             }
 

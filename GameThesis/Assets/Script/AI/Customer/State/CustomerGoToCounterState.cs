@@ -7,37 +7,37 @@ public class CustomerGoToCounterState : BaseState
 {
     public override void EnterState(StateManager ai)
     {
-        CustomerStateManager customerStateManager = (CustomerStateManager)ai;
-        if (customerStateManager.c_chairObj != null)
+        CustomerStateManager cus = (CustomerStateManager)ai;
+        if (cus.c_chairObj != null)
         {
-            customerStateManager.c_chairObj.DisableAllFood();
-            customerStateManager.c_chairObj.b_isEmpty = true;
-            customerStateManager.c_chairObj.b_readyForNextCustomer = false;
-            customerStateManager.c_chairObj.s_currentCustomer = null;
+            cus.c_chairObj.DisableAllFood();
+            cus.c_chairObj.b_isEmpty = true;
+            cus.c_chairObj.b_readyForNextCustomer = false;
+            cus.c_chairObj.s_currentCustomer = null;
         }
-        customerStateManager.c_chairObj = null;
+        cus.c_chairObj = null;
 
         Color noColor = new Color(0, 0, 0, 0);
-        customerStateManager.ApplyOutlineColor(noColor, 0f);
+        cus.ApplyOutlineColor(noColor, 0f);
 
-        customerStateManager.g_sleepVFX.SetActive(false);
-        customerStateManager.g_stunVFX.SetActive(false);
+        cus.g_sleepVFX.SetActive(false);
+        cus.g_stunVFX.SetActive(false);
 
     }
 
     public override void UpdateState(StateManager ai)
     {
-        CustomerStateManager customerStateManager = (CustomerStateManager)ai;
-        customerStateManager.anim.SetBool("fightState", false);
-        customerStateManager.anim.SetBool("sit", false);
-        customerStateManager.anim.SetBool("drunk", false);
-        customerStateManager.anim.SetBool("walk", true);
-        customerStateManager.agent.SetDestination(GameManager.Instance.t_counterPos.position);
-        customerStateManager.agent.speed = customerStateManager.f_walkSpeed;
-        if (Vector3.Distance(customerStateManager.transform.position, GameManager.Instance.t_counterPos.position)
+        CustomerStateManager cus = (CustomerStateManager)ai;
+        cus.anim.SetBool("fightState", false);
+        cus.anim.SetBool("sit", false);
+        cus.anim.SetBool("drunk", false);
+        cus.anim.SetBool("walk", true);
+        cus.agent.SetDestination(GameManager.Instance.t_counterPos.position);
+        cus.agent.speed = cus.f_walkSpeed;
+        if (Vector3.Distance(cus.transform.position, GameManager.Instance.t_counterPos.position)
             <= 1f)
         {
-            customerStateManager.SwitchState(customerStateManager.s_frontCounter);
+            cus.SwitchState(cus.s_frontCounter);
         }
     }
 

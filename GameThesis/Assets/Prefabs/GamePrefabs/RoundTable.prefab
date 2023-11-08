@@ -587,7 +587,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   t_sitPos: {fileID: 3689684253594982125}
-  v_minmaxCDForNextCustomer: {x: 8, y: 10}
+  v_minmaxCDForNextCustomer: {x: 15, y: 20}
   b_isEmpty: 0
   f_cdForNextCustomer: 0
   b_readyForNextCustomer: 0
@@ -634,7 +634,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   t_sitPos: {fileID: 7971512944550618382}
-  v_minmaxCDForNextCustomer: {x: 8, y: 10}
+  v_minmaxCDForNextCustomer: {x: 15, y: 20}
   b_isEmpty: 0
   f_cdForNextCustomer: 0
   b_readyForNextCustomer: 0
@@ -739,7 +739,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   t_sitPos: {fileID: 143228138757125866}
-  v_minmaxCDForNextCustomer: {x: 8, y: 10}
+  v_minmaxCDForNextCustomer: {x: 15, y: 20}
   b_isEmpty: 0
   f_cdForNextCustomer: 0
   b_readyForNextCustomer: 0
@@ -786,7 +786,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   t_sitPos: {fileID: 8150671421481954561}
-  v_minmaxCDForNextCustomer: {x: 8, y: 10}
+  v_minmaxCDForNextCustomer: {x: 15, y: 20}
   b_isEmpty: 0
   f_cdForNextCustomer: 0
   b_readyForNextCustomer: 0
