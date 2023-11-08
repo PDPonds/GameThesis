@@ -4,10 +4,12 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class WaypointIndicator : MonoBehaviour
 {
-    public Image image;
+    public UnityEngine.UI.Image image;
+    public UnityEngine.UI.Image background;
     public Transform target;
     public TextMeshProUGUI distanceText;
 
@@ -61,7 +63,9 @@ public class WaypointIndicator : MonoBehaviour
             pos.x = Mathf.Clamp(pos.x, minX, maxX);
             pos.y = Mathf.Clamp(pos.y, minY, maxY);
 
+            
             image.transform.position = pos;
+            background.transform.localPosition = pos;
 
             // Meter Text
             if (isDistanceNeeded)
@@ -76,11 +80,13 @@ public class WaypointIndicator : MonoBehaviour
 
         if (target.gameObject.GetComponent<Renderer>().isVisible && Vector3.Distance(Camera.main.transform.position, target.position) < visibleDistance)
         {
+            background.enabled = false;
             image.enabled = false;
             distanceText.gameObject.SetActive(false);
         }
         else
         {
+            background.enabled = true;
             image.enabled = true;
             distanceText.gameObject.SetActive(true);
         }
