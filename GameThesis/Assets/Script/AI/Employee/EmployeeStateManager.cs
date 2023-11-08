@@ -17,11 +17,8 @@ public class EmployeeStateManager : StateManager, IDamageable
     public float f_runSpeed;
 
     public EmployeeServeAndCookingState s_activityState = new EmployeeServeAndCookingState();
-
-    public EmployeeSlackOffState s_slowDownState = new EmployeeSlackOffState();
-
+    public EmployeeSlackOffState s_slackOffState = new EmployeeSlackOffState();
     public EmployeePassedOutState s_passedOutState = new EmployeePassedOutState();
-
     public EmployeeHurtState s_hurtState = new EmployeeHurtState();
 
     [Header("===== Attack =====")]
@@ -50,6 +47,7 @@ public class EmployeeStateManager : StateManager, IDamageable
     public AnimatorOverrideController cookingAnim;
 
     [Header("===== Slack Off =====")]
+    public bool b_onSlackOffPoint;
     public float f_timeToSlackOff;
     public float f_slackOffPercent;
     public Vector2 v_minmaxX;

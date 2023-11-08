@@ -49,8 +49,16 @@ public class UIManager : Auto_Singleton<UIManager>
     [Space(10f)]
 
     [Header("===== WayPoint =====")]
-    public GameObject g_wayPointUI;
-    //public List<WaypointIndicator> escapeWayPoint = new List<WaypointIndicator>();
+    public GameObject g_cashWaypoint;
+    public GameObject g_sleepWaypoint;
+    public GameObject g_sneakWaypoint;
+    public GameObject g_threatWaypoint;
+    public GameObject g_slackoffWaypoint;
+    List<WaypointIndicator> allSneakWaypoint = new List<WaypointIndicator>();
+    List<WaypointIndicator> allSleepWaypoint = new List<WaypointIndicator>();
+    List<WaypointIndicator> allCashWaypoint = new List<WaypointIndicator>();
+    List<WaypointIndicator> allThreatWaypoint = new List<WaypointIndicator>();
+    List<WaypointIndicator> allSlackOffWaypoint = new List<WaypointIndicator>();
 
     private void Update()
     {
@@ -60,47 +68,182 @@ public class UIManager : Auto_Singleton<UIManager>
 
         #region warning
 
-        if (!RestaurantManager.Instance.AllEmployeeWorkingCheckForText()) g_slockOff.SetActive(true);
-        else g_slockOff.SetActive(false);
+        if (!RestaurantManager.Instance.AllEmployeeWorkingCheckForText())
+        {
+            g_slockOff.SetActive(true);
+            int slackOffCount = RestaurantManager.Instance.GetSlackoffCount();
+            if (allSlackOffWaypoint.Count != slackOffCount)
+            {
+                foreach (WaypointIndicator waypoints in allSlackOffWaypoint)
+                { Destroy(waypoints.gameObject); }
+                allSlackOffWaypoint.Clear();
+
+                for (int i = 0; i < RestaurantManager.Instance.allEmployees.Length; i++)
+                {
+                    EmployeeStateManager emp = RestaurantManager.Instance.allEmployees[i];
+                    if (emp.b_onSlackOffPoint)
+                    {
+                        WaypointIndicator waypoint = SpawnWayPoint(g_slackoffWaypoint, emp);
+                        allSlackOffWaypoint.Add(waypoint);
+                    }
+                }
+            }
+        }
+        else
+        {
+            g_slockOff.SetActive(false);
+
+            foreach (WaypointIndicator waypoints in allSlackOffWaypoint)
+            { Destroy(waypoints.gameObject); }
+            allSlackOffWaypoint.Clear();
+        }
 
         if (RestaurantManager.Instance.SomeOneEscape())
         {
             g_escape.SetActive(true);
-            //int escapeCount = RestaurantManager.Instance.GetEscapeCount();
-            //if (escapeWayPoint.Count != escapeCount)
-            //{
-            //    foreach (WaypointIndicator wayPoint in escapeWayPoint)
-            //    { Destroy(wayPoint.gameObject); }
+            int escapeCount = RestaurantManager.Instance.GetEscapeCount();
+            if (allSneakWaypoint.Count != escapeCount)
+            {
+                foreach (WaypointIndicator wayPoint in allSneakWaypoint)
+                { Destroy(wayPoint.gameObject); }
 
-            //    escapeWayPoint.Clear();
-            //    if (RestaurantManager.Instance.allCustomers.Length > 0)
-            //    {
-            //        for (int i = 0; i < RestaurantManager.Instance.allCustomers.Length; i++)
-            //        {
-            //            CustomerStateManager cus = RestaurantManager.Instance.allCustomers[i];
-            //            if (cus.b_escape)
-            //            {
-            //                SpawnWayPoint(cus);
-            //            }
-            //        }
-            //    }
+                allSneakWaypoint.Clear();
+                if (RestaurantManager.Instance.allCustomers.Length > 0)
+                {
+                    for (int i = 0; i < RestaurantManager.Instance.allCustomers.Length; i++)
+                    {
+                        CustomerStateManager cus = RestaurantManager.Instance.allCustomers[i];
+                        if (cus.b_escape)
+                        {
+                            WaypointIndicator waypoint = SpawnWayPoint(g_sneakWaypoint, cus);
+                            allSneakWaypoint.Add(waypoint);
+                        }
+                    }
+                }
+            }
 
-            //}
         }
         else
         {
-            //foreach (WaypointIndicator wayPoint in escapeWayPoint)
-            //{ Destroy(wayPoint.gameObject); }
-            //escapeWayPoint.Clear();
+            if (allSneakWaypoint.Count > 0)
+            {
+                foreach (WaypointIndicator wayPoint in allSneakWaypoint)
+                { Destroy(wayPoint.gameObject); }
+                allSneakWaypoint.Clear();
+            }
 
             g_escape.SetActive(false);
         }
 
-        if (RestaurantManager.Instance.HasGangToTeachYou()) g_gang.SetActive(true);
-        else g_gang.SetActive(false);
+        if (RestaurantManager.Instance.HasGangToTeachYou())
+        {
+            g_gang.SetActive(true);
+        }
+        else
+        {
+            g_gang.SetActive(false);
+        }
 
-        if(RestaurantManager.Instance.SomeOneSleep()) g_drunkSleep.SetActive(true);
-        else g_drunkSleep.SetActive(false);
+        if (RestaurantManager.Instance.SomeOneSleep())
+        {
+            g_drunkSleep.SetActive(true);
+            int sleepCount = RestaurantManager.Instance.GetSleepCount();
+            if (allSleepWaypoint.Count != sleepCount)
+            {
+                foreach (WaypointIndicator waypoint in allSleepWaypoint)
+                { Destroy(waypoint.gameObject); }
+                allSleepWaypoint.Clear();
+                if (RestaurantManager.Instance.allCustomers.Length > 0)
+                {
+                    for (int i = 0; i < RestaurantManager.Instance.allCustomers.Length; i++)
+                    {
+                        CustomerStateManager cus = RestaurantManager.Instance.allCustomers[i];
+                        if (cus.s_currentState == cus.s_drunkState)
+                        {
+                            WaypointIndicator waypoint = SpawnWayPoint(g_sleepWaypoint, cus);
+                            allSleepWaypoint.Add(waypoint);
+                        }
+                    }
+                }
+            }
+
+        }
+        else
+        {
+            if (allSleepWaypoint.Count > 0)
+            {
+                foreach (WaypointIndicator waypoint in allSleepWaypoint)
+                { Destroy(waypoint.gameObject); }
+                allSleepWaypoint.Clear();
+            }
+            g_drunkSleep.SetActive(false);
+        }
+
+        if (RestaurantManager.Instance.SomeOneCash())
+        {
+            int cashCount = RestaurantManager.Instance.GetCashCount();
+            if (allCashWaypoint.Count != cashCount)
+            {
+                foreach (WaypointIndicator waypoint in allCashWaypoint)
+                { Destroy(waypoint.gameObject); }
+                allCashWaypoint.Clear();
+                if (RestaurantManager.Instance.allCustomers.Length > 0)
+                {
+                    for (int i = 0; i < RestaurantManager.Instance.allCustomers.Length; i++)
+                    {
+                        CustomerStateManager cus = RestaurantManager.Instance.allCustomers[i];
+                        if (cus.s_currentState == cus.s_frontCounter)
+                        {
+                            WaypointIndicator waypoint = SpawnWayPoint(g_cashWaypoint, cus);
+                            allCashWaypoint.Add(waypoint);
+                        }
+                    }
+                }
+            }
+        }
+        else
+        {
+            if (allCashWaypoint.Count > 0)
+            {
+                foreach (WaypointIndicator waypoint in allCashWaypoint)
+                { Destroy(waypoint.gameObject); }
+                allCashWaypoint.Clear();
+            }
+
+        }
+
+        if (RestaurantManager.Instance.HasThreat())
+        {
+            int threatCount = RestaurantManager.Instance.GetThreatCount();
+            if (allThreatWaypoint.Count != threatCount)
+            {
+                foreach (WaypointIndicator waypoint in allThreatWaypoint)
+                { Destroy(waypoint.gameObject); }
+                allThreatWaypoint.Clear();
+                if (RestaurantManager.Instance.allCustomers.Length > 0)
+                {
+                    for (int i = 0; i < RestaurantManager.Instance.allCustomers.Length; i++)
+                    {
+                        CustomerStateManager cus = RestaurantManager.Instance.allCustomers[i];
+                        if (cus.b_fightWithPlayer)
+                        {
+                            WaypointIndicator waypoint = SpawnWayPoint(g_threatWaypoint, cus);
+                            allThreatWaypoint.Add(waypoint);
+                        }
+                    }
+                }
+            }
+        }
+        else
+        {
+            if (allThreatWaypoint.Count > 0)
+            {
+                foreach (WaypointIndicator waypoint in allThreatWaypoint)
+                { Destroy(waypoint.gameObject); }
+                allThreatWaypoint.Clear();
+            }
+        }
+
 
         #endregion
 
@@ -138,17 +281,24 @@ public class UIManager : Auto_Singleton<UIManager>
             g_objective.SetActive(false);
         }
 
-
     }
 
 
-    public void SpawnWayPoint(CustomerStateManager cus)
+    public WaypointIndicator SpawnWayPoint(GameObject waypoint, CustomerStateManager cus)
     {
-        GameObject wayPointObj = Instantiate(g_wayPointUI, Vector3.zero, Quaternion.identity);
+        GameObject wayPointObj = Instantiate(waypoint, Vector3.zero, Quaternion.identity);
         wayPointObj.transform.SetParent(t_Canvas);
         WaypointIndicator indicator = wayPointObj.GetComponent<WaypointIndicator>();
         indicator.target = cus.t_mesh;
-        //escapeWayPoint.Add(indicator);
+        return indicator;
     }
 
+    public WaypointIndicator SpawnWayPoint(GameObject waypoint, EmployeeStateManager emp)
+    {
+        GameObject wayPointObj = Instantiate(waypoint, Vector3.zero, Quaternion.identity);
+        wayPointObj.transform.SetParent(t_Canvas);
+        WaypointIndicator indicator = wayPointObj.GetComponent<WaypointIndicator>();
+        indicator.target = emp.t_mesh;
+        return indicator;
+    }
 }

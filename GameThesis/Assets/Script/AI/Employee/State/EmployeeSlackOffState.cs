@@ -37,11 +37,13 @@ public class EmployeeSlackOffState : BaseState
     {
         EmployeeStateManager emp = (EmployeeStateManager)ai;
         emp.RagdollOff();
+        emp.agent.speed = emp.f_walkSpeed;
 
-        emp.agent.SetDestination(emp.v_walkPos);
         if (Vector3.Distance(emp.transform.position, emp.v_walkPos)
             <= 1f)
         {
+            emp.agent.velocity = Vector3.zero;
+            emp.b_onSlackOffPoint = true;
             emp.anim.SetBool("walk", false);
             emp.anim.SetBool("slackOff", true);
             f_currentSlowTime -= Time.deltaTime;
@@ -53,11 +55,12 @@ public class EmployeeSlackOffState : BaseState
         }
         else
         {
+            emp.agent.SetDestination(emp.v_walkPos);
+            emp.b_onSlackOffPoint = false;
             emp.anim.SetBool("walk", true);
             emp.anim.SetBool("slackOff", false);
         }
 
-        emp.agent.speed = emp.f_walkSpeed;
 
     }
 }

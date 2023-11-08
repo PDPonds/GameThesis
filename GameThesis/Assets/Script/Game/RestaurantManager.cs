@@ -1,9 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.UIElements;
-using static Unity.Burst.Intrinsics.X86.Avx;
 
 public class RestaurantManager : Auto_Singleton<RestaurantManager>
 {
@@ -263,6 +260,39 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
         return true;
     }
 
+    public bool SomeOneCash()
+    {
+        if (allCustomers.Length > 0)
+        {
+            for (int i = 0; i < allCustomers.Length; i++)
+            {
+                CustomerStateManager cus = allCustomers[i];
+                if (cus.s_currentState == cus.s_frontCounter)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public int GetCashCount()
+    {
+        int count = 0;
+        if (allCustomers.Length > 0)
+        {
+            for (int i = 0; i < allCustomers.Length; i++)
+            {
+                CustomerStateManager cus = allCustomers[i];
+                if (cus.s_currentState == cus.s_frontCounter)
+                {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
     public bool SomeOneEscape()
     {
         if (allCustomers.Length >= 0)
@@ -279,6 +309,23 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
         return false;
     }
 
+    public int GetEscapeCount()
+    {
+        int count = 0;
+        if (allCustomers.Length >= 0)
+        {
+            for (int i = 0; i < allCustomers.Length; i++)
+            {
+                if (allCustomers[i].b_escape)
+                {
+                    count++;
+                }
+            }
+        }
+
+        return count;
+    }
+
     public bool SomeOneSleep()
     {
         if (allCustomers.Length > 0)
@@ -292,6 +339,22 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
             }
         }
         return false;
+    }
+
+    public int GetSleepCount()
+    {
+        int count = 0;
+        if (allCustomers.Length > 0)
+        {
+            for (int i = 0; i < allCustomers.Length; i++)
+            {
+                if (allCustomers[i].s_currentState == allCustomers[i].s_drunkState)
+                {
+                    count++;
+                }
+            }
+        }
+        return count;
     }
 
     public bool AllEmployeeWorkingCheckForText()
@@ -310,6 +373,23 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
         }
 
         return allEmployees.Length == allEmployeeProcessing;
+    }
+
+    public int GetSlackoffCount()
+    {
+        int count = 0;
+        if (allEmployees.Length > 0)
+        {
+            for (int i = 0; i < allEmployees.Length; i++)
+            {
+                if (allEmployees[i].s_currentState == allEmployees[i].s_slackOffState)
+                {
+                    count++;
+                }
+            }
+        }
+
+        return count;
     }
 
     public bool HasCustomerInFightState()
@@ -378,4 +458,34 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
         return false;
     }
 
+    public bool HasThreat()
+    {
+        if (allCustomers.Length > 0)
+        {
+            for (int i = 0; i < allCustomers.Length; i++)
+            {
+                CustomerStateManager cus = allCustomers[i];
+                if (cus.b_fightWithPlayer == true)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    public int GetThreatCount()
+    {
+        int count = 0;
+        if (allCustomers.Length > 0)
+        {
+            for (int i = 0; i < allCustomers.Length; i++)
+            {
+                if (allCustomers[i].b_fightWithPlayer)
+                {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
 }

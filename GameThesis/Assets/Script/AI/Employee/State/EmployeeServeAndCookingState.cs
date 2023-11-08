@@ -28,6 +28,7 @@ public class EmployeeServeAndCookingState : BaseState
         EmployeeStateManager emp = (EmployeeStateManager)ai;
 
         emp.RagdollOff();
+        emp.b_onSlackOffPoint = false;
 
         if (GameManager.Instance.s_gameState.s_currentState ==
             GameManager.Instance.s_gameState.s_openState)
@@ -183,7 +184,7 @@ public class EmployeeServeAndCookingState : BaseState
                 float p = Random.Range(0f, 100f);
                 if (p <= emp.f_slackOffPercent)
                 {
-                    emp.SwitchState(emp.s_slowDownState);
+                    emp.SwitchState(emp.s_slackOffState);
                     f_currentToSlowTime = emp.f_timeToSlackOff;
                 }
                 else

@@ -29,6 +29,7 @@ public class CustomerDeadState : BaseState
             }
         }
 
+        if (cus.b_fightWithPlayer) cus.b_fightWithPlayer = false;
     }
 
     public override void UpdateState(StateManager ai)

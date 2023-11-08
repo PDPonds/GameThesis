@@ -96,6 +96,8 @@ public class AISoundController : MonoBehaviour, IObserver
         }
     }
 
+
+
     AudioSource InitializedAudioSource(bool loop)
     {
         AudioSource newSource = transform.AddComponent<AudioSource>();

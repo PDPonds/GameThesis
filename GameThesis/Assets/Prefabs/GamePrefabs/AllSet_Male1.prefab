@@ -2891,7 +2891,7 @@ MonoBehaviour:
   f_waitDis: 3
   f_fightDis: 1
   f_atkDelay: 1
-  f_attackRange: 1.5
+  f_attackRange: 1.35
   f_playerEscapeTime: 10
   f_hurtTime: 0.1
   f_protectStunTime: 1.5
@@ -2905,13 +2905,13 @@ MonoBehaviour:
   f_orderTime: 60
   f_currentOrderTime: 0
   c_chairObj: {fileID: 0}
-  v_minAndMaxEatFood: {x: 10, y: 15}
+  v_minAndMaxEatFood: {x: 20, y: 30}
   f_randomEventPercent: 10
   b_escape: 0
   f_fightBackPercent: 10
   f_payTime: 25
   f_giveCoin: 0
-  v_minmaxGiveCoin: {x: 10, y: 20}
+  v_minmaxGiveCoin: {x: 10, y: 13}
   f_runTime: 10
   f_runSpeed: 3
   f_walkSpeed: 2

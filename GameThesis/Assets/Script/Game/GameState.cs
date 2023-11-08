@@ -17,7 +17,7 @@ public class GameState : StateManager
 
     private void Start()
     {
-        SwitchState(s_closeState);
+        SwitchState(s_openState);
     }
 
     private void Update()
@@ -25,6 +25,11 @@ public class GameState : StateManager
         s_currentState.UpdateState(this);
 
         SpawnCustomer();
+
+        if (TimeController.Instance.d_currentTime.Hour == TimeController.Instance.f_endTime)
+        {
+            SwitchState(s_closeState);
+        }
 
     }
 

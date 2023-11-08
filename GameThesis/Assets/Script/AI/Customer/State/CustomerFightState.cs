@@ -110,11 +110,16 @@ public class CustomerFightState : BaseState
 
             //Attack Range
 
-            if (Vector3.Distance(cus.transform.position, playerPos) < cus.f_attackRange)
+            if (Vector3.Distance(cus.transform.position, playerPos) < cus.f_attackRange + 0.5f)
             {
                 f_currentDelay -= Time.deltaTime;
             }
 
+            if (Vector3.Distance(cus.transform.position, playerPos) < cus.f_attackRange)
+            {
+                cus.agent.velocity = Vector3.zero;
+
+            }
             //Attack
             if (f_currentDelay <= 0)
             {

@@ -24,6 +24,8 @@ public class EmployeeHurtState : BaseState
 
         emp.anim.Play("Hurt");
 
+        emp.b_onSlackOffPoint = false;
+
         emp.RagdollOff();
 
         if (emp.anim.GetCurrentAnimatorStateInfo(0).IsName("Hurt"))

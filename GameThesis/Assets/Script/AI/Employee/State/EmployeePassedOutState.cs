@@ -27,6 +27,8 @@ public class EmployeePassedOutState : BaseState
         EmployeeStateManager emp = (EmployeeStateManager)ai;
         emp.RagdollOn();
 
+        emp.b_onSlackOffPoint = false;
+
         f_currentPressedOutTime -= Time.deltaTime;
         if (f_currentPressedOutTime <= 0)
         {
