@@ -83,10 +83,10 @@ public class InputSystem : MonoBehaviour
     {
         if (!PlayerManager.Instance.b_isDead)
         {
-            if (PlayerManager.Instance.b_canGuard)
-            {
+            //if (PlayerManager.Instance.b_canGuard)
+            //{
                 PlayerManager.Instance.b_isGuard = true;
-            }
+            //}
         }
 
     }

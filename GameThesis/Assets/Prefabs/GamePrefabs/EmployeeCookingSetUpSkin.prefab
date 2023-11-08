@@ -116,7 +116,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.889999
+      value: 8.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
@@ -126,7 +126,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b204018a8378be5498eb3adc2908f6ab,
         type: 3}
@@ -1918,7 +1918,9 @@ MonoBehaviour:
   v_minmaxX: {x: -21, y: -15}
   v_minmaxZ: {x: -1, y: 7}
   v_minAndMaxSlackOffTime: {x: 30, y: 60}
-  allSlackOffAnim: []
+  allSlackOffAnim:
+  - {fileID: 22100000, guid: c427e4eeb0fb50443ba4bd22a3089ec3, type: 2}
+  - {fileID: 22100000, guid: 368364148d6150942b312e0acf79eeee, type: 2}
   v_walkPos: {x: 0, y: 0, z: 0}
   f_slackOffTime: 0
   currentAreaStay: 0
@@ -1926,6 +1928,7 @@ MonoBehaviour:
   f_outlineScale: 0.005
   color_warning: {r: 0.93333334, g: 0.7058824, b: 0.37254903, a: 1}
   color_fighting: {r: 0.9607843, g: 0.45882353, b: 0.45882353, a: 0}
+  currentCookingHandle: {fileID: 0}
 --- !u!114 &3101097738747627747
 MonoBehaviour:
   m_ObjectHideFlags: 0

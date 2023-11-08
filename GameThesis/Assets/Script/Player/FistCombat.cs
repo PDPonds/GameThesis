@@ -19,8 +19,10 @@ public class FistCombat : MainObserver
     public void Punch()
     {
 
-        if (PlayerManager.Instance.b_canPunch)
+        if (PlayerManager.Instance.b_canPunch && 
+            PlayerManager.Instance.f_currentStamina > PlayerManager.Instance.f_staminaMultiply)
         {
+            PlayerManager.Instance.f_currentStamina -= PlayerManager.Instance.f_attackStamina;
             PlayerManager.Instance.i_atkCount++;
             if (FightingManager.Instance.fighter.Count > 0)
             {
@@ -30,7 +32,6 @@ public class FistCombat : MainObserver
                     float playerAndCusDistance = Vector3.Distance(cus.transform.position, playerPos);
                     Collider col = PlayerManager.Instance.c_punchCol;
                     BoxCollider punchCol = (BoxCollider)col;
-                    PlayerManager.Instance.b_canMove = false;
 
                     if (playerAndCusDistance > punchCol.size.z)
                     {

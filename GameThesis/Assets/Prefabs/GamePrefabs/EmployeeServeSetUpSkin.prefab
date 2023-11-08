@@ -962,7 +962,9 @@ MonoBehaviour:
   v_minmaxX: {x: -21, y: -15}
   v_minmaxZ: {x: -1, y: 7}
   v_minAndMaxSlackOffTime: {x: 30, y: 60}
-  allSlackOffAnim: []
+  allSlackOffAnim:
+  - {fileID: 22100000, guid: c427e4eeb0fb50443ba4bd22a3089ec3, type: 2}
+  - {fileID: 22100000, guid: 368364148d6150942b312e0acf79eeee, type: 2}
   v_walkPos: {x: 0, y: 0, z: 0}
   f_slackOffTime: 0
   currentAreaStay: 0

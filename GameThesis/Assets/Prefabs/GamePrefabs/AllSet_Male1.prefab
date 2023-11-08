@@ -2884,15 +2884,17 @@ MonoBehaviour:
   hats:
   - {fileID: 4829462630192099315}
   i_currentHP: 0
-  i_maxHP: 5
+  i_maxHP: 8
   b_inFight: 0
   b_fightWithPlayer: 0
   c_atkCol: {fileID: 1125995785127699134}
   f_waitDis: 3
   f_fightDis: 1
-  f_atkDelay: 0.7
+  f_atkDelay: 1
   f_attackRange: 1.5
   f_playerEscapeTime: 10
+  f_hurtTime: 0.1
+  f_protectStunTime: 1.5
   i_atkCount: 0
   t_hips: {fileID: 21130652732719118}
   rb: []

@@ -7,7 +7,7 @@ public class FightingManager : Auto_Singleton<FightingManager>
 {
     public List<CustomerStateManager> fighter = new List<CustomerStateManager>();
 
-    public WaypointIndicator s_wayPoint;
+    //public WaypointIndicator s_wayPoint;
 
     private void Update()
     {
@@ -49,16 +49,16 @@ public class FightingManager : Auto_Singleton<FightingManager>
             }
         }
 
-        if (GetCurrentFightWithPlayer(out CustomerStateManager cusfight))
-        {
-            s_wayPoint.gameObject.SetActive(true);
-            s_wayPoint.target = cusfight.t_mesh;
-            s_wayPoint.image.color = cusfight.color_fightWithPlayer;
-        }
-        else
-        {
-            s_wayPoint.gameObject.SetActive(false);
-        }
+        //if (GetCurrentFightWithPlayer(out CustomerStateManager cusfight))
+        //{
+        //    s_wayPoint.gameObject.SetActive(true);
+        //    s_wayPoint.target = cusfight.t_mesh;
+        //    s_wayPoint.image.color = cusfight.color_fightWithPlayer;
+        //}
+        //else
+        //{
+        //    s_wayPoint.gameObject.SetActive(false);
+        //}
 
     }
 

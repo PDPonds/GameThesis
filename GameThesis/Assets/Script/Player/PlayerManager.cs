@@ -37,6 +37,9 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
     public float f_fightingCheckDis;
     public float f_targetSmoothRot;
     public float f_attackMoveForce;
+    public float f_attackStamina;
+    public float f_regenTime;
+    float f_currentRegenTime;
     [HideInInspector] public float f_cantMoveInFightTime;
     [HideInInspector] public bool b_inFighting;
     [HideInInspector] public bool b_lockTarget;
@@ -51,7 +54,7 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
 
 
     [Header("===== Player Gaurd =====")]
-    public float f_guardTime;
+    //public float f_guardTime;
     public float f_guardDelay;
 
     [HideInInspector] public bool b_canGuard;
@@ -92,6 +95,7 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
     [Header("===== Area =====")]
     public AreaType currentAreaStay;
 
+
     private void Awake()
     {
         c_collider = GetComponent<CapsuleCollider>();
@@ -111,11 +115,28 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
         if (b_inFighting)
         {
             PlayerAnimation.Instance.animator.SetBool("isFight", true);
+            if (i_currentHP < i_maxHP)
+            {
+                f_currentRegenTime = f_regenTime;
+            }
         }
         else
         {
+            f_currentRegenTime -= Time.deltaTime;
+            if (f_currentRegenTime <= 0)
+            {
+                if (i_currentHP < i_maxHP)
+                {
+                    CameraTrigger camTrigger = Camera.main.GetComponent<CameraTrigger>();
+                    i_currentHP++;
+                    camTrigger.RegenHP();
+                }
+                f_currentRegenTime = f_regenTime;
+            }
             PlayerAnimation.Instance.animator.SetBool("isFight", false);
         }
+
+
 
         Collider[] allCus = Physics.OverlapSphere(transform.position, f_fightingCheckDis, GameManager.Instance.lm_enemyMask);
         if (hasCusInFight(allCus))
@@ -123,31 +144,10 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
             f_currentInFightingTime = f_maxInFightingTime;
             b_inFighting = true;
 
-            
-            if (!b_canMove)
-            {
-                f_cantMoveInFightTime -= Time.deltaTime;
-                if (f_cantMoveInFightTime <= 0)
-                {
-                    b_canMove = true;
-                }
-            }
-            else
-            {
-                f_cantMoveInFightTime = 2;
-
-            }
         }
         else
         {
-
-            i_currentHP = i_maxHP;
             b_inFighting = false;
-            b_canMove = true;
-
-            CameraTrigger camTrigger = Camera.main.GetComponent<CameraTrigger>();
-            camTrigger.ResetVignetteAndFocal();
-
         }
 
     }

@@ -74,6 +74,12 @@ public class CameraTrigger : MonoBehaviour
         }
     }
 
+    public void RegenHP()
+    {
+        Vignette_StepDown();
+        FocalLength_StepDown();
+    }
+
     public void ResetVignetteAndFocal()
     {
         depthOfField.focalLength.value = minFocalLength;
