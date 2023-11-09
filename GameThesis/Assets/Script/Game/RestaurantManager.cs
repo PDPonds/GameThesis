@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
+using UnityEngine.WSA;
 
 public class RestaurantManager : Auto_Singleton<RestaurantManager>
 {
@@ -26,8 +28,115 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
     [Header("===== Level =====")]
     public int i_level = 1;
 
+    [Header("===== Manage Restaurant ======")]
+    [Header("- Cost")]
+    public float f_cookerCost;
+    public float f_waiterCost;
+
+    public float f_currentCostPerDay;
+
+    [Header("- Setup")]
+    public int i_maxCooker;
+    public int i_maxWaiter;
+
+    public int i_minCooker;
+    public int i_minWaiter;
+
+    public int i_currentCookerCount;
+    public int i_currentWaiterCount;
+    [Header("- Prefabs")]
+    public GameObject g_cooker;
+    public GameObject g_waiter;
+
+    [Header("- CookingPos")]
+    public List<Transform> allCookingPos = new List<Transform>();
+
+
+    public void AddCurrentCookingCount()
+    {
+        if (GameManager.Instance.s_gameState.s_currentState ==
+            GameManager.Instance.s_gameState.s_beforeOpenState)
+        {
+            if (i_currentCookerCount < i_maxCooker)
+            {
+                i_currentCookerCount++;
+            }
+        }
+
+    }
+
+    public void AddCurrentServeCount()
+    {
+        if (GameManager.Instance.s_gameState.s_currentState ==
+            GameManager.Instance.s_gameState.s_beforeOpenState)
+        {
+            if (i_currentWaiterCount < i_maxWaiter)
+            {
+                i_currentWaiterCount++;
+            }
+        }
+    }
+
+    public void RemoveCurrentCookingCount()
+    {
+        if (GameManager.Instance.s_gameState.s_currentState ==
+            GameManager.Instance.s_gameState.s_beforeOpenState)
+        {
+            if (i_currentCookerCount > i_minCooker)
+            {
+                i_currentCookerCount--;
+
+            }
+        }
+    }
+
+    public void RemoveCurrentServeCount()
+    {
+        if (GameManager.Instance.s_gameState.s_currentState ==
+            GameManager.Instance.s_gameState.s_beforeOpenState)
+        {
+            if (i_currentWaiterCount > i_minWaiter)
+            {
+                i_currentWaiterCount--;
+
+            }
+        }
+    }
+
+    public void SpawnEmp()
+    {
+        if (GameManager.Instance.s_gameState.s_currentState ==
+            GameManager.Instance.s_gameState.s_beforeOpenState)
+        {
+            if (i_currentCookerCount > 0)
+            {
+                for (int i = 0; i < i_currentCookerCount; i++)
+                {
+                    Vector3 cookingPos = allCookingPos[i].position;
+                    GameObject cookingEmpObj = Instantiate(g_cooker, cookingPos, Quaternion.identity);
+                    EmployeeStateManager emp = cookingEmpObj.GetComponent<EmployeeStateManager>();
+                    emp.t_workingPos = allCookingPos[i];
+                }
+            }
+
+            if (i_currentWaiterCount > 0)
+            {
+                for (int i = 0; i < i_currentWaiterCount; i++)
+                {
+                    Vector3 severPos = GameManager.Instance.t_stayPos.position;
+                    GameObject serveEmpObj = Instantiate(g_waiter, severPos, Quaternion.identity);
+                }
+            }
+        }
+
+    }
+
+
     private void Awake()
     {
+        i_currentCookerCount = i_minCooker;
+        i_currentWaiterCount = i_minWaiter;
+
         i_rating = i_startRating;
     }
 
@@ -43,11 +152,20 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
 
     void Update()
     {
+        float allCookerCost = i_currentCookerCount * f_cookerCost;
+        float allWaiterCost = i_currentWaiterCount * f_waiterCost;
+        f_currentCostPerDay = allCookerCost + allWaiterCost;
+
         allCustomers = FindObjectsOfType<CustomerStateManager>();
         allEmployees = FindObjectsOfType<EmployeeStateManager>();
         allSheriffs = FindObjectsOfType<SheriffStateManager>();
         allTables = FindObjectsOfType<TableObj>();
         allChairs = FindObjectsOfType<ChairObj>();
+
+        if (GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_beforeOpenState)
+        {
+            UIManager.Instance.g_summary.SetActive(false);
+        }
 
         if (GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_openState)
         {
@@ -68,14 +186,35 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
                 }
             }
 
+            UIManager.Instance.g_summary.SetActive(false);
+
+
         }
 
-        #region Restaurant is Empty
-        if (GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_closeState)
+        if (GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_afterOpenState)
         {
+            if (allEmployees.Length > 0)
+            {
+                foreach (EmployeeStateManager emp in allEmployees)
+                {
+                    Destroy(emp.gameObject);
+                }
+            }
+
+            if (allCustomers.Length > 0)
+            {
+                foreach (CustomerStateManager cus in allCustomers)
+                {
+                    cus.SwitchState(cus.s_walkAroundState);
+                }
+            }
+           
+            UIManager.Instance.g_summary.SetActive(true);
+
+            PlayerManager.Instance.b_canMove = false;
 
         }
-        #endregion
+
 
     }
 
@@ -473,6 +612,7 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
         }
         return false;
     }
+
     public int GetThreatCount()
     {
         int count = 0;

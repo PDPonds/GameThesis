@@ -13,7 +13,9 @@ public class Pause : MonoBehaviour
             PauseGame();
         }
 
-        if(isPause)
+        if (isPause || 
+            GameManager.Instance.s_gameState.s_currentState == 
+            GameManager.Instance.s_gameState.s_afterOpenState)
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;

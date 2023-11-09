@@ -29,7 +29,7 @@ public class OpenCloseRestaurantInterac : MonoBehaviour, IInteracable
         {
             text += "[E] to Close Restaurant";
         }
-        else if (GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_closeState)
+        else if (GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_afterOpenState)
         {
             text += "[E] to Open Restaurant";
         }
