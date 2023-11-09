@@ -60,6 +60,9 @@ public class UIManager : Auto_Singleton<UIManager>
     List<WaypointIndicator> allThreatWaypoint = new List<WaypointIndicator>();
     List<WaypointIndicator> allSlackOffWaypoint = new List<WaypointIndicator>();
 
+    [Header("===== Summary =====")]
+    public GameObject g_summary;
+
     private void Update()
     {
         text_Cash.text = $"{GameManager.Instance.f_coin.ToString("00.00")}$";
@@ -259,7 +262,7 @@ public class UIManager : Auto_Singleton<UIManager>
 
         }
 
-        if (GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_closeState)
+        if (GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_beforeOpenState)
         {
             g_closeWarning.SetActive(true);
         }

@@ -7,8 +7,9 @@ public class GameState : StateManager
 {
     public override BaseState s_currentState { get; set; }
 
+    public BeforeOpenStoreState s_beforeOpenState = new BeforeOpenStoreState();
     public OpenStoreState s_openState = new OpenStoreState();
-    public CloseStoreState s_closeState = new CloseStoreState();
+    public AffterOpenStoreState s_afterOpenState = new AffterOpenStoreState();
 
     public List<GameObject> g_customerPrefab = new List<GameObject>();
     public List<Transform> t_spawnPoint = new List<Transform>();
@@ -17,7 +18,7 @@ public class GameState : StateManager
 
     private void Start()
     {
-        SwitchState(s_openState);
+        SwitchState(s_beforeOpenState);
     }
 
     private void Update()
@@ -28,7 +29,7 @@ public class GameState : StateManager
 
         if (TimeController.Instance.d_currentTime.Hour == TimeController.Instance.f_endTime)
         {
-            SwitchState(s_closeState);
+            SwitchState(s_afterOpenState);
         }
 
     }
@@ -71,9 +72,10 @@ public class GameState : StateManager
 
     public void OpenCloseRestaurant()
     {
-        if (s_currentState == s_openState)
-            SwitchState(s_closeState);
-        else if (s_currentState == s_closeState)
+        if (s_currentState == s_beforeOpenState)
+        {
+            RestaurantManager.Instance.SpawnEmp();
             SwitchState(s_openState);
+        }
     }
 }

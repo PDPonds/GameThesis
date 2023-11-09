@@ -58,7 +58,7 @@ public class UpgradTable : MonoBehaviour, IInteracable
 
             GameState state = GameManager.Instance.s_gameState;
 
-            if (state.s_currentState == state.s_closeState)
+            if (state.s_currentState == state.s_beforeOpenState)
             {
                 Collider[] taCol = tableObj.g_table.GetComponents<Collider>();
                 foreach (Collider col in taCol)
