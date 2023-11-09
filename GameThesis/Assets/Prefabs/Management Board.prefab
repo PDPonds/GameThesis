@@ -227,7 +227,6 @@ GameObject:
   - component: {fileID: 8210619908782332410}
   - component: {fileID: 8226527179453213703}
   - component: {fileID: 4950031645620645291}
-  - component: {fileID: 708643086960757131}
   m_Layer: 0
   m_Name: Waiter Text
   m_TagString: Untagged
@@ -352,27 +351,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!65 &708643086960757131
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1358119121514795385}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.03, y: 0.03, z: 0.03}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1423841981639744744
 GameObject:
   m_ObjectHideFlags: 0
@@ -517,6 +495,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6738813952105269335}
+  - component: {fileID: 6140227273492103080}
   m_Layer: 0
   m_Name: Management Board
   m_TagString: Untagged
@@ -532,7 +511,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1635803512247077502}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.06, y: 2.1704364, z: 2.732202}
   m_LocalScale: {x: 0.1, y: 1, z: 2}
   m_ConstrainProportionsScale: 0
@@ -541,6 +520,23 @@ Transform:
   - {fileID: 1112910098354264549}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6140227273492103080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1635803512247077502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43616168ae119b34f95340b7a3408dd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text_waiterCount: {fileID: 800967507500418464}
+  text_cookerCount: {fileID: 1359341429851412052}
+  text_waiterCost: {fileID: 8592558508465633042}
+  text_cookerCost: {fileID: 7718157127444893376}
+  text_totalCost: {fileID: 9073653134246931052}
 --- !u!1 &1854803298638365469
 GameObject:
   m_ObjectHideFlags: 0
@@ -554,6 +550,7 @@ GameObject:
   - component: {fileID: 2363114841701287640}
   - component: {fileID: 6958810417122125051}
   - component: {fileID: 47626436667231478}
+  - component: {fileID: 5037486691551926458}
   m_Layer: 7
   m_Name: Minus -
   m_TagString: Untagged
@@ -697,8 +694,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.03, y: 0.03, z: 0.03}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.1, y: 0.1, z: 0.05}
+  m_Center: {x: -0.02, y: 0, z: 0}
 --- !u!95 &47626436667231478
 Animator:
   serializedVersion: 5
@@ -709,7 +706,7 @@ Animator:
   m_GameObject: {fileID: 1854803298638365469}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 88ba81eef7969f64b8ace5038077f72f, type: 2}
+  m_Controller: {fileID: 9100000, guid: d650ccb936982814ebb3686bb4a4bf3e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -720,6 +717,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5037486691551926458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1854803298638365469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2ce251884138594e84c51ac5c00671e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 3
 --- !u!1 &3256356532013479824
 GameObject:
   m_ObjectHideFlags: 0
@@ -733,6 +743,7 @@ GameObject:
   - component: {fileID: 5877813849128745150}
   - component: {fileID: 7799801042514835470}
   - component: {fileID: 6415155437275091767}
+  - component: {fileID: 3931930441400206733}
   m_Layer: 7
   m_Name: Add +
   m_TagString: Untagged
@@ -876,8 +887,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.03, y: 0.03, z: 0.03}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.1, y: 0.1, z: 0.05}
+  m_Center: {x: 0.02, y: 0, z: 0}
 --- !u!95 &6415155437275091767
 Animator:
   serializedVersion: 5
@@ -888,7 +899,7 @@ Animator:
   m_GameObject: {fileID: 3256356532013479824}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 88ba81eef7969f64b8ace5038077f72f, type: 2}
+  m_Controller: {fileID: 9100000, guid: d650ccb936982814ebb3686bb4a4bf3e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -899,6 +910,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3931930441400206733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3256356532013479824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2ce251884138594e84c51ac5c00671e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
 --- !u!1 &3358592686126847485
 GameObject:
   m_ObjectHideFlags: 0
@@ -1049,6 +1073,7 @@ GameObject:
   - component: {fileID: 7147245223088367977}
   - component: {fileID: 1451900618874180899}
   - component: {fileID: 9085113374032798128}
+  - component: {fileID: 2572594610273550588}
   m_Layer: 7
   m_Name: Add +
   m_TagString: Untagged
@@ -1192,8 +1217,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.03, y: 0.03, z: 0.03}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.1, y: 0.1, z: 0.03}
+  m_Center: {x: 0.02, y: 0, z: 0}
 --- !u!95 &9085113374032798128
 Animator:
   serializedVersion: 5
@@ -1204,7 +1229,7 @@ Animator:
   m_GameObject: {fileID: 3400611212387256393}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 88ba81eef7969f64b8ace5038077f72f, type: 2}
+  m_Controller: {fileID: 9100000, guid: d650ccb936982814ebb3686bb4a4bf3e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1215,6 +1240,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2572594610273550588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3400611212387256393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2ce251884138594e84c51ac5c00671e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 0
 --- !u!1 &3801795592758417915
 GameObject:
   m_ObjectHideFlags: 0
@@ -1466,7 +1504,6 @@ GameObject:
   - component: {fileID: 5343532386644682669}
   - component: {fileID: 706812874304866510}
   - component: {fileID: 9073653134246931052}
-  - component: {fileID: 8651267940014462637}
   m_Layer: 0
   m_Name: Total
   m_TagString: Untagged
@@ -1591,27 +1628,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!65 &8651267940014462637
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4839024167104851848}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.03, y: 0.03, z: 0.03}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4933441901385027942
 GameObject:
   m_ObjectHideFlags: 0
@@ -1623,7 +1639,6 @@ GameObject:
   - component: {fileID: 6153540988327867901}
   - component: {fileID: 7802250548100827974}
   - component: {fileID: 7718157127444893376}
-  - component: {fileID: 2008321657392675438}
   m_Layer: 0
   m_Name: Total
   m_TagString: Untagged
@@ -1748,27 +1763,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!65 &2008321657392675438
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4933441901385027942}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.03, y: 0.03, z: 0.03}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5311820459046762284
 GameObject:
   m_ObjectHideFlags: 0
@@ -1780,7 +1774,6 @@ GameObject:
   - component: {fileID: 7997560042797494617}
   - component: {fileID: 2165157955864928330}
   - component: {fileID: 9212372397852199673}
-  - component: {fileID: 546848659973134781}
   m_Layer: 0
   m_Name: Cooker
   m_TagString: Untagged
@@ -1905,27 +1898,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!65 &546848659973134781
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5311820459046762284}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.03, y: 0.03, z: 0.03}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6173031974698298606
 GameObject:
   m_ObjectHideFlags: 0
@@ -1937,7 +1909,6 @@ GameObject:
   - component: {fileID: 1553552984524264955}
   - component: {fileID: 6586885080740099274}
   - component: {fileID: 7679946581104433373}
-  - component: {fileID: 2721465721176049137}
   m_Layer: 0
   m_Name: Cooker
   m_TagString: Untagged
@@ -2064,27 +2035,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!65 &2721465721176049137
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6173031974698298606}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.03, y: 0.03, z: 0.03}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6516600514523342647
 GameObject:
   m_ObjectHideFlags: 0
@@ -2096,7 +2046,6 @@ GameObject:
   - component: {fileID: 2225666583615569137}
   - component: {fileID: 2195721368184924948}
   - component: {fileID: 8592558508465633042}
-  - component: {fileID: 8096823034511202738}
   m_Layer: 0
   m_Name: Total
   m_TagString: Untagged
@@ -2221,27 +2170,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!65 &8096823034511202738
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6516600514523342647}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.03, y: 0.03, z: 0.03}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6596600845814269874
 GameObject:
   m_ObjectHideFlags: 0
@@ -2296,6 +2224,7 @@ GameObject:
   - component: {fileID: 1898167760344163921}
   - component: {fileID: 6566651077528473917}
   - component: {fileID: 3411940939359901345}
+  - component: {fileID: 8766052992793387334}
   m_Layer: 7
   m_Name: Minus -
   m_TagString: Untagged
@@ -2439,8 +2368,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.03, y: 0.03, z: 0.03}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.1, y: 0.1, z: 0.03}
+  m_Center: {x: -0.02, y: 0, z: 0}
 --- !u!95 &3411940939359901345
 Animator:
   serializedVersion: 5
@@ -2451,7 +2380,7 @@ Animator:
   m_GameObject: {fileID: 7102026704344587484}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 88ba81eef7969f64b8ace5038077f72f, type: 2}
+  m_Controller: {fileID: 9100000, guid: d650ccb936982814ebb3686bb4a4bf3e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -2462,6 +2391,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8766052992793387334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7102026704344587484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2ce251884138594e84c51ac5c00671e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 2
 --- !u!1 &7224400149595856484
 GameObject:
   m_ObjectHideFlags: 0

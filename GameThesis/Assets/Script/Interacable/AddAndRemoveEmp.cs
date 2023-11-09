@@ -8,8 +8,17 @@ public class AddAndRemoveEmp : MonoBehaviour, IInteracable
 {
     public AddRemoveEmpType type;
 
+    Animator animator;
+
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
+
     public void Interaction()
     {
+        animator.SetTrigger("Pressed");
+
         switch (type)
         {
             case AddRemoveEmpType.AddCooking:

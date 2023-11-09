@@ -29,7 +29,18 @@ public class GameState : StateManager
 
         if (TimeController.Instance.d_currentTime.Hour == TimeController.Instance.f_endTime)
         {
-            SwitchState(s_afterOpenState);
+            if (RestaurantManager.Instance.allCustomers.Length > 0)
+            {
+                foreach (CustomerStateManager cus in RestaurantManager.Instance.allCustomers)
+                {
+                    if (cus.s_currentState != cus.s_walkAroundState)
+                        cus.SwitchState(cus.s_walkAroundState);
+                }
+            }
+
+            if (s_currentState != s_afterOpenState)
+                SwitchState(s_afterOpenState);
+
         }
 
     }

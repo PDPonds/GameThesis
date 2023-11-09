@@ -33,7 +33,7 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
     public float f_cookerCost;
     public float f_waiterCost;
 
-    public float f_currentCostPerDay;
+    [HideInInspector] public float f_currentCostPerDay;
 
     [Header("- Setup")]
     public int i_maxCooker;
@@ -42,8 +42,8 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
     public int i_minCooker;
     public int i_minWaiter;
 
-    public int i_currentCookerCount;
-    public int i_currentWaiterCount;
+    [HideInInspector] public int i_currentCookerCount;
+    [HideInInspector] public int i_currentWaiterCount;
     [Header("- Prefabs")]
     public GameObject g_cooker;
     public GameObject g_waiter;
@@ -165,6 +165,8 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
         if (GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_beforeOpenState)
         {
             UIManager.Instance.g_summary.SetActive(false);
+            PlayerManager.Instance.b_canMove = true;
+
         }
 
         if (GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_openState)
@@ -187,7 +189,7 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
             }
 
             UIManager.Instance.g_summary.SetActive(false);
-
+            PlayerManager.Instance.b_canMove = true;
 
         }
 
@@ -201,14 +203,6 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
                 }
             }
 
-            if (allCustomers.Length > 0)
-            {
-                foreach (CustomerStateManager cus in allCustomers)
-                {
-                    cus.SwitchState(cus.s_walkAroundState);
-                }
-            }
-           
             UIManager.Instance.g_summary.SetActive(true);
 
             PlayerManager.Instance.b_canMove = false;
@@ -216,6 +210,34 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
         }
 
 
+    }
+
+    public void ClearChair()
+    {
+        if (allChairs.Length > 0)
+        {
+            for (int i = 0; i < allChairs.Length; i++)
+            {
+                if (allChairs[i].s_currentCustomer != null)
+                {
+                    allChairs[i].s_currentCustomer = null;
+                }
+
+                if (allChairs[i].s_currentCookingEmployee != null)
+                {
+                    allChairs[i].s_currentCookingEmployee = null;
+                }
+
+                if (allChairs[i].s_currentServerEmployee != null)
+                {
+                    allChairs[i].s_currentServerEmployee = null;
+                }
+
+                allChairs[i].b_isEmpty = true;
+                allChairs[i].b_readyForNextCustomer = true;
+                allChairs[i].b_canUse = true;
+            }
+        }
     }
 
     public int ReqRateToBuyTable()

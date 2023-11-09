@@ -18,7 +18,15 @@ public class UIManager : Auto_Singleton<UIManager>
     public UI_animmationController uiAnimCon;
     [Space(10f)]
 
+    [Header("===== PocketMoney =====")]
+    public TextMeshProUGUI text_pocketCash;
+    public TextMeshProUGUI addPocketCash;
+    public TextMeshProUGUI removePocketCash;
+    public UI_animmationController uiAnimPocket;
+    [Space(10f)]
+
     [Header("===== Time =====")]
+    public TextMeshProUGUI text_day;
     public TextMeshProUGUI text_time;
     [Space(10f)]
 
@@ -62,10 +70,51 @@ public class UIManager : Auto_Singleton<UIManager>
 
     [Header("===== Summary =====")]
     public GameObject g_summary;
+    public Button button_next;
+    public TextMeshProUGUI text_waiterCount;
+    public TextMeshProUGUI text_cookerCount;
+    public TextMeshProUGUI text_profitCost;
+    public TextMeshProUGUI text_daliyIncomeCost;
+    public TextMeshProUGUI text_totalEmpCost;
+    public TextMeshProUGUI text_waiterCost;
+    public TextMeshProUGUI text_cookerCost;
+
+    private void Awake()
+    {
+        button_next.onClick.AddListener(() => SkipDay());
+    }
+
+    void SkipDay()
+    {
+        if (GameManager.Instance.f_coin >= RestaurantManager.Instance.f_currentCostPerDay)
+        {
+            float toAddPocket = GameManager.Instance.f_coin - RestaurantManager.Instance.f_currentCostPerDay;
+            GameManager.Instance.AddPocketMoney(toAddPocket);
+            GameManager.Instance.f_coin = 0;
+            RestaurantManager.Instance.i_currentWaiterCount = 1;
+            RestaurantManager.Instance.i_currentCookerCount = 1;
+
+        }
+        else
+        {
+            float toRemovePocket = RestaurantManager.Instance.f_currentCostPerDay - GameManager.Instance.f_coin;
+            GameManager.Instance.RemovePocketMoney(toRemovePocket);
+            GameManager.Instance.f_coin = 0;
+            RestaurantManager.Instance.i_currentWaiterCount = 1;
+            RestaurantManager.Instance.i_currentCookerCount = 1;
+        }
+        RestaurantManager.Instance.ClearChair();
+        TimeController.Instance.ResetTime();
+        GameManager.Instance.i_currentDay++;
+        GameManager.Instance.s_gameState.SwitchState(GameManager.Instance.s_gameState.s_beforeOpenState);
+    }
 
     private void Update()
     {
-        text_Cash.text = $"{GameManager.Instance.f_coin.ToString("00.00")}$";
+        text_day.text = $"Day : {GameManager.Instance.i_currentDay}";
+
+        text_Cash.text = $"{GameManager.Instance.f_coin.ToString("C2")}$";
+        text_pocketCash.text = $"{GameManager.Instance.f_pocketMoney.ToString("C2")}$";
 
         text_time.text = TimeController.Instance.d_currentTime.ToString("HH:mm");
 
@@ -266,9 +315,26 @@ public class UIManager : Auto_Singleton<UIManager>
         {
             g_closeWarning.SetActive(true);
         }
+        else if (GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_afterOpenState)
+        {
+            g_closeWarning.SetActive(false);
+
+            text_waiterCount.text = $"{RestaurantManager.Instance.i_currentWaiterCount} ea";
+            text_cookerCount.text = $"{RestaurantManager.Instance.i_currentCookerCount} ea";
+            text_daliyIncomeCost.text = $"{GameManager.Instance.f_coin.ToString("C2")} $";
+            float cookerCost = RestaurantManager.Instance.i_currentCookerCount * RestaurantManager.Instance.f_cookerCost;
+            float waiterCost = RestaurantManager.Instance.i_currentWaiterCount * RestaurantManager.Instance.f_waiterCost;
+            float totalEmpCost = cookerCost + waiterCost;
+            text_totalEmpCost.text = $"{totalEmpCost.ToString("C2")} $";
+            float profit = GameManager.Instance.f_coin - totalEmpCost;
+            text_profitCost.text = $"{profit.ToString("C2")} $";
+            text_waiterCost.text = $"{waiterCost.ToString("C2")} $";
+            text_cookerCost.text = $"{cookerCost.ToString("C2")} $";
+        }
         else
         {
             g_closeWarning.SetActive(false);
+
         }
 
         if (ObjectiveManager.Instance.GetCurrentObjective(out int index) &&
