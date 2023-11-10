@@ -31,8 +31,16 @@ public class Pause : MonoBehaviour
         {
             if (RestaurantManager.Instance.RestaurantIsEmpty())
             {
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
+                if (UIManager.Instance.g_summary.activeSelf)
+                {
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
+                }
+                else
+                {
+                    Cursor.lockState = CursorLockMode.Locked;
+                    Cursor.visible = false;
+                }
             }
             else
             {

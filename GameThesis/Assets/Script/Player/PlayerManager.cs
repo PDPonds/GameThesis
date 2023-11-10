@@ -108,6 +108,7 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
         a_cameraAnim.enabled = false;
         f_moveSpeed = f_walkSpeed;
         i_currentHP = i_maxHP;
+        c_punchCol.enabled = false;
     }
 
     private void Update()

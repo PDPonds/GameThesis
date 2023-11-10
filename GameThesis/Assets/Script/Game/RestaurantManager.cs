@@ -191,34 +191,30 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
 
         }
 
-        if (GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_afterOpenState)
+    }
+
+    public void CloseRestaurant()
+    {
+        if (allCustomers.Length > 0)
         {
-            if (RestaurantIsEmpty())
+            foreach (CustomerStateManager cus in allCustomers)
             {
-                if (allCustomers.Length > 0)
-                {
-                    foreach (CustomerStateManager cus in allCustomers)
-                    {
-                        if (cus.s_currentState != cus.s_walkAroundState)
-                            cus.SwitchState(cus.s_walkAroundState);
-                    }
-                }
-
-                if (allEmployees.Length > 0)
-                {
-                    foreach (EmployeeStateManager emp in allEmployees)
-                    {
-                        Destroy(emp.gameObject);
-                    }
-                }
-
-                UIManager.Instance.g_summary.SetActive(true);
-
-                PlayerManager.Instance.b_canMove = false;
+                if (cus.s_currentState != cus.s_walkAroundState)
+                    cus.SwitchState(cus.s_walkAroundState);
             }
-
         }
 
+        if (allEmployees.Length > 0)
+        {
+            foreach (EmployeeStateManager emp in allEmployees)
+            {
+                Destroy(emp.gameObject);
+            }
+        }
+
+        UIManager.Instance.g_summary.SetActive(true);
+
+        PlayerManager.Instance.b_canMove = false;
     }
 
     public void ClearChair()

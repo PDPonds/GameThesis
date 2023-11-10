@@ -269,9 +269,9 @@ public class EmployeeServeAndCookingState : BaseState
                             }
                             else
                             {
-                                emp.anim.SetBool("walk", false);
-                                emp.agent.speed = emp.f_runSpeed;
-                                emp.anim.SetBool("run", true);
+                                emp.agent.speed = emp.f_walkSpeed;
+                                emp.anim.SetBool("walk", true);
+                                emp.anim.SetBool("run", false);
 
                             }
                             emp.b_hasFood = false;

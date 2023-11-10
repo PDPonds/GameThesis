@@ -18,9 +18,16 @@ public class PlayerCamera : MonoBehaviour
         }
         else
         {
-            if(RestaurantManager.Instance.RestaurantIsEmpty())
+            if (RestaurantManager.Instance.RestaurantIsEmpty())
             {
-                b_canRotCam = false;
+                if (UIManager.Instance.g_summary.activeSelf)
+                {
+                    b_canRotCam = false;
+                }
+                else
+                {
+                    b_canRotCam = true;
+                }
             }
             else
             {

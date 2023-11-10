@@ -29,6 +29,13 @@ public class OpenCloseRestaurantInterac : MonoBehaviour, IInteracable
         {
             text += "[E] to Open Restaurant";
         }
+        else if (GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_afterOpenState)
+        {
+            if (RestaurantManager.Instance.RestaurantIsEmpty())
+            {
+                text += "[E] to Close Restaurant";
+            }
+        }
         return text;
     }
 }
