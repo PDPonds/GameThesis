@@ -47,7 +47,25 @@ public class EmployeeServeAndCookingState : BaseState
                         emp.agent.velocity = Vector3.zero;
                         emp.anim.SetBool("run", false);
                         emp.anim.SetBool("walk", false);
-                        emp.anim.SetBool("cooking", true);
+
+                        if (emp.b_canCook) emp.anim.SetBool("cooking", false);
+                        else emp.anim.SetBool("cooking", true);
+
+                        if (emp.s_cookingChair != null)
+                        {
+
+                            emp.b_canCook = false;
+                            f_cookingTime -= Time.deltaTime;
+                            if (f_cookingTime < 0)
+                            {
+                                f_cookingTime = emp.f_cookingTime;
+                                emp.b_canCook = true;
+                                emp.s_cookingChair.b_finishCooking = true;
+                                emp.s_cookingChair.s_currentCookingEmployee = null;
+                                emp.s_cookingChair = null;
+                            }
+                        }
+
                     }
                     else
                     {
@@ -60,21 +78,6 @@ public class EmployeeServeAndCookingState : BaseState
                     emp.agent.speed = emp.f_runSpeed;
 
 
-                    if (emp.s_cookingChair != null)
-                    {
-                        emp.b_canCook = false;
-                        f_cookingTime -= Time.deltaTime;
-                        if (f_cookingTime < 0)
-                        {
-                            emp.s_cookingChair.b_finishCooking = true;
-                            emp.s_cookingChair = null;
-                        }
-                    }
-                    else
-                    {
-                        f_cookingTime = emp.f_cookingTime;
-
-                    }
 
                     break;
                 case EmployeeType.Serve:
@@ -104,7 +107,6 @@ public class EmployeeServeAndCookingState : BaseState
                                 emp.b_hasFood = false;
                                 emp.b_canServe = false;
                                 emp.s_serveChair = null;
-                                chair.s_currentCookingEmployee.b_canCook = true;
                                 chair.s_currentCustomer.SwitchState(chair.s_currentCustomer.s_eatFoodState);
                             }
                         }
@@ -175,7 +177,7 @@ public class EmployeeServeAndCookingState : BaseState
             {
                 case EmployeeType.Cooking:
 
-                    if(!RestaurantManager.Instance.RestaurantIsEmpty())
+                    if (!RestaurantManager.Instance.RestaurantIsEmpty())
                     {
                         emp.agent.SetDestination(emp.t_workingPos.position);
 
@@ -188,6 +190,21 @@ public class EmployeeServeAndCookingState : BaseState
                             emp.anim.SetBool("run", false);
                             emp.anim.SetBool("walk", false);
                             emp.anim.SetBool("cooking", true);
+
+                            if (emp.s_cookingChair != null)
+                            {
+                                emp.b_canCook = false;
+                                f_cookingTime -= Time.deltaTime;
+                                if (f_cookingTime < 0)
+                                {
+                                    f_cookingTime = emp.f_cookingTime;
+                                    emp.b_canCook = true;
+                                    emp.s_cookingChair.b_finishCooking = true;
+                                    emp.s_cookingChair.s_currentCookingEmployee = null;
+                                    emp.s_cookingChair = null;
+                                }
+                            }
+
                         }
                         else
                         {
@@ -199,22 +216,6 @@ public class EmployeeServeAndCookingState : BaseState
 
                         emp.agent.speed = emp.f_runSpeed;
 
-
-                        if (emp.s_cookingChair != null)
-                        {
-                            emp.b_canCook = false;
-                            f_cookingTime -= Time.deltaTime;
-                            if (f_cookingTime < 0)
-                            {
-                                emp.s_cookingChair.b_finishCooking = true;
-                                emp.s_cookingChair = null;
-                            }
-                        }
-                        else
-                        {
-                            f_cookingTime = emp.f_cookingTime;
-
-                        }
                     }
 
 

@@ -11,15 +11,41 @@ public class ManagementBoard : MonoBehaviour
     public TextMeshProUGUI text_cookerCost;
     public TextMeshProUGUI text_totalCost;
 
+    public GameObject g_addCookerButton;
+    public GameObject g_removeCookerButton;
+    public GameObject g_addWaiterButton;
+    public GameObject g_removeWaiterButton;
+
+
     private void Update()
     {
         text_waiterCount.text = $"{RestaurantManager.Instance.i_currentWaiterCount.ToString("0")}";
         text_cookerCount.text = $"{RestaurantManager.Instance.i_currentCookerCount.ToString("0")}";
 
-        text_waiterCost.text = $"{RestaurantManager.Instance.f_waiterCost.ToString("00")}";
-        text_cookerCost.text = $"{RestaurantManager.Instance.f_cookerCost.ToString("00")}";
+        float waiterCost = RestaurantManager.Instance.f_waiterCost * RestaurantManager.Instance.i_currentWaiterCount;
+        text_waiterCost.text = $"{waiterCost}$";
+
+        float cookerCost = RestaurantManager.Instance.f_cookerCost * RestaurantManager.Instance.i_currentCookerCount;
+        text_cookerCost.text = $"{cookerCost}$";
 
         text_totalCost.text = $"{RestaurantManager.Instance.f_currentCostPerDay}";
+
+        GameState state = GameManager.Instance.s_gameState;
+        if (state.s_currentState == state.s_beforeOpenState)
+        {
+            g_addCookerButton.SetActive(true);
+            g_addWaiterButton.SetActive(true);
+            g_removeCookerButton.SetActive(true);
+            g_removeWaiterButton.SetActive(true);
+        }
+        else
+        {
+            g_addCookerButton.SetActive(false);
+            g_addWaiterButton.SetActive(false);
+            g_removeCookerButton.SetActive(false);
+            g_removeWaiterButton.SetActive(false);
+        }
+
     }
 
 }

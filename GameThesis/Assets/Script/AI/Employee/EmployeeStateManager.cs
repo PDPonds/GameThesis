@@ -43,7 +43,7 @@ public class EmployeeStateManager : StateManager, IDamageable
     public bool b_isWorking;
     public Transform t_workingPos;
     public float f_cookingTime;
-    [HideInInspector] public ChairObj s_cookingChair;
+    /*[HideInInspector]*/ public ChairObj s_cookingChair;
     public AnimatorOverrideController cookingAnim;
 
     [Header("===== Slack Off =====")]

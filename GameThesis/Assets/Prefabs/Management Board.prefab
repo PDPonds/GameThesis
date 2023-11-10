@@ -537,6 +537,10 @@ MonoBehaviour:
   text_waiterCost: {fileID: 8592558508465633042}
   text_cookerCost: {fileID: 7718157127444893376}
   text_totalCost: {fileID: 9073653134246931052}
+  g_addCookerButton: {fileID: 3400611212387256393}
+  g_removeCookerButton: {fileID: 7102026704344587484}
+  g_addWaiterButton: {fileID: 3256356532013479824}
+  g_removeWaiterButton: {fileID: 1854803298638365469}
 --- !u!1 &1854803298638365469
 GameObject:
   m_ObjectHideFlags: 0

@@ -55,6 +55,7 @@ public class ChairObj : MonoBehaviour
             f_currentCDForNextCustomer = f_cdForNextCustomer;
         }
 
+
         if (s_currentCustomer != null)
         {
             if (s_currentCustomer.c_chairObj != this)
@@ -65,15 +66,17 @@ public class ChairObj : MonoBehaviour
 
             if (s_currentCustomer.s_currentState == s_currentCustomer.s_waitFoodState)
             {
-                if (RestaurantManager.Instance.GetCanEmployeeCooking(out int cookingIndex) &&
-                    s_currentCookingEmployee == null)
+                if (!b_finishCooking)
                 {
-                    RestaurantManager.Instance.allEmployees[cookingIndex].s_cookingChair = this;
-                    RestaurantManager.Instance.allEmployees[cookingIndex].b_canCook = false;
-                    s_currentCookingEmployee = RestaurantManager.Instance.allEmployees[cookingIndex];
+                    if (RestaurantManager.Instance.GetCanEmployeeCooking(out int cookingIndex) &&
+                    s_currentCookingEmployee == null)
+                    {
+                        RestaurantManager.Instance.allEmployees[cookingIndex].s_cookingChair = this;
+                        RestaurantManager.Instance.allEmployees[cookingIndex].b_canCook = false;
+                        s_currentCookingEmployee = RestaurantManager.Instance.allEmployees[cookingIndex];
+                    }
                 }
-
-                if (b_finishCooking)
+                else
                 {
                     if (RestaurantManager.Instance.GetCanEmployeeServe(out int index) &&
                                         s_currentServerEmployee == null)

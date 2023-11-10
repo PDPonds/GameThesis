@@ -72,20 +72,5 @@ public class GameState : StateManager
 
     }
 
-    public void OpenCloseRestaurant()
-    {
-        if (s_currentState == s_beforeOpenState)
-        {
-            RestaurantManager.Instance.SpawnEmp();
-            SwitchState(s_openState);
-        }
-        else if (s_currentState == s_afterOpenState)
-        {
-            if (RestaurantManager.Instance.RestaurantIsEmpty())
-            {
-                RestaurantManager.Instance.CloseRestaurant();
-            }
-        }
-    }
 
 }

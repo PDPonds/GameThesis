@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class OpenCloseRestaurantInterac : MonoBehaviour, IInteracable
 {
+    public GameObject g_forntDoor;
     Animator anim;
 
     private void Awake()
@@ -13,13 +14,29 @@ public class OpenCloseRestaurantInterac : MonoBehaviour, IInteracable
 
     private void Update()
     {
-        bool isOpen = GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_openState;
-        anim.SetBool("isOpen", isOpen);
+        Door forntDoor = g_forntDoor.GetComponent<Door>();
+        anim.SetBool("isLock", forntDoor.b_isLock);
     }
 
     public void Interaction()
     {
-        GameManager.Instance.s_gameState.OpenCloseRestaurant();
+        Door forntDoor = g_forntDoor.GetComponent<Door>();
+        GameState state = GameManager.Instance.s_gameState;
+
+        if (state.s_currentState == state.s_beforeOpenState)
+        {
+            forntDoor.b_isLock = false;
+            RestaurantManager.Instance.SpawnEmp();
+            state.SwitchState(state.s_openState);
+        }
+        else if (state.s_currentState == state.s_afterOpenState)
+        {
+            if (RestaurantManager.Instance.RestaurantIsEmpty())
+            {
+                forntDoor.b_isLock = true;
+                RestaurantManager.Instance.CloseRestaurant();
+            }
+        }
     }
 
     public string InteractionText()
