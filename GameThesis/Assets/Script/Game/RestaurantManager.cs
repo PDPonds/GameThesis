@@ -12,8 +12,6 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
     public SheriffStateManager[] allSheriffs;
     public ChairObj[] allChairs;
 
-    [HideInInspector] public bool b_summaryButHasCustome;
-
     [Header("===== Start Rating =====")]
     public int i_rating;
     public Vector2Int v_minmaxRating;
@@ -193,23 +191,30 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
 
         }
 
-        if (GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_afterOpenState)
+    }
+
+    public void CloseRestaurant()
+    {
+        if (allCustomers.Length > 0)
         {
-            if (allEmployees.Length > 0)
+            foreach (CustomerStateManager cus in allCustomers)
             {
-                foreach (EmployeeStateManager emp in allEmployees)
-                {
-                    Destroy(emp.gameObject);
-                }
+                if (cus.s_currentState != cus.s_walkAroundState)
+                    cus.SwitchState(cus.s_walkAroundState);
             }
-
-            UIManager.Instance.g_summary.SetActive(true);
-
-            PlayerManager.Instance.b_canMove = false;
-
         }
 
+        if (allEmployees.Length > 0)
+        {
+            foreach (EmployeeStateManager emp in allEmployees)
+            {
+                Destroy(emp.gameObject);
+            }
+        }
 
+        UIManager.Instance.g_summary.SetActive(true);
+
+        PlayerManager.Instance.b_canMove = false;
     }
 
     public void ClearChair()
@@ -404,20 +409,21 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
         {
             for (int i = 0; i < allCustomers.Length; i++)
             {
-                if (allCustomers[i].s_currentState == allCustomers[i].s_eatFoodState ||
-                    allCustomers[i].s_currentState == allCustomers[i].s_waitFoodState ||
-                    allCustomers[i].s_currentState == allCustomers[i].s_goToCounterState ||
-                    allCustomers[i].s_currentState == allCustomers[i].s_goToChairState ||
-                    allCustomers[i].s_currentState == allCustomers[i].s_frontCounter ||
-                    allCustomers[i].s_currentState == allCustomers[i].s_fightState ||
-                    allCustomers[i].b_escape)
+                CustomerStateManager cus = allCustomers[i];
+                if (cus.s_currentState == cus.s_eatFoodState ||
+                    cus.s_currentState == cus.s_waitFoodState ||
+                    cus.s_currentState == cus.s_goToCounterState ||
+                    cus.s_currentState == cus.s_goToChairState ||
+                    cus.s_currentState == cus.s_frontCounter ||
+                    cus.s_currentState == cus.s_fightState ||
+                    cus.s_currentState == cus.s_drunkState ||
+                    cus.s_currentState == cus.s_giveBackState ||
+                    cus.b_escape)
                 {
-                    b_summaryButHasCustome = true;
                     return false;
                 }
             }
         }
-        b_summaryButHasCustome = false;
         return true;
     }
 

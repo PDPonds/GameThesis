@@ -7,11 +7,36 @@ public class PlayerCamera : MonoBehaviour
     float f_xRotation;
     float f_yRotation;
 
+    bool b_canRotCam;
+
     private void Update()
     {
-        if (GameManager.Instance.s_gameState.s_currentState != GameManager.Instance.s_gameState.s_afterOpenState)
+        if (GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_openState ||
+            GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_beforeOpenState)
         {
+            b_canRotCam = true;
+        }
+        else
+        {
+            if (RestaurantManager.Instance.RestaurantIsEmpty())
+            {
+                if (UIManager.Instance.g_summary.activeSelf)
+                {
+                    b_canRotCam = false;
+                }
+                else
+                {
+                    b_canRotCam = true;
+                }
+            }
+            else
+            {
+                b_canRotCam = true;
+            }
+        }
 
+        if (b_canRotCam)
+        {
             float f_mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * CameraController.Instance.f_senX;
             float f_mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * CameraController.Instance.f_senY;
 

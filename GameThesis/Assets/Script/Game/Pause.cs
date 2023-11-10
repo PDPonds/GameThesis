@@ -13,12 +13,40 @@ public class Pause : MonoBehaviour
             PauseGame();
         }
 
-        if (isPause || 
-            GameManager.Instance.s_gameState.s_currentState == 
-            GameManager.Instance.s_gameState.s_afterOpenState)
+        if (isPause)
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+
+
+
+        if (GameManager.Instance.s_gameState.s_currentState ==
+            GameManager.Instance.s_gameState.s_afterOpenState)
+        {
+            if (RestaurantManager.Instance.RestaurantIsEmpty())
+            {
+                if (UIManager.Instance.g_summary.activeSelf)
+                {
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
+                }
+                else
+                {
+                    Cursor.lockState = CursorLockMode.Locked;
+                    Cursor.visible = false;
+                }
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
         }
         else
         {

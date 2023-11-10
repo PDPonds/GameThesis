@@ -86,6 +86,7 @@ public class UIManager : Auto_Singleton<UIManager>
 
     void SkipDay()
     {
+        StartCoroutine(PlayerManager.Instance.SkipDay());
         if (GameManager.Instance.f_coin >= RestaurantManager.Instance.f_currentCostPerDay)
         {
             float toAddPocket = GameManager.Instance.f_coin - RestaurantManager.Instance.f_currentCostPerDay;

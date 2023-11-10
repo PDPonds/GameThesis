@@ -15,6 +15,7 @@ public class GameManager : Auto_Singleton<GameManager>
     public Transform t_counterPos;
     public Transform t_getFoodPos;
     public Transform t_stayPos;
+    public Transform t_spawnPos;
 
     [Header("===== Money =====")]
     public float f_pocketMoney;
@@ -39,6 +40,11 @@ public class GameManager : Auto_Singleton<GameManager>
         s_gameState = GetComponent<GameState>();
         f_coin = f_startCoin;
         i_currentDay = i_startDay;
+    }
+
+    public void MovePlayerToSpawnPoint()
+    {
+        PlayerManager.Instance.transform.position = t_spawnPos.position;
     }
 
     public void AddCoin(float amount)
