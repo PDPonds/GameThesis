@@ -15,13 +15,12 @@ public class GameManager : Auto_Singleton<GameManager>
     public Transform t_counterPos;
     public Transform t_getFoodPos;
     public Transform t_stayPos;
+    public Transform t_spawnPos;
 
+    [Header("===== Money =====")]
+    public float f_pocketMoney;
     public float f_coin;
     public float f_startCoin;
-
-    public TextMeshProUGUI addCash;
-    public TextMeshProUGUI removeCash;
-    public UI_animmationController uiAnimCon;
 
     [HideInInspector] public GameState s_gameState;
 
@@ -30,17 +29,27 @@ public class GameManager : Auto_Singleton<GameManager>
     public float f_crowdDistance;
     public float f_crowdArea;
 
+    [Header("===== Day =====")]
+    public int i_startDay;
+    [HideInInspector] public int i_currentDay;
+
     public FrameStop framestop;
 
     private void Awake()
     {
         s_gameState = GetComponent<GameState>();
         f_coin = f_startCoin;
+        i_currentDay = i_startDay;
+    }
+
+    public void MovePlayerToSpawnPoint()
+    {
+        PlayerManager.Instance.transform.position = t_spawnPos.position;
     }
 
     public void AddCoin(float amount)
     {
-        uiAnimCon.AddCashAnim();
+        UIManager.Instance.uiAnimCon.AddCashAnim();
 
         if (amount < 0) return;
 
@@ -50,9 +59,23 @@ public class GameManager : Auto_Singleton<GameManager>
 
     public void RemoveCoin(float amount)
     {
-        uiAnimCon.RemoveCashAnim();
+        UIManager.Instance.uiAnimCon.RemoveCashAnim();
         f_coin -= amount;
     }
+
+    public void AddPocketMoney(float amount)
+    {
+        UIManager.Instance.uiAnimPocket.AddCashAnim();
+        if (amount < 0) return;
+        f_pocketMoney += amount;
+    }
+
+    public void RemovePocketMoney(float amount)
+    {
+        UIManager.Instance.uiAnimPocket.RemoveCashAnim();
+        f_pocketMoney -= amount;
+    }
+
 
     public void EnableCrowd(Vector3 worldPos)
     {

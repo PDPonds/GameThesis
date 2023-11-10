@@ -134,6 +134,13 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
                 f_currentRegenTime = f_regenTime;
             }
             PlayerAnimation.Instance.animator.SetBool("isFight", false);
+
+            if (i_currentHP == i_maxHP)
+            {
+                CameraTrigger camTrigger = Camera.main.GetComponent<CameraTrigger>();
+                camTrigger.ResetVignetteAndFocal();
+            }
+
         }
 
 
@@ -176,16 +183,25 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
         return false;
     }
 
+    public IEnumerator SkipDay()
+    {
+        a_fadeAnim.SetBool("blackSkip", true);
+        yield return new WaitForSeconds(1.5f);
+        GameManager.Instance.MovePlayerToSpawnPoint();
+        yield return new WaitForSeconds(1.5f);
+        a_fadeAnim.SetBool("blackSkip", false);
+    }
+
     IEnumerator DeadState()
     {
         b_isDead = true;
         b_canMove = false;
         a_cameraAnim.SetBool("dead", true);
-        a_fadeAnim.SetBool("black", true);
+        a_fadeAnim.SetBool("blackDead", true);
 
         yield return new WaitForSeconds(3f);
         a_cameraAnim.SetBool("dead", false);
-        a_fadeAnim.SetBool("black", false);
+        a_fadeAnim.SetBool("blackDead", false);
         yield return new WaitForSeconds(0.5f);
         CameraTrigger camTrigger = Camera.main.GetComponent<CameraTrigger>();
         camTrigger.Vignette_StepDown();

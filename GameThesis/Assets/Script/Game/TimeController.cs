@@ -31,9 +31,17 @@ public class TimeController : Auto_Singleton<TimeController>
         sunSetTime = TimeSpan.FromHours(sunSetHour);
     }
 
+    public void ResetTime()
+    {
+        d_currentTime = DateTime.Now.Date + TimeSpan.FromHours(f_startTime);
+    }
+
     void Update()
     {
-        d_currentTime = d_currentTime.AddSeconds(Time.deltaTime * f_timeMultiplier);
+        if (GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_openState)
+        {
+            d_currentTime = d_currentTime.AddSeconds(Time.deltaTime * f_timeMultiplier);
+        }
 
         RotateSun();
     }
@@ -67,7 +75,7 @@ public class TimeController : Auto_Singleton<TimeController>
     private TimeSpan CalTimeDiff(TimeSpan fromTime, TimeSpan toTime)
     {
         TimeSpan diff = toTime - fromTime;
-        if(diff.TotalSeconds < 0)
+        if (diff.TotalSeconds < 0)
         {
             diff += TimeSpan.FromHours(24);
         }

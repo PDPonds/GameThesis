@@ -58,7 +58,7 @@ public class UpgradTable : MonoBehaviour, IInteracable
 
             GameState state = GameManager.Instance.s_gameState;
 
-            if (state.s_currentState == state.s_closeState)
+            if (state.s_currentState == state.s_beforeOpenState)
             {
                 Collider[] taCol = tableObj.g_table.GetComponents<Collider>();
                 foreach (Collider col in taCol)
@@ -121,7 +121,7 @@ public class UpgradTable : MonoBehaviour, IInteracable
 
     public void BuyTable()
     {
-        if (GameManager.Instance.f_coin >= f_costToBuy &&
+        if (GameManager.Instance.f_pocketMoney >= f_costToBuy &&
             RestaurantManager.Instance.i_rating >= RestaurantManager.Instance.ReqRateToBuyTable()
             && !b_readyToUse)
         {

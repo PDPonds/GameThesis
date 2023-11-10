@@ -13,10 +13,32 @@ public class Pause : MonoBehaviour
             PauseGame();
         }
 
-        if(isPause)
+        if (isPause)
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+
+
+
+        if (GameManager.Instance.s_gameState.s_currentState ==
+            GameManager.Instance.s_gameState.s_afterOpenState)
+        {
+            if (RestaurantManager.Instance.RestaurantIsEmpty())
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
         }
         else
         {

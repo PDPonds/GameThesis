@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CloseStoreState : BaseState
+public class AffterOpenStoreState : BaseState
 {
     public override void EnterState(StateManager state)
     {
