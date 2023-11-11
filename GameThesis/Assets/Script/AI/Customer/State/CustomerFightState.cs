@@ -84,6 +84,8 @@ public class CustomerFightState : BaseState
                     cus.anim.SetBool("walk", false);
                     cus.anim.SetBool("run", false);
                     cus.anim.SetBool("sit", false);
+                    cus.anim.SetBool("eat", false);
+                    cus.anim.SetBool("checkbill", false);
                     f_currentPlayerEscapeTime = cus.f_playerEscapeTime;
 
                     
@@ -103,6 +105,8 @@ public class CustomerFightState : BaseState
                     cus.anim.SetBool("walk", false);
                     cus.anim.SetBool("run", true);
                     cus.anim.SetBool("sit", false);
+                    cus.anim.SetBool("eat", false);
+                    cus.anim.SetBool("checkbill", false);
                 }
 
                 cus.agent.SetDestination(fightPos);
@@ -143,6 +147,8 @@ public class CustomerFightState : BaseState
                     cus.anim.SetBool("walk", false);
                     cus.anim.SetBool("run", false);
                     cus.anim.SetBool("sit", false);
+                    cus.anim.SetBool("eat", false);
+                    cus.anim.SetBool("checkbill", false);
                     cus.agent.SetDestination(waitPos);
                     f_currentPlayerEscapeTime = cus.f_playerEscapeTime;
 
@@ -162,6 +168,8 @@ public class CustomerFightState : BaseState
                     cus.anim.SetBool("walk", false);
                     cus.anim.SetBool("run", true);
                     cus.anim.SetBool("sit", false);
+                    cus.anim.SetBool("eat", false);
+                    cus.anim.SetBool("checkbill", false);
                     cus.agent.SetDestination(waitPos);
                 }
             }

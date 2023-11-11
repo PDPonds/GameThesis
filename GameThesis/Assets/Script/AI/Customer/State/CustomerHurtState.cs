@@ -36,6 +36,8 @@ public class CustomerHurtState : BaseState
         cus.anim.SetBool("fightState", false);
         cus.anim.SetBool("sit", false);
         cus.anim.SetBool("drunk", false);
+        cus.anim.SetBool("eat", false);
+        cus.anim.SetBool("checkbill", false);
 
         cus.RagdollOff();
 

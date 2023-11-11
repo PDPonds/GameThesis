@@ -31,6 +31,7 @@ public class CustomerGoToCounterState : BaseState
         cus.anim.SetBool("fightState", false);
         cus.anim.SetBool("sit", false);
         cus.anim.SetBool("drunk", false);
+        cus.anim.SetBool("eat", false);
         cus.anim.SetBool("walk", true);
         cus.agent.SetDestination(GameManager.Instance.t_counterPos.position);
         cus.agent.speed = cus.f_walkSpeed;

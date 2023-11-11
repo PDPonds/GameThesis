@@ -125,8 +125,8 @@ public class UIManager : Auto_Singleton<UIManager>
     {
         text_day.text = $"Day : {GameManager.Instance.i_currentDay}";
 
-        text_Cash.text = $"{GameManager.Instance.f_coin.ToString("C2")}$";
-        text_pocketCash.text = $"{GameManager.Instance.f_pocketMoney.ToString("C2")}$";
+        text_Cash.text = $"{GameManager.Instance.f_coin.ToString("C2")}";
+        text_pocketCash.text = $"{GameManager.Instance.f_pocketMoney.ToString("C2")}";
 
         text_time.text = TimeController.Instance.d_currentTime.ToString("HH:mm");
 
@@ -326,7 +326,6 @@ public class UIManager : Auto_Singleton<UIManager>
         if (GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_beforeOpenState)
         {
             g_open.SetActive(true);
-            g_close.SetActive(false);
             g_managementBoard.SetActive(true);
 
             SpawnManagementBoardWaypoint();
@@ -339,20 +338,20 @@ public class UIManager : Auto_Singleton<UIManager>
         else if (GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_afterOpenState)
         {
             g_open.SetActive(false);
-            g_close.SetActive(true);
+            g_close.SetActive(false);
             g_managementBoard.SetActive(false);
 
             text_waiterCount.text = $"{RestaurantManager.Instance.i_currentWaiterCount} ea";
             text_cookerCount.text = $"{RestaurantManager.Instance.i_currentCookerCount} ea";
-            text_daliyIncomeCost.text = $"{GameManager.Instance.f_coin.ToString("C2")} $";
+            text_daliyIncomeCost.text = $"{GameManager.Instance.f_coin.ToString("C2")} ";
             float cookerCost = RestaurantManager.Instance.i_currentCookerCount * RestaurantManager.Instance.f_cookerCost;
             float waiterCost = RestaurantManager.Instance.i_currentWaiterCount * RestaurantManager.Instance.f_waiterCost;
             float totalEmpCost = cookerCost + waiterCost;
-            text_totalEmpCost.text = $"{totalEmpCost.ToString("C2")} $";
+            text_totalEmpCost.text = $"{totalEmpCost.ToString("C2")} ";
             float profit = GameManager.Instance.f_coin - totalEmpCost;
-            text_profitCost.text = $"{profit.ToString("C2")} $";
-            text_waiterCost.text = $"{waiterCost.ToString("C2")} $";
-            text_cookerCost.text = $"{cookerCost.ToString("C2")} $";
+            text_profitCost.text = $"{profit.ToString("C2")} ";
+            text_waiterCost.text = $"{waiterCost.ToString("C2")} ";
+            text_cookerCost.text = $"{cookerCost.ToString("C2")} ";
 
             if (RestaurantManager.Instance.RestaurantIsEmpty())
             {
@@ -360,6 +359,11 @@ public class UIManager : Auto_Singleton<UIManager>
                 //g_managementBoardWaypoint.SetActive(false);
                 SpawnOpenCloseWaypoint();
                 DestroyManagementBoardWaypoint();
+                g_close.SetActive(true);
+            }
+            else
+            {
+                g_close.SetActive(false);
             }
         }
         else

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.Burst.CompilerServices;
 using Unity.VisualScripting;
+using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -15,16 +16,19 @@ public class CustomerClothes
     public int shirt;
     public int pant;
     public int hat;
+    public int asset;
 }
 
 public class CustomerStateManager : StateManager, IDamageable, IInteracable
 {
     public CustomerClothes CustomerClothes;
 
+    public bool b_isFemale;
     public List<GameObject> hairs = new List<GameObject>();
     public List<GameObject> shirts = new List<GameObject>();
     public List<GameObject> pants = new List<GameObject>();
     public List<GameObject> hats = new List<GameObject>();
+    public List<GameObject> assets = new List<GameObject>();
 
     public override BaseState s_currentState { get; set; }
 
@@ -155,6 +159,7 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     SkinnedMeshRenderer shirtrnd;
     SkinnedMeshRenderer pantrnd;
     SkinnedMeshRenderer hatrnd;
+    SkinnedMeshRenderer assetsrnd;
 
     MaterialPropertyBlock mpb;
     public MaterialPropertyBlock Mpb
@@ -181,8 +186,20 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
         if (CustomerClothes.hair >= 0) hairrnd = hairs[CustomerClothes.hair].GetComponent<SkinnedMeshRenderer>();
         shirtrnd = shirts[CustomerClothes.shirt].GetComponent<SkinnedMeshRenderer>();
         pantrnd = pants[CustomerClothes.pant].GetComponent<SkinnedMeshRenderer>();
-        if (CustomerClothes.hat >= 0) hatrnd = hats[CustomerClothes.hat].GetComponent<SkinnedMeshRenderer>();
-
+        if (CustomerClothes.hat >= 0)
+        {
+            if (hats.Count > 0)
+            {
+                hatrnd = hats[CustomerClothes.hat].GetComponent<SkinnedMeshRenderer>();
+            }
+        }
+        if (CustomerClothes.asset >= 0)
+        {
+            if (assets.Count > 0)
+            {
+                assetsrnd = assets[CustomerClothes.asset].GetComponent<SkinnedMeshRenderer>();
+            }
+        }
         Mpb.SetColor("_Color", color);
         Mpb.SetFloat("_Scale", scale);
 
@@ -191,29 +208,70 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
         if (shirtrnd != null) shirtrnd.SetPropertyBlock(mpb);
         if (pantrnd != null) pantrnd.SetPropertyBlock(mpb);
         if (hatrnd != null) hatrnd.SetPropertyBlock(mpb);
+        if (assetsrnd != null) assetsrnd.SetPropertyBlock(mpb);
     }
 
     public CustomerClothes GenerateClothes()
     {
         CustomerClothes clothes = new CustomerClothes();
-        int hair = UnityEngine.Random.Range(-1, hairs.Count);
-        int shirt = UnityEngine.Random.Range(0, shirts.Count);
-        int pant = UnityEngine.Random.Range(0, pants.Count); ;
-        int hat = UnityEngine.Random.Range(-1, hats.Count);
-        clothes.hair = hair;
-        clothes.shirt = shirt;
-        clothes.pant = pant;
-        clothes.hat = hat;
+
+        if (hairs.Count > 0)
+        {
+            if (b_isFemale)
+            {
+                int Fhair = UnityEngine.Random.Range(0, hairs.Count);
+                clothes.hair = Fhair;
+            }
+            else
+            {
+                int Bhair = UnityEngine.Random.Range(-1, hairs.Count);
+                clothes.hair = Bhair;
+            }
+        }
+        else clothes.hair = -1;
+
+        if (shirts.Count > 0)
+        {
+            int shirt = UnityEngine.Random.Range(0, shirts.Count);
+            clothes.shirt = shirt;
+
+        }
+        else clothes.shirt = -1;
+
+        if (pants.Count > 0)
+        {
+            int pant = UnityEngine.Random.Range(0, pants.Count); ;
+            clothes.pant = pant;
+
+        }
+        else clothes.pant = -1;
+
+        if (hats.Count > 0)
+        {
+            int hat = UnityEngine.Random.Range(-1, hats.Count);
+            clothes.hat = hat;
+        }
+        else clothes.hat = -1;
+
+        if (assets.Count > 0)
+        {
+            int asset = UnityEngine.Random.Range(-1, assets.Count);
+            clothes.asset = asset;
+
+        }
+        else clothes.asset = -1;
+
         return clothes;
     }
 
-    public CustomerClothes SetUpClothes(int hair, int shirt, int pant, int hat)
+    public CustomerClothes SetUpClothes(int hair, int shirt, int pant, int hat, int asset)
     {
         CustomerClothes clothes = new CustomerClothes();
         clothes.hair = hair;
         clothes.shirt = shirt;
         clothes.pant = pant;
         clothes.hat = hat;
+        clothes.asset = asset;
         return clothes;
     }
 
@@ -268,6 +326,13 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
         {
             if (i != CustomerClothes.pant) hats[i].SetActive(false);
             else hats[i].SetActive(true);
+        }
+
+        for (int i = 0; i < assets.Count; i++)
+        {
+            if (i != CustomerClothes.asset) assets[i].SetActive(false);
+            else assets[i].SetActive(true);
+
         }
 
         if (b_protectStun)

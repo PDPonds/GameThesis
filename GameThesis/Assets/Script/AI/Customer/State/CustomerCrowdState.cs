@@ -29,6 +29,9 @@ public class CustomerCrowdState : BaseState
         cus.anim.SetBool("sit", false);
         cus.anim.SetBool("drunk", false);
         cus.anim.SetBool("cheer", false);
+        cus.anim.SetBool("eat", false);
+        cus.anim.SetBool("checkbill", false);
+
 
         if (Vector3.Distance(cus.transform.position,
             cus.v_crowdPos) <= 1f)

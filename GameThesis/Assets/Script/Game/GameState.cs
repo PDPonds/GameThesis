@@ -65,7 +65,7 @@ public class GameState : StateManager
 
         cus.name = "Gang";
         CustomerStateManager state = cus.GetComponent<CustomerStateManager>();
-        state.SetUpClothes(closth.hair, closth.shirt, closth.pant, closth.hat);
+        state.SetUpClothes(closth.hair, closth.shirt, closth.pant, closth.hat, closth.asset);
 
         state.b_isGang = true;
         state.SwitchState(state.s_fightState);

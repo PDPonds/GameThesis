@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 915923222068091617}
   serializedVersion: 2
   m_LocalRotation: {x: -0.00000008429357, y: 0.00000004214685, z: 1, w: 0.0000028610223}
-  m_LocalPosition: {x: 0, y: -0, z: 0.16}
+  m_LocalPosition: {x: 0, y: 0, z: 0.002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -56,7 +56,7 @@ Transform:
   m_GameObject: {fileID: 1797399882280387846}
   serializedVersion: 2
   m_LocalRotation: {x: -0.000000033417784, y: 0.00000012282496, z: 0.7071059, w: 0.7071078}
-  m_LocalPosition: {x: -0, y: -0, z: 0.16}
+  m_LocalPosition: {x: 0, y: 0, z: 0.002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -87,7 +87,7 @@ Transform:
   m_GameObject: {fileID: 5987285647764843778}
   serializedVersion: 2
   m_LocalRotation: {x: -0.00000012282511, y: -0.00000003341737, z: 0.70710987, w: -0.7071038}
-  m_LocalPosition: {x: 0, y: 0, z: 0.16}
+  m_LocalPosition: {x: 0, y: 0, z: 0.002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -118,7 +118,7 @@ Transform:
   m_GameObject: {fileID: 7060009396663476342}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0.16}
+  m_LocalPosition: {x: 0, y: 0, z: 0.002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -591,8 +591,10 @@ MonoBehaviour:
   b_isEmpty: 0
   f_cdForNextCustomer: 0
   b_readyForNextCustomer: 0
+  b_finishCooking: 0
   s_currentCustomer: {fileID: 0}
-  s_currentEmployee: {fileID: 0}
+  s_currentServerEmployee: {fileID: 0}
+  s_currentCookingEmployee: {fileID: 0}
   b_canUse: 0
   g_foodPlate: {fileID: 8340261457542345253}
   g_stew: {fileID: 541355526357613951}
@@ -638,8 +640,10 @@ MonoBehaviour:
   b_isEmpty: 0
   f_cdForNextCustomer: 0
   b_readyForNextCustomer: 0
+  b_finishCooking: 0
   s_currentCustomer: {fileID: 0}
-  s_currentEmployee: {fileID: 0}
+  s_currentServerEmployee: {fileID: 0}
+  s_currentCookingEmployee: {fileID: 0}
   b_canUse: 0
   g_foodPlate: {fileID: 8083047426932867704}
   g_stew: {fileID: 293025002158296354}
@@ -743,8 +747,10 @@ MonoBehaviour:
   b_isEmpty: 0
   f_cdForNextCustomer: 0
   b_readyForNextCustomer: 0
+  b_finishCooking: 0
   s_currentCustomer: {fileID: 0}
-  s_currentEmployee: {fileID: 0}
+  s_currentServerEmployee: {fileID: 0}
+  s_currentCookingEmployee: {fileID: 0}
   b_canUse: 0
   g_foodPlate: {fileID: 5932030308941112189}
   g_stew: {fileID: 2769439183948033063}
@@ -790,8 +796,10 @@ MonoBehaviour:
   b_isEmpty: 0
   f_cdForNextCustomer: 0
   b_readyForNextCustomer: 0
+  b_finishCooking: 0
   s_currentCustomer: {fileID: 0}
-  s_currentEmployee: {fileID: 0}
+  s_currentServerEmployee: {fileID: 0}
+  s_currentCookingEmployee: {fileID: 0}
   b_canUse: 0
   g_foodPlate: {fileID: 6484948496769399311}
   g_stew: {fileID: 3297446557198628181}

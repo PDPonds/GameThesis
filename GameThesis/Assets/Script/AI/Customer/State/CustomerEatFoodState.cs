@@ -41,8 +41,9 @@ public class CustomerEatFoodState : BaseState
                 cus.anim.SetBool("walk", false);
                 cus.anim.SetBool("sit", true);
                 cus.anim.SetBool("drunk", false);
+                cus.anim.SetBool("eat", true);
                 cus.agent.velocity = Vector3.zero;
-                Vector3 chairPos = new Vector3(chair.t_sitPos.position.x, chair.t_sitPos.position.y - 0.4f, chair.t_sitPos.position.z);
+                Vector3 chairPos = new Vector3(chair.t_sitPos.position.x, chair.t_sitPos.position.y, chair.t_sitPos.position.z);
                 cus.transform.position = chairPos;
                 cus.transform.rotation = Quaternion.Euler(0, chair.transform.localEulerAngles.z + 90f, 0);
             }
