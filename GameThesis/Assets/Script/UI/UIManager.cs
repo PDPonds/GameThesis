@@ -326,6 +326,7 @@ public class UIManager : Auto_Singleton<UIManager>
         if (GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_beforeOpenState)
         {
             g_open.SetActive(true);
+            g_close.SetActive(false);
             g_managementBoard.SetActive(true);
 
             SpawnManagementBoardWaypoint();
