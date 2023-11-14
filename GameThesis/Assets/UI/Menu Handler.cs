@@ -11,7 +11,28 @@ public class MenuHandler : MonoBehaviour
 
     void Start()
     {
+        ActivateDishMenu(0);
+        ActivateDrinksMenu(0);
+
         MenuBoardUpdate();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            ActivateDishMenu(1);
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            ActivateDishMenu(2);
+        }
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            ActivateDrinksMenu(1);
+        }
     }
 
     public int RandomDish()
@@ -23,7 +44,7 @@ public class MenuHandler : MonoBehaviour
             {
                 return index;
             }
-        }        
+        }
     }
 
     public int RandomDrink()
@@ -40,7 +61,7 @@ public class MenuHandler : MonoBehaviour
 
     public void MenuBoardUpdate()
     {
-        for(int i = 0; i < mainDish_Status.Count; i++)
+        for (int i = 0; i < mainDish_Status.Count; i++)
         {
             if (mainDish_Status[i].status == true)
             {
@@ -49,8 +70,8 @@ public class MenuHandler : MonoBehaviour
             else { mainDish_Status[i].menuGameobject.SetActive(false); }
         }
 
-        for (int i = 0;i < drinks_Status.Count;i++)
-        { 
+        for (int i = 0; i < drinks_Status.Count; i++)
+        {
             if (drinks_Status[i].status == true)
             {
                 drinks_Status[i].menuGameobject.SetActive(true);
@@ -59,16 +80,24 @@ public class MenuHandler : MonoBehaviour
         }
     }
 
-    public void ActivateDishMenu(int go)
+    public void ActivateDishMenu(int menuIndex)
     {
-        mainDish_Status[go].menuGameobject.SetActive(true);
-        MenuBoardUpdate();
+        if (mainDish_Status[menuIndex].status == false)
+        {
+            mainDish_Status[menuIndex].status = true;
+            MenuBoardUpdate();
+        }
+
     }
 
-    public void ActivateDrinksMenu(int go)
+    public void ActivateDrinksMenu(int menuIndex)
     {
-        drinks_Status[go].menuGameobject.SetActive(true);
-        MenuBoardUpdate();
+        if(drinks_Status[menuIndex].status == false)
+        {
+            drinks_Status[menuIndex].status = true;
+            MenuBoardUpdate();
+        }
+        
     }
 }
 
@@ -76,5 +105,6 @@ public class MenuHandler : MonoBehaviour
 public class MenuStatus
 {
     public GameObject menuGameobject;
+    public float cost;
     public bool status;
 }

@@ -49,6 +49,9 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
     public List<Transform> allCookingPos = new List<Transform>();
 
 
+    [Header("- Menu")]
+    public MenuHandler menuHandler;
+
     public void AddCurrentCookingCount()
     {
         if (GameManager.Instance.s_gameState.s_currentState ==

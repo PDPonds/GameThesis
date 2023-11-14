@@ -189,7 +189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   b_readyToUse: 0
-  f_costToBuy: 100
+  f_costToBuy: 250
   tableObj: {fileID: 0}
   m_waitForBuy: {fileID: 2100000, guid: beb3f41c4fe8b9c48a9b303ee16936a8, type: 2}
   m_readyToUse: {fileID: 2100000, guid: f3e66dd9cd9f9ae48aeea23d5465a9c0, type: 2}

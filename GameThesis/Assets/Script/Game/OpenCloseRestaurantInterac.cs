@@ -27,6 +27,7 @@ public class OpenCloseRestaurantInterac : MonoBehaviour, IInteracable
         {
             forntDoor.b_isLock = false;
             RestaurantManager.Instance.SpawnEmp();
+            SoundManager.Instance.PlayOpenRestaurantSound();
             state.SwitchState(state.s_openState);
         }
         else if (state.s_currentState == state.s_afterOpenState)
@@ -34,6 +35,7 @@ public class OpenCloseRestaurantInterac : MonoBehaviour, IInteracable
             if (RestaurantManager.Instance.RestaurantIsEmpty())
             {
                 forntDoor.b_isLock = true;
+                SoundManager.Instance.PlayCloseRestaurantSound();
                 RestaurantManager.Instance.CloseRestaurant();
             }
         }
@@ -54,5 +56,10 @@ public class OpenCloseRestaurantInterac : MonoBehaviour, IInteracable
             }
         }
         return text;
+    }
+
+    public Color InteractionTextColor()
+    {
+        return Color.white;
     }
 }

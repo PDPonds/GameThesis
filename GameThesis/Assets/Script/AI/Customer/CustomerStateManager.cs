@@ -84,13 +84,18 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
 
     [Header("===== WalkAround =====")]
     public float f_findNextPositionTime;
-    public Vector3 v_walkPos;
+    [HideInInspector] public Vector3 v_walkPos;
     [Space(10f)]
 
     [Header("===== Order Food =====")]
     public float f_orderTime;
     [HideInInspector] public float f_currentOrderTime;
     [HideInInspector] public ChairObj c_chairObj;
+
+    [HideInInspector] public float f_giveCoin;
+    [HideInInspector] public int i_dish;
+    [HideInInspector] public int i_drink;
+
     [Space(10f)]
 
     [Header("===== Eat Food =====")]
@@ -105,8 +110,7 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
 
     [Header("===== Pay =====")]
     public float f_payTime;
-    [HideInInspector] public float f_giveCoin;
-    public Vector2 v_minmaxGiveCoin;
+    public Vector2 v_minmaxTipsCoin;
     [Space(10f)]
 
     [Header("===== Run Escape =====")]
@@ -293,7 +297,9 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
         }
 
         i_currentHP = i_maxHP;
-        f_giveCoin = UnityEngine.Random.Range(v_minmaxGiveCoin.x, v_minmaxGiveCoin.y);
+
+
+        //f_giveCoin = UnityEngine.Random.Range(v_minmaxGiveCoin.x, v_minmaxGiveCoin.y);
 
     }
 
@@ -467,4 +473,8 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
         Destroy(gameObject);
     }
 
+    public Color InteractionTextColor()
+    {
+        return Color.white;
+    }
 }

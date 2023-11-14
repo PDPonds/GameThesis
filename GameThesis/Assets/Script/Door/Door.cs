@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Door : MonoBehaviour
@@ -7,24 +8,26 @@ public class Door : MonoBehaviour
     public Transform t_doorMesh;
     Animator anim;
 
-    public bool b_isOpen;
+    [HideInInspector] public bool b_isOpen;
+    [HideInInspector] public bool b_isLock;
 
     public bool b_isForntDoor;
 
-    public bool b_isLock;
-
+    public AudioClip openDoorSound;
+    AudioSource openDoorSoundSource;
 
     private void Awake()
     {
         if (b_isForntDoor) b_isLock = true;
         anim = t_doorMesh.GetComponent<Animator>();
+
+        openDoorSoundSource = InitializedAudioSource(false, false);
+
     }
     private void Update()
     {
         anim.SetBool("isOpen", b_isOpen);
     }
-
-
 
     private void OnTriggerStay(Collider other)
     {
@@ -54,5 +57,24 @@ public class Door : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         b_isOpen = false;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!b_isOpen && !b_isLock)
+        {
+            openDoorSoundSource.PlayOneShot(openDoorSound);
+        }
+    }
+
+    AudioSource InitializedAudioSource(bool loop, bool threeDsound)
+    {
+        AudioSource newSource = transform.AddComponent<AudioSource>();
+
+        if (threeDsound) newSource.dopplerLevel = 1;
+        else newSource.dopplerLevel = 0;
+
+        newSource.loop = loop;
+        return newSource;
     }
 }

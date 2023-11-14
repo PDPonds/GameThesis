@@ -14,7 +14,7 @@ public class CustomerEatFoodState : BaseState
         f_currentEatTime = f_eatTime;
 
         Color noColor = new Color(0, 0, 0, 0);
-        cus.ApplyOutlineColor(noColor,0f);
+        cus.ApplyOutlineColor(noColor, 0f);
 
         cus.g_stunVFX.SetActive(false);
         cus.g_sleepVFX.SetActive(false);
@@ -23,7 +23,7 @@ public class CustomerEatFoodState : BaseState
         {
             cus.c_chairObj.EnableAllFood();
         }
-       
+
 
     }
 
@@ -54,13 +54,32 @@ public class CustomerEatFoodState : BaseState
         f_currentEatTime -= Time.deltaTime;
         if (f_currentEatTime <= 0)
         {
-            float drunkRan = Random.Range(0f, 100f);
-
-            RestaurantManager.Instance.AddRating();
-
-            if (drunkRan <= cus.f_drunkPercent)
+            if(cus.i_drink == 1)
             {
-                cus.SwitchState(cus.s_drunkState);
+                float drunkRan = Random.Range(0f, 100f);
+
+                RestaurantManager.Instance.AddRating();
+
+                if (drunkRan <= cus.f_drunkPercent)
+                {
+                    cus.SwitchState(cus.s_drunkState);
+                }
+                else
+                {
+                    float ran = Random.Range(0, 100f);
+
+                    if (ran <= cus.f_randomEventPercent)
+                    {
+                        cus.c_chairObj.b_isEmpty = true;
+                        cus.SwitchState(cus.s_escapeState);
+                    }
+                    else
+                    {
+                        cus.c_chairObj.b_isEmpty = true;
+                        cus.SwitchState(cus.s_goToCounterState);
+                    }
+                }
+
             }
             else
             {

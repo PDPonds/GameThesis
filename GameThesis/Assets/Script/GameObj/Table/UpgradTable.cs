@@ -141,10 +141,23 @@ public class UpgradTable : MonoBehaviour, IInteracable
         string text = string.Empty;
         if (!b_readyToUse)
         {
-            text = $"[E] Use {f_costToBuy}$ And{Environment.NewLine} " +
+            text = $"[E] Use {f_costToBuy.ToString("C2")} And{Environment.NewLine} " +
                 $"Atleast {RestaurantManager.Instance.ReqRateToBuyTable()} Rating to Unlock Table.";
         }
         return text;
+    }
+
+    public Color InteractionTextColor()
+    {
+        Color color = Color.white;
+        if (!b_readyToUse)
+        {
+            if (GameManager.Instance.f_pocketMoney < f_costToBuy)
+            {
+                color = Color.gray;
+            }
+        }
+        return color;
     }
 
 }

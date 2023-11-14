@@ -21,6 +21,19 @@ public class CustomerWaitFoodState : BaseState
         cus.g_sleepVFX.SetActive(false);
         cus.g_stunVFX.SetActive(false);
 
+        //cus.f_giveCoin 
+        cus.i_dish = RestaurantManager.Instance.menuHandler.RandomDish();
+        cus.i_drink = RestaurantManager.Instance.menuHandler.RandomDrink();
+
+        float f_dishCost = RestaurantManager.Instance.menuHandler.mainDish_Status[cus.i_dish].cost;
+        float f_drinkCost = RestaurantManager.Instance.menuHandler.drinks_Status[cus.i_drink].cost;
+
+        float cost = f_dishCost + f_drinkCost;
+
+        float tips = Random.Range(cus.v_minmaxTipsCoin.x, cus.v_minmaxTipsCoin.y);
+
+        cus.f_giveCoin = cost + tips;
+
     }
 
     public override void UpdateState(StateManager ai)

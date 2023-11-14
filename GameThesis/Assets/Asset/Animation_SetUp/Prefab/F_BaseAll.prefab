@@ -1072,13 +1072,15 @@ MonoBehaviour:
   f_orderTime: 60
   f_currentOrderTime: 0
   c_chairObj: {fileID: 0}
+  f_giveCoin: 0
+  i_dish: 0
+  i_drink: 0
   v_minAndMaxEatFood: {x: 20, y: 30}
   f_randomEventPercent: 10
   b_escape: 0
   f_fightBackPercent: 10
   f_payTime: 25
-  f_giveCoin: 0
-  v_minmaxGiveCoin: {x: 10, y: 13}
+  v_minmaxTipsCoin: {x: 0, y: 5}
   f_runTime: 10
   f_runSpeed: 3
   f_walkSpeed: 2

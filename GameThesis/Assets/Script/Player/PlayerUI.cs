@@ -32,6 +32,7 @@ public class PlayerUI : Auto_Singleton<PlayerUI>
                     if (interactive != null)
                     {
                         text_interactText.text = interactive.InteractionText();
+                        text_interactText.color = interactive.InteractionTextColor();
                         CustomerStateManager cus = PlayerManager.Instance.g_interactiveObj.GetComponentInParent<CustomerStateManager>();
                         if (cus != null)
                         {
@@ -63,6 +64,7 @@ public class PlayerUI : Auto_Singleton<PlayerUI>
                     if (interactive != null)
                     {
                         text_interactText.text = interactive.InteractionText();
+                        text_interactText.color = interactive.InteractionTextColor();
                     }
                     else text_interactText.text = string.Empty;
                 }
