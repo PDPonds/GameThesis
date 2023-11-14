@@ -54,11 +54,10 @@ public class CustomerEatFoodState : BaseState
         f_currentEatTime -= Time.deltaTime;
         if (f_currentEatTime <= 0)
         {
-            if(cus.i_drink == 1)
+            RestaurantManager.Instance.AddRating();
+            if (cus.i_drink == 1)
             {
                 float drunkRan = Random.Range(0f, 100f);
-
-                RestaurantManager.Instance.AddRating();
 
                 if (drunkRan <= cus.f_drunkPercent)
                 {

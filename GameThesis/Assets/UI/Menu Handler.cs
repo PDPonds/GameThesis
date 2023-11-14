@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 
@@ -13,25 +14,58 @@ public class MenuHandler : MonoBehaviour
     {
         ActivateDishMenu(0);
         ActivateDrinksMenu(0);
-
-        MenuBoardUpdate();
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        GameState state = GameManager.Instance.s_gameState;
+        if (state.s_currentState == state.s_beforeOpenState)
         {
-            ActivateDishMenu(1);
+            for (int i = 0; i < mainDish_Status.Count; i++)
+            {
+                if (!mainDish_Status[i].menuGameobject.activeSelf)
+                {
+                    mainDish_Status[i].menuGameobject.SetActive(true);
+                }
+            }
+            for (int i = 0; i < drinks_Status.Count; i++)
+            {
+                if (!drinks_Status[i].menuGameobject.activeSelf)
+                {
+                    drinks_Status[i].menuGameobject.SetActive(true);
+                }
+            }
         }
-
-        if (Input.GetKeyDown(KeyCode.R))
+        else
         {
-            ActivateDishMenu(2);
-        }
+            for (int i = 0; i < mainDish_Status.Count; i++)
+            {
+                if (mainDish_Status[i].status == true)
+                {
+                    if (!mainDish_Status[i].menuGameobject.activeSelf)
+                        mainDish_Status[i].menuGameobject.SetActive(true);
 
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            ActivateDrinksMenu(1);
+                }
+                else
+                {
+                    if (mainDish_Status[i].menuGameobject.activeSelf)
+                        mainDish_Status[i].menuGameobject.SetActive(false);
+                }
+            }
+
+            for (int i = 0; i < drinks_Status.Count; i++)
+            {
+                if (drinks_Status[i].status == true)
+                {
+                    if (!drinks_Status[i].menuGameobject.activeSelf)
+                        drinks_Status[i].menuGameobject.SetActive(true);
+                }
+                else
+                {
+                    if (drinks_Status[i].menuGameobject.activeSelf)
+                        drinks_Status[i].menuGameobject.SetActive(false);
+                }
+            }
         }
     }
 
@@ -59,46 +93,24 @@ public class MenuHandler : MonoBehaviour
         }
     }
 
-    public void MenuBoardUpdate()
-    {
-        for (int i = 0; i < mainDish_Status.Count; i++)
-        {
-            if (mainDish_Status[i].status == true)
-            {
-                mainDish_Status[i].menuGameobject.SetActive(true);
-            }
-            else { mainDish_Status[i].menuGameobject.SetActive(false); }
-        }
-
-        for (int i = 0; i < drinks_Status.Count; i++)
-        {
-            if (drinks_Status[i].status == true)
-            {
-                drinks_Status[i].menuGameobject.SetActive(true);
-            }
-            else { drinks_Status[i].menuGameobject.SetActive(false); }
-        }
-    }
-
     public void ActivateDishMenu(int menuIndex)
     {
         if (mainDish_Status[menuIndex].status == false)
         {
             mainDish_Status[menuIndex].status = true;
-            MenuBoardUpdate();
         }
 
     }
 
     public void ActivateDrinksMenu(int menuIndex)
     {
-        if(drinks_Status[menuIndex].status == false)
+        if (drinks_Status[menuIndex].status == false)
         {
             drinks_Status[menuIndex].status = true;
-            MenuBoardUpdate();
         }
-        
+
     }
+
 }
 
 [Serializable]
