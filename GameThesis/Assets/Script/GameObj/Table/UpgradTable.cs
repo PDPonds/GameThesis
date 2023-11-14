@@ -125,6 +125,7 @@ public class UpgradTable : MonoBehaviour, IInteracable
             RestaurantManager.Instance.i_rating >= RestaurantManager.Instance.ReqRateToBuyTable()
             && !b_readyToUse)
         {
+            SoundManager.Instance.PlayUpgradeSound();
             GameManager.Instance.RemoveCoin(f_costToBuy);
             SetUpUseAble();
             b_readyToUse = true;

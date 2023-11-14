@@ -87,6 +87,7 @@ public class EmployeeServeAndCookingState : BaseState
                     {
 
                         ChairObj chair = RestaurantManager.Instance.allChairs[chairIndex];
+                        CustomerStateManager cus = chair.s_currentCustomer;
 
                         if (!emp.b_hasFood)
                         {
@@ -109,6 +110,31 @@ public class EmployeeServeAndCookingState : BaseState
                                 emp.s_serveChair = null;
                                 chair.s_currentCustomer.SwitchState(chair.s_currentCustomer.s_eatFoodState);
                             }
+                        }
+
+                        if (emp.b_hasFood)
+                        {
+                            emp.anim.SetLayerWeight(1, 1);
+                            switch (cus.i_dish)
+                            {
+                                case 0:
+                                    emp.g_Bacon.SetActive(true);
+                                    break;
+                                case 1:
+                                    emp.g_Staw.SetActive(true);
+                                    break;
+                                case 2:
+                                    emp.g_Steak.SetActive(true);
+                                    break;
+                            }
+
+                        }
+                        else
+                        {
+                            emp.anim.SetLayerWeight(1, 0);
+                            emp.g_Steak.SetActive(false);
+                            emp.g_Bacon.SetActive(false);
+                            emp.g_Staw.SetActive(false);
                         }
 
                         emp.agent.speed = emp.f_walkSpeed;
@@ -137,18 +163,6 @@ public class EmployeeServeAndCookingState : BaseState
                         emp.b_hasFood = false;
                         emp.s_serveChair = null;
                     }
-
-                    if (emp.b_hasFood)
-                    {
-                        emp.anim.SetLayerWeight(1, 1);
-                        emp.g_FoodInHand.SetActive(true);
-                    }
-                    else
-                    {
-                        emp.anim.SetLayerWeight(1, 0);
-                        emp.g_FoodInHand.SetActive(false);
-                    }
-
                     emp.b_isWorking = true;
 
                     break;
@@ -231,6 +245,7 @@ public class EmployeeServeAndCookingState : BaseState
                             emp.anim.SetBool("run", false);
 
                             ChairObj chair = RestaurantManager.Instance.allChairs[chairIndex];
+                            CustomerStateManager cus = chair.s_currentCustomer;
 
                             if (!emp.b_hasFood)
                             {
@@ -255,6 +270,30 @@ public class EmployeeServeAndCookingState : BaseState
                                 }
                             }
 
+                            if (emp.b_hasFood)
+                            {
+                                emp.anim.SetLayerWeight(1, 1);
+                                switch(cus.i_dish)
+                                {
+                                    case 0:
+                                        emp.g_Bacon.SetActive(true);
+                                        break;
+                                    case 1:
+                                        emp.g_Staw.SetActive(true);
+                                        break;
+                                    case 2:
+                                        emp.g_Steak.SetActive(true);
+                                        break;
+                                }
+                                
+                            }
+                            else
+                            {
+                                emp.anim.SetLayerWeight(1, 0);
+                                emp.g_Steak.SetActive(false);
+                                emp.g_Bacon.SetActive(false);
+                                emp.g_Staw.SetActive(false);
+                            }
                         }
                         else
                         {
@@ -280,16 +319,7 @@ public class EmployeeServeAndCookingState : BaseState
                         }
                     }
 
-                    if (emp.b_hasFood)
-                    {
-                        emp.anim.SetLayerWeight(1, 1);
-                        emp.g_FoodInHand.SetActive(true);
-                    }
-                    else
-                    {
-                        emp.anim.SetLayerWeight(1, 0);
-                        emp.g_FoodInHand.SetActive(false);
-                    }
+                    
 
                     break;
 

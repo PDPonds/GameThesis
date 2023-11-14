@@ -144,6 +144,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 843411077778342794, guid: bb6920a9508f7d14b95e137da8049be5,
         type: 3}
+      propertyPath: m_Name
+      value: Steak
+      objectReference: {fileID: 0}
+    - target: {fileID: 843411077778342794, guid: bb6920a9508f7d14b95e137da8049be5,
+        type: 3}
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
@@ -467,7 +472,7 @@ MonoBehaviour:
   s_currentServerEmployee: {fileID: 0}
   s_currentCookingEmployee: {fileID: 0}
   b_canUse: 0
-  g_foodPlate: {fileID: 4320710711803156515}
+  g_steak: {fileID: 4320710711803156515}
   g_stew: {fileID: 5492409081334514354}
   g_beanAndBacon: {fileID: 2397676267491778499}
   g_beerGlass: {fileID: 7194361045454421395}
@@ -610,6 +615,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4575447166685991556, guid: 3b1f3eefa9d1d944195f3f370ac00371,
         type: 3}
+      propertyPath: m_Name
+      value: Steak
+      objectReference: {fileID: 0}
+    - target: {fileID: 4575447166685991556, guid: 3b1f3eefa9d1d944195f3f370ac00371,
+        type: 3}
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
@@ -711,7 +721,7 @@ MonoBehaviour:
   s_currentServerEmployee: {fileID: 0}
   s_currentCookingEmployee: {fileID: 0}
   b_canUse: 0
-  g_foodPlate: {fileID: 5073043185739375020}
+  g_steak: {fileID: 5073043185739375020}
   g_stew: {fileID: 3578631706844101437}
   g_beanAndBacon: {fileID: 6689938618423567948}
   g_beerGlass: {fileID: 2181623650711585820}

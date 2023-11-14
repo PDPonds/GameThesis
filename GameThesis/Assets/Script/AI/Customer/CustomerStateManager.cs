@@ -180,6 +180,10 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     public List<AnimatorOverrideController> allCheerAnim = new List<AnimatorOverrideController>();
     [HideInInspector] public Vector3 v_crowdPos;
 
+    [Header("===== Sound =====")]
+    public AudioClip sleepSound;
+    AudioSource sleepSource;
+
     public void ApplyOutlineColor(Color color, float scale)
     {
         meshrnd = t_mesh.GetComponent<SkinnedMeshRenderer>();
@@ -278,6 +282,8 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
 
     private void Awake()
     {
+        sleepSource = InitializedAudioSource(true, true);
+
         anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponentsInChildren<Rigidbody>();
@@ -297,9 +303,6 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
         }
 
         i_currentHP = i_maxHP;
-
-
-        //f_giveCoin = UnityEngine.Random.Range(v_minmaxGiveCoin.x, v_minmaxGiveCoin.y);
 
     }
 
@@ -347,6 +350,17 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
             }
         }
 
+        if (s_currentState == s_drunkState)
+        {
+            if (!sleepSource.isPlaying)
+            {
+                sleepSource.Play();
+            }
+        }
+        else
+        {
+            sleepSource.Pause();
+        }
 
     }
 
@@ -477,4 +491,19 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     {
         return Color.white;
     }
+
+    AudioSource InitializedAudioSource(bool loop, bool threeDsound)
+    {
+        AudioSource newSource = transform.AddComponent<AudioSource>();
+
+        newSource.volume = 0.2f;
+
+        if (threeDsound) newSource.dopplerLevel = 1;
+        else newSource.dopplerLevel = 0;
+
+        newSource.loop = loop;
+        return newSource;
+    }
+
+
 }

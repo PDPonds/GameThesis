@@ -36,7 +36,10 @@ public class EmployeeStateManager : StateManager, IDamageable
     public bool b_canServe;
     public bool b_hasFood;
     [HideInInspector] public ChairObj s_serveChair;
-    public GameObject g_FoodInHand;
+    public GameObject g_Steak;
+    public GameObject g_Staw;
+    public GameObject g_Bacon;
+
 
     [Header("===== Cooking =====")]
     public bool b_canCook;

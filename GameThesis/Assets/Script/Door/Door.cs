@@ -71,6 +71,8 @@ public class Door : MonoBehaviour
     {
         AudioSource newSource = transform.AddComponent<AudioSource>();
 
+        newSource.volume = 0.2f;
+
         if (threeDsound) newSource.dopplerLevel = 1;
         else newSource.dopplerLevel = 0;
 
