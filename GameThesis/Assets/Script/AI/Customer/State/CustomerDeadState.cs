@@ -56,9 +56,11 @@ public class CustomerDeadState : BaseState
         cus.anim.SetBool("sit", false);
         cus.anim.SetBool("drunk", false);
         cus.anim.SetBool("cheer", false);
+        cus.anim.SetBool("eat", false);
+        cus.anim.SetBool("checkbill", false);
 
         DisableAllSound(cus);
-
+        cus.PauseSleepSound();
     }
 
     void DisableAllSound(CustomerStateManager cus)

@@ -14,7 +14,7 @@ public class CustomerCrowdState : BaseState
 
         int CheerAnimCount = Random.Range(0, cus.allCheerAnim.Count);
         cus.anim.runtimeAnimatorController = cus.allCheerAnim[CheerAnimCount];
-
+        cus.PauseSleepSound();
     }
 
     public override void UpdateState(StateManager ai)
@@ -29,6 +29,9 @@ public class CustomerCrowdState : BaseState
         cus.anim.SetBool("sit", false);
         cus.anim.SetBool("drunk", false);
         cus.anim.SetBool("cheer", false);
+        cus.anim.SetBool("eat", false);
+        cus.anim.SetBool("checkbill", false);
+
 
         if (Vector3.Distance(cus.transform.position,
             cus.v_crowdPos) <= 1f)

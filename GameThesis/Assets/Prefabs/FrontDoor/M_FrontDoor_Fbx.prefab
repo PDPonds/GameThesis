@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 059cba4af3a7fa9419cdcf097f81a90f,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.05
+      value: 1.0500002
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 059cba4af3a7fa9419cdcf097f81a90f,
         type: 3}
@@ -21,7 +21,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 059cba4af3a7fa9419cdcf097f81a90f,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.05
+      value: 1.0500002
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 059cba4af3a7fa9419cdcf097f81a90f,
         type: 3}
@@ -46,7 +46,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 059cba4af3a7fa9419cdcf097f81a90f,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 059cba4af3a7fa9419cdcf097f81a90f,
         type: 3}
@@ -56,7 +56,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 059cba4af3a7fa9419cdcf097f81a90f,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 059cba4af3a7fa9419cdcf097f81a90f,
         type: 3}
@@ -284,3 +284,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   t_doorMesh: {fileID: 3560387051974016415}
   b_isOpen: 0
+  b_isLock: 0
+  b_isForntDoor: 1
+  openDoorSound: {fileID: 8300000, guid: a4f17b6b5919ee241a2c7efe562dc3d7, type: 3}

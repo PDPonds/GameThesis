@@ -513,7 +513,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.06, y: 2.1704364, z: 2.732202}
-  m_LocalScale: {x: 0.1, y: 1, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2457882054368181840}
@@ -537,6 +537,10 @@ MonoBehaviour:
   text_waiterCost: {fileID: 8592558508465633042}
   text_cookerCost: {fileID: 7718157127444893376}
   text_totalCost: {fileID: 9073653134246931052}
+  g_addCookerButton: {fileID: 3400611212387256393}
+  g_removeCookerButton: {fileID: 7102026704344587484}
+  g_addWaiterButton: {fileID: 3256356532013479824}
+  g_removeWaiterButton: {fileID: 1854803298638365469}
 --- !u!1 &1854803298638365469
 GameObject:
   m_ObjectHideFlags: 0

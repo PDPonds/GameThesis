@@ -8,4 +8,6 @@ public interface IInteracable
 
     public string InteractionText();
 
+    public Color InteractionTextColor();
+
 }

@@ -7,11 +7,12 @@ public class UnlockNewItemObjective : ObjectiveSO
 {
     public int i_targetCount;
     public ItemType e_item;
+    public int i_menuIndex;
 
     public UnlockNewItemObjective()
     {
         e_type = ObjectiveType.UnlockNewItem;
     }
 
-    public enum ItemType { Table}
+    public enum ItemType { Table, Dish, Drink }
 }

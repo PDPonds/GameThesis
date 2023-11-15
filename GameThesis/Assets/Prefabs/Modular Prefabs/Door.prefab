@@ -48,6 +48,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   t_doorMesh: {fileID: 3271117325157060022}
   b_isOpen: 0
+  b_isLock: 0
+  b_isForntDoor: 0
+  openDoorSound: {fileID: 8300000, guid: 483ee24f6a9e2bb489f9a15aea903f53, type: 3}
 --- !u!65 &3908837299557097551
 BoxCollider:
   m_ObjectHideFlags: 0

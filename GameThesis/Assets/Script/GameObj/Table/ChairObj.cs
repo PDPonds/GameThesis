@@ -13,19 +13,19 @@ public class ChairObj : MonoBehaviour
     [HideInInspector] public float f_cdForNextCustomer;
 
     [HideInInspector] public bool b_readyForNextCustomer;
-    float f_currentCDForNextCustomer;
+    [HideInInspector] float f_currentCDForNextCustomer;
 
-    public bool b_finishCooking;
-    public CustomerStateManager s_currentCustomer;
-    public EmployeeStateManager s_currentServerEmployee;
-    public EmployeeStateManager s_currentCookingEmployee;
+    [HideInInspector] public bool b_finishCooking;
+    [HideInInspector] public CustomerStateManager s_currentCustomer;
+    [HideInInspector] public EmployeeStateManager s_currentServerEmployee;
+    [HideInInspector] public EmployeeStateManager s_currentCookingEmployee;
 
     TableObj table;
     [HideInInspector] public bool b_canUse;
 
     [Header("===== Food =====")]
     [Header("- Main Dish")]
-    public GameObject g_foodPlate;
+    public GameObject g_steak;
     public GameObject g_stew;
     public GameObject g_beanAndBacon;
     [Header("- Drinks")]
@@ -55,6 +55,7 @@ public class ChairObj : MonoBehaviour
             f_currentCDForNextCustomer = f_cdForNextCustomer;
         }
 
+
         if (s_currentCustomer != null)
         {
             if (s_currentCustomer.c_chairObj != this)
@@ -65,15 +66,17 @@ public class ChairObj : MonoBehaviour
 
             if (s_currentCustomer.s_currentState == s_currentCustomer.s_waitFoodState)
             {
-                if (RestaurantManager.Instance.GetCanEmployeeCooking(out int cookingIndex) &&
-                    s_currentCookingEmployee == null)
+                if (!b_finishCooking)
                 {
-                    RestaurantManager.Instance.allEmployees[cookingIndex].s_cookingChair = this;
-                    RestaurantManager.Instance.allEmployees[cookingIndex].b_canCook = false;
-                    s_currentCookingEmployee = RestaurantManager.Instance.allEmployees[cookingIndex];
+                    if (RestaurantManager.Instance.GetCanEmployeeCooking(out int cookingIndex) &&
+                    s_currentCookingEmployee == null)
+                    {
+                        RestaurantManager.Instance.allEmployees[cookingIndex].s_cookingChair = this;
+                        RestaurantManager.Instance.allEmployees[cookingIndex].b_canCook = false;
+                        s_currentCookingEmployee = RestaurantManager.Instance.allEmployees[cookingIndex];
+                    }
                 }
-
-                if (b_finishCooking)
+                else
                 {
                     if (RestaurantManager.Instance.GetCanEmployeeServe(out int index) &&
                                         s_currentServerEmployee == null)
@@ -111,18 +114,40 @@ public class ChairObj : MonoBehaviour
 
     public void EnableAllFood()
     {
-        if (!g_beanAndBacon.activeSelf) g_beanAndBacon.SetActive(true);
-        if (!g_beerGlass.activeSelf) g_beerGlass.SetActive(true);
-        if (!g_foodPlate.activeSelf) g_foodPlate.SetActive(true);
-        if (!g_glass.activeSelf) g_glass.SetActive(true);
-        if (!g_stew.activeSelf) g_stew.SetActive(true);
+        CustomerStateManager cus = s_currentCustomer;
+        if (cus != null)
+        {
+            switch (cus.i_dish)
+            {
+                case 0:
+                    if (!g_beanAndBacon.activeSelf) g_beanAndBacon.SetActive(true);
+                    break;
+                case 1:
+                    if (!g_stew.activeSelf) g_stew.SetActive(true);
+                    break;
+                case 2:
+                    if (!g_steak.activeSelf) g_steak.SetActive(true);
+                    break;
+            }
+
+            switch (cus.i_drink)
+            {
+                case 0:
+                    if (!g_glass.activeSelf) g_glass.SetActive(true);
+                    break;
+                case 1:
+                    if (!g_beerGlass.activeSelf) g_beerGlass.SetActive(true);
+                    break;
+            }
+        }
+
     }
 
     public void DisableAllFood()
     {
         if (g_beanAndBacon.activeSelf) g_beanAndBacon.SetActive(false);
         if (g_beerGlass.activeSelf) g_beerGlass.SetActive(false);
-        if (g_foodPlate.activeSelf) g_foodPlate.SetActive(false);
+        if (g_steak.activeSelf) g_steak.SetActive(false);
         if (g_glass.activeSelf) g_glass.SetActive(false);
         if (g_stew.activeSelf) g_stew.SetActive(false);
     }

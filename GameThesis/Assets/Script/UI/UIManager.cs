@@ -47,7 +47,9 @@ public class UIManager : Auto_Singleton<UIManager>
     [Space(10f)]
 
     [Header("===== Close Warning ====")]
-    public GameObject g_closeWarning;
+    public GameObject g_open;
+    public GameObject g_close;
+    public GameObject g_managementBoard;
     [Space(10f)]
 
     [Header("===== Objective =====")]
@@ -67,6 +69,15 @@ public class UIManager : Auto_Singleton<UIManager>
     List<WaypointIndicator> allCashWaypoint = new List<WaypointIndicator>();
     List<WaypointIndicator> allThreatWaypoint = new List<WaypointIndicator>();
     List<WaypointIndicator> allSlackOffWaypoint = new List<WaypointIndicator>();
+
+    public GameObject g_openAndCloseRestaurantWaypoint;
+    public GameObject g_managementBoardWaypoint;
+
+    List<WaypointIndicator> allOpenAndCloseWaypoint = new List<WaypointIndicator>();
+    List<WaypointIndicator> allManagementWaypoint = new List<WaypointIndicator>();
+
+    public Transform t_managementBoardMesh;
+    public Transform t_doorMesh;
 
     [Header("===== Summary =====")]
     public GameObject g_summary;
@@ -114,8 +125,8 @@ public class UIManager : Auto_Singleton<UIManager>
     {
         text_day.text = $"Day : {GameManager.Instance.i_currentDay}";
 
-        text_Cash.text = $"{GameManager.Instance.f_coin.ToString("C2")}$";
-        text_pocketCash.text = $"{GameManager.Instance.f_pocketMoney.ToString("C2")}$";
+        text_Cash.text = $"{GameManager.Instance.f_coin.ToString("C2")}";
+        text_pocketCash.text = $"{GameManager.Instance.f_pocketMoney.ToString("C2")}";
 
         text_time.text = TimeController.Instance.d_currentTime.ToString("HH:mm");
 
@@ -314,28 +325,58 @@ public class UIManager : Auto_Singleton<UIManager>
 
         if (GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_beforeOpenState)
         {
-            g_closeWarning.SetActive(true);
+            g_open.SetActive(true);
+            g_close.SetActive(false);
+            g_managementBoard.SetActive(true);
+
+            SpawnManagementBoardWaypoint();
+            SpawnOpenCloseWaypoint();
+
+            //g_openAndCloseRestaurantWaypoint.SetActive(true);
+            //g_managementBoardWaypoint.SetActive(true);
+
         }
         else if (GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_afterOpenState)
         {
-            g_closeWarning.SetActive(false);
+            g_open.SetActive(false);
+            g_close.SetActive(false);
+            g_managementBoard.SetActive(false);
 
             text_waiterCount.text = $"{RestaurantManager.Instance.i_currentWaiterCount} ea";
             text_cookerCount.text = $"{RestaurantManager.Instance.i_currentCookerCount} ea";
-            text_daliyIncomeCost.text = $"{GameManager.Instance.f_coin.ToString("C2")} $";
+            text_daliyIncomeCost.text = $"{GameManager.Instance.f_coin.ToString("C2")} ";
             float cookerCost = RestaurantManager.Instance.i_currentCookerCount * RestaurantManager.Instance.f_cookerCost;
             float waiterCost = RestaurantManager.Instance.i_currentWaiterCount * RestaurantManager.Instance.f_waiterCost;
             float totalEmpCost = cookerCost + waiterCost;
-            text_totalEmpCost.text = $"{totalEmpCost.ToString("C2")} $";
+            text_totalEmpCost.text = $"{totalEmpCost.ToString("C2")} ";
             float profit = GameManager.Instance.f_coin - totalEmpCost;
-            text_profitCost.text = $"{profit.ToString("C2")} $";
-            text_waiterCost.text = $"{waiterCost.ToString("C2")} $";
-            text_cookerCost.text = $"{cookerCost.ToString("C2")} $";
+            text_profitCost.text = $"{profit.ToString("C2")} ";
+            text_waiterCost.text = $"{waiterCost.ToString("C2")} ";
+            text_cookerCost.text = $"{cookerCost.ToString("C2")} ";
+
+            if (RestaurantManager.Instance.RestaurantIsEmpty())
+            {
+                //g_openAndCloseRestaurantWaypoint.SetActive(true);
+                //g_managementBoardWaypoint.SetActive(false);
+                SpawnOpenCloseWaypoint();
+                DestroyManagementBoardWaypoint();
+                g_close.SetActive(true);
+            }
+            else
+            {
+                g_close.SetActive(false);
+            }
         }
         else
         {
-            g_closeWarning.SetActive(false);
+            g_open.SetActive(false);
+            g_close.SetActive(false);
+            g_managementBoard.SetActive(false);
 
+            //g_openAndCloseRestaurantWaypoint.SetActive(false);
+            //g_managementBoardWaypoint.SetActive(false);
+            DestroyManagementBoardWaypoint();
+            DestroyOpenClseWaypoint();
         }
 
         if (ObjectiveManager.Instance.GetCurrentObjective(out int index) &&
@@ -351,6 +392,64 @@ public class UIManager : Auto_Singleton<UIManager>
             g_objective.SetActive(false);
         }
 
+    }
+
+    void SpawnOpenCloseWaypoint()
+    {
+        if (allOpenAndCloseWaypoint.Count != 1)
+        {
+            foreach (WaypointIndicator waypoint in allOpenAndCloseWaypoint)
+            {
+                Destroy(waypoint.gameObject);
+            }
+            allOpenAndCloseWaypoint.Clear();
+            GameObject wayPointObj = Instantiate(g_openAndCloseRestaurantWaypoint, Vector3.zero, Quaternion.identity);
+            wayPointObj.transform.SetParent(t_Canvas);
+            WaypointIndicator indicator = wayPointObj.GetComponent<WaypointIndicator>();
+            indicator.target = t_doorMesh;
+            allOpenAndCloseWaypoint.Add(indicator);
+        }
+    }
+
+    void DestroyOpenClseWaypoint()
+    {
+        if (allOpenAndCloseWaypoint.Count > 0)
+        {
+            foreach (WaypointIndicator waypoint in allOpenAndCloseWaypoint)
+            {
+                Destroy(waypoint.gameObject);
+            }
+        }
+        allOpenAndCloseWaypoint.Clear();
+    }
+
+    void SpawnManagementBoardWaypoint()
+    {
+        if (allManagementWaypoint.Count != 1)
+        {
+            foreach (WaypointIndicator waypoint in allManagementWaypoint)
+            {
+                Destroy(waypoint.gameObject);
+            }
+            allManagementWaypoint.Clear();
+            GameObject wayPointObj = Instantiate(g_managementBoardWaypoint, Vector3.zero, Quaternion.identity);
+            wayPointObj.transform.SetParent(t_Canvas);
+            WaypointIndicator indicator = wayPointObj.GetComponent<WaypointIndicator>();
+            indicator.target = t_managementBoardMesh;
+            allManagementWaypoint.Add(indicator);
+        }
+    }
+
+    void DestroyManagementBoardWaypoint()
+    {
+        if (allManagementWaypoint.Count > 0)
+        {
+            foreach (WaypointIndicator waypoint in allManagementWaypoint)
+            {
+                Destroy(waypoint.gameObject);
+            }
+        }
+        allManagementWaypoint.Clear();
     }
 
 

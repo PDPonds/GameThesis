@@ -2,11 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.Burst.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.UI;
 
 [Serializable]
 public class CustomerClothes
@@ -15,16 +13,19 @@ public class CustomerClothes
     public int shirt;
     public int pant;
     public int hat;
+    public int asset;
 }
 
 public class CustomerStateManager : StateManager, IDamageable, IInteracable
 {
     public CustomerClothes CustomerClothes;
 
+    public bool b_isFemale;
     public List<GameObject> hairs = new List<GameObject>();
     public List<GameObject> shirts = new List<GameObject>();
     public List<GameObject> pants = new List<GameObject>();
     public List<GameObject> hats = new List<GameObject>();
+    public List<GameObject> assets = new List<GameObject>();
 
     public override BaseState s_currentState { get; set; }
 
@@ -83,13 +84,18 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
 
     [Header("===== WalkAround =====")]
     public float f_findNextPositionTime;
-    public Vector3 v_walkPos;
+    [HideInInspector] public Vector3 v_walkPos;
     [Space(10f)]
 
     [Header("===== Order Food =====")]
     public float f_orderTime;
     [HideInInspector] public float f_currentOrderTime;
     [HideInInspector] public ChairObj c_chairObj;
+
+    [HideInInspector] public float f_giveCoin;
+    [HideInInspector] public int i_dish;
+    [HideInInspector] public int i_drink;
+
     [Space(10f)]
 
     [Header("===== Eat Food =====")]
@@ -103,9 +109,9 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     [Space(10f)]
 
     [Header("===== Pay =====")]
+    public GameObject g_cashObj;
     public float f_payTime;
-    [HideInInspector] public float f_giveCoin;
-    public Vector2 v_minmaxGiveCoin;
+    public Vector2 v_minmaxTipsCoin;
     [Space(10f)]
 
     [Header("===== Run Escape =====")]
@@ -155,6 +161,7 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     SkinnedMeshRenderer shirtrnd;
     SkinnedMeshRenderer pantrnd;
     SkinnedMeshRenderer hatrnd;
+    SkinnedMeshRenderer assetsrnd;
 
     MaterialPropertyBlock mpb;
     public MaterialPropertyBlock Mpb
@@ -174,6 +181,10 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     public List<AnimatorOverrideController> allCheerAnim = new List<AnimatorOverrideController>();
     [HideInInspector] public Vector3 v_crowdPos;
 
+    [Header("===== Sound =====")]
+    public AudioClip sleepSound;
+    AudioSource sleepSource;
+
     public void ApplyOutlineColor(Color color, float scale)
     {
         meshrnd = t_mesh.GetComponent<SkinnedMeshRenderer>();
@@ -181,8 +192,20 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
         if (CustomerClothes.hair >= 0) hairrnd = hairs[CustomerClothes.hair].GetComponent<SkinnedMeshRenderer>();
         shirtrnd = shirts[CustomerClothes.shirt].GetComponent<SkinnedMeshRenderer>();
         pantrnd = pants[CustomerClothes.pant].GetComponent<SkinnedMeshRenderer>();
-        if (CustomerClothes.hat >= 0) hatrnd = hats[CustomerClothes.hat].GetComponent<SkinnedMeshRenderer>();
-
+        if (CustomerClothes.hat >= 0)
+        {
+            if (hats.Count > 0)
+            {
+                hatrnd = hats[CustomerClothes.hat].GetComponent<SkinnedMeshRenderer>();
+            }
+        }
+        if (CustomerClothes.asset >= 0)
+        {
+            if (assets.Count > 0)
+            {
+                assetsrnd = assets[CustomerClothes.asset].GetComponent<SkinnedMeshRenderer>();
+            }
+        }
         Mpb.SetColor("_Color", color);
         Mpb.SetFloat("_Scale", scale);
 
@@ -191,34 +214,77 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
         if (shirtrnd != null) shirtrnd.SetPropertyBlock(mpb);
         if (pantrnd != null) pantrnd.SetPropertyBlock(mpb);
         if (hatrnd != null) hatrnd.SetPropertyBlock(mpb);
+        if (assetsrnd != null) assetsrnd.SetPropertyBlock(mpb);
     }
 
     public CustomerClothes GenerateClothes()
     {
         CustomerClothes clothes = new CustomerClothes();
-        int hair = UnityEngine.Random.Range(-1, hairs.Count);
-        int shirt = UnityEngine.Random.Range(0, shirts.Count);
-        int pant = UnityEngine.Random.Range(0, pants.Count); ;
-        int hat = UnityEngine.Random.Range(-1, hats.Count);
-        clothes.hair = hair;
-        clothes.shirt = shirt;
-        clothes.pant = pant;
-        clothes.hat = hat;
+
+        if (hairs.Count > 0)
+        {
+            if (b_isFemale)
+            {
+                int Fhair = UnityEngine.Random.Range(0, hairs.Count);
+                clothes.hair = Fhair;
+            }
+            else
+            {
+                int Bhair = UnityEngine.Random.Range(-1, hairs.Count);
+                clothes.hair = Bhair;
+            }
+        }
+        else clothes.hair = -1;
+
+        if (shirts.Count > 0)
+        {
+            int shirt = UnityEngine.Random.Range(0, shirts.Count);
+            clothes.shirt = shirt;
+
+        }
+        else clothes.shirt = -1;
+
+        if (pants.Count > 0)
+        {
+            int pant = UnityEngine.Random.Range(0, pants.Count); ;
+            clothes.pant = pant;
+
+        }
+        else clothes.pant = -1;
+
+        if (hats.Count > 0)
+        {
+            int hat = UnityEngine.Random.Range(-1, hats.Count);
+            clothes.hat = hat;
+        }
+        else clothes.hat = -1;
+
+        if (assets.Count > 0)
+        {
+            int asset = UnityEngine.Random.Range(-1, assets.Count);
+            clothes.asset = asset;
+
+        }
+        else clothes.asset = -1;
+
         return clothes;
     }
 
-    public CustomerClothes SetUpClothes(int hair, int shirt, int pant, int hat)
+    public CustomerClothes SetUpClothes(int hair, int shirt, int pant, int hat, int asset)
     {
         CustomerClothes clothes = new CustomerClothes();
         clothes.hair = hair;
         clothes.shirt = shirt;
         clothes.pant = pant;
         clothes.hat = hat;
+        clothes.asset = asset;
         return clothes;
     }
 
     private void Awake()
     {
+        sleepSource = InitializedAudioSource(true, true);
+
         anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponentsInChildren<Rigidbody>();
@@ -238,7 +304,6 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
         }
 
         i_currentHP = i_maxHP;
-        f_giveCoin = UnityEngine.Random.Range(v_minmaxGiveCoin.x, v_minmaxGiveCoin.y);
 
     }
 
@@ -270,6 +335,13 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
             else hats[i].SetActive(true);
         }
 
+        for (int i = 0; i < assets.Count; i++)
+        {
+            if (i != CustomerClothes.asset) assets[i].SetActive(false);
+            else assets[i].SetActive(true);
+
+        }
+
         if (b_protectStun)
         {
             f_currentStunTime -= Time.deltaTime;
@@ -279,7 +351,26 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
             }
         }
 
+        if (s_currentState == s_drunkState)
+        {
+            if (!sleepSource.isPlaying)
+            {
+                sleepSource.Play();
+            }
+        }
+        else
+        {
+            sleepSource.Pause();
+        }
 
+        if (s_currentState == s_frontCounter)
+        {
+            g_cashObj.SetActive(true);
+        }
+        else
+        {
+            g_cashObj.SetActive(false);
+        }
     }
 
     public void TakeDamage(int damage)
@@ -403,6 +494,45 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     public void DestroyAI()
     {
         Destroy(gameObject);
+    }
+
+    public Color InteractionTextColor()
+    {
+        return Color.white;
+    }
+
+    AudioSource InitializedAudioSource(bool loop, bool threeDsound)
+    {
+        AudioSource newSource = transform.AddComponent<AudioSource>();
+
+        newSource.volume = 0.2f;
+
+        if (threeDsound)
+        {
+            newSource.spatialBlend = 1f;
+            newSource.dopplerLevel = 1;
+            newSource.maxDistance = 10;
+        }
+        else newSource.dopplerLevel = 0;
+
+        newSource.loop = loop;
+        return newSource;
+    }
+
+    public void PlaySleepSound()
+    {
+        if (!sleepSource.isPlaying)
+        {
+            sleepSource.Play();
+        }
+    }
+
+    public void PauseSleepSound()
+    {
+        if (sleepSource.isPlaying)
+        {
+            sleepSource.Pause();
+        }
     }
 
 }

@@ -16,4 +16,5 @@ MonoBehaviour:
   s_objectiveDescription: Unlock New Table
   i_objectiveID: 2
   e_type: 1
-  i_targetCount: 4
+  i_targetCount: 3
+  e_item: 0

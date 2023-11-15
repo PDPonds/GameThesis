@@ -21,7 +21,7 @@ public class CustomerGoOutFormRestaurantState : BaseState
 
         cus.g_sleepVFX.SetActive(false);
         cus.g_stunVFX.SetActive(false);
-
+        cus.PauseSleepSound();
     }
 
     public override void UpdateState(StateManager ai)
@@ -31,6 +31,9 @@ public class CustomerGoOutFormRestaurantState : BaseState
         cus.anim.SetBool("sit", false);
         cus.anim.SetBool("drunk", false);
         cus.anim.SetBool("walk", true);
+        cus.anim.SetBool("eat", false);
+        cus.anim.SetBool("checkbill", false);
+
         cus.agent.speed = cus.f_walkSpeed;
         cus.agent.SetDestination(GameManager.Instance.t_restaurantForntDoor.position);
 

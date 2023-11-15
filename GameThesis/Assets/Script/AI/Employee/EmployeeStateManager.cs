@@ -36,14 +36,18 @@ public class EmployeeStateManager : StateManager, IDamageable
     public bool b_canServe;
     public bool b_hasFood;
     [HideInInspector] public ChairObj s_serveChair;
-    public GameObject g_FoodInHand;
+    public GameObject g_Steak;
+    public GameObject g_Staw;
+    public GameObject g_Bacon;
+
 
     [Header("===== Cooking =====")]
     public bool b_canCook;
     public bool b_isWorking;
     public Transform t_workingPos;
     public float f_cookingTime;
-    [HideInInspector] public ChairObj s_cookingChair;
+    /*[HideInInspector]*/
+    public ChairObj s_cookingChair;
     public AnimatorOverrideController cookingAnim;
 
     [Header("===== Slack Off =====")]
@@ -90,6 +94,7 @@ public class EmployeeStateManager : StateManager, IDamageable
 
     private void Awake()
     {
+
         anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponentsInChildren<Rigidbody>();

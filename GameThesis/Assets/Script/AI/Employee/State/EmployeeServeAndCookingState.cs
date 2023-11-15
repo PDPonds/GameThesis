@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static Unity.Burst.Intrinsics.X86.Avx;
-using static UnityEngine.Rendering.DebugUI;
 
 public class EmployeeServeAndCookingState : BaseState
 {
@@ -47,7 +45,25 @@ public class EmployeeServeAndCookingState : BaseState
                         emp.agent.velocity = Vector3.zero;
                         emp.anim.SetBool("run", false);
                         emp.anim.SetBool("walk", false);
-                        emp.anim.SetBool("cooking", true);
+
+                        if (emp.b_canCook) emp.anim.SetBool("cooking", false);
+                        else emp.anim.SetBool("cooking", true);
+
+                        if (emp.s_cookingChair != null)
+                        {
+
+                            emp.b_canCook = false;
+                            f_cookingTime -= Time.deltaTime;
+                            if (f_cookingTime < 0)
+                            {
+                                f_cookingTime = emp.f_cookingTime;
+                                emp.b_canCook = true;
+                                emp.s_cookingChair.b_finishCooking = true;
+                                emp.s_cookingChair.s_currentCookingEmployee = null;
+                                emp.s_cookingChair = null;
+                            }
+                        }
+
                     }
                     else
                     {
@@ -60,21 +76,6 @@ public class EmployeeServeAndCookingState : BaseState
                     emp.agent.speed = emp.f_runSpeed;
 
 
-                    if (emp.s_cookingChair != null)
-                    {
-                        emp.b_canCook = false;
-                        f_cookingTime -= Time.deltaTime;
-                        if (f_cookingTime < 0)
-                        {
-                            emp.s_cookingChair.b_finishCooking = true;
-                            emp.s_cookingChair = null;
-                        }
-                    }
-                    else
-                    {
-                        f_cookingTime = emp.f_cookingTime;
-
-                    }
 
                     break;
                 case EmployeeType.Serve:
@@ -84,6 +85,7 @@ public class EmployeeServeAndCookingState : BaseState
                     {
 
                         ChairObj chair = RestaurantManager.Instance.allChairs[chairIndex];
+                        CustomerStateManager cus = chair.s_currentCustomer;
 
                         if (!emp.b_hasFood)
                         {
@@ -104,9 +106,42 @@ public class EmployeeServeAndCookingState : BaseState
                                 emp.b_hasFood = false;
                                 emp.b_canServe = false;
                                 emp.s_serveChair = null;
-                                chair.s_currentCookingEmployee.b_canCook = true;
                                 chair.s_currentCustomer.SwitchState(chair.s_currentCustomer.s_eatFoodState);
                             }
+                        }
+
+                        if (emp.b_hasFood)
+                        {
+                            emp.anim.SetLayerWeight(1, 1);
+                            if(cus != null)
+                            {
+                                switch (cus.i_dish)
+                                {
+                                    case 0:
+                                        emp.g_Bacon.SetActive(true);
+                                        break;
+                                    case 1:
+                                        emp.g_Staw.SetActive(true);
+                                        break;
+                                    case 2:
+                                        emp.g_Steak.SetActive(true);
+                                        break;
+                                }
+                            }
+                            else
+                            {
+                                emp.g_Steak.SetActive(false);
+                                emp.g_Bacon.SetActive(false);
+                                emp.g_Staw.SetActive(false);
+                            }
+
+                        }
+                        else
+                        {
+                            emp.anim.SetLayerWeight(1, 0);
+                            emp.g_Steak.SetActive(false);
+                            emp.g_Bacon.SetActive(false);
+                            emp.g_Staw.SetActive(false);
                         }
 
                         emp.agent.speed = emp.f_walkSpeed;
@@ -135,18 +170,6 @@ public class EmployeeServeAndCookingState : BaseState
                         emp.b_hasFood = false;
                         emp.s_serveChair = null;
                     }
-
-                    if (emp.b_hasFood)
-                    {
-                        emp.anim.SetLayerWeight(1, 1);
-                        emp.g_FoodInHand.SetActive(true);
-                    }
-                    else
-                    {
-                        emp.anim.SetLayerWeight(1, 0);
-                        emp.g_FoodInHand.SetActive(false);
-                    }
-
                     emp.b_isWorking = true;
 
                     break;
@@ -175,7 +198,7 @@ public class EmployeeServeAndCookingState : BaseState
             {
                 case EmployeeType.Cooking:
 
-                    if(!RestaurantManager.Instance.RestaurantIsEmpty())
+                    if (!RestaurantManager.Instance.RestaurantIsEmpty())
                     {
                         emp.agent.SetDestination(emp.t_workingPos.position);
 
@@ -188,6 +211,21 @@ public class EmployeeServeAndCookingState : BaseState
                             emp.anim.SetBool("run", false);
                             emp.anim.SetBool("walk", false);
                             emp.anim.SetBool("cooking", true);
+
+                            if (emp.s_cookingChair != null)
+                            {
+                                emp.b_canCook = false;
+                                f_cookingTime -= Time.deltaTime;
+                                if (f_cookingTime < 0)
+                                {
+                                    f_cookingTime = emp.f_cookingTime;
+                                    emp.b_canCook = true;
+                                    emp.s_cookingChair.b_finishCooking = true;
+                                    emp.s_cookingChair.s_currentCookingEmployee = null;
+                                    emp.s_cookingChair = null;
+                                }
+                            }
+
                         }
                         else
                         {
@@ -199,22 +237,6 @@ public class EmployeeServeAndCookingState : BaseState
 
                         emp.agent.speed = emp.f_runSpeed;
 
-
-                        if (emp.s_cookingChair != null)
-                        {
-                            emp.b_canCook = false;
-                            f_cookingTime -= Time.deltaTime;
-                            if (f_cookingTime < 0)
-                            {
-                                emp.s_cookingChair.b_finishCooking = true;
-                                emp.s_cookingChair = null;
-                            }
-                        }
-                        else
-                        {
-                            f_cookingTime = emp.f_cookingTime;
-
-                        }
                     }
 
 
@@ -230,6 +252,7 @@ public class EmployeeServeAndCookingState : BaseState
                             emp.anim.SetBool("run", false);
 
                             ChairObj chair = RestaurantManager.Instance.allChairs[chairIndex];
+                            CustomerStateManager cus = chair.s_currentCustomer;
 
                             if (!emp.b_hasFood)
                             {
@@ -254,6 +277,30 @@ public class EmployeeServeAndCookingState : BaseState
                                 }
                             }
 
+                            if (emp.b_hasFood)
+                            {
+                                emp.anim.SetLayerWeight(1, 1);
+                                switch(cus.i_dish)
+                                {
+                                    case 0:
+                                        emp.g_Bacon.SetActive(true);
+                                        break;
+                                    case 1:
+                                        emp.g_Staw.SetActive(true);
+                                        break;
+                                    case 2:
+                                        emp.g_Steak.SetActive(true);
+                                        break;
+                                }
+                                
+                            }
+                            else
+                            {
+                                emp.anim.SetLayerWeight(1, 0);
+                                emp.g_Steak.SetActive(false);
+                                emp.g_Bacon.SetActive(false);
+                                emp.g_Staw.SetActive(false);
+                            }
                         }
                         else
                         {
@@ -279,16 +326,7 @@ public class EmployeeServeAndCookingState : BaseState
                         }
                     }
 
-                    if (emp.b_hasFood)
-                    {
-                        emp.anim.SetLayerWeight(1, 1);
-                        emp.g_FoodInHand.SetActive(true);
-                    }
-                    else
-                    {
-                        emp.anim.SetLayerWeight(1, 0);
-                        emp.g_FoodInHand.SetActive(false);
-                    }
+                    
 
                     break;
 

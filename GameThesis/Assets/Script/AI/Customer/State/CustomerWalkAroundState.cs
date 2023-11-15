@@ -14,7 +14,7 @@ public class CustomerWalkAroundState : BaseState
 
         cus.g_sleepVFX.SetActive(false);
         cus.g_stunVFX.SetActive(false);
-
+        cus.PauseSleepSound();
     }
 
     public override void UpdateState(StateManager ai)
@@ -27,6 +27,8 @@ public class CustomerWalkAroundState : BaseState
         cus.anim.SetBool("sit", false);
         cus.anim.SetBool("drunk", false);
         cus.anim.SetBool("cheer", false);
+        cus.anim.SetBool("eat", false);
+        cus.anim.SetBool("checkbill", false);
 
         f_currentTimeToWalk -= Time.deltaTime;
         if (f_currentTimeToWalk <= 0)

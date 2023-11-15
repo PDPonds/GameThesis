@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: F_CheerOverride2
+  m_Controller: {fileID: 9100000, guid: 77a53fa54d1b77942badfce91bec0118, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: -2010882681977354353, guid: 4346950eda7a87f4da1068df9502a87e,
+      type: 3}
+    m_OverrideClip: {fileID: 6614090233425607363, guid: b3ddd2ae870884f4aac31a2d93c75b16,
+      type: 3}

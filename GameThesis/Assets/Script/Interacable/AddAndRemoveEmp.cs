@@ -43,19 +43,24 @@ public class AddAndRemoveEmp : MonoBehaviour, IInteracable
         switch (type)
         {
             case AddRemoveEmpType.AddCooking:
-                text = "Add Cooker";
+                text = "[E] Add Cooker";
                 break;
             case AddRemoveEmpType.AddServe:
-                text = "Add Waiter";
+                text = "[E] Add Waiter";
                 break;
             case AddRemoveEmpType.RemoveCooking:
-                text = "Remove Cooker";
+                text = "[E] Remove Cooker";
                 break;
             case AddRemoveEmpType.RemoveServe:
-                text = "Remove Waiter";
+                text = "[E] Remove Waiter";
                 break;
             default: break;
         }
         return text;
+    }
+
+    public Color InteractionTextColor()
+    {
+        return Color.white;
     }
 }
