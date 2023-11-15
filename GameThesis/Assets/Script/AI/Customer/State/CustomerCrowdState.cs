@@ -14,7 +14,7 @@ public class CustomerCrowdState : BaseState
 
         int CheerAnimCount = Random.Range(0, cus.allCheerAnim.Count);
         cus.anim.runtimeAnimatorController = cus.allCheerAnim[CheerAnimCount];
-
+        cus.PauseSleepSound();
     }
 
     public override void UpdateState(StateManager ai)

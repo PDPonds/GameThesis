@@ -62,7 +62,6 @@ public class InputSystem : MonoBehaviour
                         IInteracable interactive = PlayerManager.Instance.g_interactiveObj.GetComponentInParent<IInteracable>();
                         if (interactive != null)
                         {
-                            SoundManager.Instance.PlayInteractiveSound();
                             interactive.Interaction();
                         }
                     }
@@ -71,7 +70,6 @@ public class InputSystem : MonoBehaviour
                         IInteracable interactive = PlayerManager.Instance.g_interactiveObj.GetComponent<IInteracable>();
                         if (interactive != null)
                         {
-                            SoundManager.Instance.PlayInteractiveSound();
                             interactive.Interaction();
                         }
                     }

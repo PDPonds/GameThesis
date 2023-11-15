@@ -60,7 +60,7 @@ public class CustomerDeadState : BaseState
         cus.anim.SetBool("checkbill", false);
 
         DisableAllSound(cus);
-
+        cus.PauseSleepSound();
     }
 
     void DisableAllSound(CustomerStateManager cus)

@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dfd3b49ed86f9444cbdaed5f30abae48, type: 3}
-  m_Name: 1 Collect 200
+  m_Name: 3 Collect 100
   m_EditorClassIdentifier: 
-  s_objectiveName: Collect 200$
-  s_objectiveDescription: Collect 200$
-  i_objectiveID: 1
+  s_objectiveName: Collect 150$
+  s_objectiveDescription: Collect 150$
+  i_objectiveID: 3
   e_type: 0
-  f_tagetMoney: 200
+  f_tagetMoney: 150

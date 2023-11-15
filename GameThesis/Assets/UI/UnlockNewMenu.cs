@@ -21,13 +21,15 @@ public class UnlockNewMenu : MonoBehaviour, IInteracable
     {
         if (GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_beforeOpenState)
         {
+            Color color = new Color(255f, 255f, 255f, 50f);
+
             if (type == menuType.dish)
             {
                 if (menuHandler.mainDish_Status[menuNum].status)
                 {
-                    text_menuCost.color = Color.white;
-                    text_menuName.color = Color.white;
-                    text_menuDollar.color = Color.white;
+                    text_menuCost.color = color;
+                    text_menuName.color = color;
+                    text_menuDollar.color = color;
                 }
                 else
                 {
@@ -40,9 +42,9 @@ public class UnlockNewMenu : MonoBehaviour, IInteracable
             {
                 if (menuHandler.drinks_Status[menuNum].status)
                 {
-                    text_menuCost.color = Color.white;
-                    text_menuName.color = Color.white;
-                    text_menuDollar.color = Color.white;
+                    text_menuCost.color = color;
+                    text_menuName.color = color;
+                    text_menuDollar.color = color;
                 }
                 else
                 {
@@ -66,6 +68,8 @@ public class UnlockNewMenu : MonoBehaviour, IInteracable
                 {
                     if (!menuHandler.mainDish_Status[menuNum].status)
                     {
+                        GameManager.Instance.RemovePocketMoney(menuCost);
+                        SoundManager.Instance.PlayInteractiveSound();
                         menuHandler.ActivateDishMenu(menuNum);
                     }
                 }
@@ -73,9 +77,15 @@ public class UnlockNewMenu : MonoBehaviour, IInteracable
                 {
                     if (!menuHandler.drinks_Status[menuNum].status)
                     {
+                        GameManager.Instance.RemovePocketMoney(menuCost);
+                        SoundManager.Instance.PlayInteractiveSound();
                         menuHandler.ActivateDrinksMenu(menuNum);
                     }
                 }
+            }
+            else
+            {
+                SoundManager.Instance.PlayCantInteractSound();
             }
         }
 

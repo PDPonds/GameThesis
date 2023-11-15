@@ -109,6 +109,7 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     [Space(10f)]
 
     [Header("===== Pay =====")]
+    public GameObject g_cashObj;
     public float f_payTime;
     public Vector2 v_minmaxTipsCoin;
     [Space(10f)]
@@ -362,6 +363,14 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
             sleepSource.Pause();
         }
 
+        if (s_currentState == s_frontCounter)
+        {
+            g_cashObj.SetActive(true);
+        }
+        else
+        {
+            g_cashObj.SetActive(false);
+        }
     }
 
     public void TakeDamage(int damage)
@@ -498,12 +507,32 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
 
         newSource.volume = 0.2f;
 
-        if (threeDsound) newSource.dopplerLevel = 1;
+        if (threeDsound)
+        {
+            newSource.spatialBlend = 1f;
+            newSource.dopplerLevel = 1;
+            newSource.maxDistance = 10;
+        }
         else newSource.dopplerLevel = 0;
 
         newSource.loop = loop;
         return newSource;
     }
 
+    public void PlaySleepSound()
+    {
+        if (!sleepSource.isPlaying)
+        {
+            sleepSource.Play();
+        }
+    }
+
+    public void PauseSleepSound()
+    {
+        if (sleepSource.isPlaying)
+        {
+            sleepSource.Pause();
+        }
+    }
 
 }

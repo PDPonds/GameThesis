@@ -286,4 +286,4 @@ MonoBehaviour:
   b_isOpen: 0
   b_isLock: 0
   b_isForntDoor: 1
-  openDoorSound: {fileID: 8300000, guid: 483ee24f6a9e2bb489f9a15aea903f53, type: 3}
+  openDoorSound: {fileID: 8300000, guid: a4f17b6b5919ee241a2c7efe562dc3d7, type: 3}

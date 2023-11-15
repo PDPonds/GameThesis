@@ -33,7 +33,7 @@ public class CustomerWaitFoodState : BaseState
         float tips = Random.Range(cus.v_minmaxTipsCoin.x, cus.v_minmaxTipsCoin.y);
 
         cus.f_giveCoin = cost + tips;
-
+        cus.PauseSleepSound();
     }
 
     public override void UpdateState(StateManager ai)

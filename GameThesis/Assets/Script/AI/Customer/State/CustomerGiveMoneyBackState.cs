@@ -22,7 +22,7 @@ public class CustomerGiveMoneyBackState : BaseState
                 shrSM.SwitchState(shrSM.s_activityState);
             }
         }
-
+        cus.PauseSleepSound();
     }
 
     public override void UpdateState(StateManager ai)

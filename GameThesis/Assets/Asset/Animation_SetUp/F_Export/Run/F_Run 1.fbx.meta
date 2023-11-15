@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 682f09041f7cd8641b57690c3775f3d8
+guid: 05513d3f1bf77f046b2d19bab1d3e45d
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -14,25 +14,12 @@ ModelImporter:
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
-    removeConstantScaleCurves: 1
-    motionNodeName: <Root Transform>
+    removeConstantScaleCurves: 0
+    motionNodeName: 
     rigImportErrors: 
-    rigImportWarnings: "Copied Avatar Rig Configuration mis-match. Inbetween bone
-      rotation in copied configuration does not match rotation in animation file:\n\t'HipPart1_L'
-      : rotation error = 3.307290 deg\n\t'KneePart1_L' : rotation error = 2.196741
-      deg\n"
+    rigImportWarnings: 
     animationImportErrors: 
-    animationImportWarnings: "\nClip 'F_Run' has import animation warnings that might
-      lower retargeting quality:\nNote: Activate translation DOF on avatar to improve
-      retargeting quality.\n\t'Scapula_R' is inbetween humanoid transforms and has
-      rotation animation that will be discarded.\n\t'ElbowPart1_R' is inbetween humanoid
-      transforms and has rotation animation that will be discarded.\n\t'Scapula_L'
-      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'ElbowPart1_L'
-      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'HipPart1_R'
-      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'KneePart1_R'
-      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'HipPart1_L'
-      is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'KneePart1_L'
-      is inbetween humanoid transforms and has rotation animation that will be discarded.\n"
+    animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -44,36 +31,7 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations:
-    - serializedVersion: 16
-      name: F_Run
-      takeName: F_Run
-      internalID: 8899644901765333407
-      firstFrame: 263
-      lastFrame: 292
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 1
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 262.80002
+    clipAnimations: []
     isReadable: 0
   meshes:
     lODScreenPercentages: []
@@ -1111,7 +1069,7 @@ ModelImporter:
   humanoidOversampling: 1
   avatarSetup: 2
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
-  importBlendShapeDeformPercent: 0
+  importBlendShapeDeformPercent: 1
   remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
   userData: 

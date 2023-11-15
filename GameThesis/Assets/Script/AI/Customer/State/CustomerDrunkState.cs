@@ -18,6 +18,8 @@ public class CustomerDrunkState : BaseState
         cus.g_sleepVFX.SetActive(true);
         cus.g_stunVFX.SetActive(false);
 
+        cus.PlaySleepSound();
+        
     }
 
     public override void UpdateState(StateManager ai)

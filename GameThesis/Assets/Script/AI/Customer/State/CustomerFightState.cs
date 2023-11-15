@@ -28,7 +28,7 @@ public class CustomerFightState : BaseState
         f_currentReDirection = f_reDir;
 
         f_currentPlayerEscapeTime = cus.f_playerEscapeTime;
-
+        cus.PauseSleepSound();
     }
 
     public override void UpdateState(StateManager ai)

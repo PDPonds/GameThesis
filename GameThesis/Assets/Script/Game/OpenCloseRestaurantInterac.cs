@@ -35,6 +35,7 @@ public class OpenCloseRestaurantInterac : MonoBehaviour, IInteracable
             if (RestaurantManager.Instance.RestaurantIsEmpty())
             {
                 forntDoor.b_isLock = true;
+                SoundManager.Instance.PlaySummarySound();
                 SoundManager.Instance.PlayCloseRestaurantSound();
                 RestaurantManager.Instance.CloseRestaurant();
             }

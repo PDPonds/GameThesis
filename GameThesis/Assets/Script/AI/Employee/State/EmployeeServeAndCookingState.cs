@@ -113,17 +113,26 @@ public class EmployeeServeAndCookingState : BaseState
                         if (emp.b_hasFood)
                         {
                             emp.anim.SetLayerWeight(1, 1);
-                            switch (cus.i_dish)
+                            if(cus != null)
                             {
-                                case 0:
-                                    emp.g_Bacon.SetActive(true);
-                                    break;
-                                case 1:
-                                    emp.g_Staw.SetActive(true);
-                                    break;
-                                case 2:
-                                    emp.g_Steak.SetActive(true);
-                                    break;
+                                switch (cus.i_dish)
+                                {
+                                    case 0:
+                                        emp.g_Bacon.SetActive(true);
+                                        break;
+                                    case 1:
+                                        emp.g_Staw.SetActive(true);
+                                        break;
+                                    case 2:
+                                        emp.g_Steak.SetActive(true);
+                                        break;
+                                }
+                            }
+                            else
+                            {
+                                emp.g_Steak.SetActive(false);
+                                emp.g_Bacon.SetActive(false);
+                                emp.g_Staw.SetActive(false);
                             }
 
                         }

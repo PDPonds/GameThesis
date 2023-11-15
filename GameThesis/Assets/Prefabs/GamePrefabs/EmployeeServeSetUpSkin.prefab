@@ -2099,6 +2099,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: F_Bean&Bacon
       objectReference: {fileID: 0}
+    - target: {fileID: 7118575747549430817, guid: b9f3de1f5ee51cb43a882931b8c28b7f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7602518456697970331, guid: b9f3de1f5ee51cb43a882931b8c28b7f,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -2322,7 +2327,7 @@ PrefabInstance:
     - target: {fileID: 4752440506443369609, guid: 123209948b512c940a2283b7454a70e9,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5386269809170994739, guid: 123209948b512c940a2283b7454a70e9,
         type: 3}
@@ -2433,6 +2438,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: F_Stew
+      objectReference: {fileID: 0}
+    - target: {fileID: 7481309214215485892, guid: 92063d0acbd932b4b9b262b047bac94d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7825325114179445630, guid: 92063d0acbd932b4b9b262b047bac94d,
         type: 3}

@@ -94,9 +94,6 @@ public class EmployeeStateManager : StateManager, IDamageable
 
     private void Awake()
     {
-        g_Bacon.SetActive(false);
-        g_Staw.SetActive(false);
-        g_Steak.SetActive(false);
 
         anim = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();

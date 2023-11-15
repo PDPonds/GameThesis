@@ -59,7 +59,12 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
         {
             if (i_currentCookerCount < i_maxCooker)
             {
+                SoundManager.Instance.PlayInteractiveSound();
                 i_currentCookerCount++;
+            }
+            else
+            {
+                SoundManager.Instance.PlayCantInteractSound();
             }
         }
 
@@ -72,7 +77,12 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
         {
             if (i_currentWaiterCount < i_maxWaiter)
             {
+                SoundManager.Instance.PlayInteractiveSound();
                 i_currentWaiterCount++;
+            }
+            else
+            {
+                SoundManager.Instance.PlayCantInteractSound();
             }
         }
     }
@@ -84,8 +94,12 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
         {
             if (i_currentCookerCount > i_minCooker)
             {
+                SoundManager.Instance.PlayInteractiveSound();
                 i_currentCookerCount--;
-
+            }
+            else
+            {
+                SoundManager.Instance.PlayCantInteractSound();
             }
         }
     }
@@ -97,8 +111,12 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
         {
             if (i_currentWaiterCount > i_minWaiter)
             {
+                SoundManager.Instance.PlayInteractiveSound();
                 i_currentWaiterCount--;
-
+            }
+            else
+            {
+                SoundManager.Instance.PlayCantInteractSound();
             }
         }
     }

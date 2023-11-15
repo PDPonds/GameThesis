@@ -7,21 +7,25 @@ public class SoundManager : Auto_Singleton<SoundManager>
 {
     AudioSource addCoinSource;
     AudioSource removeCoinSource;
+
     AudioSource interactiveSource;
+    AudioSource cantIneractiveSource;
 
     AudioSource openRestaurantSource;
     AudioSource closeRestaurantSource;
 
     AudioSource upgradeSource;
+    AudioSource summarySource;
 
     public AudioClip addCoinSound;
     public AudioClip removeCoinSound;
     public AudioClip interactiveSound;
+    public AudioClip cantIneractiveSound;
     public AudioClip openRestaurantSound;
     public AudioClip closeRestaurantSound;
     public AudioClip upgradeSound;
+    public AudioClip summarySound;
 
- 
     private void Awake()
     {
         addCoinSource = InitializedAudioSource(false, false);
@@ -30,6 +34,8 @@ public class SoundManager : Auto_Singleton<SoundManager>
         openRestaurantSource = InitializedAudioSource(false, false);
         closeRestaurantSource = InitializedAudioSource(false, false);
         upgradeSource = InitializedAudioSource(false, false);
+        summarySource = InitializedAudioSource(false, false);
+        cantIneractiveSource = InitializedAudioSource(false, false);
     }
 
     public void PlayAddCoinSound()
@@ -60,6 +66,16 @@ public class SoundManager : Auto_Singleton<SoundManager>
     public void PlayUpgradeSound()
     {
         upgradeSource.PlayOneShot(upgradeSound);
+    }
+
+    public void PlaySummarySound()
+    {
+        summarySource.PlayOneShot(summarySound);
+    }
+
+    public void PlayCantInteractSound()
+    {
+        cantIneractiveSource.PlayOneShot(cantIneractiveSound);
     }
 
     AudioSource InitializedAudioSource(bool loop, bool threeDsound)

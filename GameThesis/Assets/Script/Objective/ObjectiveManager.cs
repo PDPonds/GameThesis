@@ -27,7 +27,7 @@ public class ObjectiveManager : Auto_Singleton<ObjectiveManager>
 
                     CollectMoneyObjective collectMoney = (CollectMoneyObjective)s_currentObjective;
 
-                    if (GameManager.Instance.f_coin >= collectMoney.f_tagetMoney)
+                    if (GameManager.Instance.f_pocketMoney >= collectMoney.f_tagetMoney)
                     {
                         NextObjective();
                     }
@@ -35,12 +35,30 @@ public class ObjectiveManager : Auto_Singleton<ObjectiveManager>
                     break;
                 case ObjectiveType.UnlockNewItem:
 
+                    MenuHandler menuHandler = RestaurantManager.Instance.menuHandler;
+
                     UnlockNewItemObjective unlock = (UnlockNewItemObjective)s_currentObjective;
                     switch (unlock.e_item)
                     {
                         case UnlockNewItemObjective.ItemType.Table:
 
                             if (RestaurantManager.Instance.GetCurrentTableIsReadyCount() >= unlock.i_targetCount)
+                            {
+                                NextObjective();
+                            }
+
+                            break;
+                        case UnlockNewItemObjective.ItemType.Dish:
+
+                            if (menuHandler.DishStatus(unlock.i_menuIndex))
+                            {
+                                NextObjective();
+                            }
+
+                            break;
+                        case UnlockNewItemObjective.ItemType.Drink:
+
+                            if (menuHandler.DrinkStatus(unlock.i_menuIndex))
                             {
                                 NextObjective();
                             }

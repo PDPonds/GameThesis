@@ -21,7 +21,7 @@ public class Door : MonoBehaviour
         if (b_isForntDoor) b_isLock = true;
         anim = t_doorMesh.GetComponent<Animator>();
 
-        openDoorSoundSource = InitializedAudioSource(false, false);
+        openDoorSoundSource = InitializedAudioSource(false, true);
 
     }
     private void Update()
@@ -73,7 +73,12 @@ public class Door : MonoBehaviour
 
         newSource.volume = 0.2f;
 
-        if (threeDsound) newSource.dopplerLevel = 1;
+        if (threeDsound)
+        {
+            newSource.spatialBlend = 1f;
+            newSource.dopplerLevel = 1;
+            newSource.maxDistance = 10;
+        }
         else newSource.dopplerLevel = 0;
 
         newSource.loop = loop;

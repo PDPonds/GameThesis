@@ -16,6 +16,16 @@ public class MenuHandler : MonoBehaviour
         ActivateDrinksMenu(0);
     }
 
+    public bool DishStatus(int menuIndex)
+    {
+        return mainDish_Status[menuIndex].status;
+    }
+
+    public bool DrinkStatus(int menuIndex)
+    {
+        return drinks_Status[menuIndex].status;
+    }
+
     private void Update()
     {
         GameState state = GameManager.Instance.s_gameState;

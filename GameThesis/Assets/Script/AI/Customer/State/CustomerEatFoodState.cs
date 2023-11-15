@@ -24,7 +24,7 @@ public class CustomerEatFoodState : BaseState
             cus.c_chairObj.EnableAllFood();
         }
 
-
+        cus.PauseSleepSound();
     }
 
     public override void UpdateState(StateManager ai)

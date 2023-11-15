@@ -14,7 +14,7 @@ public class CustomerGoToChairState : BaseState
 
         cus.g_sleepVFX.SetActive(false);
         cus.g_stunVFX.SetActive(false);
-
+        cus.PauseSleepSound();
     }
 
     public override void UpdateState(StateManager ai)
