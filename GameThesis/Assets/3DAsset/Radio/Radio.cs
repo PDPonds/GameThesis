@@ -5,8 +5,7 @@ using UnityEngine;
 public class Radio : MonoBehaviour , IInteracable
 {
     public List<AudioClip> playlist = new List<AudioClip>();
-    public AudioClip openSound;
-    public AudioClip closeSound;
+    public AudioClip interactSound;
 
     private AudioSource audioSource;
     private bool isRadioOn = true;
@@ -27,7 +26,7 @@ public class Radio : MonoBehaviour , IInteracable
         }
         else
         {
-            audioSource.Stop();
+            
         }
 
     }
@@ -42,6 +41,18 @@ public class Radio : MonoBehaviour , IInteracable
     public void Interaction()
     {
         isRadioOn = !isRadioOn;
+        
+
+        if (isRadioOn)
+        {
+            audioSource.PlayOneShot(interactSound);
+            PlaySong();
+        }
+        else
+        {
+            audioSource.Stop();
+            audioSource.PlayOneShot(interactSound);
+        }
     }
 
     public string InteractionText()
