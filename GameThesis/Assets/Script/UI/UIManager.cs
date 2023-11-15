@@ -64,6 +64,7 @@ public class UIManager : Auto_Singleton<UIManager>
     public GameObject g_sneakWaypoint;
     public GameObject g_threatWaypoint;
     public GameObject g_slackoffWaypoint;
+
     List<WaypointIndicator> allSneakWaypoint = new List<WaypointIndicator>();
     List<WaypointIndicator> allSleepWaypoint = new List<WaypointIndicator>();
     List<WaypointIndicator> allCashWaypoint = new List<WaypointIndicator>();
@@ -72,12 +73,15 @@ public class UIManager : Auto_Singleton<UIManager>
 
     public GameObject g_openAndCloseRestaurantWaypoint;
     public GameObject g_managementBoardWaypoint;
+    public GameObject g_menuWaypoint;
 
     List<WaypointIndicator> allOpenAndCloseWaypoint = new List<WaypointIndicator>();
     List<WaypointIndicator> allManagementWaypoint = new List<WaypointIndicator>();
+    List<WaypointIndicator> allMenuWaypoint = new List<WaypointIndicator>();
 
     public Transform t_managementBoardMesh;
     public Transform t_doorMesh;
+    public Transform t_menuBoardMesh;
 
     [Header("===== Summary =====")]
     public GameObject g_summary;
@@ -331,6 +335,7 @@ public class UIManager : Auto_Singleton<UIManager>
 
             SpawnManagementBoardWaypoint();
             SpawnOpenCloseWaypoint();
+            SpawnMenuBoardWaypoint();
 
             //g_openAndCloseRestaurantWaypoint.SetActive(true);
             //g_managementBoardWaypoint.SetActive(true);
@@ -360,6 +365,7 @@ public class UIManager : Auto_Singleton<UIManager>
                 //g_managementBoardWaypoint.SetActive(false);
                 SpawnOpenCloseWaypoint();
                 DestroyManagementBoardWaypoint();
+                DestroyMenuBoardWaypoint();
                 g_close.SetActive(true);
             }
             else
@@ -375,8 +381,10 @@ public class UIManager : Auto_Singleton<UIManager>
 
             //g_openAndCloseRestaurantWaypoint.SetActive(false);
             //g_managementBoardWaypoint.SetActive(false);
+
             DestroyManagementBoardWaypoint();
             DestroyOpenClseWaypoint();
+            DestroyMenuBoardWaypoint();
         }
 
         if (ObjectiveManager.Instance.GetCurrentObjective(out int index) &&
@@ -450,6 +458,35 @@ public class UIManager : Auto_Singleton<UIManager>
             }
         }
         allManagementWaypoint.Clear();
+    }
+
+    void SpawnMenuBoardWaypoint()
+    {
+        if (allMenuWaypoint.Count != 1)
+        {
+            foreach (WaypointIndicator waypoint in allMenuWaypoint)
+            {
+                Destroy(waypoint.gameObject);
+            }
+            allMenuWaypoint.Clear();
+            GameObject wayPointObj = Instantiate(g_menuWaypoint, Vector3.zero, Quaternion.identity);
+            wayPointObj.transform.SetParent(t_Canvas);
+            WaypointIndicator indicator = wayPointObj.GetComponent<WaypointIndicator>();
+            indicator.target = t_menuBoardMesh;
+            allMenuWaypoint.Add(indicator);
+        }
+    }
+
+    void DestroyMenuBoardWaypoint()
+    {
+        if (allMenuWaypoint.Count > 0)
+        {
+            foreach (WaypointIndicator waypoint in allMenuWaypoint)
+            {
+                Destroy(waypoint.gameObject);
+            }
+        }
+        allMenuWaypoint.Clear();
     }
 
 

@@ -58,37 +58,104 @@ public class UpgradTable : MonoBehaviour, IInteracable
 
             GameState state = GameManager.Instance.s_gameState;
 
+            bool isBigTable = tableObj.g_chairs.Count > 2;
+            bool isLevel2 = RestaurantManager.Instance.i_level > 1;
+
+
             if (state.s_currentState == state.s_beforeOpenState)
             {
-                Collider[] taCol = tableObj.g_table.GetComponents<Collider>();
-                foreach (Collider col in taCol)
+                if (isLevel2)
                 {
-                    if (!col.enabled) col.enabled = true;
-                }
-
-                if (!tableObj.g_table.gameObject.activeSelf) tableObj.g_table.gameObject.SetActive(true);
-
-                if (tableObj.g_chairs.Count > 0)
-                {
-                    for (int i = 0; i < tableObj.g_chairs.Count; i++)
+                    Collider[] taCol = tableObj.g_table.GetComponents<Collider>();
+                    foreach (Collider col in taCol)
                     {
-                        MeshRenderer rnd = tableObj.g_chairs[i].GetComponent<MeshRenderer>();
-                        if (rnd.material != m_waitForBuy)
+                        if (!col.enabled) col.enabled = true;
+                    }
+
+                    if (!tableObj.g_table.gameObject.activeSelf) tableObj.g_table.gameObject.SetActive(true);
+
+                    if (tableObj.g_chairs.Count > 0)
+                    {
+                        for (int i = 0; i < tableObj.g_chairs.Count; i++)
                         {
-                            rnd.material = m_waitForBuy;
+                            MeshRenderer rnd = tableObj.g_chairs[i].GetComponent<MeshRenderer>();
+                            if (rnd.material != m_waitForBuy)
+                            {
+                                rnd.material = m_waitForBuy;
+                            }
+
+                            Collider[] chairCol = tableObj.g_chairs[i].GetComponents<Collider>();
+                            foreach (Collider col in chairCol) if (!col.enabled) col.enabled = true;
+
+                            if (!tableObj.g_chairs[i].gameObject.activeSelf) tableObj.g_chairs[i].gameObject.SetActive(true);
+
                         }
-
-                        Collider[] chairCol = tableObj.g_chairs[i].GetComponents<Collider>();
-                        foreach (Collider col in chairCol) if (!col.enabled) col.enabled = true;
-
-                        if (!tableObj.g_chairs[i].gameObject.activeSelf) tableObj.g_chairs[i].gameObject.SetActive(true);
-
                     }
                 }
+                else
+                {
+                    if(isBigTable)
+                    {
+                        Collider[] taCol = tableObj.g_table.GetComponents<Collider>();
+                        foreach (Collider col in taCol)
+                        {
+                            if (col.enabled) col.enabled = false;
+                        }
+
+                        if (tableObj.g_table.gameObject.activeSelf) tableObj.g_table.gameObject.SetActive(false);
+                        if (tableObj.g_chairs.Count > 0)
+                        {
+                            for (int i = 0; i < tableObj.g_chairs.Count; i++)
+                            {
+                                MeshRenderer rnd = tableObj.g_chairs[i].GetComponent<MeshRenderer>();
+                                if (rnd.material != m_waitForBuy)
+                                {
+                                    rnd.material = m_waitForBuy;
+                                }
+
+                                Collider[] chairCol = tableObj.g_chairs[i].GetComponents<Collider>();
+                                foreach (Collider col in chairCol) if (col.enabled) col.enabled = false;
+
+                                if (tableObj.g_chairs[i].gameObject.activeSelf) tableObj.g_chairs[i].gameObject.SetActive(false);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Collider[] taCol = tableObj.g_table.GetComponents<Collider>();
+                        foreach (Collider col in taCol)
+                        {
+                            if (!col.enabled) col.enabled = true;
+                        }
+
+                        if (!tableObj.g_table.gameObject.activeSelf) tableObj.g_table.gameObject.SetActive(true);
+
+                        if (tableObj.g_chairs.Count > 0)
+                        {
+                            for (int i = 0; i < tableObj.g_chairs.Count; i++)
+                            {
+                                MeshRenderer rnd = tableObj.g_chairs[i].GetComponent<MeshRenderer>();
+                                if (rnd.material != m_waitForBuy)
+                                {
+                                    rnd.material = m_waitForBuy;
+                                }
+
+                                Collider[] chairCol = tableObj.g_chairs[i].GetComponents<Collider>();
+                                foreach (Collider col in chairCol) if (!col.enabled) col.enabled = true;
+
+                                if (!tableObj.g_chairs[i].gameObject.activeSelf) tableObj.g_chairs[i].gameObject.SetActive(true);
+
+                            }
+                        }
+                    }
+                }
+
+                
             }
 
             if (state.s_currentState == state.s_openState)
             {
+
                 Collider[] taCol = tableObj.g_table.GetComponents<Collider>();
                 foreach (Collider col in taCol)
                 {
