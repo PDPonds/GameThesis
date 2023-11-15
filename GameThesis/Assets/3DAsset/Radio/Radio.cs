@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Radio : MonoBehaviour
+public class Radio : MonoBehaviour , IInteracable
 {
     public List<AudioClip> playlist = new List<AudioClip>();
     public AudioClip openSound;
@@ -25,8 +25,11 @@ public class Radio : MonoBehaviour
                 PlaySong();
             }
         }
+        else
+        {
+            audioSource.Stop();
+        }
 
-        if(Input.GetKeyUp(KeyCode.Space)) { PlaySong(); }
     }
 
 
@@ -34,5 +37,28 @@ public class Radio : MonoBehaviour
     {
         audioSource.clip = playlist[Random.Range(0, playlist.Count)];
         audioSource.Play();
+    }
+
+    public void Interaction()
+    {
+        isRadioOn = !isRadioOn;
+    }
+
+    public string InteractionText()
+    {
+        if(isRadioOn)
+        {
+            return $"[E] to close radio";
+        }
+        else
+        {
+            return $"[E] to open radio";
+        }
+        
+    }
+
+    public Color InteractionTextColor()
+    {
+        return Color.white;
     }
 }
