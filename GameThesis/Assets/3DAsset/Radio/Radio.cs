@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class Radio : MonoBehaviour , IInteracable
@@ -9,6 +10,8 @@ public class Radio : MonoBehaviour , IInteracable
 
     private AudioSource audioSource;
     private bool isRadioOn = true;
+
+    private int currentSong;
 
     void Start()
     {
@@ -34,8 +37,15 @@ public class Radio : MonoBehaviour , IInteracable
 
     private void PlaySong()
     {
-        audioSource.clip = playlist[Random.Range(0, playlist.Count)];
+        audioSource.clip = playlist[currentSong];
         audioSource.Play();
+    }
+
+    private void NextSong()
+    {
+        currentSong++;
+        if(currentSong >= playlist.Count) { currentSong = 0; }
+        PlaySong();
     }
 
     public void Interaction()
@@ -46,7 +56,7 @@ public class Radio : MonoBehaviour , IInteracable
         if (isRadioOn)
         {
             audioSource.PlayOneShot(interactSound);
-            PlaySong();
+            NextSong();
         }
         else
         {
