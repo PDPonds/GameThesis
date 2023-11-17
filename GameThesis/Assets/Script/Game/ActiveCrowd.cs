@@ -89,11 +89,4 @@ public class ActiveCrowd : MonoBehaviour
 
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.white;
-        Gizmos.DrawWireSphere(transform.position, GameManager.Instance.f_crowdDistance);
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, GameManager.Instance.f_crowdArea);
-    }
 }

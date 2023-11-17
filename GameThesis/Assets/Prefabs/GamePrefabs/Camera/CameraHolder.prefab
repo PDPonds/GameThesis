@@ -107,7 +107,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -376,8 +376,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   s_playerCamera: {fileID: 0}
   s_fpsMoveCam: {fileID: 0}
-  f_senX: 200
-  f_senY: 200
+  f_senX: 100
+  f_senY: 100
 --- !u!114 &6839733495753513927
 MonoBehaviour:
   m_ObjectHideFlags: 0

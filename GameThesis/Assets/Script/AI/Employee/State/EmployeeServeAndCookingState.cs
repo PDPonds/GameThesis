@@ -38,13 +38,16 @@ public class EmployeeServeAndCookingState : BaseState
                     emp.agent.SetDestination(emp.t_workingPos.position);
 
                     if (Vector3.Distance(emp.transform.position, emp.t_workingPos.position)
-                        <= 1.5f)
+                        <= 0.1f)
                     {
                         emp.b_isWorking = true;
                         emp.anim.runtimeAnimatorController = emp.cookingAnim;
                         emp.agent.velocity = Vector3.zero;
                         emp.anim.SetBool("run", false);
                         emp.anim.SetBool("walk", false);
+
+                        Vector3 rot = new Vector3(0, emp.t_workingPos.rotation.y, 0);
+                        emp.transform.rotation = Quaternion.Euler(rot);
 
                         if (emp.b_canCook) emp.anim.SetBool("cooking", false);
                         else emp.anim.SetBool("cooking", true);
@@ -113,7 +116,7 @@ public class EmployeeServeAndCookingState : BaseState
                         if (emp.b_hasFood)
                         {
                             emp.anim.SetLayerWeight(1, 1);
-                            if(cus != null)
+                            if (cus != null)
                             {
                                 switch (cus.i_dish)
                                 {
@@ -203,7 +206,7 @@ public class EmployeeServeAndCookingState : BaseState
                         emp.agent.SetDestination(emp.t_workingPos.position);
 
                         if (Vector3.Distance(emp.transform.position, emp.t_workingPos.position)
-                            <= 1.5f)
+                            <= 0.1f)
                         {
                             emp.b_isWorking = true;
                             emp.anim.runtimeAnimatorController = emp.cookingAnim;
@@ -280,7 +283,7 @@ public class EmployeeServeAndCookingState : BaseState
                             if (emp.b_hasFood)
                             {
                                 emp.anim.SetLayerWeight(1, 1);
-                                switch(cus.i_dish)
+                                switch (cus.i_dish)
                                 {
                                     case 0:
                                         emp.g_Bacon.SetActive(true);
@@ -292,7 +295,7 @@ public class EmployeeServeAndCookingState : BaseState
                                         emp.g_Steak.SetActive(true);
                                         break;
                                 }
-                                
+
                             }
                             else
                             {
@@ -326,7 +329,7 @@ public class EmployeeServeAndCookingState : BaseState
                         }
                     }
 
-                    
+
 
                     break;
 

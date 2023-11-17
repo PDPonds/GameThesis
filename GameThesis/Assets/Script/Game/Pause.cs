@@ -54,6 +54,17 @@ public class Pause : MonoBehaviour
             Cursor.visible = false;
         }
 
+
+        if(DebugController.Instance.showConsole)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
     }
 
     private static void PauseGame()

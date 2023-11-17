@@ -21,6 +21,9 @@ public class EmployeeSlackOffState : BaseState
         if (emp.employeeType == EmployeeType.Serve)
         {
             emp.b_hasFood = false;
+            emp.g_Bacon.SetActive(false);
+            emp.g_Steak.SetActive(false);
+            emp.g_Staw.SetActive(false);
         }
 
         emp.ApplyOutlineColor(emp.color_warning, emp.f_outlineScale);
@@ -30,10 +33,6 @@ public class EmployeeSlackOffState : BaseState
         emp.anim.runtimeAnimatorController = emp.allSlackOffAnim[slackOffNum];
 
         emp.anim.SetBool("cooking", false);
-
-        emp.g_Bacon.SetActive(false);
-        emp.g_Steak.SetActive(false);
-        emp.g_Staw.SetActive(false);
 
     }
 
