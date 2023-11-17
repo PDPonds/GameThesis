@@ -15,7 +15,7 @@ public class ManagementBoard : MonoBehaviour
     public GameObject g_removeCookerButton;
     public GameObject g_addWaiterButton;
     public GameObject g_removeWaiterButton;
-
+    public GameObject g_upgradeRestaurant;
 
     private void Update()
     {
@@ -37,6 +37,7 @@ public class ManagementBoard : MonoBehaviour
             g_addWaiterButton.SetActive(true);
             g_removeCookerButton.SetActive(true);
             g_removeWaiterButton.SetActive(true);
+            g_upgradeRestaurant.SetActive(true);
         }
         else
         {
@@ -44,6 +45,7 @@ public class ManagementBoard : MonoBehaviour
             g_addWaiterButton.SetActive(false);
             g_removeCookerButton.SetActive(false);
             g_removeWaiterButton.SetActive(false);
+            g_upgradeRestaurant.SetActive(false);
         }
 
     }

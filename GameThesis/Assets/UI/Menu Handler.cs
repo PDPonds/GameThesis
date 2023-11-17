@@ -10,6 +10,8 @@ public class MenuHandler : MonoBehaviour
     public List<MenuStatus> mainDish_Status = new List<MenuStatus>();
     public List<MenuStatus> drinks_Status = new List<MenuStatus>();
 
+    public GameObject LiqourLicense;
+
     void Start()
     {
         ActivateDishMenu(0);
@@ -29,22 +31,53 @@ public class MenuHandler : MonoBehaviour
     private void Update()
     {
         GameState state = GameManager.Instance.s_gameState;
+        bool isLevel2 = RestaurantManager.Instance.i_level > 1;
+
         if (state.s_currentState == state.s_beforeOpenState)
         {
-            for (int i = 0; i < mainDish_Status.Count; i++)
+            if (isLevel2)
             {
-                if (!mainDish_Status[i].menuGameobject.activeSelf)
+                for (int i = 0; i < mainDish_Status.Count; i++)
                 {
-                    mainDish_Status[i].menuGameobject.SetActive(true);
+                    if (!mainDish_Status[i].menuGameobject.activeSelf)
+                    {
+                        mainDish_Status[i].menuGameobject.SetActive(true);
+                    }
+                }
+                for (int i = 0; i < drinks_Status.Count; i++)
+                {
+                    if (!drinks_Status[i].menuGameobject.activeSelf)
+                    {
+                        drinks_Status[i].menuGameobject.SetActive(true);
+                    }
                 }
             }
-            for (int i = 0; i < drinks_Status.Count; i++)
+            else
             {
-                if (!drinks_Status[i].menuGameobject.activeSelf)
+                for (int i = 0; i < mainDish_Status.Count; i++)
                 {
-                    drinks_Status[i].menuGameobject.SetActive(true);
+                    if (i != 2)
+                    {
+                        if (!mainDish_Status[i].menuGameobject.activeSelf)
+                        {
+                            mainDish_Status[i].menuGameobject.SetActive(true);
+                        }
+                    }
+                    else
+                    {
+                        if (mainDish_Status[i].menuGameobject.activeSelf)
+                            mainDish_Status[i].menuGameobject.SetActive(false);
+                    }
+                }
+                for (int i = 0; i < drinks_Status.Count; i++)
+                {
+                    if (!drinks_Status[i].menuGameobject.activeSelf)
+                    {
+                        drinks_Status[i].menuGameobject.SetActive(true);
+                    }
                 }
             }
+
         }
         else
         {
@@ -77,6 +110,10 @@ public class MenuHandler : MonoBehaviour
                 }
             }
         }
+
+        if (drinks_Status[1].status) LiqourLicense.SetActive(true);
+        else LiqourLicense.SetActive(false);
+
     }
 
     public int RandomDish()

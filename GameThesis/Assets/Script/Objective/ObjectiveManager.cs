@@ -70,11 +70,11 @@ public class ObjectiveManager : Auto_Singleton<ObjectiveManager>
                     break;
                 case ObjectiveType.UpgradeRestaurant:
 
-                    UpgradeRestaurantObjective upgrade = (UpgradeRestaurantObjective)s_currentObjective;
-                    if (RestaurantManager.Instance.i_level >= upgrade.i_targetLevel)
-                    {
-                        NextObjective();
-                    }
+                    //UpgradeRestaurantObjective upgrade = (UpgradeRestaurantObjective)s_currentObjective;
+                    //if (RestaurantManager.Instance.i_level >= upgrade.i_targetLevel)
+                    //{
+                    //    NextObjective();
+                    //}
 
                     break;
                 default: break;
