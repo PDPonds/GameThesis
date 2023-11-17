@@ -31,6 +31,10 @@ public class EmployeeSlackOffState : BaseState
 
         emp.anim.SetBool("cooking", false);
 
+        emp.g_Bacon.SetActive(false);
+        emp.g_Steak.SetActive(false);
+        emp.g_Staw.SetActive(false);
+
     }
 
     public override void UpdateState(StateManager ai)

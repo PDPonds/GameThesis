@@ -46,8 +46,8 @@ public class EmployeeStateManager : StateManager, IDamageable
     public bool b_isWorking;
     public Transform t_workingPos;
     public float f_cookingTime;
-    /*[HideInInspector]*/
-    public ChairObj s_cookingChair;
+
+    [HideInInspector] public ChairObj s_cookingChair;
     public AnimatorOverrideController cookingAnim;
 
     [Header("===== Slack Off =====")]
@@ -66,6 +66,7 @@ public class EmployeeStateManager : StateManager, IDamageable
 
     [Header("===== Outline =====")]
     public Transform t_mesh;
+    public List<Transform> meshs = new List<Transform>();
     public float f_outlineScale;
     public Color color_warning;
     public Color color_fighting;
@@ -85,10 +86,13 @@ public class EmployeeStateManager : StateManager, IDamageable
 
     public void ApplyOutlineColor(Color color, float scale)
     {
-        SkinnedMeshRenderer rnd = t_mesh.GetComponent<SkinnedMeshRenderer>();
         Mpb.SetColor("_Color", color);
         Mpb.SetFloat("_Scale", scale);
-        rnd.SetPropertyBlock(mpb);
+        foreach (Transform t in meshs)
+        {
+            SkinnedMeshRenderer trnd = t.GetComponent<SkinnedMeshRenderer>();
+            trnd.SetPropertyBlock(mpb);
+        }
 
     }
 
