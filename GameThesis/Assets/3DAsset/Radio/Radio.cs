@@ -24,14 +24,14 @@ public class Radio : MonoBehaviour , IInteracable
         {
             if(!audioSource.isPlaying)
             {
-                PlaySong();
+                NextSong();
             }
         }
-        else
-        {
-            
-        }
+    }
 
+    private void StartCombatSong()
+    {
+        audioSource.Pause();
     }
 
 
