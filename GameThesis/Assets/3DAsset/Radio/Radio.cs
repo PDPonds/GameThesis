@@ -5,46 +5,60 @@ using UnityEngine;
 
 public class Radio : MonoBehaviour , IInteracable
 {
-    public List<AudioClip> playlist = new List<AudioClip>();
+    public List<AudioClip> restaurantPlaylist = new List<AudioClip>();
+    public List<AudioClip> combatPlaylist = new List<AudioClip>();
     public AudioClip interactSound;
 
-    private AudioSource audioSource;
+    public AudioSource restaurantAudioSource;
+    public AudioSource combatAudioSource;
     private bool isRadioOn = true;
 
     private int currentSong;
 
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();
+        restaurantAudioSource = GetComponent<AudioSource>();
+        combatAudioSource = GetComponent<AudioSource>();
     }
 
     void Update()
     {
         if (isRadioOn)
         {
-            if(!audioSource.isPlaying)
+            if(!restaurantAudioSource.isPlaying)
             {
-                PlaySong();
+                NextSong();
             }
         }
-        else
-        {
-            
-        }
 
+        if(Input.GetKeyDown(KeyCode.LeftArrow)) { StartCombatSong(); }
+        if(Input.GetKeyDown(KeyCode.RightArrow)) { StopCombatSong(); }
+    }
+
+    private void StartCombatSong()
+    {
+        combatAudioSource.clip = combatPlaylist[UnityEngine.Random.Range(0, combatPlaylist.Count)];
+        restaurantAudioSource.Pause();
+        combatAudioSource.Play();
+    }
+
+    private void StopCombatSong()
+    {
+        restaurantAudioSource.Play();
+        combatAudioSource.Pause();
     }
 
 
     private void PlaySong()
     {
-        audioSource.clip = playlist[currentSong];
-        audioSource.Play();
+        restaurantAudioSource.clip = restaurantPlaylist[currentSong];
+        restaurantAudioSource.Play();
     }
 
     private void NextSong()
     {
         currentSong++;
-        if(currentSong >= playlist.Count) { currentSong = 0; }
+        if(currentSong >= restaurantPlaylist.Count) { currentSong = 0; }
         PlaySong();
     }
 
@@ -55,13 +69,13 @@ public class Radio : MonoBehaviour , IInteracable
 
         if (isRadioOn)
         {
-            audioSource.PlayOneShot(interactSound);
+            restaurantAudioSource.PlayOneShot(interactSound);
             NextSong();
         }
         else
         {
-            audioSource.Stop();
-            audioSource.PlayOneShot(interactSound);
+            restaurantAudioSource.Stop();
+            restaurantAudioSource.PlayOneShot(interactSound);
         }
     }
 
