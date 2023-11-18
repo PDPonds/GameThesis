@@ -29,6 +29,8 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
     public GameObject g_level1Restaurant;
     public GameObject g_level2Restaurant;
 
+    public int i_empLevel = 1;
+
     [Header("===== Manage Restaurant ======")]
     [Header("- Cost")]
     public float f_cookerCost;
@@ -66,10 +68,6 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
                 SoundManager.Instance.PlayInteractiveSound();
                 i_currentCookerCount++;
             }
-            else
-            {
-                SoundManager.Instance.PlayCantInteractSound();
-            }
         }
 
     }
@@ -84,10 +82,6 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
                 SoundManager.Instance.PlayInteractiveSound();
                 i_currentWaiterCount++;
             }
-            else
-            {
-                SoundManager.Instance.PlayCantInteractSound();
-            }
         }
     }
 
@@ -101,10 +95,6 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
                 SoundManager.Instance.PlayInteractiveSound();
                 i_currentCookerCount--;
             }
-            else
-            {
-                SoundManager.Instance.PlayCantInteractSound();
-            }
         }
     }
 
@@ -117,10 +107,6 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
             {
                 SoundManager.Instance.PlayInteractiveSound();
                 i_currentWaiterCount--;
-            }
-            else
-            {
-                SoundManager.Instance.PlayCantInteractSound();
             }
         }
     }

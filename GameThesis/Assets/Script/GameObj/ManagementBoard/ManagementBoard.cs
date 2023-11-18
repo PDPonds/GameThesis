@@ -16,7 +16,15 @@ public class ManagementBoard : MonoBehaviour
     public GameObject g_addWaiterButton;
     public GameObject g_removeWaiterButton;
     public GameObject g_upgradeRestaurant;
-    public GameObject g_checker;
+
+    [Header("===== Checker =====")]
+    public GameObject g_upgradeResChecker;
+    public GameObject g_upgradeResBorder;
+    public GameObject g_upgradeEmp1Checker;
+    public GameObject g_upgradeEmp1Border;
+    public GameObject g_upgradeEmp2Checker;
+    public GameObject g_upgradeEmp2Border;
+
 
     private void Update()
     {
@@ -39,6 +47,32 @@ public class ManagementBoard : MonoBehaviour
             g_removeCookerButton.SetActive(true);
             g_removeWaiterButton.SetActive(true);
             g_upgradeRestaurant.SetActive(true);
+
+            if (RestaurantManager.Instance.i_level == 1)
+            {
+                g_upgradeResBorder.SetActive(true);
+            }
+            else if (RestaurantManager.Instance.i_level == 2)
+            {
+                g_upgradeResBorder.SetActive(false);
+            }
+
+            if(RestaurantManager.Instance.i_empLevel == 1)
+            {
+                g_upgradeEmp1Border.SetActive(true);
+                g_upgradeEmp2Border.SetActive(true);
+
+            }
+            else if (RestaurantManager.Instance.i_empLevel == 2)
+            {
+                g_upgradeEmp1Border.SetActive(true);
+                g_upgradeEmp2Border.SetActive(false);
+            }
+            else if (RestaurantManager.Instance.i_empLevel == 3)
+            {
+                g_upgradeEmp1Border.SetActive(false);
+                g_upgradeEmp2Border.SetActive(false);
+            }
         }
         else
         {
@@ -49,13 +83,30 @@ public class ManagementBoard : MonoBehaviour
             g_upgradeRestaurant.SetActive(false);
         }
 
-        if(RestaurantManager.Instance.i_level > 1)
+        if (RestaurantManager.Instance.i_level > 1)
         {
-            g_checker.SetActive(true);
+            g_upgradeResChecker.SetActive(true);
         }
         else
         {
-            g_checker.SetActive(false);
+            g_upgradeResChecker.SetActive(false);
+        }
+
+        if (RestaurantManager.Instance.i_empLevel == 1)
+        {
+            g_upgradeEmp1Checker.SetActive(false);
+            g_upgradeEmp2Checker.SetActive(false);
+
+        }
+        else if (RestaurantManager.Instance.i_empLevel == 2)
+        {
+            g_upgradeEmp1Checker.SetActive(false);
+            g_upgradeEmp2Checker.SetActive(true);
+        }
+        else if (RestaurantManager.Instance.i_empLevel == 3)
+        {
+            g_upgradeEmp1Checker.SetActive(true);
+            g_upgradeEmp2Checker.SetActive(true);
         }
 
     }

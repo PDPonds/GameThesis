@@ -16,6 +16,10 @@ public class EmployeeStateManager : StateManager, IDamageable
     public float f_walkSpeed;
     public float f_runSpeed;
 
+    [Header("- Upgrade")]
+    public float f_level2Mul;
+    public float f_level3Mul;
+
     public EmployeeServeAndCookingState s_activityState = new EmployeeServeAndCookingState();
     public EmployeeSlackOffState s_slackOffState = new EmployeeSlackOffState();
     public EmployeePassedOutState s_passedOutState = new EmployeePassedOutState();
