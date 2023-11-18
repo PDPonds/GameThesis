@@ -23,12 +23,12 @@ public class ActiveCrowd : MonoBehaviour
                             if (cusMan.currentAreaStay == AreaType.OutRestaurant &&
                                 cusMan.s_currentState == cusMan.s_walkAroundState)
                             {
-                                float theta = (2 * Mathf.PI / (cus.Length)) * i;
-                                float xPos = Mathf.Sin(theta) * GameManager.Instance.f_crowdDistance;
-                                float yPos = Mathf.Cos(theta) * GameManager.Instance.f_crowdDistance;
-                                Vector3 xyPos = new Vector3(xPos, 0, yPos) + transform.position;
+                                //float theta = (2 * Mathf.PI / (cus.Length)) * i;
+                                //float xPos = Mathf.Sin(theta) * GameManager.Instance.f_crowdDistance;
+                                //float yPos = Mathf.Cos(theta) * GameManager.Instance.f_crowdDistance;
+                                //Vector3 xyPos = new Vector3(xPos, 0, yPos) + transform.position;
 
-                                cusMan.v_crowdPos = xyPos;
+                                //cusMan.v_crowdPos = xyPos;
 
                                 cusMan.SwitchState(cusMan.s_crowdState);
                             }
@@ -50,13 +50,13 @@ public class ActiveCrowd : MonoBehaviour
                             if (cusMan.currentAreaStay == AreaType.OutRestaurant &&
                                 cusMan.s_currentState == cusMan.s_walkAroundState)
                             {
-                                float theta = (2 * Mathf.PI / (cus.Length)) * i;
-                                float xPos = Mathf.Sin(theta) * GameManager.Instance.f_crowdDistance;
-                                float yPos = Mathf.Cos(theta) * GameManager.Instance.f_crowdDistance;
-                                Vector3 xyPos = new Vector3(xPos, 0, yPos) + transform.position;
-                                Vector3 throngPos = xyPos;
+                                //float theta = (2 * Mathf.PI / (cus.Length)) * i;
+                                //float xPos = Mathf.Sin(theta) * GameManager.Instance.f_crowdDistance;
+                                //float yPos = Mathf.Cos(theta) * GameManager.Instance.f_crowdDistance;
+                                //Vector3 xyPos = new Vector3(xPos, 0, yPos) + transform.position;
+                                //Vector3 throngPos = xyPos;
 
-                                cusMan.v_crowdPos = throngPos;
+                                //cusMan.v_crowdPos = throngPos;
 
                                 cusMan.SwitchState(cusMan.s_crowdState);
                             }

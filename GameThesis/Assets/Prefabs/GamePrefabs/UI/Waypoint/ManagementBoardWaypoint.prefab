@@ -53,8 +53,8 @@ MonoBehaviour:
   background: {fileID: 6061780030918261491}
   target: {fileID: 0}
   distanceText: {fileID: 3888559589785583962}
-  visibleDistance: 1
-  offset: {x: 0, y: 0, z: 0}
+  visibleDistance: 3
+  offset: {x: 0, y: 1, z: 0}
   isDistanceNeeded: 1
   safeAreaRadius: 2.5
 --- !u!1 &1806227527598813297

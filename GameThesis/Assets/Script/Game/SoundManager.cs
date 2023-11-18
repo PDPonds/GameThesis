@@ -55,6 +55,7 @@ public class SoundManager : Auto_Singleton<SoundManager>
 
     public void PlayOpenRestaurantSound()
     {
+        openRestaurantSource.volume = 0.2f;
         openRestaurantSource.PlayOneShot(openRestaurantSound);
     }
 

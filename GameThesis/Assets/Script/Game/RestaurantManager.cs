@@ -20,7 +20,9 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
     public UI_animmationController uiAnimCon;
 
     [Header("===== Upgrade Table Manager =====")]
-    public int i_startTable;
+    public int i_startTable; //2
+    //public float f_startTableCost; //100
+    //public float f_tableCostMul; //50
 
     [Header("===== Level =====")]
     public int i_level = 1;
@@ -163,11 +165,15 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
 
     private void Start()
     {
-        for (int i = 0; i < i_startTable; i++)
+
+        for (int i = 0; i < allTables.Length; i++)
         {
-            UpgradTable up = allTables[i].transform.GetComponent<UpgradTable>();
-            up.b_readyToUse = true;
-            up.SetUpUseAble();
+            if (i < i_startTable)
+            {
+                UpgradTable up = allTables[i].transform.GetComponent<UpgradTable>();
+                up.b_readyToUse = true;
+                up.SetUpUseAble();
+            }
         }
     }
 

@@ -58,13 +58,13 @@ public class UpgradTable : MonoBehaviour, IInteracable
 
             GameState state = GameManager.Instance.s_gameState;
 
-            bool isBigTable = tableObj.g_chairs.Count > 2;
-            bool isLevel2 = RestaurantManager.Instance.i_level > 1;
+            bool isTableLevel2 = tableObj.isLevel2;
+            bool isResLevel2 = RestaurantManager.Instance.i_level > 1;
 
 
             if (state.s_currentState == state.s_beforeOpenState)
             {
-                if (isLevel2)
+                if (isResLevel2)
                 {
                     Collider[] taCol = tableObj.g_table.GetComponents<Collider>();
                     foreach (Collider col in taCol)
@@ -94,7 +94,7 @@ public class UpgradTable : MonoBehaviour, IInteracable
                 }
                 else
                 {
-                    if(isBigTable)
+                    if (isTableLevel2)
                     {
                         Collider[] taCol = tableObj.g_table.GetComponents<Collider>();
                         foreach (Collider col in taCol)
@@ -150,7 +150,7 @@ public class UpgradTable : MonoBehaviour, IInteracable
                     }
                 }
 
-                
+
             }
 
             if (state.s_currentState == state.s_openState)

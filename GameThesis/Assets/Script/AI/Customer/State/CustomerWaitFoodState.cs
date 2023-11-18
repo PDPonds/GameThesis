@@ -55,7 +55,19 @@ public class CustomerWaitFoodState : BaseState
 
                 Vector3 chairPos = new Vector3(chair.t_sitPos.position.x, chair.t_sitPos.position.y, chair.t_sitPos.position.z);
                 cus.transform.position = chairPos;
-                cus.transform.rotation = Quaternion.Euler(0, chair.transform.localEulerAngles.z + 90f, 0);
+
+                TableObj table = chair.transform.GetComponentInParent<TableObj>();
+                if (table != null)
+                {
+                    if (table.transform.localEulerAngles.y == 0)
+                    {
+                        cus.transform.rotation = Quaternion.Euler(0, chair.transform.localEulerAngles.z + 90f, 0);
+                    }
+                    else if (table.transform.localEulerAngles.y == 90)
+                    {
+                        cus.transform.rotation = Quaternion.Euler(0, chair.transform.localEulerAngles.z + 180f, 0);
+                    }
+                }
 
             }
 

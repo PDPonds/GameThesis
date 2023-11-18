@@ -189,8 +189,8 @@ MonoBehaviour:
   background: {fileID: 6902706621747008331}
   target: {fileID: 0}
   distanceText: {fileID: 4062495937989136625}
-  visibleDistance: 1
-  offset: {x: 0, y: 2, z: 0}
+  visibleDistance: 3
+  offset: {x: 0, y: 1, z: 0}
   isDistanceNeeded: 1
   safeAreaRadius: 2.5
 --- !u!1 &7511548145617134914

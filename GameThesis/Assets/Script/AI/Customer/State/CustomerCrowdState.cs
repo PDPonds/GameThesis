@@ -33,24 +33,45 @@ public class CustomerCrowdState : BaseState
         cus.anim.SetBool("checkbill", false);
 
 
-        if (Vector3.Distance(cus.transform.position,
-            cus.v_crowdPos) <= 1f)
-        {
-            cus.anim.SetBool("fightState", false);
-            cus.anim.SetBool("walk", false);
-            cus.anim.SetBool("run", false);
-            cus.anim.SetBool("sit", false);
-            cus.anim.SetBool("drunk", false);
-            cus.anim.SetBool("cheer", true);
+        //if (Vector3.Distance(cus.transform.position,
+        //    cus.v_crowdPos) <= 1f)
+        //{
+        //    cus.anim.SetBool("fightState", false);
+        //    cus.anim.SetBool("walk", false);
+        //    cus.anim.SetBool("run", false);
+        //    cus.anim.SetBool("sit", false);
+        //    cus.anim.SetBool("drunk", false);
+        //    cus.anim.SetBool("cheer", true);
 
-            cus.agent.velocity = Vector3.zero;
-            cus.transform.LookAt(PlayerManager.Instance.transform.position);
-        }
+        //    cus.agent.velocity = Vector3.zero;
+        //    cus.transform.LookAt(PlayerManager.Instance.transform.position);
+        //}
 
         if (Vector3.Distance(cus.transform.position, GameManager.Instance.t_crowdCenterPoint.position)
-            > GameManager.Instance.f_crowdArea)
+            > GameManager.Instance.f_crowdDistance)
         {
             cus.SwitchState(cus.s_walkAroundState);
+        }
+
+        if (Vector3.Distance(cus.transform.position, PlayerManager.Instance.transform.position)
+            < 6f)
+        {
+            Vector3 dir = cus.transform.position - PlayerManager.Instance.transform.position;
+            dir = dir.normalized;
+            Vector3 pos = (dir * 5f) + GameManager.Instance.t_crowdCenterPoint.position;
+            cus.agent.SetDestination(pos);
+            if(Vector3.Distance(cus.transform.position, pos) <= 1f)
+            {
+                cus.anim.SetBool("fightState", false);
+                cus.anim.SetBool("walk", false);
+                cus.anim.SetBool("run", false);
+                cus.anim.SetBool("sit", false);
+                cus.anim.SetBool("drunk", false);
+                cus.anim.SetBool("cheer", true);
+
+                cus.agent.velocity = Vector3.zero;
+                cus.transform.LookAt(PlayerManager.Instance.transform.position);
+            }
         }
 
     }

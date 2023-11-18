@@ -8,17 +8,17 @@ public class ChairObj : MonoBehaviour
     public Transform t_sitPos;
     public Vector2 v_minmaxCDForNextCustomer;
 
-    [HideInInspector] public bool b_isEmpty;
+    public bool b_isEmpty;
 
     [HideInInspector] public float f_cdForNextCustomer;
 
-    [HideInInspector] public bool b_readyForNextCustomer;
+     public bool b_readyForNextCustomer;
     [HideInInspector] float f_currentCDForNextCustomer;
 
     [HideInInspector] public bool b_finishCooking;
-    [HideInInspector] public CustomerStateManager s_currentCustomer;
-    [HideInInspector] public EmployeeStateManager s_currentServerEmployee;
-    [HideInInspector] public EmployeeStateManager s_currentCookingEmployee;
+    public CustomerStateManager s_currentCustomer;
+    public EmployeeStateManager s_currentServerEmployee;
+    public EmployeeStateManager s_currentCookingEmployee;
 
     TableObj table;
     [HideInInspector] public bool b_canUse;

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class TableObj : MonoBehaviour
 {
+    public bool isLevel2;
     public GameObject g_table;
     public List<GameObject> g_chairs = new List<GameObject>();
 

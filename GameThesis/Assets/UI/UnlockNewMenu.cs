@@ -16,6 +16,7 @@ public class UnlockNewMenu : MonoBehaviour, IInteracable
     public TextMeshProUGUI text_menuName;
     public TextMeshProUGUI text_menuCost;
     public TextMeshProUGUI text_menuDollar;
+    public GameObject g_border;
 
     private void Update()
     {
@@ -30,12 +31,14 @@ public class UnlockNewMenu : MonoBehaviour, IInteracable
                     text_menuCost.color = color;
                     text_menuName.color = color;
                     text_menuDollar.color = color;
+                    if (g_border != null) g_border.SetActive(false);
                 }
                 else
                 {
                     text_menuCost.color = Color.gray;
                     text_menuName.color = Color.gray;
                     text_menuDollar.color = Color.gray;
+                    if (g_border != null) g_border.SetActive(true);
                 }
             }
             else if (type == menuType.drink)
@@ -45,12 +48,14 @@ public class UnlockNewMenu : MonoBehaviour, IInteracable
                     text_menuCost.color = color;
                     text_menuName.color = color;
                     text_menuDollar.color = color;
+                    if (g_border != null) g_border.SetActive(false);
                 }
                 else
                 {
                     text_menuCost.color = Color.gray;
                     text_menuName.color = Color.gray;
                     text_menuDollar.color = Color.gray;
+                    if (g_border != null) g_border.SetActive(true);
                 }
             }
 

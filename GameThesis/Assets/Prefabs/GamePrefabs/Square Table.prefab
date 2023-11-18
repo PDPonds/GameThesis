@@ -77,6 +77,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d860dc68c59fdd4391da202daf0b526, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isLevel2: 0
   g_table: {fileID: 6338093163460378328}
   g_chairs:
   - {fileID: 2104527614964219477}
@@ -464,9 +465,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   t_sitPos: {fileID: 1529568447855346968}
   v_minmaxCDForNextCustomer: {x: 15, y: 20}
-  b_isEmpty: 0
+  b_isEmpty: 1
   f_cdForNextCustomer: 0
-  b_readyForNextCustomer: 0
+  b_readyForNextCustomer: 1
   b_finishCooking: 0
   s_currentCustomer: {fileID: 0}
   s_currentServerEmployee: {fileID: 0}
@@ -713,9 +714,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   t_sitPos: {fileID: 8068458789347815368}
   v_minmaxCDForNextCustomer: {x: 15, y: 20}
-  b_isEmpty: 0
+  b_isEmpty: 1
   f_cdForNextCustomer: 0
-  b_readyForNextCustomer: 0
+  b_readyForNextCustomer: 1
   b_finishCooking: 0
   s_currentCustomer: {fileID: 0}
   s_currentServerEmployee: {fileID: 0}
