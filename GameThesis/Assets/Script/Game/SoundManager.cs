@@ -26,6 +26,8 @@ public class SoundManager : Auto_Singleton<SoundManager>
     public AudioClip upgradeSound;
     public AudioClip summarySound;
 
+
+
     private void Awake()
     {
         addCoinSource = InitializedAudioSource(false, false);
@@ -37,6 +39,7 @@ public class SoundManager : Auto_Singleton<SoundManager>
         summarySource = InitializedAudioSource(false, false);
         cantIneractiveSource = InitializedAudioSource(false, false);
     }
+
 
     public void PlayAddCoinSound()
     {

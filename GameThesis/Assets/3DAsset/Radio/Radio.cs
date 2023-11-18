@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 
-public class Radio : MonoBehaviour , IInteracable
+public class Radio : MonoBehaviour, IInteracable
 {
     public List<AudioClip> restaurantPlaylist = new List<AudioClip>();
     public List<AudioClip> combatPlaylist = new List<AudioClip>();
@@ -21,31 +21,51 @@ public class Radio : MonoBehaviour , IInteracable
         combatAudioSource = GetComponent<AudioSource>();
     }
 
+    int count = 0;
+
     void Update()
     {
         if (isRadioOn)
         {
-            if(!restaurantAudioSource.isPlaying)
+            if (!restaurantAudioSource.isPlaying)
             {
                 NextSong();
             }
         }
 
-        if(Input.GetKeyDown(KeyCode.LeftArrow)) { StartCombatSong(); }
-        if(Input.GetKeyDown(KeyCode.RightArrow)) { StopCombatSong(); }
+        if (PlayerManager.Instance.b_inFighting)
+        {
+            if (count == 0)
+            {
+                StartCombatSong();
+                count++;
+            }
+        }
+        else
+        {
+            if (count != 0)
+            {
+                StopCombatSong();
+                count = 0;
+            }
+        }
     }
 
     private void StartCombatSong()
     {
-        combatAudioSource.clip = combatPlaylist[UnityEngine.Random.Range(0, combatPlaylist.Count)];
-        restaurantAudioSource.Pause();
-        combatAudioSource.Play();
+        if (restaurantAudioSource.isPlaying) restaurantAudioSource.Pause();
+        if (!combatAudioSource.isPlaying)
+        {
+            combatAudioSource.clip = combatPlaylist[UnityEngine.Random.Range(0, combatPlaylist.Count)];
+            combatAudioSource.Play();
+        }
+
     }
 
     private void StopCombatSong()
     {
-        restaurantAudioSource.Play();
-        combatAudioSource.Pause();
+        if (!restaurantAudioSource.isPlaying) restaurantAudioSource.Play();
+        if (combatAudioSource.isPlaying) combatAudioSource.Pause();
     }
 
 
@@ -58,14 +78,14 @@ public class Radio : MonoBehaviour , IInteracable
     private void NextSong()
     {
         currentSong++;
-        if(currentSong >= restaurantPlaylist.Count) { currentSong = 0; }
+        if (currentSong >= restaurantPlaylist.Count) { currentSong = 0; }
         PlaySong();
     }
 
     public void Interaction()
     {
         isRadioOn = !isRadioOn;
-        
+
 
         if (isRadioOn)
         {
@@ -81,7 +101,7 @@ public class Radio : MonoBehaviour , IInteracable
 
     public string InteractionText()
     {
-        if(isRadioOn)
+        if (isRadioOn)
         {
             return $"[E] to close radio";
         }
@@ -89,7 +109,7 @@ public class Radio : MonoBehaviour , IInteracable
         {
             return $"[E] to open radio";
         }
-        
+
     }
 
     public Color InteractionTextColor()

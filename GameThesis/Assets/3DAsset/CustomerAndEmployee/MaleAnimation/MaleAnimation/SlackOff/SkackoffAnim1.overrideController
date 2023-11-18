@@ -7,7 +7,7 @@ AnimatorOverrideController:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: SkackoffAnim1
-  m_Controller: {fileID: 9100000, guid: 1f597078a70e32144868b436cd6d9a65, type: 2}
+  m_Controller: {fileID: 9100000, guid: f6ebf21fd9e3e464ab72df8d5dffeeec, type: 2}
   m_Clips:
   - m_OriginalClip: {fileID: -2208378497853171600, guid: f766a528423a5494f91eee65fb2cc1fb,
       type: 3}

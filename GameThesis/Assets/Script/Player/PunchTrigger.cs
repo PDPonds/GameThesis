@@ -12,7 +12,8 @@ public class PunchTrigger : MainObserver
             if (damageAble != null)
             {
                 GameManager.Instance.framestop.ActivateFrameStop();
-                damageAble.TakeDamage(1);
+                GameManager.Instance.EnableCrowd(transform.position);
+                damageAble.TakeDamage(2);
                 StartCoroutine(puaseAnim());
                 if (transform.TryGetComponent(out Collider collider))
                 {
@@ -21,12 +22,7 @@ public class PunchTrigger : MainObserver
                         collider.enabled = false;
                     }
                 }
-
-                if (!GameManager.Instance.isCrowdEnable())
-                {
-                    GameManager.Instance.EnableCrowd(transform.position);
-                }
-
+                
                 Vector3 hitpoint = other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
                 PlayerManager.Instance.v_punchHitPoint = hitpoint;
                 ActiveAllObserver(ActionObserver.PlayerAttackRightHit);

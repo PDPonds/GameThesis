@@ -10,7 +10,7 @@ public class UpgradeEmp : MonoBehaviour, IInteracable
     public void Interaction()
     {
         if (GameManager.Instance.f_pocketMoney >= cost &&
-            RestaurantManager.Instance.i_empLevel < levelTarget)
+            RestaurantManager.Instance.i_empLevel + 1 == levelTarget)
         {
             SoundManager.Instance.PlayRemoveCoinSound();
             GameManager.Instance.RemovePocketMoney(cost);

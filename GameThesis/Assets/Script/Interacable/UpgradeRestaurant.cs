@@ -9,18 +9,6 @@ public class UpgradeRestaurant : MonoBehaviour, IInteracable
 
     public TextMeshProUGUI text;
 
-    private void Update()
-    {
-        if (GameManager.Instance.f_pocketMoney >= f_cost)
-        {
-            text.color = Color.white;
-        }
-        else
-        {
-            text.color = Color.gray;
-        }
-    }
-
     public void Interaction()
     {
         if (GameManager.Instance.f_pocketMoney >= f_cost)
