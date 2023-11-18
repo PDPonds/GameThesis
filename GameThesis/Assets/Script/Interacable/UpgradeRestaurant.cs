@@ -29,10 +29,6 @@ public class UpgradeRestaurant : MonoBehaviour, IInteracable
             GameManager.Instance.RemovePocketMoney(f_cost);
             RestaurantManager.Instance.i_level = 2;
         }
-        else
-        {
-            SoundManager.Instance.PlayCantInteractSound();
-        }
     }
 
     public string InteractionText()

@@ -76,8 +76,21 @@ public class EmployeeServeAndCookingState : BaseState
                         emp.anim.SetBool("cooking", false);
                     }
 
-                    emp.agent.speed = emp.f_runSpeed;
-
+                    
+                    if (RestaurantManager.Instance.i_empLevel == 1)
+                    {
+                        emp.agent.speed = emp.f_runSpeed;
+                    }
+                    else if (RestaurantManager.Instance.i_empLevel == 2)
+                    {
+                        float empSpeed1 = emp.f_runSpeed * emp.f_level2Mul;
+                        emp.agent.speed = empSpeed1;
+                    }
+                    else if (RestaurantManager.Instance.i_empLevel == 3)
+                    {
+                        float empSpeed2 = emp.f_runSpeed * emp.f_level3Mul;
+                        emp.agent.speed = empSpeed2;
+                    }
 
 
                     break;
@@ -147,10 +160,23 @@ public class EmployeeServeAndCookingState : BaseState
                             emp.g_Staw.SetActive(false);
                         }
 
-                        emp.agent.speed = emp.f_walkSpeed;
                         emp.anim.SetBool("walk", true);
                         emp.anim.SetBool("run", false);
 
+                        if (RestaurantManager.Instance.i_empLevel == 1)
+                        {
+                            emp.agent.speed = emp.f_walkSpeed;
+                        }
+                        else if (RestaurantManager.Instance.i_empLevel == 2)
+                        {
+                            float empSpeed1 = emp.f_walkSpeed * emp.f_level2Mul;
+                            emp.agent.speed = empSpeed1;
+                        }
+                        else if (RestaurantManager.Instance.i_empLevel == 3)
+                        {
+                            float empSpeed2 = emp.f_walkSpeed * emp.f_level3Mul;
+                            emp.agent.speed = empSpeed2;
+                        }
                     }
                     else
                     {
@@ -166,8 +192,22 @@ public class EmployeeServeAndCookingState : BaseState
                         else
                         {
                             emp.anim.SetBool("walk", true);
-                            emp.agent.speed = emp.f_walkSpeed;
                             emp.anim.SetBool("run", false);
+
+                            if (RestaurantManager.Instance.i_empLevel == 1)
+                            {
+                                emp.agent.speed = emp.f_walkSpeed;
+                            }
+                            else if (RestaurantManager.Instance.i_empLevel == 2)
+                            {
+                                float empSpeed1 = emp.f_walkSpeed * emp.f_level2Mul;
+                                emp.agent.speed = empSpeed1;
+                            }
+                            else if (RestaurantManager.Instance.i_empLevel == 3)
+                            {
+                                float empSpeed2 = emp.f_walkSpeed * emp.f_level3Mul;
+                                emp.agent.speed = empSpeed2;
+                            }
 
                         }
                         emp.b_hasFood = false;
@@ -238,7 +278,20 @@ public class EmployeeServeAndCookingState : BaseState
                             emp.anim.SetBool("cooking", false);
                         }
 
-                        emp.agent.speed = emp.f_runSpeed;
+                        if (RestaurantManager.Instance.i_empLevel == 1)
+                        {
+                            emp.agent.speed = emp.f_runSpeed;
+                        }
+                        else if (RestaurantManager.Instance.i_empLevel == 2)
+                        {
+                            float empSpeed1 = emp.f_runSpeed * emp.f_level2Mul;
+                            emp.agent.speed = empSpeed1;
+                        }
+                        else if (RestaurantManager.Instance.i_empLevel == 3)
+                        {
+                            float empSpeed2 = emp.f_runSpeed * emp.f_level3Mul;
+                            emp.agent.speed = empSpeed2;
+                        }
 
                     }
 
@@ -249,7 +302,20 @@ public class EmployeeServeAndCookingState : BaseState
                     {
                         if (RestaurantManager.Instance.GetCurrentChairFormServeEmployee(emp, out int chairIndex))
                         {
-                            emp.agent.speed = emp.f_walkSpeed;
+                            if (RestaurantManager.Instance.i_empLevel == 1)
+                            {
+                                emp.agent.speed = emp.f_walkSpeed;
+                            }
+                            else if (RestaurantManager.Instance.i_empLevel == 2)
+                            {
+                                float empSpeed1 = emp.f_walkSpeed * emp.f_level2Mul;
+                                emp.agent.speed = empSpeed1;
+                            }
+                            else if (RestaurantManager.Instance.i_empLevel == 3)
+                            {
+                                float empSpeed2 = emp.f_walkSpeed * emp.f_level3Mul;
+                                emp.agent.speed = empSpeed2;
+                            }
 
                             emp.anim.SetBool("walk", true);
                             emp.anim.SetBool("run", false);
@@ -319,7 +385,20 @@ public class EmployeeServeAndCookingState : BaseState
                             }
                             else
                             {
-                                emp.agent.speed = emp.f_walkSpeed;
+                                if (RestaurantManager.Instance.i_empLevel == 1)
+                                {
+                                    emp.agent.speed = emp.f_walkSpeed;
+                                }
+                                else if (RestaurantManager.Instance.i_empLevel == 2)
+                                {
+                                    float empSpeed1 = emp.f_walkSpeed * emp.f_level2Mul;
+                                    emp.agent.speed = empSpeed1;
+                                }
+                                else if (RestaurantManager.Instance.i_empLevel == 3)
+                                {
+                                    float empSpeed2 = emp.f_walkSpeed * emp.f_level3Mul;
+                                    emp.agent.speed = empSpeed2;
+                                }
                                 emp.anim.SetBool("walk", true);
                                 emp.anim.SetBool("run", false);
 

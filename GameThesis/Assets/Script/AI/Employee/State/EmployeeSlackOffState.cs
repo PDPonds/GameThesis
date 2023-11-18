@@ -40,7 +40,23 @@ public class EmployeeSlackOffState : BaseState
     {
         EmployeeStateManager emp = (EmployeeStateManager)ai;
         emp.RagdollOff();
-        emp.agent.speed = emp.f_walkSpeed;
+
+        if (RestaurantManager.Instance.i_empLevel == 1)
+        {
+            emp.agent.speed = emp.f_walkSpeed;
+        }
+        else if (RestaurantManager.Instance.i_empLevel == 2)
+        {
+            float empSpeed1 = emp.f_walkSpeed * emp.f_level2Mul;
+            emp.agent.speed = empSpeed1;
+        }
+        else if (RestaurantManager.Instance.i_empLevel == 3)
+        {
+            float empSpeed2 = emp.f_walkSpeed * emp.f_level3Mul;
+            emp.agent.speed = empSpeed2;
+        }
+
+
 
         if (Vector3.Distance(emp.transform.position, emp.v_walkPos)
             <= 1f)

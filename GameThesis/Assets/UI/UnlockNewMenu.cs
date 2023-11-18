@@ -88,10 +88,7 @@ public class UnlockNewMenu : MonoBehaviour, IInteracable
                     }
                 }
             }
-            else
-            {
-                SoundManager.Instance.PlayCantInteractSound();
-            }
+
         }
 
     }
