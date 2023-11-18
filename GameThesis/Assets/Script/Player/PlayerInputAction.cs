@@ -143,6 +143,24 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ShowDebug"",
+                    ""type"": ""Button"",
+                    ""id"": ""ecd736f1-d772-472e-b7af-c540a7539846"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""EnterDebug"",
+                    ""type"": ""Button"",
+                    ""id"": ""d43f2e75-c23d-4d1e-9ced-ce7dd2fcce37"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -200,6 +218,28 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""action"": ""Punch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""249a4a88-fecb-4569-9f41-d97d402f706d"",
+                    ""path"": ""<Keyboard>/slash"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ShowDebug"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f86c5670-16ea-4758-8e96-50407e9e7c87"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EnterDebug"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -216,6 +256,8 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         m_Action_Guard = m_Action.FindAction("Guard", throwIfNotFound: true);
         m_Action_Pause = m_Action.FindAction("Pause", throwIfNotFound: true);
         m_Action_Punch = m_Action.FindAction("Punch", throwIfNotFound: true);
+        m_Action_ShowDebug = m_Action.FindAction("ShowDebug", throwIfNotFound: true);
+        m_Action_EnterDebug = m_Action.FindAction("EnterDebug", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -328,6 +370,8 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     private readonly InputAction m_Action_Guard;
     private readonly InputAction m_Action_Pause;
     private readonly InputAction m_Action_Punch;
+    private readonly InputAction m_Action_ShowDebug;
+    private readonly InputAction m_Action_EnterDebug;
     public struct ActionActions
     {
         private @PlayerInputAction m_Wrapper;
@@ -337,6 +381,8 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         public InputAction @Guard => m_Wrapper.m_Action_Guard;
         public InputAction @Pause => m_Wrapper.m_Action_Pause;
         public InputAction @Punch => m_Wrapper.m_Action_Punch;
+        public InputAction @ShowDebug => m_Wrapper.m_Action_ShowDebug;
+        public InputAction @EnterDebug => m_Wrapper.m_Action_EnterDebug;
         public InputActionMap Get() { return m_Wrapper.m_Action; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -361,6 +407,12 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @Punch.started += instance.OnPunch;
             @Punch.performed += instance.OnPunch;
             @Punch.canceled += instance.OnPunch;
+            @ShowDebug.started += instance.OnShowDebug;
+            @ShowDebug.performed += instance.OnShowDebug;
+            @ShowDebug.canceled += instance.OnShowDebug;
+            @EnterDebug.started += instance.OnEnterDebug;
+            @EnterDebug.performed += instance.OnEnterDebug;
+            @EnterDebug.canceled += instance.OnEnterDebug;
         }
 
         private void UnregisterCallbacks(IActionActions instance)
@@ -380,6 +432,12 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @Punch.started -= instance.OnPunch;
             @Punch.performed -= instance.OnPunch;
             @Punch.canceled -= instance.OnPunch;
+            @ShowDebug.started -= instance.OnShowDebug;
+            @ShowDebug.performed -= instance.OnShowDebug;
+            @ShowDebug.canceled -= instance.OnShowDebug;
+            @EnterDebug.started -= instance.OnEnterDebug;
+            @EnterDebug.performed -= instance.OnEnterDebug;
+            @EnterDebug.canceled -= instance.OnEnterDebug;
         }
 
         public void RemoveCallbacks(IActionActions instance)
@@ -408,5 +466,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         void OnGuard(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
         void OnPunch(InputAction.CallbackContext context);
+        void OnShowDebug(InputAction.CallbackContext context);
+        void OnEnterDebug(InputAction.CallbackContext context);
     }
 }

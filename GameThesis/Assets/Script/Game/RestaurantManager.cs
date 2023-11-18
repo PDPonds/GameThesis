@@ -24,6 +24,8 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
 
     [Header("===== Level =====")]
     public int i_level = 1;
+    public GameObject g_level1Restaurant;
+    public GameObject g_level2Restaurant;
 
     [Header("===== Manage Restaurant ======")]
     [Header("- Cost")]
@@ -131,7 +133,8 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
                 for (int i = 0; i < i_currentCookerCount; i++)
                 {
                     Vector3 cookingPos = allCookingPos[i].position;
-                    GameObject cookingEmpObj = Instantiate(g_cooker, cookingPos, Quaternion.identity);
+                    Vector3 cookingRot = new Vector3(0, allCookingPos[i].rotation.y, 0);
+                    GameObject cookingEmpObj = Instantiate(g_cooker, cookingPos, Quaternion.Euler(cookingRot));
                     EmployeeStateManager emp = cookingEmpObj.GetComponent<EmployeeStateManager>();
                     emp.t_workingPos = allCookingPos[i];
                 }
@@ -211,6 +214,16 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
 
         }
 
+        if (i_level == 1)
+        {
+            if (!g_level1Restaurant.activeSelf) g_level1Restaurant.SetActive(true);
+            if (g_level2Restaurant.activeSelf) g_level2Restaurant.SetActive(false);
+        }
+        else if (i_level == 2)
+        {
+            if (!g_level2Restaurant.activeSelf) g_level2Restaurant.SetActive(true);
+            if (g_level1Restaurant.activeSelf) g_level1Restaurant.SetActive(false);
+        }
     }
 
     public void CloseRestaurant()

@@ -26,6 +26,9 @@ public class InputSystem : MonoBehaviour
 
             ia_action.Action.Pause.performed += i => Pause.isPause = !Pause.isPause;
 
+            ia_action.Action.ShowDebug.performed += i => DebugController.Instance.pressToggleConsole();
+            ia_action.Action.EnterDebug.performed += i => DebugController.Instance.pressReturn();
+
             ia_action.Enable();
         }
     }
@@ -85,7 +88,7 @@ public class InputSystem : MonoBehaviour
         {
             //if (PlayerManager.Instance.b_canGuard)
             //{
-                PlayerManager.Instance.b_isGuard = true;
+            PlayerManager.Instance.b_isGuard = true;
             //}
         }
 
