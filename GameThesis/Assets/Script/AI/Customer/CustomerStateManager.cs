@@ -408,10 +408,10 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
             }
         }
 
-        if (currentAreaStay == AreaType.InRestaurant)
-        {
-            RestaurantManager.Instance.RemoveRating();
-        }
+        //if (currentAreaStay == AreaType.InRestaurant)
+        //{
+        //    RestaurantManager.Instance.RemoveRating();
+        //}
 
         SwitchState(s_deadState);
     }
