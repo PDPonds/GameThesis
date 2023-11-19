@@ -432,22 +432,23 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
 
     public void Interaction()
     {
-        if (s_currentState == s_deadState)
-        {
-            if (PlayerManager.Instance.g_dragObj == null)
-            {
-                PlayerManager.Instance.g_dragObj = this.gameObject;
-                Rigidbody connectRb = PlayerManager.Instance.t_dragPos.GetComponent<Rigidbody>();
+        //if (s_currentState == s_deadState)
+        //{
+        //    if (PlayerManager.Instance.g_dragObj == null)
+        //    {
+        //        PlayerManager.Instance.g_dragObj = this.gameObject;
+        //        Rigidbody connectRb = PlayerManager.Instance.t_dragPos.GetComponent<Rigidbody>();
 
-                SpringJoint spring = t_hips.AddComponent<SpringJoint>();
-                spring.connectedBody = connectRb;
-                spring.spring = 200f;
-                spring.anchor = new Vector3(0, .85f, 0);
-                spring.damper = .1f;
-                spring.autoConfigureConnectedAnchor = false;
-            }
-        }
-        else if (s_currentState == s_frontCounter)
+        //        SpringJoint spring = t_hips.AddComponent<SpringJoint>();
+        //        spring.connectedBody = connectRb;
+        //        spring.spring = 200f;
+        //        spring.anchor = new Vector3(0, .85f, 0);
+        //        spring.damper = .1f;
+        //        spring.autoConfigureConnectedAnchor = false;
+        //    }
+        //}
+        //else
+        if (s_currentState == s_frontCounter)
         {
             GameManager.Instance.AddCoin(f_giveCoin);
             SwitchState(s_goOutState);
@@ -473,14 +474,15 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
     {
         string text = string.Empty;
 
-        if (s_currentState == s_deadState)
-        {
-            if (PlayerManager.Instance.g_dragObj == null)
-            {
-                text = "[E] to Drag";
-            }
-        }
-        else if (s_currentState == s_frontCounter)
+        //if (s_currentState == s_deadState)
+        //{
+        //    if (PlayerManager.Instance.g_dragObj == null)
+        //    {
+        //        text = "[E] to Drag";
+        //    }
+        //}
+        //else
+        if (s_currentState == s_frontCounter)
         {
             text = "[E] to Take Money";
         }
