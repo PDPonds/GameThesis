@@ -42,7 +42,7 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
     float f_currentRegenTime;
     [HideInInspector] public float f_cantMoveInFightTime;
     [HideInInspector] public bool b_inFighting;
-    [HideInInspector] public bool b_lockTarget;
+    //[HideInInspector] public bool b_lockTarget;
 
     [HideInInspector] public float f_currentInFightingTime;
 
