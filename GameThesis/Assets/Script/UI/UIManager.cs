@@ -94,6 +94,7 @@ public class UIManager : Auto_Singleton<UIManager>
     public TextMeshProUGUI text_totalEmpCost;
     public TextMeshProUGUI text_waiterCost;
     public TextMeshProUGUI text_cookerCost;
+    public TextMeshProUGUI text_ingredientCost;
 
     [Header("===== Lose Win =====")]
     public GameObject winPage;
@@ -146,6 +147,7 @@ public class UIManager : Auto_Singleton<UIManager>
         RestaurantManager.Instance.ClearChair();
         TimeController.Instance.ResetTime();
         GameManager.Instance.i_currentDay++;
+        RestaurantManager.Instance.ResetIngredietnCost();
         GameManager.Instance.s_gameState.SwitchState(GameManager.Instance.s_gameState.s_beforeOpenState);
     }
 
@@ -376,12 +378,12 @@ public class UIManager : Auto_Singleton<UIManager>
             text_daliyIncomeCost.text = $"{GameManager.Instance.f_coin.ToString("C2")} ";
             float cookerCost = RestaurantManager.Instance.i_currentCookerCount * RestaurantManager.Instance.f_cookerCost;
             float waiterCost = RestaurantManager.Instance.i_currentWaiterCount * RestaurantManager.Instance.f_waiterCost;
-            float totalEmpCost = cookerCost + waiterCost;
-            text_totalEmpCost.text = $"{totalEmpCost.ToString("C2")} ";
-            float profit = GameManager.Instance.f_coin - totalEmpCost;
+            text_totalEmpCost.text = $"{RestaurantManager.Instance.f_currentCostPerDay.ToString("C2")} ";
+            float profit = GameManager.Instance.f_coin - RestaurantManager.Instance.f_currentCostPerDay;
             text_profitCost.text = $"{profit.ToString("C2")} ";
             text_waiterCost.text = $"{waiterCost.ToString("C2")} ";
             text_cookerCost.text = $"{cookerCost.ToString("C2")} ";
+            text_ingredientCost.text = $"{RestaurantManager.Instance.f_ingredientCost.ToString("C2")}";
 
             if (RestaurantManager.Instance.RestaurantIsEmpty())
             {
@@ -424,7 +426,7 @@ public class UIManager : Auto_Singleton<UIManager>
             g_objective.SetActive(false);
         }
 
-        if(letter.activeSelf) letterUI.SetActive(true);
+        if (letter.activeSelf) letterUI.SetActive(true);
         else letterUI.SetActive(false);
 
     }
