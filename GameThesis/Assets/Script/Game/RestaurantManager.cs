@@ -57,6 +57,7 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
 
     [Header("- Menu")]
     public MenuHandler menuHandler;
+    public float f_ingredientCost;
 
     public void AddCurrentCookingCount()
     {
@@ -138,6 +139,16 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
             }
         }
 
+    }
+
+    public void AddIngredientCost(float cost)
+    {
+        f_ingredientCost += cost;
+    }
+
+    public void ResetIngredietnCost()
+    {
+        f_ingredientCost = 0;
     }
 
 

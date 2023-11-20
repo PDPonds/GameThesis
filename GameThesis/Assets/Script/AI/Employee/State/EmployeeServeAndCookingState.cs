@@ -19,6 +19,8 @@ public class EmployeeServeAndCookingState : BaseState
         Color noColor = new Color(0, 0, 0, 0);
         emp.ApplyOutlineColor(noColor, 0f);
         emp.g_stunVFX.SetActive(false);
+
+        f_cookingTime = emp.f_cookingTime;
     }
 
     public override void UpdateState(StateManager ai)
@@ -54,6 +56,21 @@ public class EmployeeServeAndCookingState : BaseState
 
                         if (emp.s_cookingChair != null)
                         {
+                            if (f_cookingTime == emp.f_cookingTime)
+                            {
+                                int dish = emp.s_cookingChair.s_currentCustomer.i_dish;
+                                int drink = emp.s_cookingChair.s_currentCustomer.i_drink;
+
+                                float dishCost = RestaurantManager.Instance.menuHandler.mainDish_Status[dish].cost;
+                                float dirnkCost = RestaurantManager.Instance.menuHandler.drinks_Status[drink].cost;
+
+                                float dishIng = dishCost / 2;
+                                float drinkIng = dirnkCost / 2;
+
+                                float IngCost = dishIng + drinkIng;
+
+                                RestaurantManager.Instance.AddIngredientCost(IngCost);
+                            }
 
                             emp.b_canCook = false;
                             f_cookingTime -= Time.deltaTime;
@@ -76,7 +93,7 @@ public class EmployeeServeAndCookingState : BaseState
                         emp.anim.SetBool("cooking", false);
                     }
 
-                    
+
                     if (RestaurantManager.Instance.i_empLevel == 1)
                     {
                         emp.agent.speed = emp.f_runSpeed;
@@ -257,6 +274,22 @@ public class EmployeeServeAndCookingState : BaseState
 
                             if (emp.s_cookingChair != null)
                             {
+                                if (f_cookingTime == emp.f_cookingTime)
+                                {
+                                    int dish = emp.s_cookingChair.s_currentCustomer.i_dish;
+                                    int drink = emp.s_cookingChair.s_currentCustomer.i_drink;
+
+                                    float dishCost = RestaurantManager.Instance.menuHandler.mainDish_Status[dish].cost;
+                                    float dirnkCost = RestaurantManager.Instance.menuHandler.drinks_Status[drink].cost;
+
+                                    float dishIng = dishCost / 2;
+                                    float drinkIng = dirnkCost / 2;
+
+                                    float IngCost = dishIng + drinkIng;
+
+                                    RestaurantManager.Instance.AddIngredientCost(IngCost);
+                                }
+
                                 emp.b_canCook = false;
                                 f_cookingTime -= Time.deltaTime;
                                 if (f_cookingTime < 0)

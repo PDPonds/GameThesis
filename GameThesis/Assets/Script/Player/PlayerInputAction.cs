@@ -161,6 +161,15 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Escape"",
+                    ""type"": ""Button"",
+                    ""id"": ""0f85eb6c-49b2-45c7-967b-0da690045776"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -240,6 +249,17 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""action"": ""EnterDebug"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""68e192ca-7c6d-455e-9301-289d605bb0ee"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Escape"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -258,6 +278,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         m_Action_Punch = m_Action.FindAction("Punch", throwIfNotFound: true);
         m_Action_ShowDebug = m_Action.FindAction("ShowDebug", throwIfNotFound: true);
         m_Action_EnterDebug = m_Action.FindAction("EnterDebug", throwIfNotFound: true);
+        m_Action_Escape = m_Action.FindAction("Escape", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -372,6 +393,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     private readonly InputAction m_Action_Punch;
     private readonly InputAction m_Action_ShowDebug;
     private readonly InputAction m_Action_EnterDebug;
+    private readonly InputAction m_Action_Escape;
     public struct ActionActions
     {
         private @PlayerInputAction m_Wrapper;
@@ -383,6 +405,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         public InputAction @Punch => m_Wrapper.m_Action_Punch;
         public InputAction @ShowDebug => m_Wrapper.m_Action_ShowDebug;
         public InputAction @EnterDebug => m_Wrapper.m_Action_EnterDebug;
+        public InputAction @Escape => m_Wrapper.m_Action_Escape;
         public InputActionMap Get() { return m_Wrapper.m_Action; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -413,6 +436,9 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @EnterDebug.started += instance.OnEnterDebug;
             @EnterDebug.performed += instance.OnEnterDebug;
             @EnterDebug.canceled += instance.OnEnterDebug;
+            @Escape.started += instance.OnEscape;
+            @Escape.performed += instance.OnEscape;
+            @Escape.canceled += instance.OnEscape;
         }
 
         private void UnregisterCallbacks(IActionActions instance)
@@ -438,6 +464,9 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @EnterDebug.started -= instance.OnEnterDebug;
             @EnterDebug.performed -= instance.OnEnterDebug;
             @EnterDebug.canceled -= instance.OnEnterDebug;
+            @Escape.started -= instance.OnEscape;
+            @Escape.performed -= instance.OnEscape;
+            @Escape.canceled -= instance.OnEscape;
         }
 
         public void RemoveCallbacks(IActionActions instance)
@@ -468,5 +497,6 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         void OnPunch(InputAction.CallbackContext context);
         void OnShowDebug(InputAction.CallbackContext context);
         void OnEnterDebug(InputAction.CallbackContext context);
+        void OnEscape(InputAction.CallbackContext context);
     }
 }

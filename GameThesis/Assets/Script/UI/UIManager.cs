@@ -101,6 +101,10 @@ public class UIManager : Auto_Singleton<UIManager>
     public Button winBut;
     public Button loseBut;
 
+    [Header("===== Letter =====")]
+    public GameObject letter;
+    public GameObject letterUI;
+
     private void Awake()
     {
         button_next.onClick.AddListener(() => SkipDay());
@@ -419,6 +423,9 @@ public class UIManager : Auto_Singleton<UIManager>
         {
             g_objective.SetActive(false);
         }
+
+        if(letter.activeSelf) letterUI.SetActive(true);
+        else letterUI.SetActive(false);
 
     }
 

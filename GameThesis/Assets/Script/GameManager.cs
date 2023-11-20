@@ -92,12 +92,6 @@ public class GameManager : Auto_Singleton<GameManager>
         at.enabled = false;
     }
 
-    public bool isCrowdEnable()
-    {
-        ActiveCrowd at = t_crowdCenterPoint.GetComponent<ActiveCrowd>();
-        return at.enabled;
-    }
-
     public void SkipDay()
     {
         if (s_gameState.s_currentState == s_gameState.s_openState)

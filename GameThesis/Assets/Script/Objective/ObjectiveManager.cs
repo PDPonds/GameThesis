@@ -10,6 +10,7 @@ public class ObjectiveManager : Auto_Singleton<ObjectiveManager>
 
     ObjectiveSO s_currentObjective;
 
+    public MainObjective mainObjtive;
 
     private void Update()
     {

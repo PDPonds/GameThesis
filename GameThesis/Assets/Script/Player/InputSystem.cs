@@ -24,7 +24,7 @@ public class InputSystem : MonoBehaviour
             ia_action.Action.Sprint.performed += i => SprintPerformed();
             ia_action.Action.Sprint.canceled += i => PlayerManager.Instance.b_isSprint = false;
 
-            ia_action.Action.Pause.performed += i => Pause.isPause = !Pause.isPause;
+            ia_action.Action.Pause.performed += i => Escape();
 
             ia_action.Action.ShowDebug.performed += i => DebugController.Instance.pressToggleConsole();
             ia_action.Action.EnterDebug.performed += i => DebugController.Instance.pressReturn();
@@ -33,10 +33,21 @@ public class InputSystem : MonoBehaviour
         }
     }
 
-
     private void OnDisable()
     {
         ia_action.Disable();
+    }
+
+    void Escape()
+    {
+        if (UIManager.Instance.letter.activeSelf)
+        {
+            UIManager.Instance.letter.SetActive(false);
+        }
+        else
+        {
+            Pause.isPause = !Pause.isPause;
+        }
     }
 
     void InteractivePerformed()
