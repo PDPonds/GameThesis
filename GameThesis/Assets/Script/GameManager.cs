@@ -79,7 +79,6 @@ public class GameManager : Auto_Singleton<GameManager>
         f_pocketMoney -= amount;
     }
 
-
     public void EnableCrowd(Vector3 worldPos)
     {
         t_crowdCenterPoint.transform.position = worldPos;

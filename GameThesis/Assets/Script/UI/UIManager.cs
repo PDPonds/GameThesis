@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : Auto_Singleton<UIManager>
@@ -94,9 +95,28 @@ public class UIManager : Auto_Singleton<UIManager>
     public TextMeshProUGUI text_waiterCost;
     public TextMeshProUGUI text_cookerCost;
 
+    [Header("===== Lose Win =====")]
+    public GameObject winPage;
+    public GameObject losePage;
+    public Button winBut;
+    public Button loseBut;
+
     private void Awake()
     {
         button_next.onClick.AddListener(() => SkipDay());
+        winBut.onClick.AddListener(() => WinButton());
+        loseBut.onClick.AddListener(() => LoseButton());
+    }
+
+    void WinButton()
+    {
+        winPage.SetActive(false);
+    }
+
+    void LoseButton()
+    {
+        losePage.SetActive(false);
+        SceneManager.LoadScene(0);
     }
 
     void SkipDay()
