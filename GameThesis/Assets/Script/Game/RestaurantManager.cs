@@ -12,11 +12,11 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
     public ChairObj[] allChairs;
 
     [Header("===== Start Rating =====")]
-    public int i_rating;
-    public Vector2Int v_minmaxRating;
-    public int i_startRating;
-    public int i_ratingToRemove;
-    public int i_ratingToAdd;
+    //public int i_rating;
+    //public Vector2Int v_minmaxRating;
+    //public int i_startRating;
+    //public int i_ratingToRemove;
+    //public int i_ratingToAdd;
     public UI_animmationController uiAnimCon;
 
     [Header("===== Upgrade Table Manager =====")]
@@ -146,7 +146,7 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
         i_currentCookerCount = i_minCooker;
         i_currentWaiterCount = i_minWaiter;
 
-        i_rating = i_startRating;
+        //i_rating = i_startRating;
     }
 
     private void Start()
@@ -270,14 +270,14 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
         }
     }
 
-    public int ReqRateToBuyTable()
-    {
-        int rating = 0;
+    //public int ReqRateToBuyTable()
+    //{
+    //    int rating = 0;
 
-        int currentStep = (allTableIsReady() - i_startTable) + 1;
-        rating = currentStep * 10;
-        return rating;
-    }
+    //    int currentStep = (allTableIsReady() - i_startTable) + 1;
+    //    rating = currentStep * 10;
+    //    return rating;
+    //}
 
     int allTableIsReady()
     {
@@ -600,27 +600,29 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
         return false;
     }
 
-    public void RemoveRating()
-    {
-        uiAnimCon.RemoveRatingAnim(); // Waann
+    #region Rating
+    //public void RemoveRating()
+    //{
+    //    uiAnimCon.RemoveRatingAnim(); // Waann
 
-        i_rating -= i_ratingToRemove;
-        if (i_rating <= v_minmaxRating.x)
-        {
-            i_rating = v_minmaxRating.x;
-        }
-    }
+    //    i_rating -= i_ratingToRemove;
+    //    if (i_rating <= v_minmaxRating.x)
+    //    {
+    //        i_rating = v_minmaxRating.x;
+    //    }
+    //}
 
-    public void AddRating()
-    {
-        uiAnimCon.AddRatingAnim(); //Waann
+    //public void AddRating()
+    //{
+    //    uiAnimCon.AddRatingAnim(); //Waann
 
-        i_rating += i_ratingToAdd;
-        if (i_rating >= v_minmaxRating.y)
-        {
-            i_rating = v_minmaxRating.y;
-        }
-    }
+    //    i_rating += i_ratingToAdd;
+    //    if (i_rating >= v_minmaxRating.y)
+    //    {
+    //        i_rating = v_minmaxRating.y;
+    //    }
+    //}
+    #endregion
 
     public int GetCurrentTableIsReadyCount()
     {

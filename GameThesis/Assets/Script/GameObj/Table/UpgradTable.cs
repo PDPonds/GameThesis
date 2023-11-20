@@ -191,9 +191,7 @@ public class UpgradTable : MonoBehaviour, IInteracable
         if (GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_beforeOpenState)
         {
 
-            if (GameManager.Instance.f_pocketMoney >= f_costToBuy &&
-                RestaurantManager.Instance.i_rating >= RestaurantManager.Instance.ReqRateToBuyTable()
-                && !b_readyToUse)
+            if (GameManager.Instance.f_pocketMoney >= f_costToBuy)
             {
                 SoundManager.Instance.PlayInteractiveSound();
                 SoundManager.Instance.PlayUpgradeSound();
@@ -218,8 +216,9 @@ public class UpgradTable : MonoBehaviour, IInteracable
         string text = string.Empty;
         if (!b_readyToUse)
         {
-            text = $"[E] Use {f_costToBuy.ToString("C2")} And{Environment.NewLine} " +
-                $"Atleast {RestaurantManager.Instance.ReqRateToBuyTable()} Rating to Unlock Table.";
+            text = $"[E] Use {f_costToBuy.ToString("C2")}";
+            //text = $"[E] Use {f_costToBuy.ToString("C2")} And{Environment.NewLine} " +
+            //    $"Atleast {RestaurantManager.Instance.ReqRateToBuyTable()} Rating to Unlock Table.";
         }
         return text;
     }

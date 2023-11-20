@@ -56,38 +56,38 @@ public class PlayerCamera : MonoBehaviour
             PlayerManager.Instance.t_orientation.rotation = Quaternion.Euler(0, f_yRotation, 0);
             PlayerManager.Instance.t_playerMesh.rotation = Quaternion.Euler(f_xRotation, f_yRotation, 0);
 
-            if (PlayerManager.Instance.b_inFighting)
-            {
-                Vector3 playerPos = PlayerManager.Instance.transform.position;
-                if (FightingManager.Instance.GetCurrentFightWithPlayer(out CustomerStateManager cus))
-                {
-                    if (Vector3.Distance(playerPos, cus.transform.position) < PlayerManager.Instance.f_fightingCheckDis)
-                    {
-                        Vector3 dir = cus.transform.position - playerPos;
-                        dir = dir.normalized;
-                        Quaternion lookat = Quaternion.LookRotation(dir);
-                        Quaternion rot = Quaternion.Slerp(transform.rotation, lookat, PlayerManager.Instance.f_targetSmoothRot * Time.deltaTime);
+            //if (PlayerManager.Instance.b_inFighting)
+            //{
+            //    Vector3 playerPos = PlayerManager.Instance.transform.position;
+            //    if (FightingManager.Instance.GetCurrentFightWithPlayer(out CustomerStateManager cus))
+            //    {
+            //        if (Vector3.Distance(playerPos, cus.transform.position) < PlayerManager.Instance.f_fightingCheckDis)
+            //        {
+            //            Vector3 dir = cus.transform.position - playerPos;
+            //            dir = dir.normalized;
+            //            Quaternion lookat = Quaternion.LookRotation(dir);
+            //            Quaternion rot = Quaternion.Slerp(transform.rotation, lookat, PlayerManager.Instance.f_targetSmoothRot * Time.deltaTime);
 
-                        rot.x = 0;
-                        rot.z = 0;
+            //            rot.x = 0;
+            //            rot.z = 0;
 
-                        if (f_mouseX == 0 && f_mouseY == 0)
-                        {
-                            transform.rotation = rot;
-                            PlayerManager.Instance.t_orientation.rotation = rot;
-                            PlayerManager.Instance.t_playerMesh.rotation = rot;
+            //            if (f_mouseX == 0 && f_mouseY == 0)
+            //            {
+            //                transform.rotation = rot;
+            //                PlayerManager.Instance.t_orientation.rotation = rot;
+            //                PlayerManager.Instance.t_playerMesh.rotation = rot;
 
-                            f_yRotation = transform.rotation.eulerAngles.y;
-                            f_xRotation = transform.rotation.eulerAngles.x;
+            //                f_yRotation = transform.rotation.eulerAngles.y;
+            //                f_xRotation = transform.rotation.eulerAngles.x;
 
-                        }
+            //            }
 
-                    }
+            //        }
 
 
-                }
+            //    }
 
-            }
+            //}
 
         }
     }

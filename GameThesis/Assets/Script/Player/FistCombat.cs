@@ -24,26 +24,26 @@ public class FistCombat : MainObserver
         {
             PlayerManager.Instance.f_currentStamina -= PlayerManager.Instance.f_attackStamina;
             PlayerManager.Instance.i_atkCount++;
-            if (FightingManager.Instance.fighter.Count > 0)
-            {
-                Vector3 playerPos = PlayerManager.Instance.transform.position;
-                if (FightingManager.Instance.GetCurrentFightWithPlayer(out CustomerStateManager cus))
-                {
-                    float playerAndCusDistance = Vector3.Distance(cus.transform.position, playerPos);
-                    Collider col = PlayerManager.Instance.c_punchCol;
-                    BoxCollider punchCol = (BoxCollider)col;
+            //if (FightingManager.Instance.fighter.Count > 0)
+            //{
+            //    Vector3 playerPos = PlayerManager.Instance.transform.position;
+            //    if (FightingManager.Instance.GetCurrentFightWithPlayer(out CustomerStateManager cus))
+            //    {
+            //        float playerAndCusDistance = Vector3.Distance(cus.transform.position, playerPos);
+            //        Collider col = PlayerManager.Instance.c_punchCol;
+            //        BoxCollider punchCol = (BoxCollider)col;
 
-                    if (playerAndCusDistance > punchCol.size.z)
-                    {
-                        Rigidbody rb = PlayerManager.Instance.c_rb;
-                        Vector3 dir = cus.transform.position - playerPos;
-                        dir = dir.normalized;
-                        rb.AddForce(dir * PlayerManager.Instance.f_attackMoveForce, ForceMode.Impulse);
-                    }
+            //        if (playerAndCusDistance > punchCol.size.z)
+            //        {
+            //            Rigidbody rb = PlayerManager.Instance.c_rb;
+            //            Vector3 dir = cus.transform.position - playerPos;
+            //            dir = dir.normalized;
+            //            rb.AddForce(dir * PlayerManager.Instance.f_attackMoveForce, ForceMode.Impulse);
+            //        }
 
-                }
-                PlayerManager.Instance.b_lockTarget = true;
-            }
+            //    }
+            //    PlayerManager.Instance.b_lockTarget = true;
+            //}
 
             if (PlayerManager.Instance.i_atkCount % 2 == 0)
             {

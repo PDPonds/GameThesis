@@ -38,7 +38,7 @@ public class UIManager : Auto_Singleton<UIManager>
     [Space(10f)]
 
     [Header("===== Rating =====")]
-    public TextMeshProUGUI text_rating;
+    //public TextMeshProUGUI text_rating;
     [Space(10f)]
 
     [Header("===== Leave Area Text =====")]
@@ -315,7 +315,7 @@ public class UIManager : Auto_Singleton<UIManager>
 
         #endregion
 
-        text_rating.text = $"{RestaurantManager.Instance.i_rating} / {RestaurantManager.Instance.v_minmaxRating.y}";
+        //text_rating.text = $"{RestaurantManager.Instance.i_rating} / {RestaurantManager.Instance.v_minmaxRating.y}";
 
         if (b_leaveTrigger)
         {
