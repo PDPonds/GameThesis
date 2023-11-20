@@ -178,7 +178,7 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
     {
         float allCookerCost = i_currentCookerCount * f_cookerCost;
         float allWaiterCost = i_currentWaiterCount * f_waiterCost;
-        f_currentCostPerDay = allCookerCost + allWaiterCost;
+        f_currentCostPerDay = allCookerCost + allWaiterCost + f_ingredientCost;
 
         allCustomers = FindObjectsOfType<CustomerStateManager>();
         allEmployees = FindObjectsOfType<EmployeeStateManager>();
