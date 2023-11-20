@@ -99,4 +99,13 @@ public class GameManager : Auto_Singleton<GameManager>
         return at.enabled;
     }
 
+    public void SkipDay()
+    {
+        if (s_gameState.s_currentState == s_gameState.s_openState)
+        {
+            s_gameState.SwitchState(s_gameState.s_afterOpenState);
+            RestaurantManager.Instance.ClearRestaurant();
+        }
+    }
+
 }

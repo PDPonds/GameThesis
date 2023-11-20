@@ -14,6 +14,7 @@ public class DebugController : Auto_Singleton<DebugController>
     //public static DebugCommand<int, int> RemoveItem;
 
     public static DebugCommand<int> AddPocketCoin;
+    public static DebugCommand SkipDay;
 
     public List<object> commandList = new List<object>();
 
@@ -23,6 +24,11 @@ public class DebugController : Auto_Singleton<DebugController>
         AddPocketCoin = new DebugCommand<int>("add_pocket", "add pocket coint", "add_pocket", (i) =>
         {
             GameManager.Instance.AddPocketMoney(i);
+        });
+
+        SkipDay = new DebugCommand("skipday", "skip current day", "skipday", () =>
+        {
+            GameManager.Instance.SkipDay();
         });
 
         //RemoveItem = new DebugCommand<int, int>("remove_item", "remove itemId count", "remove_item", (x, y) =>
@@ -42,7 +48,7 @@ public class DebugController : Auto_Singleton<DebugController>
 
         commandList = new List<object>()
         {
-            AddPocketCoin,
+            AddPocketCoin, SkipDay,
             //RemoveItem,ClearInventory,UnlockIngredient
         };
 

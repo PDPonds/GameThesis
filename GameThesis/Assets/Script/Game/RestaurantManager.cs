@@ -683,4 +683,16 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
         }
         return count;
     }
+
+    public void ClearRestaurant()
+    {
+        for (int i = 0; i < allCustomers.Length; i++)
+        {
+            if (allCustomers[i].s_currentState != allCustomers[i].s_walkAroundState)
+            {
+                allCustomers[i].SwitchState(allCustomers[i].s_walkAroundState);
+            }
+        }
+    }
+
 }

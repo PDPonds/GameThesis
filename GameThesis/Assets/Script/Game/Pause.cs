@@ -29,7 +29,8 @@ public class Pause : MonoBehaviour
         if (GameManager.Instance.s_gameState.s_currentState ==
             GameManager.Instance.s_gameState.s_afterOpenState)
         {
-            if (RestaurantManager.Instance.RestaurantIsEmpty())
+            if (RestaurantManager.Instance.RestaurantIsEmpty() || 
+                DebugController.Instance.showConsole)
             {
                 if (UIManager.Instance.g_summary.activeSelf)
                 {
@@ -47,24 +48,23 @@ public class Pause : MonoBehaviour
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
             }
+
         }
         else
         {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            if (DebugController.Instance.showConsole)
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
+
         }
 
-
-        if(DebugController.Instance.showConsole)
-        {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-        }
-        else
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-        }
     }
 
     private static void PauseGame()

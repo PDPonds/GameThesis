@@ -186,10 +186,12 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
 
     public IEnumerator SkipDay()
     {
+        PlayerManager.Instance.b_canMove = false;
         a_fadeAnim.SetBool("blackSkip", true);
         yield return new WaitForSeconds(1.5f);
         GameManager.Instance.MovePlayerToSpawnPoint();
         yield return new WaitForSeconds(1.5f);
+        PlayerManager.Instance.b_canMove = true;
         a_fadeAnim.SetBool("blackSkip", false);
     }
 
