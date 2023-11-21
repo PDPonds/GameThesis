@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class UI_animmationController : MonoBehaviour
 {
     [SerializeField] private Animator cashAnim;
     [SerializeField] private Animator addCashAnim;
-    [SerializeField] private Animator removeCashAnim;
+    [SerializeField] private TextMeshProUGUI amountText;
 
     [SerializeField] private Animator ratingTextAnim;
     [SerializeField] private Animator ratingStarAnim;
@@ -16,15 +17,17 @@ public class UI_animmationController : MonoBehaviour
         cashAnim = GetComponent<Animator>();
     }
 
-    public void AddCashAnim()
+    public void AddCashAnim(float amount)
     {
+        amountText.text = $"+$ {amount.ToString("F2")}";
         addCashAnim.Play("Add Cash");
         cashAnim.Play("Add Cash Blink");        
     }
 
-    public void RemoveCashAnim()
+    public void RemoveCashAnim(float amount)
     {
-        removeCashAnim.Play("Deduct Cash");
+        amountText.text = $"-$ {amount.ToString("F2")}";
+        addCashAnim.Play("Add Cash");
         cashAnim.Play("Deduct Cash Blink");
     }
 

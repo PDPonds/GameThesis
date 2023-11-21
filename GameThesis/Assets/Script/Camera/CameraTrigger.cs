@@ -26,6 +26,7 @@ public class CameraTrigger : MonoBehaviour
 
     public float duration;
     public float magnitude;
+    public float rotationMagnitude;
 
     private void Start()
     {
@@ -89,20 +90,34 @@ public class CameraTrigger : MonoBehaviour
     public IEnumerator Shake(float duration, float magnitude)
     {
         Vector3 originalPos = transform.localPosition;
+        Quaternion originalRot = transform.localRotation;
 
         float elapsed = 0.0f;
+
         while (elapsed < duration)
         {
-            float x = Random.Range(-1f, 1f) * magnitude;
-            float y = Random.Range(-1f, 1f) * magnitude;
+            float smoothStep = Mathf.SmoothStep(0.0f, 1.0f, elapsed / duration);
 
+            float x = Random.Range(-1f, 1f) * magnitude * smoothStep;
+            float y = Random.Range(-1f, 1f) * magnitude * smoothStep;
+
+            // Update the object's position with the smoothed random offsets
             transform.localPosition = new Vector3(x, y, originalPos.z);
+
+            // Generate random rotation around Z axis
+            float rotationZ = Random.Range(-1f, 1f) * rotationMagnitude * smoothStep;
+            Quaternion randomRotation = Quaternion.Euler(0f, 0f, rotationZ);
+
+            // Update the object's rotation with the smoothed random rotation
+            transform.localRotation = originalRot * randomRotation;
 
             elapsed += Time.deltaTime;
 
             yield return null;
         }
 
+        // Reset the position and rotation after the shaking is complete
         transform.localPosition = originalPos;
+        transform.localRotation = originalRot;
     }
 }
