@@ -2238,7 +2238,7 @@ MonoBehaviour:
   b_canCook: 1
   b_isWorking: 0
   t_workingPos: {fileID: 0}
-  f_cookingTime: 10
+  f_cookingTime: 20
   s_cookingChair: {fileID: 0}
   cookingAnim: {fileID: 22100000, guid: d8f074c4e5c8cbf4d80828846bbf8218, type: 2}
   b_onSlackOffPoint: 0

@@ -59,6 +59,10 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
     public MenuHandler menuHandler;
     public float f_ingredientCost;
 
+    [Header("===== PotAndPan =====")]
+    public List<PotAndPan> allPotandPan = new List<PotAndPan>();
+    public PotAndPan currentPotAndPan;
+
     public void AddCurrentCookingCount()
     {
         if (GameManager.Instance.s_gameState.s_currentState ==
@@ -119,6 +123,11 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
         {
             if (i_currentCookerCount > 0)
             {
+                for (int i = 0; i < allPotandPan.Count; i++)
+                {
+                    allPotandPan[i].b_hasCooker = false;
+                }
+
                 for (int i = 0; i < i_currentCookerCount; i++)
                 {
                     Vector3 cookingPos = allCookingPos[i].position;
@@ -126,6 +135,7 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
                     GameObject cookingEmpObj = Instantiate(g_cooker, cookingPos, Quaternion.Euler(cookingRot));
                     EmployeeStateManager emp = cookingEmpObj.GetComponent<EmployeeStateManager>();
                     emp.t_workingPos = allCookingPos[i];
+                    allPotandPan[i].b_hasCooker = true;
                 }
             }
 
@@ -162,7 +172,6 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
 
     private void Start()
     {
-
         for (int i = 0; i < allTables.Length; i++)
         {
             if (i < i_startTable)
@@ -215,6 +224,34 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
             UIManager.Instance.g_summary.SetActive(false);
             PlayerManager.Instance.b_canMove = true;
 
+            if (currentPotAndPan == null)
+            {
+                if (GetChairCookingNoFinish(out ChairObj chair))
+                {
+                    if (UsePot(out PotAndPan pot, chair))
+                    {
+                        currentPotAndPan = pot;
+                    }
+                }
+            }
+
+
+        }
+        else if (GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_afterOpenState)
+        {
+            if (!RestaurantIsEmpty())
+            {
+                if (currentPotAndPan == null)
+                {
+                    if (GetChairCookingNoFinish(out ChairObj chair))
+                    {
+                        if (UsePot(out PotAndPan pot, chair))
+                        {
+                            currentPotAndPan = pot;
+                        }
+                    }
+                }
+            }
         }
 
         if (i_level == 1)
@@ -227,6 +264,44 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
             if (!g_level2Restaurant.activeSelf) g_level2Restaurant.SetActive(true);
             if (g_level1Restaurant.activeSelf) g_level1Restaurant.SetActive(false);
         }
+    }
+
+    bool UsePot(out PotAndPan pot, ChairObj chair)
+    {
+        while (true)
+        {
+            int PotIndex = Random.Range(0, allPotandPan.Count);
+            if (!allPotandPan[PotIndex].b_canUse && !allPotandPan[PotIndex].b_hasCooker)
+            {
+                pot = allPotandPan[PotIndex];
+                pot.b_canUse = true;
+                pot.s_cookingChair = chair;
+                pot.maxTargetPoint = Random.Range(4, pot.maxPoint);
+                return true;
+            }
+        }
+
+    }
+
+    bool GetChairCookingNoFinish(out ChairObj chair)
+    {
+        if (allChairs.Length > 0)
+        {
+            for (int i = 0; i < allChairs.Length; i++)
+            {
+                if (allChairs[i].s_currentCookingEmployee == null &&
+                    allChairs[i].b_finishCooking == false &&
+                    allChairs[i].s_currentCustomer != null &&
+                    allChairs[i].s_currentCustomer.s_currentState ==
+                    allChairs[i].s_currentCustomer.s_waitFoodState)
+                {
+                    chair = allChairs[i];
+                    return true;
+                }
+            }
+        }
+        chair = null;
+        return false;
     }
 
     public void CloseRestaurant()
@@ -289,20 +364,6 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
     //    rating = currentStep * 10;
     //    return rating;
     //}
-
-    int allTableIsReady()
-    {
-        int ready = 0;
-        for (int i = 0; i < allTables.Length; i++)
-        {
-            UpgradTable up = allTables[i].transform.GetComponent<UpgradTable>();
-            if (up.b_readyToUse)
-            {
-                ready++;
-            }
-        }
-        return ready;
-    }
 
     bool AllChairIsFull()
     {

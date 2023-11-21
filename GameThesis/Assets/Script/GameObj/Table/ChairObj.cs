@@ -12,10 +12,11 @@ public class ChairObj : MonoBehaviour
 
     [HideInInspector] public float f_cdForNextCustomer;
 
-     public bool b_readyForNextCustomer;
+    public bool b_readyForNextCustomer;
     [HideInInspector] float f_currentCDForNextCustomer;
 
-    [HideInInspector] public bool b_finishCooking;
+    /*[HideInInspector]*/
+    public bool b_finishCooking;
     public CustomerStateManager s_currentCustomer;
     public EmployeeStateManager s_currentServerEmployee;
     public EmployeeStateManager s_currentCookingEmployee;
@@ -71,9 +72,30 @@ public class ChairObj : MonoBehaviour
                     if (RestaurantManager.Instance.GetCanEmployeeCooking(out int cookingIndex) &&
                     s_currentCookingEmployee == null)
                     {
-                        RestaurantManager.Instance.allEmployees[cookingIndex].s_cookingChair = this;
-                        RestaurantManager.Instance.allEmployees[cookingIndex].b_canCook = false;
-                        s_currentCookingEmployee = RestaurantManager.Instance.allEmployees[cookingIndex];
+                        if (RestaurantManager.Instance.currentPotAndPan != null)
+                        {
+                            if (RestaurantManager.Instance.currentPotAndPan.s_cookingChair == this)
+                            {
+                                if(!RestaurantManager.Instance.currentPotAndPan.b_isWorking)
+                                {
+                                    RestaurantManager.Instance.allEmployees[cookingIndex].s_cookingChair = this;
+                                    RestaurantManager.Instance.allEmployees[cookingIndex].b_canCook = false;
+                                    s_currentCookingEmployee = RestaurantManager.Instance.allEmployees[cookingIndex];
+                                }
+                            }
+                            else
+                            {
+                                RestaurantManager.Instance.allEmployees[cookingIndex].s_cookingChair = this;
+                                RestaurantManager.Instance.allEmployees[cookingIndex].b_canCook = false;
+                                s_currentCookingEmployee = RestaurantManager.Instance.allEmployees[cookingIndex];
+                            }
+                        }
+                        else
+                        {
+                            RestaurantManager.Instance.allEmployees[cookingIndex].s_cookingChair = this;
+                            RestaurantManager.Instance.allEmployees[cookingIndex].b_canCook = false;
+                            s_currentCookingEmployee = RestaurantManager.Instance.allEmployees[cookingIndex];
+                        }
                     }
                 }
                 else

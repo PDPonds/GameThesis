@@ -10,12 +10,6 @@ public class PlayerUI : Auto_Singleton<PlayerUI>
     [Header("===== Interactive =====")]
     public TextMeshProUGUI text_interactText;
 
-    [Header("===== Stamina =====")]
-    public Slider s_staminaSlider;
-
-    [Header("===== Player HP =====")]
-    public Slider s_hpSlider;
-
     [Header("===== WakeUpDrunkCustomer =====")]
     public GameObject g_wekeUp;
     public Image image_fillAmouny;
@@ -86,19 +80,40 @@ public class PlayerUI : Auto_Singleton<PlayerUI>
                     {
                         text_interactText.text = interactive.InteractionText();
                         text_interactText.color = interactive.InteractionTextColor();
-                        PotAndPan pot = PlayerManager.Instance.g_interactiveObj.GetComponentInParent<PotAndPan>();
+                        PotAndPan pot = PlayerManager.Instance.g_interactiveObj.GetComponent<PotAndPan>();
                         if (pot != null)
                         {
-                            cookingUI.SetActive(true);
+                            GameState state = GameManager.Instance.s_gameState;
 
-                            minPoint.fillAmount = pot.minTargetPoint / 10f;
-                            maxPoint.fillAmount = 1f - (pot.maxTargetPoint / 10f);
+                            if (state.s_currentState == state.s_openState)
+                            {
+                                if(pot.b_canUse)
+                                {
+                                    cookingUI.SetActive(true);
 
-                            float pos = (pot.currentPoint / pot.maxPoint) * 250f;
-                            currentPoint.anchoredPosition = new Vector2(0, pos);
+                                    minPoint.fillAmount = pot.minTargetPoint / 10f;
+                                    maxPoint.fillAmount = 1f - (pot.maxTargetPoint / 10f);
 
-                            currentTime.fillAmount = pot.currentTime / pot.cookingTime;
+                                    float pos = (pot.currentPoint / pot.maxPoint) * 250f;
+                                    currentPoint.anchoredPosition = new Vector2(0, pos);
 
+                                    currentTime.fillAmount = pot.currentTime / pot.cookingTime;
+                                }
+                                else
+                                {
+                                    cookingUI.SetActive(false);
+                                    text_interactText.text = string.Empty;
+                                }
+                            }
+                            else if (state.s_currentState == state.s_afterOpenState)
+                            {
+                                
+                            }
+                            else
+                            {
+                                cookingUI.SetActive(false);
+                                text_interactText.text = string.Empty;
+                            }
                         }
                         else
                         {
@@ -120,13 +135,6 @@ public class PlayerUI : Auto_Singleton<PlayerUI>
                 g_wekeUp.SetActive(false);
                 text_interactText.text = string.Empty;
             }
-
-            float staminaPercent = PlayerManager.Instance.f_currentStamina / PlayerManager.Instance.f_maxStamina;
-            s_staminaSlider.value = staminaPercent;
-
-            float hpPercent = ((float)PlayerManager.Instance.i_maxHP - (float)PlayerManager.Instance.i_currentHP)
-                / PlayerManager.Instance.i_maxHP;
-            s_hpSlider.value = hpPercent;
 
         }
         else
