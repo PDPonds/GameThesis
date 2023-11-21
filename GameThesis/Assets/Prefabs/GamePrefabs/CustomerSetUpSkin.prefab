@@ -1927,6 +1927,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6afb1dfd3f6679e4fa44e808489c93d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CustomerClothes:
+    hair: 0
+    shirt: 0
+    pant: 0
+    hat: 0
+    asset: 0
+  b_isFemale: 0
+  hairs: []
+  shirts: []
+  pants: []
+  hats: []
+  assets: []
   i_currentHP: 0
   i_maxHP: 5
   b_inFight: 0
@@ -1936,6 +1948,9 @@ MonoBehaviour:
   f_fightDis: 1
   f_atkDelay: 1
   f_attackRange: 1.5
+  f_playerEscapeTime: 0
+  f_hurtTime: 0
+  f_protectStunTime: 0
   i_atkCount: 0
   t_hips: {fileID: 1841821590660256524}
   rb: []
@@ -1946,13 +1961,16 @@ MonoBehaviour:
   f_orderTime: 60
   f_currentOrderTime: 0
   c_chairObj: {fileID: 0}
+  f_giveCoin: 0
+  i_dish: 0
+  i_drink: 0
   v_minAndMaxEatFood: {x: 10, y: 15}
-  f_randomEventPercent: 50
+  f_randomEventPercent: 80
   b_escape: 0
   f_fightBackPercent: 30
+  g_cashObj: {fileID: 0}
   f_payTime: 25
-  f_giveCoin: 0
-  v_minmaxGiveCoin: {x: 10, y: 20}
+  v_minmaxTipsCoin: {x: 0, y: 0}
   f_runTime: 10
   f_runSpeed: 3
   f_walkSpeed: 2
@@ -1964,7 +1982,7 @@ MonoBehaviour:
   f_wekeUpMultiply: 1
   f_maxWekeUpPoint: 7
   g_sleepVFX: {fileID: 2602978953492949164}
-  f_isGangsterPercent: 30
+  f_isGangsterPercent: 100
   b_hasGang: 0
   v_minmaxGangCount: {x: 2, y: 5}
   b_isGang: 0
@@ -1978,7 +1996,9 @@ MonoBehaviour:
   color_inFighting: {r: 0.8773585, g: 0.49247953, b: 0.49247953, a: 1}
   color_fightWithPlayer: {r: 1, g: 0, b: 0, a: 1}
   f_outlineScale: 0.005
+  allCheerAnim: []
   v_crowdPos: {x: 0, y: 0, z: 0}
+  sleepSound: {fileID: 0}
 --- !u!114 &4548816158027124120
 MonoBehaviour:
   m_ObjectHideFlags: 0

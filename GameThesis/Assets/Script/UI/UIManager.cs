@@ -164,6 +164,7 @@ public class UIManager : Auto_Singleton<UIManager>
 
         if (!RestaurantManager.Instance.AllEmployeeWorkingCheckForText())
         {
+            g_slockOff.transform.SetAsLastSibling();
             g_slockOff.SetActive(true);
             int slackOffCount = RestaurantManager.Instance.GetSlackoffCount();
             if (allSlackOffWaypoint.Count != slackOffCount)
@@ -194,6 +195,7 @@ public class UIManager : Auto_Singleton<UIManager>
 
         if (RestaurantManager.Instance.SomeOneEscape())
         {
+            g_escape.transform.SetAsLastSibling();
             g_escape.SetActive(true);
             int escapeCount = RestaurantManager.Instance.GetEscapeCount();
             if (allSneakWaypoint.Count != escapeCount)
@@ -231,6 +233,7 @@ public class UIManager : Auto_Singleton<UIManager>
 
         if (RestaurantManager.Instance.HasGangToTeachYou())
         {
+            g_slockOff.transform.SetAsLastSibling();
             g_gang.SetActive(true);
         }
         else
@@ -240,6 +243,7 @@ public class UIManager : Auto_Singleton<UIManager>
 
         if (RestaurantManager.Instance.SomeOneSleep())
         {
+            g_drunkSleep.transform.SetAsLastSibling();
             g_drunkSleep.SetActive(true);
             int sleepCount = RestaurantManager.Instance.GetSleepCount();
             if (allSleepWaypoint.Count != sleepCount)
