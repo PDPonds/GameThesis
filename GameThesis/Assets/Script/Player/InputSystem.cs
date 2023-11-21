@@ -42,7 +42,7 @@ public class InputSystem : MonoBehaviour
     {
         if (UIManager.Instance.letter.activeSelf)
         {
-            UIManager.Instance.letter.SetActive(false);
+            
         }
         else
         {

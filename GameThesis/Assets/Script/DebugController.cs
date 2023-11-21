@@ -13,7 +13,7 @@ public class DebugController : Auto_Singleton<DebugController>
     //public static DebugCommand<int> UnlockIngredient;
     //public static DebugCommand<int, int> RemoveItem;
 
-    public static DebugCommand<int> AddPocketCoin;
+    public static DebugCommand<float> AddPocketCoin;
     public static DebugCommand SkipDay;
 
     public List<object> commandList = new List<object>();
@@ -21,12 +21,12 @@ public class DebugController : Auto_Singleton<DebugController>
     private void Awake()
     {
 
-        AddPocketCoin = new DebugCommand<int>("add_pocket", "add pocket coint", "add_pocket", (i) =>
+        AddPocketCoin = new DebugCommand<float>("add", "add pocket coint", "add", (i) =>
         {
             GameManager.Instance.AddPocketMoney(i);
         });
 
-        SkipDay = new DebugCommand("skipday", "skip current day", "skipday", () =>
+        SkipDay = new DebugCommand("skip", "skip current day", "skip", () =>
         {
             GameManager.Instance.SkipDay();
         });

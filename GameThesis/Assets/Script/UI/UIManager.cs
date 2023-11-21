@@ -91,7 +91,7 @@ public class UIManager : Auto_Singleton<UIManager>
     public TextMeshProUGUI text_cookerCount;
     public TextMeshProUGUI text_profitCost;
     public TextMeshProUGUI text_daliyIncomeCost;
-    public TextMeshProUGUI text_totalEmpCost;
+    public TextMeshProUGUI text_totalCostPerDay;
     public TextMeshProUGUI text_waiterCost;
     public TextMeshProUGUI text_cookerCost;
     public TextMeshProUGUI text_ingredientCost;
@@ -155,8 +155,8 @@ public class UIManager : Auto_Singleton<UIManager>
     {
         text_day.text = $"Day : {GameManager.Instance.i_currentDay}";
 
-        text_Cash.text = $"{GameManager.Instance.f_coin.ToString("C2")}";
-        text_pocketCash.text = $"{GameManager.Instance.f_pocketMoney.ToString("C2")}";
+        text_Cash.text = $"{GameManager.Instance.f_coin.ToString("F2")}$";
+        text_pocketCash.text = $"{GameManager.Instance.f_pocketMoney.ToString("F2")}$";
 
         text_time.text = TimeController.Instance.d_currentTime.ToString("HH:mm");
 
@@ -373,17 +373,17 @@ public class UIManager : Auto_Singleton<UIManager>
             g_close.SetActive(false);
             g_managementBoard.SetActive(false);
 
-            text_waiterCount.text = $"{RestaurantManager.Instance.i_currentWaiterCount} ea";
-            text_cookerCount.text = $"{RestaurantManager.Instance.i_currentCookerCount} ea";
-            text_daliyIncomeCost.text = $"{GameManager.Instance.f_coin.ToString("C2")} ";
+            text_waiterCount.text = $"x {RestaurantManager.Instance.i_currentWaiterCount}";
+            text_cookerCount.text = $"x {RestaurantManager.Instance.i_currentCookerCount}";
+            text_daliyIncomeCost.text = $"{GameManager.Instance.f_coin.ToString("F2")}$";
             float cookerCost = RestaurantManager.Instance.i_currentCookerCount * RestaurantManager.Instance.f_cookerCost;
             float waiterCost = RestaurantManager.Instance.i_currentWaiterCount * RestaurantManager.Instance.f_waiterCost;
-            text_totalEmpCost.text = $"{RestaurantManager.Instance.f_currentCostPerDay.ToString("C2")} ";
+            text_totalCostPerDay.text = $"- {RestaurantManager.Instance.f_currentCostPerDay.ToString("F2")}$";
             float profit = GameManager.Instance.f_coin - RestaurantManager.Instance.f_currentCostPerDay;
-            text_profitCost.text = $"{profit.ToString("C2")} ";
-            text_waiterCost.text = $"{waiterCost.ToString("C2")} ";
-            text_cookerCost.text = $"{cookerCost.ToString("C2")} ";
-            text_ingredientCost.text = $"{RestaurantManager.Instance.f_ingredientCost.ToString("C2")}";
+            text_profitCost.text = $"{profit.ToString("F2")}$";
+            text_waiterCost.text = $"{waiterCost.ToString("F2")}$";
+            text_cookerCost.text = $"{cookerCost.ToString("F2")}$";
+            text_ingredientCost.text = $"{RestaurantManager.Instance.f_ingredientCost.ToString("F2")}$";
 
             if (RestaurantManager.Instance.RestaurantIsEmpty())
             {
@@ -426,7 +426,7 @@ public class UIManager : Auto_Singleton<UIManager>
             g_objective.SetActive(false);
         }
 
-        if (letter.activeSelf) letterUI.SetActive(true);
+        if (letter.gameObject.activeSelf) letterUI.SetActive(true);
         else letterUI.SetActive(false);
 
     }
