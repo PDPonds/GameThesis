@@ -51,7 +51,7 @@ public class GameManager : Auto_Singleton<GameManager>
     {
         if (amount < 0) return;
 
-        UIManager.Instance.uiAnimCon.AddCashAnim();
+        UIManager.Instance.uiAnimCon.AddCashAnim(amount);
         f_coin += amount;
         SoundManager.Instance.PlayAddCoinSound();
     }
@@ -59,7 +59,7 @@ public class GameManager : Auto_Singleton<GameManager>
     public void RemoveCoin(float amount)
     {
         SoundManager.Instance.PlayRemoveCoinSound();
-        UIManager.Instance.uiAnimCon.RemoveCashAnim();
+        UIManager.Instance.uiAnimCon.RemoveCashAnim(amount);
         f_coin -= amount;
     }
 
@@ -67,7 +67,7 @@ public class GameManager : Auto_Singleton<GameManager>
     {
         if (amount < 0) return;
 
-        UIManager.Instance.uiAnimPocket.AddCashAnim();
+        UIManager.Instance.uiAnimPocket.AddCashAnim(amount);
         f_pocketMoney += amount;
         SoundManager.Instance.PlayAddCoinSound();
     }
@@ -75,7 +75,7 @@ public class GameManager : Auto_Singleton<GameManager>
     public void RemovePocketMoney(float amount)
     {
         SoundManager.Instance.PlayRemoveCoinSound();
-        UIManager.Instance.uiAnimPocket.RemoveCashAnim();
+        UIManager.Instance.uiAnimPocket.RemoveCashAnim(amount);
         f_pocketMoney -= amount;
     }
 
