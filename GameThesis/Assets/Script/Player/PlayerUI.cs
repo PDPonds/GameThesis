@@ -21,6 +21,9 @@ public class PlayerUI : Auto_Singleton<PlayerUI>
     public Image currentTime;
     public RectTransform currentPoint;
 
+    [Header("===== Hold =====")]
+    public Image interactiveFill;
+
 
     private void Update()
     {
@@ -53,6 +56,41 @@ public class PlayerUI : Auto_Singleton<PlayerUI>
                         else
                         {
                             g_wekeUp.SetActive(false);
+                        }
+
+
+                        UpgradeEmp upEmp = PlayerManager.Instance.g_interactiveObj.GetComponentInParent<UpgradeEmp>();
+                        UnlockNewMenu unlockMenu = PlayerManager.Instance.g_interactiveObj.GetComponentInParent<UnlockNewMenu>();
+                        UpgradeRestaurant upRes = PlayerManager.Instance.g_interactiveObj.GetComponentInParent<UpgradeRestaurant>();
+                        UpgradTable upTable = PlayerManager.Instance.g_interactiveObj.GetComponentInParent<UpgradTable>();
+
+                        if (upEmp != null)
+                        {
+                            interactiveFill.gameObject.SetActive(true);
+                            float percent = upEmp.currenthold / upEmp.holdTime;
+                            interactiveFill.fillAmount = percent;
+                        }
+                        else if (unlockMenu != null)
+                        {
+                            interactiveFill.gameObject.SetActive(true);
+                            float percent = unlockMenu.currenthold / unlockMenu.holdTime;
+                            interactiveFill.fillAmount = percent;
+                        }
+                        else if (upRes != null)
+                        {
+                            interactiveFill.gameObject.SetActive(true);
+                            float percent = upRes.currenthold / upRes.holdTime;
+                            interactiveFill.fillAmount = percent;
+                        }
+                        else if (upTable != null)
+                        {
+                            interactiveFill.gameObject.SetActive(true);
+                            float percent = upTable.currenthold / upTable.holdTime;
+                            interactiveFill.fillAmount = percent;
+                        }
+                        else
+                        {
+                            interactiveFill.gameObject.SetActive(false);
                         }
                     }
                     else
@@ -87,7 +125,7 @@ public class PlayerUI : Auto_Singleton<PlayerUI>
 
                             if (state.s_currentState == state.s_openState)
                             {
-                                if(pot.b_canUse)
+                                if (pot.b_canUse)
                                 {
                                     cookingUI.SetActive(true);
 
@@ -107,7 +145,7 @@ public class PlayerUI : Auto_Singleton<PlayerUI>
                             }
                             else if (state.s_currentState == state.s_afterOpenState)
                             {
-                                
+
                             }
                             else
                             {
@@ -127,10 +165,45 @@ public class PlayerUI : Auto_Singleton<PlayerUI>
                         text_interactText.text = string.Empty;
                     }
 
+                    UpgradeEmp upEmp = PlayerManager.Instance.g_interactiveObj.GetComponentInParent<UpgradeEmp>();
+                    UnlockNewMenu unlockMenu = PlayerManager.Instance.g_interactiveObj.GetComponentInParent<UnlockNewMenu>();
+                    UpgradeRestaurant upRes = PlayerManager.Instance.g_interactiveObj.GetComponentInParent<UpgradeRestaurant>();
+                    UpgradTable upTable = PlayerManager.Instance.g_interactiveObj.GetComponentInParent<UpgradTable>();
+
+                    if (upEmp != null)
+                    {
+                        interactiveFill.gameObject.SetActive(true);
+                        float percent = upEmp.currenthold / upEmp.holdTime;
+                        interactiveFill.fillAmount = percent;
+                    }
+                    else if (unlockMenu != null)
+                    {
+                        interactiveFill.gameObject.SetActive(true);
+                        float percent = unlockMenu.currenthold / unlockMenu.holdTime;
+                        interactiveFill.fillAmount = percent;
+                    }
+                    else if (upRes != null)
+                    {
+                        interactiveFill.gameObject.SetActive(true);
+                        float percent = upRes.currenthold / upRes.holdTime;
+                        interactiveFill.fillAmount = percent;
+                    }
+                    else if (upTable != null)
+                    {
+                        interactiveFill.gameObject.SetActive(true);
+                        float percent = upTable.currenthold / upTable.holdTime;
+                        interactiveFill.fillAmount = percent;
+                    }
+                    else
+                    {
+                        interactiveFill.gameObject.SetActive(false);
+                    }
+
                 }
             }
             else
             {
+                interactiveFill.gameObject.SetActive(false);
                 cookingUI.SetActive(false);
                 g_wekeUp.SetActive(false);
                 text_interactText.text = string.Empty;

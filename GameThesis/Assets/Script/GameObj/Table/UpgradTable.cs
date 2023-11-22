@@ -12,6 +12,9 @@ public class UpgradTable : MonoBehaviour, IInteracable
     public Material m_waitForBuy;
     public Material m_readyToUse;
 
+    public float holdTime;
+    public float currenthold;
+
     private void Awake()
     {
         tableObj = GetComponent<TableObj>();
@@ -21,6 +24,40 @@ public class UpgradTable : MonoBehaviour, IInteracable
     private void Update()
     {
         SetUpBuy();
+
+        if (GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_beforeOpenState)
+        {
+            if(PlayerManager.Instance.g_interactiveObj != null)
+            {
+                UpgradTable upTable = PlayerManager.Instance.g_interactiveObj.GetComponentInParent<UpgradTable>();
+                if (GameManager.Instance.f_pocketMoney >= f_costToBuy && upTable != null &&
+                    upTable == this)
+                {
+                    if (Input.GetKey(KeyCode.E))
+                    {
+                        currenthold += Time.deltaTime;
+                        if (currenthold > holdTime)
+                        {
+                            SoundManager.Instance.PlayInteractiveSound();
+                            SoundManager.Instance.PlayUpgradeSound();
+                            GameManager.Instance.RemovePocketMoney(f_costToBuy);
+                            SetUpUseAble();
+                            b_readyToUse = true;
+                            currenthold = 0;
+                        }
+                    }
+                    else
+                    {
+                        currenthold = 0;
+                    }
+                }
+            }
+            else
+            {
+                currenthold = 0;
+            }
+        }
+
     }
 
     public void SetUpUseAble()
@@ -199,16 +236,12 @@ public class UpgradTable : MonoBehaviour, IInteracable
                 SetUpUseAble();
                 b_readyToUse = true;
             }
-            else
-            {
-                SoundManager.Instance.PlayCantInteractSound();
-            }
         }
     }
 
     public void Interaction()
     {
-        BuyTable();
+        //BuyTable();
     }
 
     public string InteractionText()

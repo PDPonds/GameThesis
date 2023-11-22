@@ -18,10 +18,53 @@ public class UnlockNewMenu : MonoBehaviour, IInteracable
     public TextMeshProUGUI text_menuDollar;
     public GameObject g_border;
 
+    public float holdTime;
+    public float currenthold;
+
     private void Update()
     {
         if (GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_beforeOpenState)
         {
+            if (GameManager.Instance.f_pocketMoney >= menuCost &&
+                PlayerManager.Instance.g_interactiveObj == this.gameObject)
+            {
+                if (Input.GetKey(KeyCode.E))
+                {
+                    currenthold += Time.deltaTime;
+                    if (currenthold > holdTime)
+                    {
+                        if (type == menuType.dish)
+                        {
+                            if (!menuHandler.mainDish_Status[menuNum].status)
+                            {
+                                GameManager.Instance.RemovePocketMoney(menuCost);
+                                SoundManager.Instance.PlayInteractiveSound();
+                                menuHandler.ActivateDishMenu(menuNum);
+                            }
+                        }
+                        else if (type == menuType.drink)
+                        {
+                            if (!menuHandler.drinks_Status[menuNum].status)
+                            {
+                                GameManager.Instance.RemovePocketMoney(menuCost);
+                                SoundManager.Instance.PlayInteractiveSound();
+                                menuHandler.ActivateDrinksMenu(menuNum);
+                            }
+                        }
+                        currenthold = 0;
+                    }
+
+                }
+                else
+                {
+                    currenthold = 0;
+                }
+            }
+            else
+            {
+                currenthold = 0;
+            }
+
             Color color = new Color(255f, 255f, 255f, 50f);
 
             if (type == menuType.dish)
@@ -61,35 +104,42 @@ public class UnlockNewMenu : MonoBehaviour, IInteracable
 
         }
 
+
+
+
+
+
+
+
     }
 
     public void Interaction()
     {
-        if (GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_beforeOpenState)
-        {
-            if (GameManager.Instance.f_pocketMoney >= menuCost)
-            {
-                if (type == menuType.dish)
-                {
-                    if (!menuHandler.mainDish_Status[menuNum].status)
-                    {
-                        GameManager.Instance.RemovePocketMoney(menuCost);
-                        SoundManager.Instance.PlayInteractiveSound();
-                        menuHandler.ActivateDishMenu(menuNum);
-                    }
-                }
-                else if (type == menuType.drink)
-                {
-                    if (!menuHandler.drinks_Status[menuNum].status)
-                    {
-                        GameManager.Instance.RemovePocketMoney(menuCost);
-                        SoundManager.Instance.PlayInteractiveSound();
-                        menuHandler.ActivateDrinksMenu(menuNum);
-                    }
-                }
-            }
+        //if (GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_beforeOpenState)
+        //{
+        //    if (GameManager.Instance.f_pocketMoney >= menuCost)
+        //    {
+        //        if (type == menuType.dish)
+        //        {
+        //            if (!menuHandler.mainDish_Status[menuNum].status)
+        //            {
+        //                GameManager.Instance.RemovePocketMoney(menuCost);
+        //                SoundManager.Instance.PlayInteractiveSound();
+        //                menuHandler.ActivateDishMenu(menuNum);
+        //            }
+        //        }
+        //        else if (type == menuType.drink)
+        //        {
+        //            if (!menuHandler.drinks_Status[menuNum].status)
+        //            {
+        //                GameManager.Instance.RemovePocketMoney(menuCost);
+        //                SoundManager.Instance.PlayInteractiveSound();
+        //                menuHandler.ActivateDrinksMenu(menuNum);
+        //            }
+        //        }
+        //    }
 
-        }
+        //}
 
     }
 

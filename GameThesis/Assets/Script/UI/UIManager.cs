@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -85,7 +84,6 @@ public class UIManager : Auto_Singleton<UIManager>
     public Transform t_managementBoardMesh;
     public Transform t_doorMesh;
     public Transform t_menuBoardMesh;
-    public Transform t_helpCookerMesh;
 
     [Header("===== Summary =====")]
     public GameObject g_summary;
@@ -472,7 +470,7 @@ public class UIManager : Auto_Singleton<UIManager>
             GameObject wayPointObj = Instantiate(g_helpCookerWaypoint, Vector3.zero, Quaternion.identity);
             wayPointObj.transform.SetParent(t_Canvas);
             WaypointIndicator indicator = wayPointObj.GetComponent<WaypointIndicator>();
-            indicator.target = t_helpCookerMesh;
+            indicator.target = RestaurantManager.Instance.currentPotAndPan.transform;
 
             allHelpCookerWaypoint.Add(indicator);
         }
