@@ -174,7 +174,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cashAnim: {fileID: 2481343303281650522}
   addCashAnim: {fileID: 3259528530218962863}
-  amountText: {fileID: 0}
+  amountText: {fileID: 5888205491137724188}
   ratingTextAnim: {fileID: 0}
   ratingStarAnim: {fileID: 0}
 --- !u!1 &362218735167800688
@@ -890,7 +890,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -48.8, y: 2.2999449}
+  m_AnchoredPosition: {x: -48.8, y: 2.299942}
   m_SizeDelta: {x: 341, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &5776406564205743507
@@ -1163,7 +1163,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 510}
-  m_SizeDelta: {x: 1296, y: 177.6}
+  m_SizeDelta: {x: 1296, y: 177.59998}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4439505186855363621
 CanvasRenderer:
