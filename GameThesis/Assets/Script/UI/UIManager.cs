@@ -404,16 +404,6 @@ public class UIManager : Auto_Singleton<UIManager>
                 g_close.SetActive(false);
             }
 
-
-            if (RestaurantManager.Instance.currentPotAndPan != null)
-            {
-                SpawnHelpCooker();
-            }
-            else
-            {
-                DestroyHelpCooker();
-            }
-
         }
         else
         {
@@ -457,7 +447,7 @@ public class UIManager : Auto_Singleton<UIManager>
 
     }
 
-    void SpawnHelpCooker()
+    public void SpawnHelpCooker()
     {
         if (allHelpCookerWaypoint.Count != 1)
         {
@@ -476,7 +466,7 @@ public class UIManager : Auto_Singleton<UIManager>
         }
     }
 
-    void DestroyHelpCooker()
+    public void DestroyHelpCooker()
     {
         if (allHelpCookerWaypoint.Count > 0)
         {

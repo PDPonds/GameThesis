@@ -231,6 +231,7 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
                     if (UsePot(out PotAndPan pot, chair))
                     {
                         currentPotAndPan = pot;
+                        UIManager.Instance.SpawnHelpCooker();
                     }
                 }
             }

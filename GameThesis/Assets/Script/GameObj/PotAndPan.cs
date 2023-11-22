@@ -64,6 +64,7 @@ public class PotAndPan : MonoBehaviour, IInteracable
                     s_cookingChair.s_currentCustomer == null ||
                     s_cookingChair.s_currentCustomer.s_currentState != s_cookingChair.s_currentCustomer.s_waitFoodState)
                 {
+                    UIManager.Instance.DestroyHelpCooker();
                     RestaurantManager.Instance.currentPotAndPan = null;
                     b_canUse = false;
                 }
@@ -82,6 +83,7 @@ public class PotAndPan : MonoBehaviour, IInteracable
                     s_cookingChair.b_finishCooking = true;
                     b_canUse = false;
 
+                    UIManager.Instance.DestroyHelpCooker();
                     RestaurantManager.Instance.currentPotAndPan = null;
                     s_cookingChair = null;
                     currentTime = 0;
@@ -114,6 +116,7 @@ public class PotAndPan : MonoBehaviour, IInteracable
                         s_cookingChair.s_currentCustomer == null ||
                         s_cookingChair.s_currentCustomer.s_currentState != s_cookingChair.s_currentCustomer.s_waitFoodState)
                     {
+                        UIManager.Instance.DestroyHelpCooker();
                         count = 0;
                         RestaurantManager.Instance.currentPotAndPan = null;
                         b_canUse = false;
@@ -133,6 +136,7 @@ public class PotAndPan : MonoBehaviour, IInteracable
                         s_cookingChair.b_finishCooking = true;
                         b_canUse = false;
 
+                        UIManager.Instance.DestroyHelpCooker();
                         RestaurantManager.Instance.currentPotAndPan = null;
                         s_cookingChair = null;
                         currentTime = 0;
