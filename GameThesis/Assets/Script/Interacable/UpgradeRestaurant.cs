@@ -16,7 +16,8 @@ public class UpgradeRestaurant : MonoBehaviour, IInteracable
     {
         if (GameManager.Instance.f_pocketMoney >= f_cost &&
             RestaurantManager.Instance.i_level < 2 &&
-            PlayerManager.Instance.g_interactiveObj == this.gameObject)
+            PlayerManager.Instance.g_interactiveObj == this.gameObject &&
+            GameManager.Instance.i_currentDay > 2)
         {
             if (Input.GetKey(KeyCode.E))
             {
@@ -53,7 +54,11 @@ public class UpgradeRestaurant : MonoBehaviour, IInteracable
 
     public string InteractionText()
     {
-        return $"[E] ${f_cost} to upgrade restaurant.";
+        if (GameManager.Instance.i_currentDay > 2)
+        {
+            return $"[E] ${f_cost} to upgrade restaurant.";
+        }
+        return string.Empty;
     }
 
     public Color InteractionTextColor()

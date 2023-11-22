@@ -214,7 +214,35 @@ public class PotAndPan : MonoBehaviour, IInteracable
         }
         else if (state.s_currentState == state.s_afterOpenState)
         {
+            if(!RestaurantManager.Instance.RestaurantIsEmpty())
+            {
+                if (b_canUse)
+                {
+                    if (PlayerManager.Instance.g_interactiveObj == this.gameObject)
+                    {
+                        if (currentPoint < maxPoint)
+                        {
+                            if (count == 0)
+                            {
+                                int dish = s_cookingChair.s_currentCustomer.i_dish;
+                                int drink = s_cookingChair.s_currentCustomer.i_drink;
 
+                                float dishCost = RestaurantManager.Instance.menuHandler.mainDish_Status[dish].cost;
+                                float dirnkCost = RestaurantManager.Instance.menuHandler.drinks_Status[drink].cost;
+
+                                float dishIng = dishCost / 2;
+                                float drinkIng = dirnkCost / 2;
+
+                                float IngCost = dishIng + drinkIng;
+
+                                RestaurantManager.Instance.AddIngredientCost(IngCost);
+                            }
+                            currentPoint += pointMul;
+                            count++;
+                        }
+                    }
+                }
+            }
         }
     }
 

@@ -41,9 +41,17 @@ public class TutorialManager : Auto_Singleton<TutorialManager>
     public Transform empBoard;
     public float boardDis;
 
-    [Header("-T3")]
+    [Header("- T3")]
     public Vector3 lookAtOffSet;
     public Sprite addWaiterSprite;
+
+    [Header("- T6")]
+    public Vector3 lookAtFirstCusOffset;
+    public Sprite firstCusSprite;
+
+    [Header("- T7")]
+    public Sprite firstCookSprite;
+
 
     private void Update()
     {
@@ -72,13 +80,13 @@ public class TutorialManager : Auto_Singleton<TutorialManager>
                             dialog.SetActive(true);
                             DialogBox dialogBox = dialog.GetComponent<DialogBox>();
                             dialogBox.SetupDailogText(startText);
+                            UIManager.Instance.g_goToBoardForWaiter.SetActive(false);
 
                             if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0))
                             {
                                 currentTutorialIndex = 2;
                             }
 
-                            UIManager.Instance.g_goToBoardForWaiter.SetActive(false);
 
                             break;
                         case 2:
@@ -132,6 +140,64 @@ public class TutorialManager : Auto_Singleton<TutorialManager>
                     UIManager.Instance.UIBar.SetActive(true);
                     UIManager.Instance.g_open.SetActive(false);
                     UIManager.Instance.DestroyOpenClseWaypoint();
+
+                    switch (currentTutorialIndex)
+                    {
+                        case 6:
+
+                            if (RestaurantManager.Instance.GetWaitFirstChair(out int chairIndex, out int cusIndex))
+                            {
+                                CustomerStateManager cus = RestaurantManager.Instance.allCustomers[cusIndex];
+                                ChairObj chair = RestaurantManager.Instance.allChairs[chairIndex];
+                                CameraController.Instance.s_playerCamera.PlayerLookAtTarget(cus.transform, lookAtFirstCusOffset);
+
+                                tutorialImage.SetActive(true);
+                                TutorialImage image = tutorialImage.GetComponent<TutorialImage>();
+                                image.SetupImage(firstCusSprite);
+
+                                Pause.isPause = true;
+                                if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0))
+                                {
+                                    currentTutorialIndex = 7;
+                                }
+                            }
+
+                            break;
+                        case 7:
+
+                            Pause.isPause = false;
+                            tutorialImage.SetActive(false);
+
+                            if (PlayerManager.Instance.g_interactiveObj != null)
+                            {
+                                PotAndPan pot = PlayerManager.Instance.g_interactiveObj.GetComponent<PotAndPan>();
+                                if (pot != null)
+                                {
+                                    if (pot.b_canUse)
+                                    {
+                                        tutorialImage.SetActive(true);
+                                        TutorialImage image2 = tutorialImage.GetComponent<TutorialImage>();
+                                        image2.SetupImage(firstCookSprite);
+                                        Pause.isPause = true;
+
+                                        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0))
+                                        {
+                                            currentTutorialIndex = 8;
+                                        }
+
+                                    }
+                                }
+                            }
+                            
+                            break;
+                        case 8:
+
+                            Pause.isPause = false;
+                            tutorialImage.SetActive(false);
+
+                            break;
+                        default: break;
+                    }
 
                 }
                 else

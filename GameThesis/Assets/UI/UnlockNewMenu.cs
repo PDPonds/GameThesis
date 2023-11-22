@@ -26,7 +26,8 @@ public class UnlockNewMenu : MonoBehaviour, IInteracable
         if (GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_beforeOpenState)
         {
             if (GameManager.Instance.f_pocketMoney >= menuCost &&
-                PlayerManager.Instance.g_interactiveObj == this.gameObject)
+                PlayerManager.Instance.g_interactiveObj == this.gameObject &&
+                GameManager.Instance.i_currentDay > 1)
             {
                 if (Input.GetKey(KeyCode.E))
                 {
@@ -145,7 +146,8 @@ public class UnlockNewMenu : MonoBehaviour, IInteracable
 
     public string InteractionText()
     {
-        if (GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_beforeOpenState)
+        if (GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_beforeOpenState &&
+                GameManager.Instance.i_currentDay > 1)
         {
             if (type == menuType.dish)
             {

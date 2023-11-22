@@ -27,11 +27,11 @@ public class UpgradTable : MonoBehaviour, IInteracable
 
         if (GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_beforeOpenState)
         {
-            if(PlayerManager.Instance.g_interactiveObj != null)
+            if (PlayerManager.Instance.g_interactiveObj != null)
             {
                 UpgradTable upTable = PlayerManager.Instance.g_interactiveObj.GetComponentInParent<UpgradTable>();
                 if (GameManager.Instance.f_pocketMoney >= f_costToBuy && upTable != null &&
-                    upTable == this)
+                    upTable == this && GameManager.Instance.i_currentDay > 1)
                 {
                     if (Input.GetKey(KeyCode.E))
                     {
@@ -247,7 +247,7 @@ public class UpgradTable : MonoBehaviour, IInteracable
     public string InteractionText()
     {
         string text = string.Empty;
-        if (!b_readyToUse)
+        if (!b_readyToUse && GameManager.Instance.i_currentDay > 1)
         {
             text = $"[E] Use {f_costToBuy.ToString("C2")}";
             //text = $"[E] Use {f_costToBuy.ToString("C2")} And{Environment.NewLine} " +

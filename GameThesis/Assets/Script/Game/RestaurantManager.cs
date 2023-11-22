@@ -264,6 +264,41 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
         }
     }
 
+    public bool GetWaitFirstChair(out int chairIndex, out int customerIndex)
+    {
+        if (allChairs.Length > 0)
+        {
+            for (int i = 0; i < allChairs.Length; i++)
+            {
+                if (allChairs[i].s_currentCustomer != null &&
+                    allChairs[i].s_currentCustomer.s_currentState == allChairs[i].s_currentCustomer.s_waitFoodState)
+                {
+                    chairIndex = i;
+                    customerIndex = GetCustomerIndexWithCusScript(allChairs[i].s_currentCustomer);
+                    return true;
+                }
+            }
+        }
+        chairIndex = -1;
+        customerIndex = -1;
+        return false;
+    }
+
+    int GetCustomerIndexWithCusScript(CustomerStateManager cus)
+    {
+        if (allCustomers.Length > 0)
+        {
+            for (int i = 0; i < allCustomers.Length; i++)
+            {
+                if (allCustomers[i] == cus)
+                {
+                    return i;
+                }
+            }
+        }
+        return -1;
+    }
+
     bool UsePot(out PotAndPan pot, ChairObj chair)
     {
         while (true)
