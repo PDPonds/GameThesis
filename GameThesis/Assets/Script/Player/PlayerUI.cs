@@ -145,7 +145,31 @@ public class PlayerUI : Auto_Singleton<PlayerUI>
                             }
                             else if (state.s_currentState == state.s_afterOpenState)
                             {
+                                if (!RestaurantManager.Instance.RestaurantIsEmpty())
+                                {
+                                    if (pot.b_canUse)
+                                    {
+                                        cookingUI.SetActive(true);
 
+                                        minPoint.fillAmount = pot.minTargetPoint / 10f;
+                                        maxPoint.fillAmount = 1f - (pot.maxTargetPoint / 10f);
+
+                                        float pos = (pot.currentPoint / pot.maxPoint) * 250f;
+                                        currentPoint.anchoredPosition = new Vector2(0, pos);
+
+                                        currentTime.fillAmount = pot.currentTime / pot.cookingTime;
+                                    }
+                                    else
+                                    {
+                                        cookingUI.SetActive(false);
+                                        text_interactText.text = string.Empty;
+                                    }
+                                }
+                                else
+                                {
+                                    cookingUI.SetActive(false);
+                                    text_interactText.text = string.Empty;
+                                }
                             }
                             else
                             {

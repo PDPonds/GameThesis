@@ -95,7 +95,6 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
     [Header("===== Area =====")]
     public AreaType currentAreaStay;
 
-
     private void Awake()
     {
         c_collider = GetComponent<CapsuleCollider>();

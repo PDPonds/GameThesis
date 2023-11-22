@@ -25,7 +25,13 @@ public class AddAndRemoveEmp : MonoBehaviour, IInteracable
                 RestaurantManager.Instance.AddCurrentCookingCount();
                 break;
             case AddRemoveEmpType.AddServe:
+
+                if (TutorialManager.Instance.currentTutorialIndex == 4)
+                {
+                    TutorialManager.Instance.currentTutorialIndex = 5;
+                }
                 RestaurantManager.Instance.AddCurrentServeCount();
+
                 break;
             case AddRemoveEmpType.RemoveCooking:
                 RestaurantManager.Instance.RemoveCurrentCookingCount();

@@ -164,9 +164,6 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
 
     private void Awake()
     {
-        i_currentCookerCount = i_minCooker;
-        i_currentWaiterCount = i_minWaiter;
-
         //i_rating = i_startRating;
     }
 

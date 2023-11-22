@@ -92,4 +92,19 @@ public class PlayerCamera : MonoBehaviour
         }
     }
 
+    public void PlayerLookAtTarget(Transform lookPos, Vector3 offset)
+    {
+        Vector3 dir = lookPos.position - PlayerManager.Instance.transform.position;
+        dir = dir.normalized;
+        Quaternion lookat = Quaternion.LookRotation(dir);
+        Quaternion Qoffset = Quaternion.Euler(offset);
+
+        Quaternion rot = lookat * Qoffset;
+
+        transform.rotation = rot;
+        PlayerManager.Instance.t_orientation.rotation = rot;
+        PlayerManager.Instance.t_playerMesh.rotation = rot;
+
+    }
+
 }

@@ -117,7 +117,6 @@ public class PotAndPan : MonoBehaviour, IInteracable
                         s_cookingChair.s_currentCustomer.s_currentState != s_cookingChair.s_currentCustomer.s_waitFoodState)
                     {
                         UIManager.Instance.DestroyHelpCooker();
-                        count = 0;
                         RestaurantManager.Instance.currentPotAndPan = null;
                         b_canUse = false;
                     }
@@ -154,7 +153,6 @@ public class PotAndPan : MonoBehaviour, IInteracable
                     currentTime = 0;
                     currentPoint = 0;
                     count = 0;
-
                     Color noColor = new Color(0, 0, 0, 0);
                     ApplyOutlineColor(noColor, 0f);
                 }

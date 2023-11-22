@@ -42,37 +42,69 @@ public class ManagementBoard : MonoBehaviour
         GameState state = GameManager.Instance.s_gameState;
         if (state.s_currentState == state.s_beforeOpenState)
         {
-            g_addCookerButton.SetActive(true);
-            g_addWaiterButton.SetActive(true);
-            g_removeCookerButton.SetActive(true);
-            g_removeWaiterButton.SetActive(true);
-            g_upgradeRestaurant.SetActive(true);
+            if (GameManager.Instance.i_currentDay == 1)
+            {
+                g_addWaiterButton.SetActive(true);
+                g_removeWaiterButton.SetActive(true);
 
-            if (RestaurantManager.Instance.i_level == 1)
-            {
-                g_upgradeResBorder.SetActive(true);
-            }
-            else if (RestaurantManager.Instance.i_level == 2)
-            {
-                g_upgradeResBorder.SetActive(false);
-            }
+                g_addCookerButton.SetActive(false);
+                g_removeCookerButton.SetActive(false);
+                g_upgradeRestaurant.SetActive(false);
 
-            if(RestaurantManager.Instance.i_empLevel == 1)
-            {
-                g_upgradeEmp1Border.SetActive(true);
-                g_upgradeEmp2Border.SetActive(true);
-
-            }
-            else if (RestaurantManager.Instance.i_empLevel == 2)
-            {
-                g_upgradeEmp1Border.SetActive(true);
+                g_upgradeEmp1Border.SetActive(false);
                 g_upgradeEmp2Border.SetActive(false);
+
             }
-            else if (RestaurantManager.Instance.i_empLevel == 3)
+            else if(GameManager.Instance.i_currentDay == 2)
             {
+                g_addWaiterButton.SetActive(true);
+                g_removeWaiterButton.SetActive(true);
+
+                g_addCookerButton.SetActive(true);
+                g_removeCookerButton.SetActive(true);
+
+                g_upgradeRestaurant.SetActive(false);
+
                 g_upgradeEmp1Border.SetActive(false);
                 g_upgradeEmp2Border.SetActive(false);
             }
+            else
+            {
+                g_addWaiterButton.SetActive(true);
+                g_removeWaiterButton.SetActive(true);
+
+                g_addCookerButton.SetActive(true);
+                g_removeCookerButton.SetActive(true);
+
+                g_upgradeRestaurant.SetActive(true);
+
+                if (RestaurantManager.Instance.i_level == 1)
+                {
+                    g_upgradeResBorder.SetActive(true);
+                }
+                else if (RestaurantManager.Instance.i_level == 2)
+                {
+                    g_upgradeResBorder.SetActive(false);
+                }
+
+                if (RestaurantManager.Instance.i_empLevel == 1)
+                {
+                    g_upgradeEmp1Border.SetActive(true);
+                    g_upgradeEmp2Border.SetActive(true);
+
+                }
+                else if (RestaurantManager.Instance.i_empLevel == 2)
+                {
+                    g_upgradeEmp1Border.SetActive(true);
+                    g_upgradeEmp2Border.SetActive(false);
+                }
+                else
+                {
+                    g_upgradeEmp1Border.SetActive(false);
+                    g_upgradeEmp2Border.SetActive(false);
+                }
+            }
+
         }
         else
         {
@@ -81,6 +113,8 @@ public class ManagementBoard : MonoBehaviour
             g_removeCookerButton.SetActive(false);
             g_removeWaiterButton.SetActive(false);
             g_upgradeRestaurant.SetActive(false);
+            g_upgradeEmp1Border.SetActive(false);
+            g_upgradeEmp2Border.SetActive(false);
         }
 
         if (RestaurantManager.Instance.i_level > 1)
