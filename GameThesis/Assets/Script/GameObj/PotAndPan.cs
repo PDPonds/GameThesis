@@ -21,6 +21,14 @@ public class PotAndPan : MonoBehaviour, IInteracable
     public bool b_hasCooker;
     public bool b_isWorking;
 
+    [Header("Particle & Sound")]
+    public bool isPot;
+    public GameObject foodMesh;
+    public ParticleSystem smokeParticle;
+    public AudioClip sizzlingSound;
+    public AudioClip boilingSound;
+    public AudioSource cookingAudio;
+
     int count;
 
     MeshRenderer meshrnd;
@@ -36,6 +44,30 @@ public class PotAndPan : MonoBehaviour, IInteracable
             }
             return mpb;
         }
+    }
+
+    private void Start()
+    {
+        cookingAudio = GetComponent<AudioSource>();
+        if (!isPot) { cookingAudio.clip = sizzlingSound; }
+        if (isPot) { cookingAudio.clip = boilingSound; }
+        EndCooking();
+    }
+
+    public void StartCooking()
+    {
+        var emission = smokeParticle.emission;
+        emission.rateOverTime = 5;
+        cookingAudio.Play();
+        foodMesh.gameObject.SetActive(true);
+    }
+
+    public void EndCooking()
+    {
+        var emission = smokeParticle.emission;
+        emission.rateOverTime = 0;
+        cookingAudio.Stop();
+        foodMesh.gameObject.SetActive(false);
     }
 
     public void ApplyOutlineColor(Color color, float scale)
