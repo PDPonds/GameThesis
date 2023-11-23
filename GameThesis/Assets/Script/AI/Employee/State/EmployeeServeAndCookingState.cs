@@ -20,7 +20,9 @@ public class EmployeeServeAndCookingState : BaseState
         emp.ApplyOutlineColor(noColor, 0f);
         emp.g_stunVFX.SetActive(false);
 
-        f_cookingTime = emp.f_cookingTime;
+        if (TutorialManager.Instance.currentTutorialIndex > 36)
+            f_cookingTime = emp.f_cookingTime;
+        else f_cookingTime = 5f;
     }
 
     public override void UpdateState(StateManager ai)
@@ -236,7 +238,7 @@ public class EmployeeServeAndCookingState : BaseState
                 default: break;
             }
 
-            if(TutorialManager.Instance.currentTutorialIndex > 13)
+            if (TutorialManager.Instance.currentTutorialIndex > 33)
             {
                 f_currentToSlowTime -= Time.deltaTime;
                 if (f_currentToSlowTime <= 0)
@@ -253,7 +255,7 @@ public class EmployeeServeAndCookingState : BaseState
                     }
                 }
             }
-            
+
         }
         if (GameManager.Instance.s_gameState.s_currentState ==
             GameManager.Instance.s_gameState.s_afterOpenState)

@@ -235,6 +235,42 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
                 }
 
             }
+            else if (TutorialManager.Instance.currentTutorialIndex > 25 &&
+                TutorialManager.Instance.currentTutorialIndex < 34)
+            {
+                if (TutorialManager.Instance.drunkCus == null)
+                {
+                    if (GetChairReday(out int chairReday))
+                    {
+                        if (GetCustomerIndexCanOrder(out int customerIndex))
+                        {
+                            allCustomers[customerIndex].SwitchState(allCustomers[customerIndex].s_goToChairState);
+                            allCustomers[customerIndex].c_chairObj = allChairs[chairReday];
+                            allChairs[chairReday].b_isEmpty = false;
+                            allChairs[chairReday].b_readyForNextCustomer = false;
+                            TutorialManager.Instance.drunkCus = allCustomers[customerIndex];
+                        }
+                    }
+                }
+            }
+            else if(TutorialManager.Instance.currentTutorialIndex > 33 &&
+                TutorialManager.Instance.currentTutorialIndex < 37)
+            {
+                if(TutorialManager.Instance.dashCus == null)
+                {
+                    if (GetChairReday(out int chairReday))
+                    {
+                        if (GetCustomerIndexCanOrder(out int customerIndex))
+                        {
+                            allCustomers[customerIndex].SwitchState(allCustomers[customerIndex].s_goToChairState);
+                            allCustomers[customerIndex].c_chairObj = allChairs[chairReday];
+                            allChairs[chairReday].b_isEmpty = false;
+                            allChairs[chairReday].b_readyForNextCustomer = false;
+                            TutorialManager.Instance.dashCus = allCustomers[customerIndex];
+                        }
+                    }
+                }
+            }
             else
             {
                 if (!AllChairIsFull())
@@ -273,7 +309,8 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
 
 
         }
-        else if (GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_afterOpenState)
+
+        if (GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_afterOpenState)
         {
             if (!RestaurantIsEmpty())
             {

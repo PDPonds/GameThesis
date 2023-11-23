@@ -370,7 +370,12 @@ public class UIManager : Auto_Singleton<UIManager>
 
         if (GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_beforeOpenState)
         {
-
+            if (GameManager.Instance.i_currentDay >= 3)
+            {
+                SpawnManagementBoardWaypoint();
+                SpawnMenuBoardWaypoint();
+                SpawnOpenCloseWaypoint();
+            }
         }
         else if (GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_afterOpenState)
         {
@@ -394,6 +399,15 @@ public class UIManager : Auto_Singleton<UIManager>
             else
             {
                 g_close.SetActive(false);
+
+                if (RestaurantManager.Instance.currentPotAndPan != null)
+                {
+                    SpawnHelpCooker();
+                }
+                else
+                {
+                    DestroyHelpCooker();
+                }
             }
 
         }
@@ -407,6 +421,14 @@ public class UIManager : Auto_Singleton<UIManager>
             else
             {
                 DestroyHelpCooker();
+            }
+
+            if (GameManager.Instance.i_currentDay >= 3)
+            {
+
+                DestroyManagementBoardWaypoint();
+                DestroyMenuBoardWaypoint();
+                DestroyOpenClseWaypoint();
             }
 
         }

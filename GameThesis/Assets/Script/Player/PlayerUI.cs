@@ -180,7 +180,6 @@ public class PlayerUI : Auto_Singleton<PlayerUI>
                         else
                         {
                             cookingUI.SetActive(false);
-                            text_interactText.text = string.Empty;
                         }
                     }
                     else

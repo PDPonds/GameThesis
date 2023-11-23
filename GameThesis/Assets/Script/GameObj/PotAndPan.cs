@@ -184,7 +184,7 @@ public class PotAndPan : MonoBehaviour, IInteracable
 
         if (state.s_currentState == state.s_openState)
         {
-            if (b_canUse)
+            if (b_canUse && !Pause.isPause)
             {
                 if (PlayerManager.Instance.g_interactiveObj == this.gameObject)
                 {
@@ -214,7 +214,7 @@ public class PotAndPan : MonoBehaviour, IInteracable
         }
         else if (state.s_currentState == state.s_afterOpenState)
         {
-            if(!RestaurantManager.Instance.RestaurantIsEmpty())
+            if (!RestaurantManager.Instance.RestaurantIsEmpty())
             {
                 if (b_canUse)
                 {

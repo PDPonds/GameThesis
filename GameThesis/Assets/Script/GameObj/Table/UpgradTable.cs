@@ -31,7 +31,8 @@ public class UpgradTable : MonoBehaviour, IInteracable
             {
                 UpgradTable upTable = PlayerManager.Instance.g_interactiveObj.GetComponentInParent<UpgradTable>();
                 if (GameManager.Instance.f_pocketMoney >= f_costToBuy && upTable != null &&
-                    upTable == this && GameManager.Instance.i_currentDay > 1)
+                    upTable == this && GameManager.Instance.i_currentDay > 1 &&
+                    TutorialManager.Instance.currentTutorialIndex > 23)
                 {
                     if (Input.GetKey(KeyCode.E))
                     {
@@ -105,16 +106,15 @@ public class UpgradTable : MonoBehaviour, IInteracable
 
             if (state.s_currentState == state.s_beforeOpenState)
             {
-                if (isResLevel2)
+                if (TutorialManager.Instance.currentTutorialIndex < 22)
                 {
                     Collider[] taCol = tableObj.g_table.GetComponents<Collider>();
                     foreach (Collider col in taCol)
                     {
-                        if (!col.enabled) col.enabled = true;
+                        if (col.enabled) col.enabled = false;
                     }
 
-                    if (!tableObj.g_table.gameObject.activeSelf) tableObj.g_table.gameObject.SetActive(true);
-
+                    if (tableObj.g_table.gameObject.activeSelf) tableObj.g_table.gameObject.SetActive(false);
                     if (tableObj.g_chairs.Count > 0)
                     {
                         for (int i = 0; i < tableObj.g_chairs.Count; i++)
@@ -126,42 +126,15 @@ public class UpgradTable : MonoBehaviour, IInteracable
                             }
 
                             Collider[] chairCol = tableObj.g_chairs[i].GetComponents<Collider>();
-                            foreach (Collider col in chairCol) if (!col.enabled) col.enabled = true;
+                            foreach (Collider col in chairCol) if (col.enabled) col.enabled = false;
 
-                            if (!tableObj.g_chairs[i].gameObject.activeSelf) tableObj.g_chairs[i].gameObject.SetActive(true);
-
+                            if (tableObj.g_chairs[i].gameObject.activeSelf) tableObj.g_chairs[i].gameObject.SetActive(false);
                         }
                     }
                 }
                 else
                 {
-                    if (isTableLevel2)
-                    {
-                        Collider[] taCol = tableObj.g_table.GetComponents<Collider>();
-                        foreach (Collider col in taCol)
-                        {
-                            if (col.enabled) col.enabled = false;
-                        }
-
-                        if (tableObj.g_table.gameObject.activeSelf) tableObj.g_table.gameObject.SetActive(false);
-                        if (tableObj.g_chairs.Count > 0)
-                        {
-                            for (int i = 0; i < tableObj.g_chairs.Count; i++)
-                            {
-                                MeshRenderer rnd = tableObj.g_chairs[i].GetComponent<MeshRenderer>();
-                                if (rnd.material != m_waitForBuy)
-                                {
-                                    rnd.material = m_waitForBuy;
-                                }
-
-                                Collider[] chairCol = tableObj.g_chairs[i].GetComponents<Collider>();
-                                foreach (Collider col in chairCol) if (col.enabled) col.enabled = false;
-
-                                if (tableObj.g_chairs[i].gameObject.activeSelf) tableObj.g_chairs[i].gameObject.SetActive(false);
-                            }
-                        }
-                    }
-                    else
+                    if (isResLevel2)
                     {
                         Collider[] taCol = tableObj.g_table.GetComponents<Collider>();
                         foreach (Collider col in taCol)
@@ -189,7 +162,65 @@ public class UpgradTable : MonoBehaviour, IInteracable
                             }
                         }
                     }
+                    else
+                    {
+                        if (isTableLevel2)
+                        {
+                            Collider[] taCol = tableObj.g_table.GetComponents<Collider>();
+                            foreach (Collider col in taCol)
+                            {
+                                if (col.enabled) col.enabled = false;
+                            }
+
+                            if (tableObj.g_table.gameObject.activeSelf) tableObj.g_table.gameObject.SetActive(false);
+                            if (tableObj.g_chairs.Count > 0)
+                            {
+                                for (int i = 0; i < tableObj.g_chairs.Count; i++)
+                                {
+                                    MeshRenderer rnd = tableObj.g_chairs[i].GetComponent<MeshRenderer>();
+                                    if (rnd.material != m_waitForBuy)
+                                    {
+                                        rnd.material = m_waitForBuy;
+                                    }
+
+                                    Collider[] chairCol = tableObj.g_chairs[i].GetComponents<Collider>();
+                                    foreach (Collider col in chairCol) if (col.enabled) col.enabled = false;
+
+                                    if (tableObj.g_chairs[i].gameObject.activeSelf) tableObj.g_chairs[i].gameObject.SetActive(false);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            Collider[] taCol = tableObj.g_table.GetComponents<Collider>();
+                            foreach (Collider col in taCol)
+                            {
+                                if (!col.enabled) col.enabled = true;
+                            }
+
+                            if (!tableObj.g_table.gameObject.activeSelf) tableObj.g_table.gameObject.SetActive(true);
+
+                            if (tableObj.g_chairs.Count > 0)
+                            {
+                                for (int i = 0; i < tableObj.g_chairs.Count; i++)
+                                {
+                                    MeshRenderer rnd = tableObj.g_chairs[i].GetComponent<MeshRenderer>();
+                                    if (rnd.material != m_waitForBuy)
+                                    {
+                                        rnd.material = m_waitForBuy;
+                                    }
+
+                                    Collider[] chairCol = tableObj.g_chairs[i].GetComponents<Collider>();
+                                    foreach (Collider col in chairCol) if (!col.enabled) col.enabled = true;
+
+                                    if (!tableObj.g_chairs[i].gameObject.activeSelf) tableObj.g_chairs[i].gameObject.SetActive(true);
+
+                                }
+                            }
+                        }
+                    }
                 }
+
 
 
             }

@@ -105,6 +105,8 @@ public class PlayerCamera : MonoBehaviour
         PlayerManager.Instance.t_orientation.rotation = rot;
         PlayerManager.Instance.t_playerMesh.rotation = rot;
 
+        f_yRotation = rot.y;
+        f_xRotation = rot.x;
     }
 
 }

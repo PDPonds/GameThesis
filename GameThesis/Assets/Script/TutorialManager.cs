@@ -88,7 +88,25 @@ public class TutorialManager : Auto_Singleton<TutorialManager>
     [HideInInspector] public UpgradTable currentUpgradeTable;
 
     [Header("- 23")]
+    public Vector3 unlickTableOffset;
     public Sprite unlockTableSprite;
+
+    [Header("- 26")]
+    public CustomerStateManager drunkCus;
+
+    public EmployeeStateManager slackOffEmp;
+
+    public CustomerStateManager dashCus;
+
+
+    [Header("- 29")]
+    public Sprite drunkSprite;
+
+    [Header("- 32")]
+    public Sprite slackOffSprite;
+
+    [Header("- 36")]
+    public Sprite dashCusSprite;
 
     private void Update()
     {
@@ -175,7 +193,6 @@ public class TutorialManager : Auto_Singleton<TutorialManager>
                             UIManager.Instance.DestroyManagementBoardWaypoint();
                             UIManager.Instance.g_open.SetActive(true);
                             UIManager.Instance.SpawnOpenCloseWaypoint();
-                            UIManager.Instance.g_goToBoardForWaiter.SetActive(false);
 
                             break;
                         default: break;
@@ -309,6 +326,7 @@ public class TutorialManager : Auto_Singleton<TutorialManager>
                             break;
                         case 13:
 
+                            firstCus = null;
                             //ปิด couter waypoint เปิด 255Q
                             if (currentCounterWaypoint != null)
                             {
@@ -408,10 +426,10 @@ public class TutorialManager : Auto_Singleton<TutorialManager>
                             break;
                         case 19:
 
-                            Pause.isPause = false;
                             dialog.SetActive(false);
                             UIManager.Instance.SpawnMenuBoardWaypoint();
                             UIManager.Instance.g_unlockBeer.SetActive(true);
+                            Pause.isPause = false;
                             float menuBoardDis = Vector3.Distance(PlayerManager.Instance.transform.position, UIManager.Instance.t_menuBoardMesh.position);
 
                             if (menuBoardDis <= beerDis)
@@ -444,7 +462,7 @@ public class TutorialManager : Auto_Singleton<TutorialManager>
                         case 22:
 
                             UIManager.Instance.DestroyMenuBoardWaypoint();
-                            UIManager.Instance.g_menuWaypoint.SetActive(false);
+                            UIManager.Instance.g_unlockBeer.SetActive(false);
 
                             if (currentUpgradeTable == null)
                             {
@@ -458,13 +476,13 @@ public class TutorialManager : Auto_Singleton<TutorialManager>
                                 Transform tableMesh = currentUpgradeTable.tableObj.g_table.transform;
                                 UIManager.Instance.g_unlockTable.SetActive(true);
 
-                                if(currentupgrateTableWaypoint == null)
+                                if (currentupgrateTableWaypoint == null)
                                 {
                                     currentupgrateTableWaypoint = UIManager.Instance.SpawnWayPoint(upgrateTableWaypoint, tableMesh);
                                 }
 
                                 float playerAndtableDis = Vector3.Distance(PlayerManager.Instance.transform.position, tableMesh.position);
-                                if(playerAndtableDis <= tableDis)
+                                if (playerAndtableDis <= tableDis)
                                 {
                                     currentTutorialIndex = 23;
                                 }
@@ -477,7 +495,9 @@ public class TutorialManager : Auto_Singleton<TutorialManager>
                             TutorialImage image3 = tutorialImage.GetComponent<TutorialImage>();
                             image3.SetupImage(unlockTableSprite);
 
-                            CameraController.Instance.s_playerCamera.PlayerLookAtTarget(UIManager.Instance.t_menuBoardMesh, Vector3.zero);
+                            Transform tableMesh2 = currentUpgradeTable.tableObj.g_table.transform;
+
+                            CameraController.Instance.s_playerCamera.PlayerLookAtTarget(tableMesh2, unlickTableOffset);
                             Pause.isPause = true;
 
                             if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0))
@@ -491,6 +511,17 @@ public class TutorialManager : Auto_Singleton<TutorialManager>
                             Pause.isPause = false;
                             tutorialImage.SetActive(false);
 
+                            break;
+                        case 25:
+
+                            UIManager.Instance.g_open.SetActive(true);
+                            UIManager.Instance.SpawnOpenCloseWaypoint();
+                            if (currentupgrateTableWaypoint != null)
+                            {
+                                Destroy(currentupgrateTableWaypoint.gameObject);
+                                currentupgrateTableWaypoint = null;
+                            }
+                            UIManager.Instance.g_unlockTable.SetActive(false);
 
                             break;
                         default: break;
@@ -498,11 +529,172 @@ public class TutorialManager : Auto_Singleton<TutorialManager>
                 }
                 else if (state.s_currentState == state.s_openState)
                 {
+                    switch (currentTutorialIndex)
+                    {
+                        case 26:
 
+                            UIManager.Instance.DestroyOpenClseWaypoint();
+                            UIManager.Instance.g_open.SetActive(false);
+
+                            if (drunkCus != null)
+                            {
+                                drunkCus.i_drink = 1;
+                                if (drunkCus.s_currentState == drunkCus.s_drunkState)
+                                {
+                                    currentTutorialIndex = 27;
+                                }
+                            }
+
+                            break;
+                        case 27:
+
+                            if (drunkCus != null)
+                            {
+                                float drunkDis = Vector3.Distance(PlayerManager.Instance.transform.position, drunkCus.t_mesh.position);
+                                if (drunkCus.t_mesh.GetComponent<Renderer>().isVisible && drunkDis < 3)
+                                {
+                                    currentTutorialIndex = 28;
+
+                                }
+
+                            }
+
+                            break;
+                        case 28:
+
+                            CameraController.Instance.s_playerCamera.PlayerLookAtTarget(drunkCus.transform, Vector3.zero);
+
+                            tutorialImage.SetActive(true);
+                            TutorialImage image = tutorialImage.GetComponent<TutorialImage>();
+                            image.SetupImage(drunkSprite);
+
+                            Pause.isPause = true;
+                            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0))
+                            {
+                                currentTutorialIndex = 29;
+                            }
+
+                            break;
+                        case 29:
+
+                            Pause.isPause = false;
+                            tutorialImage.SetActive(false);
+
+                            break;
+                        case 30:
+
+                            if (slackOffEmp == null)
+                            {
+                                for (int i = 0; i < RestaurantManager.Instance.allEmployees.Length; i++)
+                                {
+                                    if (RestaurantManager.Instance.allEmployees[i].s_currentState == RestaurantManager.Instance.allEmployees[i].s_activityState)
+                                    {
+                                        RestaurantManager.Instance.allEmployees[i].SwitchState(RestaurantManager.Instance.allEmployees[i].s_slackOffState);
+                                        slackOffEmp = RestaurantManager.Instance.allEmployees[i];
+                                    }
+                                }
+                            }
+
+                            if (slackOffEmp != null)
+                            {
+                                currentTutorialIndex = 31;
+                            }
+
+                            break;
+                        case 31:
+                            float slackoffDis = Vector3.Distance(PlayerManager.Instance.transform.position, slackOffEmp.transform.position);
+                            if (slackOffEmp.t_mesh.GetComponent<Renderer>().isVisible && slackoffDis < 3)
+                            {
+                                currentTutorialIndex = 32;
+                            }
+
+                            break;
+                        case 32:
+
+                            CameraController.Instance.s_playerCamera.PlayerLookAtTarget(slackOffEmp.transform, Vector3.zero);
+
+                            tutorialImage.SetActive(true);
+                            TutorialImage image2 = tutorialImage.GetComponent<TutorialImage>();
+                            image2.SetupImage(slackOffSprite);
+
+                            Pause.isPause = true;
+                            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0))
+                            {
+                                currentTutorialIndex = 33;
+                            }
+
+
+                            break;
+                        case 33:
+
+                            Pause.isPause = false;
+                            tutorialImage.SetActive(false);
+                            if (slackOffEmp.s_currentState != slackOffEmp.s_slackOffState)
+                            {
+                                currentTutorialIndex = 34;
+                                slackOffEmp = null;
+                            }
+
+                            break;
+
+                        case 34:
+
+                            if (dashCus != null)
+                            {
+                                currentTutorialIndex = 35;
+                            }
+
+                            break;
+                        case 35:
+
+                            if (dashCus != null)
+                            {
+                                if (dashCus.s_currentState == dashCus.s_escapeState)
+                                {
+                                    currentTutorialIndex = 36;
+                                }
+                            }
+
+                            break;
+                        case 36:
+
+                            if (dashCus.currentAreaStay == AreaType.OutRestaurant)
+                            {
+                                CameraController.Instance.s_playerCamera.PlayerLookAtTarget(dashCus.transform, Vector3.zero);
+
+                                tutorialImage.SetActive(true);
+                                TutorialImage image3 = tutorialImage.GetComponent<TutorialImage>();
+                                image3.SetupImage(dashCusSprite);
+
+                                Pause.isPause = true;
+                                if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0))
+                                {
+                                    currentTutorialIndex = 37;
+                                }
+                            }
+
+                            break;
+                        case 37:
+
+                            Pause.isPause = false;
+                            tutorialImage.SetActive(false);
+
+                            break;
+                        default: break;
+                    }
                 }
 
                 break;
             case 3:
+
+                if (state.s_currentState == state.s_beforeOpenState)
+                {
+
+                }
+                else if (state.s_currentState == state.s_openState)
+                {
+
+                }
 
                 break;
             default: break;

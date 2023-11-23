@@ -32,6 +32,11 @@ public class OpenCloseRestaurantInterac : MonoBehaviour, IInteracable
                     TutorialManager.Instance.currentTutorialIndex = 6;
                 }
 
+                if (TutorialManager.Instance.currentTutorialIndex == 25)
+                {
+                    TutorialManager.Instance.currentTutorialIndex = 26;
+                }
+
                 forntDoor.b_isLock = false;
                 RestaurantManager.Instance.SpawnEmp();
                 SoundManager.Instance.PlayOpenRestaurantSound();

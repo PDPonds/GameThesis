@@ -65,12 +65,16 @@ public class EmployeeSlackOffState : BaseState
             emp.b_onSlackOffPoint = true;
             emp.anim.SetBool("walk", false);
             emp.anim.SetBool("slackOff", true);
-            f_currentSlowTime -= Time.deltaTime;
-            if (f_currentSlowTime < 0)
-            {
-                emp.SwitchState(emp.s_activityState);
-            }
 
+            if(TutorialManager.Instance.currentTutorialIndex > 33)
+            {
+                f_currentSlowTime -= Time.deltaTime;
+                if (f_currentSlowTime < 0)
+                {
+                    emp.SwitchState(emp.s_activityState);
+                }
+            }
+            
         }
         else
         {

@@ -63,7 +63,8 @@ public class CustomerEatFoodState : BaseState
 
         }
 
-        if (TutorialManager.Instance.currentTutorialIndex > 12)
+        if (GameManager.Instance.i_currentDay > 1 &&
+            TutorialManager.Instance.currentTutorialIndex >= 37)
         {
             f_currentEatTime -= Time.deltaTime;
             if (f_currentEatTime <= 0)
@@ -112,11 +113,38 @@ public class CustomerEatFoodState : BaseState
 
             }
         }
-        else
+        else if (GameManager.Instance.i_currentDay == 1 &&
+            TutorialManager.Instance.currentTutorialIndex < 14)
         {
-            cus.c_chairObj.b_isEmpty = true;
-            cus.SwitchState(cus.s_goToCounterState);
+            f_currentEatTime -= Time.deltaTime;
+            if (f_currentEatTime <= 0)
+            {
+                cus.c_chairObj.b_isEmpty = true;
+                cus.SwitchState(cus.s_goToCounterState);
+            }
         }
+        else if (GameManager.Instance.i_currentDay == 2 &&
+            TutorialManager.Instance.currentTutorialIndex == 35)
+        {
+            f_currentEatTime -= Time.deltaTime;
+            if (f_currentEatTime <= 0)
+            {
+                cus.c_chairObj.b_isEmpty = true;
+                cus.SwitchState(cus.s_escapeState);
+            }
+        }
+        else if (GameManager.Instance.i_currentDay == 2 &&
+            TutorialManager.Instance.currentTutorialIndex == 26)
+        {
+            float dashDis2 = Vector3.Distance(PlayerManager.Instance.transform.position, cus.transform.position);
 
+            f_currentEatTime -= Time.deltaTime;
+            if (f_currentEatTime <= 0 && cus.t_mesh.GetComponent<Renderer>().isVisible &&
+                dashDis2 < 4)
+            {
+                cus.c_chairObj.b_isEmpty = true;
+                cus.SwitchState(cus.s_drunkState);
+            }
+        }
     }
 }
