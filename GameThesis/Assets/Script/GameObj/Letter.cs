@@ -25,7 +25,7 @@ public class Letter : MonoBehaviour, IInteracable
 
         if (UIManager.Instance.letter.activeSelf)
         {
-            if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S)||
+            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) ||
                 Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
             {
                 UIManager.Instance.letter.SetActive(false);
@@ -62,7 +62,14 @@ public class Letter : MonoBehaviour, IInteracable
 
     public void Interaction()
     {
-        UIManager.Instance.letter.SetActive(true);
+        if (!UIManager.Instance.letter.activeSelf)
+        {
+            if (TutorialManager.Instance.currentTutorialIndex == 39)
+            {
+                TutorialManager.Instance.currentTutorialIndex = 40;
+            }
+            UIManager.Instance.letter.SetActive(true);
+        }
     }
 
     public string InteractionText()

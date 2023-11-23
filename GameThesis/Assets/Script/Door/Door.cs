@@ -35,21 +35,45 @@ public class Door : MonoBehaviour
         {
             if (other.CompareTag("Player") || other.CompareTag("Enemy"))
             {
-                Vector3 forward = transform.TransformDirection(Vector3.forward);
-                Vector3 toOther = other.transform.position - transform.position;
-
-                float dot = Vector3.Dot(forward, toOther);
-                if (dot < 0)
+                if (TutorialManager.Instance.currentTutorialIndex == 6)
                 {
-                    anim.SetBool("Behind", true);
-                    anim.SetBool("Fornt", false);
+                    if (b_isForntDoor)
+                    {
+                        Vector3 forward = transform.TransformDirection(Vector3.forward);
+                        Vector3 toOther = other.transform.position - transform.position;
+
+                        float dot = Vector3.Dot(forward, toOther);
+                        if (dot < 0)
+                        {
+                            anim.SetBool("Behind", true);
+                            anim.SetBool("Fornt", false);
+                        }
+                        else
+                        {
+                            anim.SetBool("Behind", false);
+                            anim.SetBool("Fornt", true);
+                        }
+                        b_isOpen = true;
+                    }
                 }
                 else
                 {
-                    anim.SetBool("Behind", false);
-                    anim.SetBool("Fornt", true);
+                    Vector3 forward = transform.TransformDirection(Vector3.forward);
+                    Vector3 toOther = other.transform.position - transform.position;
+
+                    float dot = Vector3.Dot(forward, toOther);
+                    if (dot < 0)
+                    {
+                        anim.SetBool("Behind", true);
+                        anim.SetBool("Fornt", false);
+                    }
+                    else
+                    {
+                        anim.SetBool("Behind", false);
+                        anim.SetBool("Fornt", true);
+                    }
+                    b_isOpen = true;
                 }
-                b_isOpen = true;
             }
         }
 
@@ -61,7 +85,7 @@ public class Door : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!b_isOpen && !b_isLock)
+        if (!b_isOpen && !b_isLock && TutorialManager.Instance.currentTutorialIndex != 6)
         {
             openDoorSoundSource.PlayOneShot(openDoorSound);
         }

@@ -27,7 +27,8 @@ public class GameState : StateManager
 
         SpawnCustomer();
 
-        if (TimeController.Instance.d_currentTime.Hour == TimeController.Instance.f_endTime)
+        if (TimeController.Instance.d_currentTime.Hour == TimeController.Instance.f_endTime
+            && GameManager.Instance.i_currentDay != 1)
         {
             if (s_currentState != s_afterOpenState)
                 SwitchState(s_afterOpenState);
