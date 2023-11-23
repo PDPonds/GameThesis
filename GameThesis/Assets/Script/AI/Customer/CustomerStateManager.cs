@@ -472,7 +472,6 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
                     if (TutorialManager.Instance.currentTutorialIndex == 29)
                     {
                         TutorialManager.Instance.currentTutorialIndex = 30;
-                        TutorialManager.Instance.drunkCus = null;
                     }
                 }
             }

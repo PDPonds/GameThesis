@@ -11,7 +11,14 @@ public class CustomerEatFoodState : BaseState
     {
         CustomerStateManager cus = (CustomerStateManager)ai;
         f_eatTime = Random.Range(cus.v_minAndMaxEatFood.x, cus.v_minAndMaxEatFood.y);
-        f_currentEatTime = f_eatTime;
+
+        bool first = GameManager.Instance.i_currentDay > 1 && TutorialManager.Instance.currentTutorialIndex >= 37;
+        bool second = GameManager.Instance.i_currentDay == 1 && TutorialManager.Instance.currentTutorialIndex < 14;
+
+        if (first || second)
+            f_currentEatTime = f_eatTime;
+        else
+            f_currentEatTime = 5f;
 
         Color noColor = new Color(0, 0, 0, 0);
         cus.ApplyOutlineColor(noColor, 0f);
@@ -124,26 +131,28 @@ public class CustomerEatFoodState : BaseState
             }
         }
         else if (GameManager.Instance.i_currentDay == 2 &&
-            TutorialManager.Instance.currentTutorialIndex == 35)
+            TutorialManager.Instance.currentTutorialIndex == 26)
         {
             f_currentEatTime -= Time.deltaTime;
             if (f_currentEatTime <= 0)
             {
                 cus.c_chairObj.b_isEmpty = true;
-                cus.SwitchState(cus.s_escapeState);
+                cus.SwitchState(cus.s_drunkState);
             }
         }
         else if (GameManager.Instance.i_currentDay == 2 &&
-            TutorialManager.Instance.currentTutorialIndex == 26)
+            TutorialManager.Instance.currentTutorialIndex == 35)
         {
             float dashDis2 = Vector3.Distance(PlayerManager.Instance.transform.position, cus.transform.position);
 
             f_currentEatTime -= Time.deltaTime;
             if (f_currentEatTime <= 0 && cus.t_mesh.GetComponent<Renderer>().isVisible &&
-                dashDis2 < 4)
+                dashDis2 < 15f)
             {
                 cus.c_chairObj.b_isEmpty = true;
-                cus.SwitchState(cus.s_drunkState);
+                TutorialManager.Instance.currentTutorialIndex = 36;
+                cus.SwitchState(cus.s_escapeState);
+
             }
         }
     }

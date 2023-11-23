@@ -84,7 +84,7 @@ public class TutorialManager : Auto_Singleton<TutorialManager>
     [Header("- 22")]
     public GameObject upgrateTableWaypoint;
     public float tableDis;
-    [HideInInspector] WaypointIndicator currentupgrateTableWaypoint;
+    WaypointIndicator currentupgrateTableWaypoint;
     [HideInInspector] public UpgradTable currentUpgradeTable;
 
     [Header("- 23")]
@@ -92,12 +92,9 @@ public class TutorialManager : Auto_Singleton<TutorialManager>
     public Sprite unlockTableSprite;
 
     [Header("- 26")]
-    public CustomerStateManager drunkCus;
-
-    public EmployeeStateManager slackOffEmp;
-
-    public CustomerStateManager dashCus;
-
+    [HideInInspector] public CustomerStateManager drunkCus;
+    [HideInInspector] public EmployeeStateManager slackOffEmp;
+    [HideInInspector] public CustomerStateManager dashCus;
 
     [Header("- 29")]
     public Sprite drunkSprite;
@@ -107,6 +104,15 @@ public class TutorialManager : Auto_Singleton<TutorialManager>
 
     [Header("- 36")]
     public Sprite dashCusSprite;
+
+    [Header("- 38")]
+    public string day3Text;
+
+    [Header("- 40")]
+    public Transform letterMesh;
+    public GameObject letterWaypoint;
+    public Sprite letterSprite;
+    WaypointIndicator currentLetterWaypoint;
 
     private void Update()
     {
@@ -133,6 +139,8 @@ public class TutorialManager : Auto_Singleton<TutorialManager>
                             UIManager.Instance.g_firstQ.SetActive(false);
                             UIManager.Instance.g_unlockBeer.SetActive(false);
                             UIManager.Instance.g_unlockTable.SetActive(false);
+                            UIManager.Instance.g_letter.SetActive(false);
+                            UIManager.Instance.g_finalQueue.SetActive(false);
 
                             UIManager.Instance.g_goToBoardForCooker.SetActive(false);
 
@@ -636,7 +644,6 @@ public class TutorialManager : Auto_Singleton<TutorialManager>
                             }
 
                             break;
-
                         case 34:
 
                             if (dashCus != null)
@@ -649,7 +656,7 @@ public class TutorialManager : Auto_Singleton<TutorialManager>
 
                             if (dashCus != null)
                             {
-                                if (dashCus.s_currentState == dashCus.s_escapeState)
+                                if (dashCus.b_escape)
                                 {
                                     currentTutorialIndex = 36;
                                 }
@@ -689,11 +696,51 @@ public class TutorialManager : Auto_Singleton<TutorialManager>
 
                 if (state.s_currentState == state.s_beforeOpenState)
                 {
+                    switch (currentTutorialIndex)
+                    {
+                        case 38:
 
-                }
-                else if (state.s_currentState == state.s_openState)
-                {
+                            UIManager.Instance.g_close.SetActive(false);
+                            UIManager.Instance.DestroyOpenClseWaypoint();
+                            Pause.isPause = true;
 
+                            dialog.SetActive(true);
+                            DialogBox dialogBox = dialog.GetComponent<DialogBox>();
+                            dialogBox.SetupDailogText(day3Text);
+
+                            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0))
+                            {
+                                currentTutorialIndex = 39;
+                            }
+
+                            break;
+                        case 39:
+
+                            Pause.isPause = false;
+                            dialog.SetActive(false);
+
+                            if (currentLetterWaypoint == null)
+                            {
+                                currentLetterWaypoint = UIManager.Instance.SpawnWayPoint(letterWaypoint, letterMesh);
+                            }
+                            UIManager.Instance.g_letter.SetActive(true);
+
+
+                            break;
+                        case 40:
+
+                            if (currentLetterWaypoint != null)
+                            {
+                                Destroy(currentLetterWaypoint.gameObject);
+                                currentLetterWaypoint = null;
+                            }
+                            UIManager.Instance.g_letter.SetActive(false);
+                            UIManager.Instance.g_finalQueue.SetActive(true);
+
+                            break;
+
+                        default: break;
+                    }
                 }
 
                 break;

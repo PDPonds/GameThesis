@@ -55,6 +55,8 @@ public class UIManager : Auto_Singleton<UIManager>
     public GameObject g_goToBoardForCooker;
     public GameObject g_unlockBeer;
     public GameObject g_unlockTable;
+    public GameObject g_letter;
+    public GameObject g_finalQueue;
     [Space(10f)]
 
     [Header("===== WayPoint =====")]
@@ -370,7 +372,7 @@ public class UIManager : Auto_Singleton<UIManager>
 
         if (GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_beforeOpenState)
         {
-            if (GameManager.Instance.i_currentDay >= 3)
+            if (GameManager.Instance.i_currentDay >= 3 && TutorialManager.Instance.currentTutorialIndex == 40)
             {
                 SpawnManagementBoardWaypoint();
                 SpawnMenuBoardWaypoint();

@@ -197,6 +197,10 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
         {
             TutorialManager.Instance.currentTutorialIndex = 14;
         }
+        else if (GameManager.Instance.i_currentDay == 3)
+        {
+            TutorialManager.Instance.currentTutorialIndex = 38;
+        }
     }
 
     IEnumerator DeadState()

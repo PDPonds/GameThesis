@@ -9,6 +9,8 @@ public class PlayerCamera : MonoBehaviour
 
     bool b_canRotCam;
 
+    float f_mouseX;
+    float f_mouseY;
     private void Update()
     {
         if (GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_openState ||
@@ -37,8 +39,8 @@ public class PlayerCamera : MonoBehaviour
 
         if (b_canRotCam)
         {
-            float f_mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * CameraController.Instance.f_senX;
-            float f_mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * CameraController.Instance.f_senY;
+            f_mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * CameraController.Instance.f_senX;
+            f_mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * CameraController.Instance.f_senY;
 
             f_yRotation += f_mouseX;
             f_xRotation -= f_mouseY;
@@ -104,9 +106,6 @@ public class PlayerCamera : MonoBehaviour
         transform.rotation = rot;
         PlayerManager.Instance.t_orientation.rotation = rot;
         PlayerManager.Instance.t_playerMesh.rotation = rot;
-
-        f_yRotation = rot.y;
-        f_xRotation = rot.x;
     }
 
 }
