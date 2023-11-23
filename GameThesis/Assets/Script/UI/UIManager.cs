@@ -50,6 +50,11 @@ public class UIManager : Auto_Singleton<UIManager>
     public GameObject g_open;
     public GameObject g_close;
     public GameObject g_goToBoardForWaiter;
+    public GameObject g_goToCounter;
+    public GameObject g_firstQ;
+    public GameObject g_goToBoardForCooker;
+    public GameObject g_unlockBeer;
+    public GameObject g_unlockTable;
     [Space(10f)]
 
     [Header("===== WayPoint =====")]
@@ -133,7 +138,10 @@ public class UIManager : Auto_Singleton<UIManager>
             GameManager.Instance.AddPocketMoney(toAddPocket);
             GameManager.Instance.f_coin = 0;
             RestaurantManager.Instance.i_currentWaiterCount = 1;
-            RestaurantManager.Instance.i_currentCookerCount = 1;
+            if (GameManager.Instance.i_currentDay > 2)
+            {
+                RestaurantManager.Instance.i_currentCookerCount = 1;
+            }
 
         }
         else
@@ -142,7 +150,10 @@ public class UIManager : Auto_Singleton<UIManager>
             GameManager.Instance.RemovePocketMoney(toRemovePocket);
             GameManager.Instance.f_coin = 0;
             RestaurantManager.Instance.i_currentWaiterCount = 1;
-            RestaurantManager.Instance.i_currentCookerCount = 1;
+            if (GameManager.Instance.i_currentDay > 2)
+            {
+                RestaurantManager.Instance.i_currentCookerCount = 1;
+            }
         }
         RestaurantManager.Instance.ClearChair();
         TimeController.Instance.ResetTime();
@@ -539,6 +550,15 @@ public class UIManager : Auto_Singleton<UIManager>
         wayPointObj.transform.SetParent(t_Canvas);
         WaypointIndicator indicator = wayPointObj.GetComponent<WaypointIndicator>();
         indicator.target = emp.t_mesh;
+        return indicator;
+    }
+
+    public WaypointIndicator SpawnWayPoint(GameObject waypoint, Transform pos)
+    {
+        GameObject wayPointObj = Instantiate(waypoint, Vector3.zero, Quaternion.identity);
+        wayPointObj.transform.SetParent(t_Canvas);
+        WaypointIndicator indicator = wayPointObj.GetComponent<WaypointIndicator>();
+        indicator.target = pos;
         return indicator;
     }
 }

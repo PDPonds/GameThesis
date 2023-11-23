@@ -161,6 +161,21 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
         f_ingredientCost = 0;
     }
 
+    public bool GetTableToUpgrade(out int tableIndex)
+    {
+        for (int i = 0; i < allTables.Length; i++)
+        {
+            UpgradTable up = allTables[i].transform.GetComponent<UpgradTable>();
+            if (!up.b_readyToUse)
+            {
+                tableIndex = i;
+                return true;
+            }
+        }
+
+        tableIndex = -1;
+        return false;
+    }
 
     private void Awake()
     {
@@ -201,22 +216,45 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
 
         if (GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_openState)
         {
-            if (!AllChairIsFull())
+            if (TutorialManager.Instance.currentTutorialIndex > 5 &&
+                TutorialManager.Instance.currentTutorialIndex < 13)
             {
-                for (int i = 0; i < allChairs.Length; i++)
+                if (TutorialManager.Instance.firstCus == null)
                 {
-                    if (allChairs[i].b_isEmpty && allChairs[i].b_readyForNextCustomer && allChairs[i].b_canUse)
+                    if (GetChairReday(out int chairReday))
                     {
                         if (GetCustomerIndexCanOrder(out int customerIndex))
                         {
                             allCustomers[customerIndex].SwitchState(allCustomers[customerIndex].s_goToChairState);
-                            allCustomers[customerIndex].c_chairObj = allChairs[i];
-                            allChairs[i].b_isEmpty = false;
-                            allChairs[i].b_readyForNextCustomer = false;
+                            allCustomers[customerIndex].c_chairObj = allChairs[chairReday];
+                            allChairs[chairReday].b_isEmpty = false;
+                            allChairs[chairReday].b_readyForNextCustomer = false;
+                            TutorialManager.Instance.firstCus = allCustomers[customerIndex];
+                        }
+                    }
+                }
+
+            }
+            else
+            {
+                if (!AllChairIsFull())
+                {
+                    for (int i = 0; i < allChairs.Length; i++)
+                    {
+                        if (allChairs[i].b_isEmpty && allChairs[i].b_readyForNextCustomer && allChairs[i].b_canUse)
+                        {
+                            if (GetCustomerIndexCanOrder(out int customerIndex))
+                            {
+                                allCustomers[customerIndex].SwitchState(allCustomers[customerIndex].s_goToChairState);
+                                allCustomers[customerIndex].c_chairObj = allChairs[i];
+                                allChairs[i].b_isEmpty = false;
+                                allChairs[i].b_readyForNextCustomer = false;
+                            }
                         }
                     }
                 }
             }
+
 
             UIManager.Instance.g_summary.SetActive(false);
             PlayerManager.Instance.b_canMove = true;
@@ -262,6 +300,23 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
             if (!g_level2Restaurant.activeSelf) g_level2Restaurant.SetActive(true);
             if (g_level1Restaurant.activeSelf) g_level1Restaurant.SetActive(false);
         }
+    }
+
+    bool GetChairReday(out int chairIndex)
+    {
+        if (!AllChairIsFull())
+        {
+            for (int i = 0; i < allChairs.Length; i++)
+            {
+                if (allChairs[i].b_isEmpty && allChairs[i].b_readyForNextCustomer && allChairs[i].b_canUse)
+                {
+                    chairIndex = i;
+                    return true;
+                }
+            }
+        }
+        chairIndex = -1;
+        return false;
     }
 
     public bool GetWaitFirstChair(out int chairIndex, out int customerIndex)

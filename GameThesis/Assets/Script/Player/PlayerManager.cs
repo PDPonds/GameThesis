@@ -192,6 +192,11 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
         yield return new WaitForSeconds(1.5f);
         PlayerManager.Instance.b_canMove = true;
         a_fadeAnim.SetBool("blackSkip", false);
+        yield return new WaitForSeconds(1f);
+        if (GameManager.Instance.i_currentDay == 2)
+        {
+            TutorialManager.Instance.currentTutorialIndex = 14;
+        }
     }
 
     IEnumerator DeadState()

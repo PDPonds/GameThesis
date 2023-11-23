@@ -44,6 +44,10 @@ public class UpgradTable : MonoBehaviour, IInteracable
                             SetUpUseAble();
                             b_readyToUse = true;
                             currenthold = 0;
+                            if (TutorialManager.Instance.currentTutorialIndex == 24)
+                            {
+                                TutorialManager.Instance.currentTutorialIndex = 25;
+                            }
                         }
                     }
                     else

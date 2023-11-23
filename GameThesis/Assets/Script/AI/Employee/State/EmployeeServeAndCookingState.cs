@@ -236,20 +236,24 @@ public class EmployeeServeAndCookingState : BaseState
                 default: break;
             }
 
-            f_currentToSlowTime -= Time.deltaTime;
-            if (f_currentToSlowTime <= 0)
+            if(TutorialManager.Instance.currentTutorialIndex > 13)
             {
-                float p = Random.Range(0f, 100f);
-                if (p <= emp.f_slackOffPercent)
+                f_currentToSlowTime -= Time.deltaTime;
+                if (f_currentToSlowTime <= 0)
                 {
-                    emp.SwitchState(emp.s_slackOffState);
-                    f_currentToSlowTime = emp.f_timeToSlackOff;
-                }
-                else
-                {
-                    f_currentToSlowTime = emp.f_timeToSlackOff;
+                    float p = Random.Range(0f, 100f);
+                    if (p <= emp.f_slackOffPercent)
+                    {
+                        emp.SwitchState(emp.s_slackOffState);
+                        f_currentToSlowTime = emp.f_timeToSlackOff;
+                    }
+                    else
+                    {
+                        f_currentToSlowTime = emp.f_timeToSlackOff;
+                    }
                 }
             }
+            
         }
         if (GameManager.Instance.s_gameState.s_currentState ==
             GameManager.Instance.s_gameState.s_afterOpenState)
@@ -440,8 +444,6 @@ public class EmployeeServeAndCookingState : BaseState
                             emp.s_serveChair = null;
                         }
                     }
-
-
 
                     break;
 

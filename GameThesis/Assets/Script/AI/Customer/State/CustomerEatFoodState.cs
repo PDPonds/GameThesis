@@ -63,17 +63,36 @@ public class CustomerEatFoodState : BaseState
 
         }
 
-        f_currentEatTime -= Time.deltaTime;
-        if (f_currentEatTime <= 0)
+        if (TutorialManager.Instance.currentTutorialIndex > 12)
         {
-            //RestaurantManager.Instance.AddRating();
-            if (cus.i_drink == 1)
+            f_currentEatTime -= Time.deltaTime;
+            if (f_currentEatTime <= 0)
             {
-                float drunkRan = Random.Range(0f, 100f);
-
-                if (drunkRan <= cus.f_drunkPercent)
+                //RestaurantManager.Instance.AddRating();
+                if (cus.i_drink == 1)
                 {
-                    cus.SwitchState(cus.s_drunkState);
+                    float drunkRan = Random.Range(0f, 100f);
+
+                    if (drunkRan <= cus.f_drunkPercent)
+                    {
+                        cus.SwitchState(cus.s_drunkState);
+                    }
+                    else
+                    {
+                        float ran = Random.Range(0, 100f);
+
+                        if (ran <= cus.f_randomEventPercent)
+                        {
+                            cus.c_chairObj.b_isEmpty = true;
+                            cus.SwitchState(cus.s_escapeState);
+                        }
+                        else
+                        {
+                            cus.c_chairObj.b_isEmpty = true;
+                            cus.SwitchState(cus.s_goToCounterState);
+                        }
+                    }
+
                 }
                 else
                 {
@@ -92,22 +111,11 @@ public class CustomerEatFoodState : BaseState
                 }
 
             }
-            else
-            {
-                float ran = Random.Range(0, 100f);
-
-                if (ran <= cus.f_randomEventPercent)
-                {
-                    cus.c_chairObj.b_isEmpty = true;
-                    cus.SwitchState(cus.s_escapeState);
-                }
-                else
-                {
-                    cus.c_chairObj.b_isEmpty = true;
-                    cus.SwitchState(cus.s_goToCounterState);
-                }
-            }
-
+        }
+        else
+        {
+            cus.c_chairObj.b_isEmpty = true;
+            cus.SwitchState(cus.s_goToCounterState);
         }
 
     }

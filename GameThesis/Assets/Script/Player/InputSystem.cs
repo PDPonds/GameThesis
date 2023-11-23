@@ -121,8 +121,12 @@ public class InputSystem : MonoBehaviour
 
     void Punch()
     {
-        PlayerManager.Instance.b_isSprint = false;
-        PlayerManager.Instance.s_playerFistCombat.Punch();
+        if(!Pause.isPause)
+        {
+            PlayerManager.Instance.b_isSprint = false;
+            PlayerManager.Instance.s_playerFistCombat.Punch();
+        }
+        
     }
 
 }

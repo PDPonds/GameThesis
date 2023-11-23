@@ -46,12 +46,49 @@ public class TutorialManager : Auto_Singleton<TutorialManager>
     public Sprite addWaiterSprite;
 
     [Header("- T6")]
-    public Vector3 lookAtFirstCusOffset;
+    //public Vector3 lookAtFirstCusOffset;
     public Sprite firstCusSprite;
+    [HideInInspector] public CustomerStateManager firstCus;
 
     [Header("- T7")]
     public Sprite firstCookSprite;
 
+    [Header("- T8")]
+    public float counterDis;
+    public Transform counter;
+    public GameObject counterWaypoint;
+    WaypointIndicator currentCounterWaypoint;
+
+    [Header("- 11")]
+    public Sprite firstPay;
+
+    [Header("- 13")]
+    public float queueCoin;
+
+    [Header("- 14")]
+    public string startDay2Text;
+
+    [Header("- 16")]
+    public Sprite addCookerSprite;
+
+    [Header("- 18")]
+    public string newMenuText;
+
+    [Header("- 19")]
+    public float beerDis;
+
+    [Header("- 20")]
+    public Sprite unlockBeerSprite;
+    public Vector3 menuBoardOffset;
+
+    [Header("- 22")]
+    public GameObject upgrateTableWaypoint;
+    public float tableDis;
+    [HideInInspector] WaypointIndicator currentupgrateTableWaypoint;
+    [HideInInspector] public UpgradTable currentUpgradeTable;
+
+    [Header("- 23")]
+    public Sprite unlockTableSprite;
 
     private void Update()
     {
@@ -60,11 +97,11 @@ public class TutorialManager : Auto_Singleton<TutorialManager>
             PlayerManager.Instance.b_canMove = false;
         }
 
+        GameState state = GameManager.Instance.s_gameState;
         switch (GameManager.Instance.i_currentDay)
         {
             case 1:
 
-                GameState state = GameManager.Instance.s_gameState;
                 if (state.s_currentState == state.s_beforeOpenState)
                 {
                     switch (currentTutorialIndex)
@@ -74,6 +111,13 @@ public class TutorialManager : Auto_Singleton<TutorialManager>
                             UIManager.Instance.UIBar.SetActive(false);
                             UIManager.Instance.g_open.SetActive(false);
                             UIManager.Instance.g_close.SetActive(false);
+                            UIManager.Instance.g_goToCounter.SetActive(false);
+                            UIManager.Instance.g_firstQ.SetActive(false);
+                            UIManager.Instance.g_unlockBeer.SetActive(false);
+                            UIManager.Instance.g_unlockTable.SetActive(false);
+
+                            UIManager.Instance.g_goToBoardForCooker.SetActive(false);
+
                             tutorialImage.SetActive(false);
                             Pause.isPause = true;
 
@@ -95,7 +139,7 @@ public class TutorialManager : Auto_Singleton<TutorialManager>
                             dialog.SetActive(false);
                             UIManager.Instance.SpawnManagementBoardWaypoint();
                             UIManager.Instance.g_goToBoardForWaiter.SetActive(true);
-                            float currentDis = Vector3.Distance(PlayerManager.Instance.transform.position, empBoard.position);
+                            float currentDis = Vector3.Distance(PlayerManager.Instance.transform.position, UIManager.Instance.t_managementBoardMesh.position);
                             if (currentDis <= boardDis)
                             {
                                 currentTutorialIndex = 3;
@@ -108,7 +152,7 @@ public class TutorialManager : Auto_Singleton<TutorialManager>
                             TutorialImage image = tutorialImage.GetComponent<TutorialImage>();
                             image.SetupImage(addWaiterSprite);
 
-                            CameraController.Instance.s_playerCamera.PlayerLookAtTarget(empBoard, lookAtOffSet);
+                            CameraController.Instance.s_playerCamera.PlayerLookAtTarget(UIManager.Instance.t_managementBoardMesh, lookAtOffSet);
                             Pause.isPause = true;
 
                             if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0))
@@ -124,6 +168,8 @@ public class TutorialManager : Auto_Singleton<TutorialManager>
 
                             break;
                         case 5:
+
+                            //เปิดร้าน
 
                             UIManager.Instance.g_goToBoardForWaiter.SetActive(false);
                             UIManager.Instance.DestroyManagementBoardWaypoint();
@@ -145,11 +191,13 @@ public class TutorialManager : Auto_Singleton<TutorialManager>
                     {
                         case 6:
 
+                            //ลูกค้าคนแรกเข้า
+
                             if (RestaurantManager.Instance.GetWaitFirstChair(out int chairIndex, out int cusIndex))
                             {
                                 CustomerStateManager cus = RestaurantManager.Instance.allCustomers[cusIndex];
                                 ChairObj chair = RestaurantManager.Instance.allChairs[chairIndex];
-                                CameraController.Instance.s_playerCamera.PlayerLookAtTarget(cus.transform, lookAtFirstCusOffset);
+                                CameraController.Instance.s_playerCamera.PlayerLookAtTarget(cus.transform, Vector3.zero);
 
                                 tutorialImage.SetActive(true);
                                 TutorialImage image = tutorialImage.GetComponent<TutorialImage>();
@@ -165,6 +213,7 @@ public class TutorialManager : Auto_Singleton<TutorialManager>
                             break;
                         case 7:
 
+                            //เปิด Interactive Pot
                             Pause.isPause = false;
                             tutorialImage.SetActive(false);
 
@@ -188,25 +237,269 @@ public class TutorialManager : Auto_Singleton<TutorialManager>
                                     }
                                 }
                             }
-                            
+
                             break;
                         case 8:
 
+                            //ทำอาหาร
                             Pause.isPause = false;
                             tutorialImage.SetActive(false);
+                            if (firstCus.s_currentState == firstCus.s_eatFoodState)
+                            {
+                                currentTutorialIndex = 9;
+                            }
+
+                            break;
+                        case 9:
+
+                            //พาไป Counter
+
+                            UIManager.Instance.g_goToCounter.SetActive(true);
+                            if (currentCounterWaypoint == null)
+                            {
+                                currentCounterWaypoint = UIManager.Instance.SpawnWayPoint(counterWaypoint, counter);
+                            }
+
+                            float counterAndPlayerDis = Vector3.Distance(PlayerManager.Instance.transform.position, counter.position);
+                            if (counterAndPlayerDis <= counterDis)
+                            {
+                                currentTutorialIndex = 10;
+                            }
+
+                            break;
+                        case 10:
+
+                            //เปลี่ยน cus ไปจ่ายตัง
+                            if (firstCus.s_currentState != firstCus.s_goToCounterState &&
+                                firstCus.s_currentState != firstCus.s_frontCounter)
+                            {
+                                firstCus.SwitchState(firstCus.s_goToCounterState);
+                            }
+
+                            if (firstCus.s_currentState == firstCus.s_frontCounter)
+                            {
+                                currentTutorialIndex = 11;
+                            }
+
+                            break;
+                        case 11:
+
+                            //cus ทำท่าจ่ายตัง
+                            tutorialImage.SetActive(true);
+                            TutorialImage image3 = tutorialImage.GetComponent<TutorialImage>();
+                            image3.SetupImage(firstPay);
+
+                            CameraController.Instance.s_playerCamera.PlayerLookAtTarget(firstCus.transform, Vector3.zero);
+                            Pause.isPause = true;
+                            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0))
+                            {
+                                currentTutorialIndex = 12;
+                            }
+
+                            break;
+                        case 12:
+                            //กดเก็บตัง
+                            Pause.isPause = false;
+                            tutorialImage.SetActive(false);
+                            if (firstCus.s_currentState != firstCus.s_frontCounter)
+                            {
+                                currentTutorialIndex = 13;
+                            }
+
+                            break;
+                        case 13:
+
+                            //ปิด couter waypoint เปิด 255Q
+                            if (currentCounterWaypoint != null)
+                            {
+                                Destroy(currentCounterWaypoint.gameObject);
+                                currentCounterWaypoint = null;
+                            }
+                            UIManager.Instance.g_goToCounter.SetActive(false);
+
+                            UIManager.Instance.g_firstQ.SetActive(true);
+                            if (GameManager.Instance.f_coin >= queueCoin)
+                            {
+                                if (state.s_currentState != state.s_afterOpenState)
+                                {
+                                    state.SwitchState(state.s_afterOpenState);
+                                }
+                            }
 
                             break;
                         default: break;
                     }
 
                 }
-                else
-                {
-
-                }
 
                 break;
             case 2:
+
+                if (state.s_currentState == state.s_beforeOpenState)
+                {
+                    switch (currentTutorialIndex)
+                    {
+                        case 14:
+
+                            UIManager.Instance.g_firstQ.SetActive(false);
+                            UIManager.Instance.g_close.SetActive(false);
+                            UIManager.Instance.DestroyOpenClseWaypoint();
+                            Pause.isPause = true;
+
+                            dialog.SetActive(true);
+                            DialogBox dialogBox = dialog.GetComponent<DialogBox>();
+                            dialogBox.SetupDailogText(startDay2Text);
+
+                            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0))
+                            {
+                                currentTutorialIndex = 15;
+                            }
+
+                            break;
+                        case 15:
+
+                            Pause.isPause = false;
+                            dialog.SetActive(false);
+                            UIManager.Instance.SpawnManagementBoardWaypoint();
+                            UIManager.Instance.g_goToBoardForCooker.SetActive(true);
+                            float currentDis = Vector3.Distance(PlayerManager.Instance.transform.position, empBoard.position);
+                            if (currentDis <= boardDis)
+                            {
+                                currentTutorialIndex = 16;
+                            }
+
+                            break;
+                        case 16:
+
+                            tutorialImage.SetActive(true);
+                            TutorialImage image = tutorialImage.GetComponent<TutorialImage>();
+                            image.SetupImage(addCookerSprite);
+
+                            CameraController.Instance.s_playerCamera.PlayerLookAtTarget(UIManager.Instance.t_managementBoardMesh, lookAtOffSet);
+                            Pause.isPause = true;
+
+                            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0))
+                            {
+                                currentTutorialIndex = 17;
+                            }
+
+                            break;
+                        case 17:
+
+                            tutorialImage.SetActive(false);
+                            Pause.isPause = false;
+
+                            break;
+                        case 18:
+
+                            UIManager.Instance.DestroyManagementBoardWaypoint();
+                            UIManager.Instance.g_goToBoardForCooker.SetActive(false);
+                            Pause.isPause = true;
+
+                            dialog.SetActive(true);
+                            DialogBox dialogBox2 = dialog.GetComponent<DialogBox>();
+                            dialogBox2.SetupDailogText(newMenuText);
+
+                            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0))
+                            {
+                                currentTutorialIndex = 19;
+                            }
+
+                            break;
+                        case 19:
+
+                            Pause.isPause = false;
+                            dialog.SetActive(false);
+                            UIManager.Instance.SpawnMenuBoardWaypoint();
+                            UIManager.Instance.g_unlockBeer.SetActive(true);
+                            float menuBoardDis = Vector3.Distance(PlayerManager.Instance.transform.position, UIManager.Instance.t_menuBoardMesh.position);
+
+                            if (menuBoardDis <= beerDis)
+                            {
+                                currentTutorialIndex = 20;
+                            }
+
+                            break;
+                        case 20:
+
+                            tutorialImage.SetActive(true);
+                            TutorialImage image2 = tutorialImage.GetComponent<TutorialImage>();
+                            image2.SetupImage(unlockBeerSprite);
+
+                            CameraController.Instance.s_playerCamera.PlayerLookAtTarget(UIManager.Instance.t_menuBoardMesh, menuBoardOffset);
+                            Pause.isPause = true;
+
+                            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0))
+                            {
+                                currentTutorialIndex = 21;
+                            }
+
+                            break;
+                        case 21:
+
+                            Pause.isPause = false;
+                            tutorialImage.SetActive(false);
+
+                            break;
+                        case 22:
+
+                            UIManager.Instance.DestroyMenuBoardWaypoint();
+                            UIManager.Instance.g_menuWaypoint.SetActive(false);
+
+                            if (currentUpgradeTable == null)
+                            {
+                                if (RestaurantManager.Instance.GetTableToUpgrade(out int tableIndex))
+                                {
+                                    currentUpgradeTable = RestaurantManager.Instance.allTables[tableIndex].GetComponent<UpgradTable>();
+                                }
+                            }
+                            else
+                            {
+                                Transform tableMesh = currentUpgradeTable.tableObj.g_table.transform;
+                                UIManager.Instance.g_unlockTable.SetActive(true);
+
+                                if(currentupgrateTableWaypoint == null)
+                                {
+                                    currentupgrateTableWaypoint = UIManager.Instance.SpawnWayPoint(upgrateTableWaypoint, tableMesh);
+                                }
+
+                                float playerAndtableDis = Vector3.Distance(PlayerManager.Instance.transform.position, tableMesh.position);
+                                if(playerAndtableDis <= tableDis)
+                                {
+                                    currentTutorialIndex = 23;
+                                }
+                            }
+
+                            break;
+                        case 23:
+
+                            tutorialImage.SetActive(true);
+                            TutorialImage image3 = tutorialImage.GetComponent<TutorialImage>();
+                            image3.SetupImage(unlockTableSprite);
+
+                            CameraController.Instance.s_playerCamera.PlayerLookAtTarget(UIManager.Instance.t_menuBoardMesh, Vector3.zero);
+                            Pause.isPause = true;
+
+                            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0))
+                            {
+                                currentTutorialIndex = 24;
+                            }
+
+                            break;
+                        case 24:
+
+                            Pause.isPause = false;
+                            tutorialImage.SetActive(false);
+
+
+                            break;
+                        default: break;
+                    }
+                }
+                else if (state.s_currentState == state.s_openState)
+                {
+
+                }
 
                 break;
             case 3:

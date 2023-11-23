@@ -50,6 +50,10 @@ public class UnlockNewMenu : MonoBehaviour, IInteracable
                                 GameManager.Instance.RemovePocketMoney(menuCost);
                                 SoundManager.Instance.PlayInteractiveSound();
                                 menuHandler.ActivateDrinksMenu(menuNum);
+                                if (menuNum == 1 && TutorialManager.Instance.currentTutorialIndex == 21)
+                                {
+                                    TutorialManager.Instance.currentTutorialIndex = 22;
+                                }
                             }
                         }
                         currenthold = 0;
