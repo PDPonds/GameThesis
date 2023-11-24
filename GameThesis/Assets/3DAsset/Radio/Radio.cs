@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Radio : MonoBehaviour, IInteracable
 {
@@ -33,22 +34,26 @@ public class Radio : MonoBehaviour, IInteracable
             }
         }
 
-        if (PlayerManager.Instance.b_inFighting)
+        if(SceneManager.GetActiveScene().name == "SampleScene")
         {
-            if (count == 0)
+            if (PlayerManager.Instance.b_inFighting)
             {
-                StartCombatSong();
-                count++;
+                if (count == 0)
+                {
+                    StartCombatSong();
+                    count++;
+                }
+            }
+            else
+            {
+                if (count != 0)
+                {
+                    StopCombatSong();
+                    count = 0;
+                }
             }
         }
-        else
-        {
-            if (count != 0)
-            {
-                StopCombatSong();
-                count = 0;
-            }
-        }
+        
     }
 
     private void StartCombatSong()
