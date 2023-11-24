@@ -2,8 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.AI.Navigation;
-using Unity.Mathematics;
 using UnityEngine;
 
 public class GameManager : Auto_Singleton<GameManager>
@@ -34,6 +32,7 @@ public class GameManager : Auto_Singleton<GameManager>
     [HideInInspector] public int i_currentDay;
 
     public FrameStop framestop;
+
 
     private void Awake()
     {

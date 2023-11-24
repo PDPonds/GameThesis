@@ -50,6 +50,7 @@ public class UIManager : Auto_Singleton<UIManager>
     public GameObject g_open;
     public GameObject g_close;
     public GameObject g_goToBoardForWaiter;
+    public GameObject g_startCooking;
     public GameObject g_goToCounter;
     public GameObject g_firstQ;
     public GameObject g_goToBoardForCooker;
@@ -57,6 +58,11 @@ public class UIManager : Auto_Singleton<UIManager>
     public GameObject g_unlockTable;
     public GameObject g_letter;
     public GameObject g_finalQueue;
+
+    [Space(10f)]
+
+    public TextMeshProUGUI text_debtCostObjective;
+
     [Space(10f)]
 
     [Header("===== WayPoint =====")]
@@ -97,6 +103,9 @@ public class UIManager : Auto_Singleton<UIManager>
     public TextMeshProUGUI text_waiterCost;
     public TextMeshProUGUI text_cookerCost;
     public TextMeshProUGUI text_ingredientCost;
+    public TextMeshProUGUI text_debtText;
+    public TextMeshProUGUI text_debtCost;
+
 
     [Header("===== Lose Win =====")]
     public GameObject winPage;
@@ -148,14 +157,17 @@ public class UIManager : Auto_Singleton<UIManager>
         }
         else
         {
-            float toRemovePocket = RestaurantManager.Instance.f_currentCostPerDay - GameManager.Instance.f_coin;
-            GameManager.Instance.RemovePocketMoney(toRemovePocket);
-            GameManager.Instance.f_coin = 0;
-            RestaurantManager.Instance.i_currentWaiterCount = 1;
-            if (GameManager.Instance.i_currentDay > 2)
-            {
-                RestaurantManager.Instance.i_currentCookerCount = 1;
-            }
+            //float toRemovePocket = RestaurantManager.Instance.f_currentCostPerDay - GameManager.Instance.f_coin;
+            //GameManager.Instance.RemovePocketMoney(toRemovePocket);
+            //GameManager.Instance.f_coin = 0;
+            //RestaurantManager.Instance.i_currentWaiterCount = 1;
+            //if (GameManager.Instance.i_currentDay > 2)
+            //{
+            //    RestaurantManager.Instance.i_currentCookerCount = 1;
+            //}
+
+            losePage.SetActive(true);
+
         }
         RestaurantManager.Instance.ClearChair();
         TimeController.Instance.ResetTime();
@@ -172,6 +184,11 @@ public class UIManager : Auto_Singleton<UIManager>
         text_pocketCash.text = $"{GameManager.Instance.f_pocketMoney.ToString("F2")}$";
 
         text_time.text = TimeController.Instance.d_currentTime.ToString("HH:mm");
+
+        if (g_finalQueue.activeSelf)
+        {
+            text_debtCostObjective.text = $"An amount of ${ObjectiveManager.Instance.mainObjtive.currentMainCost} will be deducted by the end of the day.";
+        }
 
         #region warning
 
@@ -391,7 +408,21 @@ public class UIManager : Auto_Singleton<UIManager>
             text_profitCost.text = $"{profit.ToString("F2")}$";
             text_waiterCost.text = $"{waiterCost.ToString("F2")}$";
             text_cookerCost.text = $"{cookerCost.ToString("F2")}$";
-            text_ingredientCost.text = $"{RestaurantManager.Instance.f_ingredientCost.ToString("F2")}$";
+            text_ingredientCost.text = $"- {RestaurantManager.Instance.f_ingredientCost.ToString("F2")}$";
+
+            if (GameManager.Instance.i_currentDay < 3)
+            {
+                text_debtCost.gameObject.SetActive(false);
+                text_debtText.gameObject.SetActive(false);
+
+            }
+            else
+            {
+                text_debtCost.gameObject.SetActive(true);
+                text_debtText.gameObject.SetActive(true);
+
+                text_debtCost.text = $"{ObjectiveManager.Instance.mainObjtive.currentMainCost.ToString("F2")}$";
+            }
 
             if (RestaurantManager.Instance.RestaurantIsEmpty())
             {

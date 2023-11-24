@@ -17,7 +17,7 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
     //public int i_startRating;
     //public int i_ratingToRemove;
     //public int i_ratingToAdd;
-    public UI_animmationController uiAnimCon;
+    //public UI_animmationController uiAnimCon;
 
     [Header("===== Upgrade Table Manager =====")]
     public int i_startTable; //2
@@ -61,7 +61,13 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
 
     [Header("===== PotAndPan =====")]
     public List<PotAndPan> allPotandPan = new List<PotAndPan>();
-    public PotAndPan currentPotAndPan;
+    [HideInInspector] public PotAndPan currentPotAndPan;
+
+    [Header("===== Letter =====")]
+    public GameObject letter;
+
+    [Header("===== IngredientCostMul =====")]
+    public float ingredientCostMul;
 
     public void AddCurrentCookingCount()
     {
@@ -197,9 +203,14 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
 
     void Update()
     {
+        if (GameManager.Instance.i_currentDay > 2) letter.SetActive(true);
+        else letter.SetActive(false);
+
+
         float allCookerCost = i_currentCookerCount * f_cookerCost;
         float allWaiterCost = i_currentWaiterCount * f_waiterCost;
-        f_currentCostPerDay = allCookerCost + allWaiterCost + f_ingredientCost;
+        float objectiveCost = ObjectiveManager.Instance.mainObjtive.currentMainCost;
+        f_currentCostPerDay = allCookerCost + allWaiterCost + f_ingredientCost + objectiveCost;
 
         allCustomers = FindObjectsOfType<CustomerStateManager>();
         allEmployees = FindObjectsOfType<EmployeeStateManager>();
@@ -253,10 +264,10 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
                     }
                 }
             }
-            else if(TutorialManager.Instance.currentTutorialIndex > 33 &&
+            else if (TutorialManager.Instance.currentTutorialIndex > 33 &&
                 TutorialManager.Instance.currentTutorialIndex < 37)
             {
-                if(TutorialManager.Instance.dashCus == null)
+                if (TutorialManager.Instance.dashCus == null)
                 {
                     if (GetChairReday(out int chairReday))
                     {

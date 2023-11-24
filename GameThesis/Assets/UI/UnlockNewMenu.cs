@@ -21,13 +21,16 @@ public class UnlockNewMenu : MonoBehaviour, IInteracable
     public float holdTime;
     public float currenthold;
 
+    public Color color;
+
     private void Update()
     {
         if (GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_beforeOpenState)
         {
             if (GameManager.Instance.f_pocketMoney >= menuCost &&
                 PlayerManager.Instance.g_interactiveObj == this.gameObject &&
-                GameManager.Instance.i_currentDay > 1)
+                GameManager.Instance.i_currentDay > 1 &&
+                !hasMenu())
             {
                 if (Input.GetKey(KeyCode.E))
                 {
@@ -70,8 +73,6 @@ public class UnlockNewMenu : MonoBehaviour, IInteracable
                 currenthold = 0;
             }
 
-            Color color = new Color(255f, 255f, 255f, 50f);
-
             if (type == menuType.dish)
             {
                 if (menuHandler.mainDish_Status[menuNum].status)
@@ -109,13 +110,34 @@ public class UnlockNewMenu : MonoBehaviour, IInteracable
 
         }
 
+    }
 
+    bool hasMenu()
+    {
+        if (type == menuType.drink)
+        {
+            if (menuHandler.drinks_Status[menuNum].status)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
 
+            }
+        }
+        else
+        {
+            if (menuHandler.mainDish_Status[menuNum].status)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
 
-
-
-
-
+            }
+        }
     }
 
     public void Interaction()
