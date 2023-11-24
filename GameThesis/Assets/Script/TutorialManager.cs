@@ -68,8 +68,8 @@ public class TutorialManager : Auto_Singleton<TutorialManager>
     [Header("- 14")]
     public string startDay2Text;
 
-    [Header("- 16")]
-    public Sprite addCookerSprite;
+    //[Header("- 16")]
+    //public Sprite addCookerSprite;
 
     [Header("- 18")]
     public string newMenuText;
@@ -87,9 +87,9 @@ public class TutorialManager : Auto_Singleton<TutorialManager>
     WaypointIndicator currentupgrateTableWaypoint;
     [HideInInspector] public UpgradTable currentUpgradeTable;
 
-    [Header("- 23")]
-    public Vector3 unlickTableOffset;
-    public Sprite unlockTableSprite;
+    //[Header("- 23")]
+    //public Vector3 unlickTableOffset;
+    //public Sprite unlockTableSprite;
 
     [Header("- 26")]
     [HideInInspector] public CustomerStateManager drunkCus;
@@ -397,14 +397,20 @@ public class TutorialManager : Auto_Singleton<TutorialManager>
                             break;
                         case 16:
 
-                            tutorialImage.SetActive(true);
-                            TutorialImage image = tutorialImage.GetComponent<TutorialImage>();
-                            image.SetupImage(addCookerSprite);
+                            //tutorialImage.SetActive(true);
+                            //TutorialImage image = tutorialImage.GetComponent<TutorialImage>();
+                            //image.SetupImage(addCookerSprite);
 
-                            CameraController.Instance.s_playerCamera.PlayerLookAtTarget(UIManager.Instance.t_managementBoardMesh, lookAtOffSet);
-                            Pause.isPause = true;
+                            //CameraController.Instance.s_playerCamera.PlayerLookAtTarget(UIManager.Instance.t_managementBoardMesh, lookAtOffSet);
+                            //Pause.isPause = true;
 
-                            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0))
+                            //if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0))
+                            //{
+                            //    currentTutorialIndex = 17;
+                            //}
+
+                            float cookerBoardDis = Vector3.Distance(PlayerManager.Instance.transform.position, UIManager.Instance.t_managementBoardMesh.position);
+                            if (cookerBoardDis <= 5)
                             {
                                 currentTutorialIndex = 17;
                             }
@@ -499,16 +505,22 @@ public class TutorialManager : Auto_Singleton<TutorialManager>
                             break;
                         case 23:
 
-                            tutorialImage.SetActive(true);
-                            TutorialImage image3 = tutorialImage.GetComponent<TutorialImage>();
-                            image3.SetupImage(unlockTableSprite);
+                            //tutorialImage.SetActive(true);
+                            //TutorialImage image3 = tutorialImage.GetComponent<TutorialImage>();
+                            //image3.SetupImage(unlockTableSprite);
 
                             Transform tableMesh2 = currentUpgradeTable.tableObj.g_table.transform;
 
-                            CameraController.Instance.s_playerCamera.PlayerLookAtTarget(tableMesh2, unlickTableOffset);
-                            Pause.isPause = true;
+                            //CameraController.Instance.s_playerCamera.PlayerLookAtTarget(tableMesh2, unlickTableOffset);
+                            //Pause.isPause = true;
 
-                            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0))
+                            //if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0))
+                            //{
+                            //    currentTutorialIndex = 24;
+                            //}
+
+                            float upTable = Vector3.Distance(PlayerManager.Instance.transform.position, tableMesh2.position);
+                            if(upTable <= 5)
                             {
                                 currentTutorialIndex = 24;
                             }

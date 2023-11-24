@@ -58,7 +58,7 @@ public class PotAndPan : MonoBehaviour, IInteracable
     {
         var emission = smokeParticle.emission;
         emission.rateOverTime = 5;
-        cookingAudio.Play();
+        if (!cookingAudio.isPlaying) cookingAudio.Play();
         foodMesh.gameObject.SetActive(true);
     }
 
@@ -66,7 +66,7 @@ public class PotAndPan : MonoBehaviour, IInteracable
     {
         var emission = smokeParticle.emission;
         emission.rateOverTime = 0;
-        cookingAudio.Stop();
+        if (cookingAudio.isPlaying) cookingAudio.Stop();
         foodMesh.gameObject.SetActive(false);
     }
 
@@ -202,10 +202,12 @@ public class PotAndPan : MonoBehaviour, IInteracable
         if (currentTime > 0 || currentPoint > 0)
         {
             b_isWorking = true;
+            StartCooking();
         }
         else
         {
             b_isWorking = false;
+            EndCooking();
         }
 
     }

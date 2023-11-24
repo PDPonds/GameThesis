@@ -134,8 +134,8 @@ public class ManagementBoard : MonoBehaviour
         }
         else if (RestaurantManager.Instance.i_empLevel == 2)
         {
-            g_upgradeEmp1Checker.SetActive(false);
-            g_upgradeEmp2Checker.SetActive(true);
+            g_upgradeEmp1Checker.SetActive(true);
+            g_upgradeEmp2Checker.SetActive(false);
         }
         else if (RestaurantManager.Instance.i_empLevel == 3)
         {
