@@ -25,10 +25,24 @@ public class OpenCloseRestaurantInterac : MonoBehaviour, IInteracable
 
         if (state.s_currentState == state.s_beforeOpenState)
         {
-            forntDoor.b_isLock = false;
-            RestaurantManager.Instance.SpawnEmp();
-            SoundManager.Instance.PlayOpenRestaurantSound();
-            state.SwitchState(state.s_openState);
+            if (TutorialManager.Instance.currentTutorialIndex >= 5)
+            {
+                if (TutorialManager.Instance.currentTutorialIndex == 5)
+                {
+                    TutorialManager.Instance.currentTutorialIndex = 6;
+                }
+
+                if (TutorialManager.Instance.currentTutorialIndex == 25)
+                {
+                    TutorialManager.Instance.currentTutorialIndex = 26;
+                }
+
+                forntDoor.b_isLock = false;
+                RestaurantManager.Instance.SpawnEmp();
+                SoundManager.Instance.PlayOpenRestaurantSound();
+                state.SwitchState(state.s_openState);
+            }
+
         }
         else if (state.s_currentState == state.s_afterOpenState)
         {
@@ -47,7 +61,10 @@ public class OpenCloseRestaurantInterac : MonoBehaviour, IInteracable
         string text = string.Empty;
         if (GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_beforeOpenState)
         {
-            text += "[E] to Open Restaurant";
+            if (TutorialManager.Instance.currentTutorialIndex >= 5)
+            {
+                text += "[E] to Open Restaurant";
+            }
         }
         else if (GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_afterOpenState)
         {

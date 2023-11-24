@@ -42,7 +42,7 @@ public class InputSystem : MonoBehaviour
     {
         if (UIManager.Instance.letter.activeSelf)
         {
-            
+
         }
         else
         {
@@ -121,8 +121,12 @@ public class InputSystem : MonoBehaviour
 
     void Punch()
     {
-        PlayerManager.Instance.b_isSprint = false;
-        PlayerManager.Instance.s_playerFistCombat.Punch();
+        if (!Pause.isPause && TutorialManager.Instance.currentTutorialIndex > 29)
+        {
+            PlayerManager.Instance.b_isSprint = false;
+            PlayerManager.Instance.s_playerFistCombat.Punch();
+        }
+
     }
 
 }

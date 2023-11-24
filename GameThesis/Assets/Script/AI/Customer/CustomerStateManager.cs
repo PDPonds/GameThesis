@@ -448,26 +448,35 @@ public class CustomerStateManager : StateManager, IDamageable, IInteracable
         //    }
         //}
         //else
-        if (s_currentState == s_frontCounter)
+        if(!Pause.isPause)
         {
-            GameManager.Instance.AddCoin(f_giveCoin);
-            SwitchState(s_goOutState);
-        }
-        else if (s_currentState == s_drunkState)
-        {
-            f_currentWekeUpPoint += f_wekeUpMultiply;
-            if (f_currentWekeUpPoint >= f_maxWekeUpPoint)
+            if (s_currentState == s_frontCounter)
             {
-                c_chairObj.b_isEmpty = true;
-                c_chairObj.b_readyForNextCustomer = false;
-                c_chairObj.s_currentCustomer = null;
+                GameManager.Instance.AddCoin(f_giveCoin);
+                SwitchState(s_goOutState);
+            }
+            else if (s_currentState == s_drunkState)
+            {
+                f_currentWekeUpPoint += f_wekeUpMultiply;
+                if (f_currentWekeUpPoint >= f_maxWekeUpPoint)
+                {
+                    c_chairObj.b_isEmpty = true;
+                    c_chairObj.b_readyForNextCustomer = false;
+                    c_chairObj.s_currentCustomer = null;
 
-                c_chairObj = null;
-                c_chairObj = null;
+                    c_chairObj = null;
+                    c_chairObj = null;
 
-                SwitchState(s_giveBackState);
+                    SwitchState(s_giveBackState);
+
+                    if (TutorialManager.Instance.currentTutorialIndex == 29)
+                    {
+                        TutorialManager.Instance.currentTutorialIndex = 30;
+                    }
+                }
             }
         }
+        
     }
 
     public string InteractionText()

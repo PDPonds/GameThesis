@@ -35,33 +35,15 @@ public class MenuHandler : MonoBehaviour
 
         if (state.s_currentState == state.s_beforeOpenState)
         {
-            if (isLevel2)
+            if(TutorialManager.Instance.currentTutorialIndex < 19)
             {
                 for (int i = 0; i < mainDish_Status.Count; i++)
                 {
-                    if (!mainDish_Status[i].menuGameobject.activeSelf)
-                    {
-                        mainDish_Status[i].menuGameobject.SetActive(true);
-                    }
-                }
-                for (int i = 0; i < drinks_Status.Count; i++)
-                {
-                    if (!drinks_Status[i].menuGameobject.activeSelf)
-                    {
-                        drinks_Status[i].menuGameobject.SetActive(true);
-                    }
-                }
-            }
-            else
-            {
-                for (int i = 0; i < mainDish_Status.Count; i++)
-                {
-                    if (i != 2)
+                    if (mainDish_Status[i].status == true)
                     {
                         if (!mainDish_Status[i].menuGameobject.activeSelf)
-                        {
                             mainDish_Status[i].menuGameobject.SetActive(true);
-                        }
+
                     }
                     else
                     {
@@ -69,14 +51,110 @@ public class MenuHandler : MonoBehaviour
                             mainDish_Status[i].menuGameobject.SetActive(false);
                     }
                 }
+
                 for (int i = 0; i < drinks_Status.Count; i++)
                 {
-                    if (!drinks_Status[i].menuGameobject.activeSelf)
+                    if (drinks_Status[i].status == true)
                     {
-                        drinks_Status[i].menuGameobject.SetActive(true);
+                        if (!drinks_Status[i].menuGameobject.activeSelf)
+                            drinks_Status[i].menuGameobject.SetActive(true);
+                    }
+                    else
+                    {
+                        if (drinks_Status[i].menuGameobject.activeSelf)
+                            drinks_Status[i].menuGameobject.SetActive(false);
                     }
                 }
             }
+            else if(TutorialManager.Instance.currentTutorialIndex > 18 &&
+                TutorialManager.Instance.currentTutorialIndex < 26)
+            {
+                for (int i = 0; i < mainDish_Status.Count; i++)
+                {
+                    if (mainDish_Status[i].status == true)
+                    {
+                        if (!mainDish_Status[i].menuGameobject.activeSelf)
+                            mainDish_Status[i].menuGameobject.SetActive(true);
+
+                    }
+                    else
+                    {
+                        if (mainDish_Status[i].menuGameobject.activeSelf)
+                            mainDish_Status[i].menuGameobject.SetActive(false);
+                    }
+                }
+
+                for (int i = 0; i < drinks_Status.Count; i++)
+                {
+                    if (drinks_Status[i].status == true)
+                    {
+                        if (!drinks_Status[i].menuGameobject.activeSelf)
+                            drinks_Status[i].menuGameobject.SetActive(true);
+                    }
+                    else
+                    {
+                        if(i == 1)
+                        {
+                            if (!drinks_Status[i].menuGameobject.activeSelf)
+                                drinks_Status[i].menuGameobject.SetActive(true);
+                        }
+                        else
+                        {
+                            if (drinks_Status[i].menuGameobject.activeSelf)
+                            {
+                                drinks_Status[i].menuGameobject.SetActive(false);
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (isLevel2)
+                {
+                    for (int i = 0; i < mainDish_Status.Count; i++)
+                    {
+                        if (!mainDish_Status[i].menuGameobject.activeSelf)
+                        {
+                            mainDish_Status[i].menuGameobject.SetActive(true);
+                        }
+                    }
+                    for (int i = 0; i < drinks_Status.Count; i++)
+                    {
+                        if (!drinks_Status[i].menuGameobject.activeSelf)
+                        {
+                            drinks_Status[i].menuGameobject.SetActive(true);
+                        }
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < mainDish_Status.Count; i++)
+                    {
+                        if (i != 2)
+                        {
+                            if (!mainDish_Status[i].menuGameobject.activeSelf)
+                            {
+                                mainDish_Status[i].menuGameobject.SetActive(true);
+                            }
+                        }
+                        else
+                        {
+                            if (mainDish_Status[i].menuGameobject.activeSelf)
+                                mainDish_Status[i].menuGameobject.SetActive(false);
+                        }
+                    }
+                    for (int i = 0; i < drinks_Status.Count; i++)
+                    {
+                        if (!drinks_Status[i].menuGameobject.activeSelf)
+                        {
+                            drinks_Status[i].menuGameobject.SetActive(true);
+                        }
+                    }
+                }
+
+            }
+            
 
         }
         else

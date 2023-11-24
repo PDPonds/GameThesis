@@ -35,11 +35,15 @@ public class CustomerFrontOfCounterState : BaseState
         cus.anim.SetBool("eat", false);
         cus.anim.SetBool("checkbill", true);
 
-        f_currentPayTime -= Time.deltaTime;
-        if (f_currentPayTime < 0)
+        if (TutorialManager.Instance.currentTutorialIndex > 12)
         {
-            cus.SwitchState(cus.s_goOutState);
+            f_currentPayTime -= Time.deltaTime;
+            if (f_currentPayTime < 0)
+            {
+                cus.SwitchState(cus.s_goOutState);
+            }
         }
+            
 
         if (f_currentPayTime <= 10)
         {

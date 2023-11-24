@@ -73,12 +73,16 @@ public class CustomerWaitFoodState : BaseState
 
         }
 
-        cus.f_currentOrderTime -= Time.deltaTime;
-        if (cus.f_currentOrderTime <= 0)
+        if (TutorialManager.Instance.currentTutorialIndex > 12)
         {
-            cus.SwitchState(cus.s_goOutState);
-            //RestaurantManager.Instance.RemoveRating();
+            cus.f_currentOrderTime -= Time.deltaTime;
+            if (cus.f_currentOrderTime <= 0)
+            {
+                cus.SwitchState(cus.s_goOutState);
+                //RestaurantManager.Instance.RemoveRating();
+            }
         }
+
 
     }
 

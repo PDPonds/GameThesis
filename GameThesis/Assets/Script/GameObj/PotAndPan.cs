@@ -96,6 +96,7 @@ public class PotAndPan : MonoBehaviour, IInteracable
                     s_cookingChair.s_currentCustomer == null ||
                     s_cookingChair.s_currentCustomer.s_currentState != s_cookingChair.s_currentCustomer.s_waitFoodState)
                 {
+                    UIManager.Instance.DestroyHelpCooker();
                     RestaurantManager.Instance.currentPotAndPan = null;
                     b_canUse = false;
                 }
@@ -114,6 +115,7 @@ public class PotAndPan : MonoBehaviour, IInteracable
                     s_cookingChair.b_finishCooking = true;
                     b_canUse = false;
 
+                    UIManager.Instance.DestroyHelpCooker();
                     RestaurantManager.Instance.currentPotAndPan = null;
                     s_cookingChair = null;
                     currentTime = 0;
@@ -146,7 +148,7 @@ public class PotAndPan : MonoBehaviour, IInteracable
                         s_cookingChair.s_currentCustomer == null ||
                         s_cookingChair.s_currentCustomer.s_currentState != s_cookingChair.s_currentCustomer.s_waitFoodState)
                     {
-                        count = 0;
+                        UIManager.Instance.DestroyHelpCooker();
                         RestaurantManager.Instance.currentPotAndPan = null;
                         b_canUse = false;
                     }
@@ -165,6 +167,7 @@ public class PotAndPan : MonoBehaviour, IInteracable
                         s_cookingChair.b_finishCooking = true;
                         b_canUse = false;
 
+                        UIManager.Instance.DestroyHelpCooker();
                         RestaurantManager.Instance.currentPotAndPan = null;
                         s_cookingChair = null;
                         currentTime = 0;
@@ -182,7 +185,6 @@ public class PotAndPan : MonoBehaviour, IInteracable
                     currentTime = 0;
                     currentPoint = 0;
                     count = 0;
-
                     Color noColor = new Color(0, 0, 0, 0);
                     ApplyOutlineColor(noColor, 0f);
                 }
@@ -214,7 +216,7 @@ public class PotAndPan : MonoBehaviour, IInteracable
 
         if (state.s_currentState == state.s_openState)
         {
-            if (b_canUse)
+            if (b_canUse && !Pause.isPause)
             {
                 if (PlayerManager.Instance.g_interactiveObj == this.gameObject)
                 {
@@ -244,7 +246,35 @@ public class PotAndPan : MonoBehaviour, IInteracable
         }
         else if (state.s_currentState == state.s_afterOpenState)
         {
+            if (!RestaurantManager.Instance.RestaurantIsEmpty())
+            {
+                if (b_canUse)
+                {
+                    if (PlayerManager.Instance.g_interactiveObj == this.gameObject)
+                    {
+                        if (currentPoint < maxPoint)
+                        {
+                            if (count == 0)
+                            {
+                                int dish = s_cookingChair.s_currentCustomer.i_dish;
+                                int drink = s_cookingChair.s_currentCustomer.i_drink;
 
+                                float dishCost = RestaurantManager.Instance.menuHandler.mainDish_Status[dish].cost;
+                                float dirnkCost = RestaurantManager.Instance.menuHandler.drinks_Status[drink].cost;
+
+                                float dishIng = dishCost / 2;
+                                float drinkIng = dirnkCost / 2;
+
+                                float IngCost = dishIng + drinkIng;
+
+                                RestaurantManager.Instance.AddIngredientCost(IngCost);
+                            }
+                            currentPoint += pointMul;
+                            count++;
+                        }
+                    }
+                }
+            }
         }
     }
 

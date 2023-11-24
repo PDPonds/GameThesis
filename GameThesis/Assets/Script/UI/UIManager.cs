@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -47,16 +46,17 @@ public class UIManager : Auto_Singleton<UIManager>
     public bool b_leaveTrigger;
     [Space(10f)]
 
-    [Header("===== Close Warning ====")]
+    [Header("===== Objective ====")]
     public GameObject g_open;
     public GameObject g_close;
-    public GameObject g_managementBoard;
-    [Space(10f)]
-
-    [Header("===== Objective =====")]
-    public GameObject g_objective;
-    public TextMeshProUGUI text_objectiveName;
-    public TextMeshProUGUI text_objectiveDis;
+    public GameObject g_goToBoardForWaiter;
+    public GameObject g_goToCounter;
+    public GameObject g_firstQ;
+    public GameObject g_goToBoardForCooker;
+    public GameObject g_unlockBeer;
+    public GameObject g_unlockTable;
+    public GameObject g_letter;
+    public GameObject g_finalQueue;
     [Space(10f)]
 
     [Header("===== WayPoint =====")]
@@ -85,7 +85,6 @@ public class UIManager : Auto_Singleton<UIManager>
     public Transform t_managementBoardMesh;
     public Transform t_doorMesh;
     public Transform t_menuBoardMesh;
-    public Transform t_helpCookerMesh;
 
     [Header("===== Summary =====")]
     public GameObject g_summary;
@@ -108,6 +107,11 @@ public class UIManager : Auto_Singleton<UIManager>
     [Header("===== Letter =====")]
     public GameObject letter;
     public GameObject letterUI;
+
+    [Header("===== Parent Bar =====")]
+    public GameObject UIBar;
+    public GameObject ObjectiveBar;
+    public GameObject TutorialImage;
 
     private void Awake()
     {
@@ -136,7 +140,10 @@ public class UIManager : Auto_Singleton<UIManager>
             GameManager.Instance.AddPocketMoney(toAddPocket);
             GameManager.Instance.f_coin = 0;
             RestaurantManager.Instance.i_currentWaiterCount = 1;
-            RestaurantManager.Instance.i_currentCookerCount = 1;
+            if (GameManager.Instance.i_currentDay > 2)
+            {
+                RestaurantManager.Instance.i_currentCookerCount = 1;
+            }
 
         }
         else
@@ -145,7 +152,10 @@ public class UIManager : Auto_Singleton<UIManager>
             GameManager.Instance.RemovePocketMoney(toRemovePocket);
             GameManager.Instance.f_coin = 0;
             RestaurantManager.Instance.i_currentWaiterCount = 1;
-            RestaurantManager.Instance.i_currentCookerCount = 1;
+            if (GameManager.Instance.i_currentDay > 2)
+            {
+                RestaurantManager.Instance.i_currentCookerCount = 1;
+            }
         }
         RestaurantManager.Instance.ClearChair();
         TimeController.Instance.ResetTime();
@@ -362,24 +372,15 @@ public class UIManager : Auto_Singleton<UIManager>
 
         if (GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_beforeOpenState)
         {
-            g_open.SetActive(true);
-            g_close.SetActive(false);
-            g_managementBoard.SetActive(true);
-
-            SpawnManagementBoardWaypoint();
-            SpawnOpenCloseWaypoint();
-            SpawnMenuBoardWaypoint();
-
-            //g_openAndCloseRestaurantWaypoint.SetActive(true);
-            //g_managementBoardWaypoint.SetActive(true);
-
+            if (GameManager.Instance.i_currentDay >= 3 && TutorialManager.Instance.currentTutorialIndex == 40)
+            {
+                SpawnManagementBoardWaypoint();
+                SpawnMenuBoardWaypoint();
+                SpawnOpenCloseWaypoint();
+            }
         }
         else if (GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_afterOpenState)
         {
-            g_open.SetActive(false);
-            g_close.SetActive(false);
-            g_managementBoard.SetActive(false);
-
             text_waiterCount.text = $"x {RestaurantManager.Instance.i_currentWaiterCount}";
             text_cookerCount.text = $"x {RestaurantManager.Instance.i_currentCookerCount}";
             text_daliyIncomeCost.text = $"{GameManager.Instance.f_coin.ToString("F2")}$";
@@ -394,18 +395,26 @@ public class UIManager : Auto_Singleton<UIManager>
 
             if (RestaurantManager.Instance.RestaurantIsEmpty())
             {
-                //g_openAndCloseRestaurantWaypoint.SetActive(true);
-                //g_managementBoardWaypoint.SetActive(false);
                 SpawnOpenCloseWaypoint();
-                DestroyManagementBoardWaypoint();
-                DestroyMenuBoardWaypoint();
                 g_close.SetActive(true);
             }
             else
             {
                 g_close.SetActive(false);
+
+                if (RestaurantManager.Instance.currentPotAndPan != null)
+                {
+                    SpawnHelpCooker();
+                }
+                else
+                {
+                    DestroyHelpCooker();
+                }
             }
 
+        }
+        else
+        {
 
             if (RestaurantManager.Instance.currentPotAndPan != null)
             {
@@ -416,42 +425,14 @@ public class UIManager : Auto_Singleton<UIManager>
                 DestroyHelpCooker();
             }
 
-        }
-        else
-        {
-            g_open.SetActive(false);
-            g_close.SetActive(false);
-            g_managementBoard.SetActive(false);
-
-            //g_openAndCloseRestaurantWaypoint.SetActive(false);
-            //g_managementBoardWaypoint.SetActive(false);
-
-            DestroyManagementBoardWaypoint();
-            DestroyOpenClseWaypoint();
-            DestroyMenuBoardWaypoint();
-
-            if (RestaurantManager.Instance.currentPotAndPan != null)
+            if (GameManager.Instance.i_currentDay >= 3)
             {
-                SpawnHelpCooker();
-            }
-            else
-            {
-                DestroyHelpCooker();
+
+                DestroyManagementBoardWaypoint();
+                DestroyMenuBoardWaypoint();
+                DestroyOpenClseWaypoint();
             }
 
-        }
-
-        if (ObjectiveManager.Instance.GetCurrentObjective(out int index) &&
-            index < ObjectiveManager.Instance.allObjectives.Count)
-        {
-            g_objective.SetActive(true);
-            ObjectiveSO objective = ObjectiveManager.Instance.allObjectives[index];
-            text_objectiveName.text = objective.s_objectiveName;
-            text_objectiveDis.text = objective.s_objectiveDescription;
-        }
-        else
-        {
-            g_objective.SetActive(false);
         }
 
         if (letter.gameObject.activeSelf) letterUI.SetActive(true);
@@ -459,7 +440,7 @@ public class UIManager : Auto_Singleton<UIManager>
 
     }
 
-    void SpawnHelpCooker()
+    public void SpawnHelpCooker()
     {
         if (allHelpCookerWaypoint.Count != 1)
         {
@@ -472,13 +453,13 @@ public class UIManager : Auto_Singleton<UIManager>
             GameObject wayPointObj = Instantiate(g_helpCookerWaypoint, Vector3.zero, Quaternion.identity);
             wayPointObj.transform.SetParent(t_Canvas);
             WaypointIndicator indicator = wayPointObj.GetComponent<WaypointIndicator>();
-            indicator.target = t_helpCookerMesh;
+            indicator.target = RestaurantManager.Instance.currentPotAndPan.transform;
 
             allHelpCookerWaypoint.Add(indicator);
         }
     }
 
-    void DestroyHelpCooker()
+    public void DestroyHelpCooker()
     {
         if (allHelpCookerWaypoint.Count > 0)
         {
@@ -490,7 +471,7 @@ public class UIManager : Auto_Singleton<UIManager>
         allHelpCookerWaypoint.Clear();
     }
 
-    void SpawnOpenCloseWaypoint()
+    public void SpawnOpenCloseWaypoint()
     {
         if (allOpenAndCloseWaypoint.Count != 1)
         {
@@ -507,7 +488,7 @@ public class UIManager : Auto_Singleton<UIManager>
         }
     }
 
-    void DestroyOpenClseWaypoint()
+    public void DestroyOpenClseWaypoint()
     {
         if (allOpenAndCloseWaypoint.Count > 0)
         {
@@ -519,7 +500,7 @@ public class UIManager : Auto_Singleton<UIManager>
         allOpenAndCloseWaypoint.Clear();
     }
 
-    void SpawnManagementBoardWaypoint()
+    public void SpawnManagementBoardWaypoint()
     {
         if (allManagementWaypoint.Count != 1)
         {
@@ -536,7 +517,7 @@ public class UIManager : Auto_Singleton<UIManager>
         }
     }
 
-    void DestroyManagementBoardWaypoint()
+    public void DestroyManagementBoardWaypoint()
     {
         if (allManagementWaypoint.Count > 0)
         {
@@ -548,7 +529,7 @@ public class UIManager : Auto_Singleton<UIManager>
         allManagementWaypoint.Clear();
     }
 
-    void SpawnMenuBoardWaypoint()
+    public void SpawnMenuBoardWaypoint()
     {
         if (allMenuWaypoint.Count != 1)
         {
@@ -565,7 +546,7 @@ public class UIManager : Auto_Singleton<UIManager>
         }
     }
 
-    void DestroyMenuBoardWaypoint()
+    public void DestroyMenuBoardWaypoint()
     {
         if (allMenuWaypoint.Count > 0)
         {
@@ -593,6 +574,15 @@ public class UIManager : Auto_Singleton<UIManager>
         wayPointObj.transform.SetParent(t_Canvas);
         WaypointIndicator indicator = wayPointObj.GetComponent<WaypointIndicator>();
         indicator.target = emp.t_mesh;
+        return indicator;
+    }
+
+    public WaypointIndicator SpawnWayPoint(GameObject waypoint, Transform pos)
+    {
+        GameObject wayPointObj = Instantiate(waypoint, Vector3.zero, Quaternion.identity);
+        wayPointObj.transform.SetParent(t_Canvas);
+        WaypointIndicator indicator = wayPointObj.GetComponent<WaypointIndicator>();
+        indicator.target = pos;
         return indicator;
     }
 }

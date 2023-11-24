@@ -95,7 +95,6 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
     [Header("===== Area =====")]
     public AreaType currentAreaStay;
 
-
     private void Awake()
     {
         c_collider = GetComponent<CapsuleCollider>();
@@ -193,6 +192,15 @@ public class PlayerManager : Auto_Singleton<PlayerManager>
         yield return new WaitForSeconds(1.5f);
         PlayerManager.Instance.b_canMove = true;
         a_fadeAnim.SetBool("blackSkip", false);
+        yield return new WaitForSeconds(1f);
+        if (GameManager.Instance.i_currentDay == 2)
+        {
+            TutorialManager.Instance.currentTutorialIndex = 14;
+        }
+        else if (GameManager.Instance.i_currentDay == 3)
+        {
+            TutorialManager.Instance.currentTutorialIndex = 38;
+        }
     }
 
     IEnumerator DeadState()

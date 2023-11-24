@@ -11,7 +11,14 @@ public class CustomerEatFoodState : BaseState
     {
         CustomerStateManager cus = (CustomerStateManager)ai;
         f_eatTime = Random.Range(cus.v_minAndMaxEatFood.x, cus.v_minAndMaxEatFood.y);
-        f_currentEatTime = f_eatTime;
+
+        bool first = GameManager.Instance.i_currentDay > 1 && TutorialManager.Instance.currentTutorialIndex >= 37;
+        bool second = GameManager.Instance.i_currentDay == 1 && TutorialManager.Instance.currentTutorialIndex < 14;
+
+        if (first || second)
+            f_currentEatTime = f_eatTime;
+        else
+            f_currentEatTime = 5f;
 
         Color noColor = new Color(0, 0, 0, 0);
         cus.ApplyOutlineColor(noColor, 0f);
@@ -63,17 +70,37 @@ public class CustomerEatFoodState : BaseState
 
         }
 
-        f_currentEatTime -= Time.deltaTime;
-        if (f_currentEatTime <= 0)
+        if (GameManager.Instance.i_currentDay > 1 &&
+            TutorialManager.Instance.currentTutorialIndex >= 37)
         {
-            //RestaurantManager.Instance.AddRating();
-            if (cus.i_drink == 1)
+            f_currentEatTime -= Time.deltaTime;
+            if (f_currentEatTime <= 0)
             {
-                float drunkRan = Random.Range(0f, 100f);
-
-                if (drunkRan <= cus.f_drunkPercent)
+                //RestaurantManager.Instance.AddRating();
+                if (cus.i_drink == 1)
                 {
-                    cus.SwitchState(cus.s_drunkState);
+                    float drunkRan = Random.Range(0f, 100f);
+
+                    if (drunkRan <= cus.f_drunkPercent)
+                    {
+                        cus.SwitchState(cus.s_drunkState);
+                    }
+                    else
+                    {
+                        float ran = Random.Range(0, 100f);
+
+                        if (ran <= cus.f_randomEventPercent)
+                        {
+                            cus.c_chairObj.b_isEmpty = true;
+                            cus.SwitchState(cus.s_escapeState);
+                        }
+                        else
+                        {
+                            cus.c_chairObj.b_isEmpty = true;
+                            cus.SwitchState(cus.s_goToCounterState);
+                        }
+                    }
+
                 }
                 else
                 {
@@ -92,23 +119,41 @@ public class CustomerEatFoodState : BaseState
                 }
 
             }
-            else
-            {
-                float ran = Random.Range(0, 100f);
-
-                if (ran <= cus.f_randomEventPercent)
-                {
-                    cus.c_chairObj.b_isEmpty = true;
-                    cus.SwitchState(cus.s_escapeState);
-                }
-                else
-                {
-                    cus.c_chairObj.b_isEmpty = true;
-                    cus.SwitchState(cus.s_goToCounterState);
-                }
-            }
-
         }
+        else if (GameManager.Instance.i_currentDay == 1 &&
+            TutorialManager.Instance.currentTutorialIndex < 14)
+        {
+            f_currentEatTime -= Time.deltaTime;
+            if (f_currentEatTime <= 0)
+            {
+                cus.c_chairObj.b_isEmpty = true;
+                cus.SwitchState(cus.s_goToCounterState);
+            }
+        }
+        else if (GameManager.Instance.i_currentDay == 2 &&
+            TutorialManager.Instance.currentTutorialIndex == 26)
+        {
+            f_currentEatTime -= Time.deltaTime;
+            if (f_currentEatTime <= 0)
+            {
+                cus.c_chairObj.b_isEmpty = true;
+                cus.SwitchState(cus.s_drunkState);
+            }
+        }
+        else if (GameManager.Instance.i_currentDay == 2 &&
+            TutorialManager.Instance.currentTutorialIndex == 35)
+        {
+            float dashDis2 = Vector3.Distance(PlayerManager.Instance.transform.position, cus.transform.position);
 
+            f_currentEatTime -= Time.deltaTime;
+            if (f_currentEatTime <= 0 && cus.t_mesh.GetComponent<Renderer>().isVisible &&
+                dashDis2 < 15f)
+            {
+                cus.c_chairObj.b_isEmpty = true;
+                TutorialManager.Instance.currentTutorialIndex = 36;
+                cus.SwitchState(cus.s_escapeState);
+
+            }
+        }
     }
 }
