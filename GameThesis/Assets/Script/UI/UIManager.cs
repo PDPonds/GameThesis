@@ -115,7 +115,6 @@ public class UIManager : Auto_Singleton<UIManager>
 
     [Header("===== Letter =====")]
     public GameObject letter;
-    public GameObject letterUI;
 
     [Header("===== Parent Bar =====")]
     public GameObject UIBar;
@@ -148,11 +147,11 @@ public class UIManager : Auto_Singleton<UIManager>
             float toAddPocket = GameManager.Instance.f_coin - RestaurantManager.Instance.f_currentCostPerDay;
             GameManager.Instance.AddPocketMoney(toAddPocket);
             GameManager.Instance.f_coin = 0;
-            RestaurantManager.Instance.i_currentWaiterCount = 1;
-            if (GameManager.Instance.i_currentDay > 2)
-            {
-                RestaurantManager.Instance.i_currentCookerCount = 1;
-            }
+            //RestaurantManager.Instance.i_currentWaiterCount = 1;
+            //if (GameManager.Instance.i_currentDay > 2)
+            //{
+            //    RestaurantManager.Instance.i_currentCookerCount = 1;
+            //}
 
         }
         else
@@ -462,12 +461,10 @@ public class UIManager : Auto_Singleton<UIManager>
                 DestroyManagementBoardWaypoint();
                 DestroyMenuBoardWaypoint();
                 DestroyOpenClseWaypoint();
+                g_close.SetActive(false);
             }
 
         }
-
-        if (letter.gameObject.activeSelf) letterUI.SetActive(true);
-        else letterUI.SetActive(false);
 
     }
 

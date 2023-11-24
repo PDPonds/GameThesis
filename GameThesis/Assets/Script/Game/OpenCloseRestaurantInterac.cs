@@ -25,7 +25,9 @@ public class OpenCloseRestaurantInterac : MonoBehaviour, IInteracable
 
         if (state.s_currentState == state.s_beforeOpenState)
         {
-            if (TutorialManager.Instance.currentTutorialIndex >= 5)
+            if (TutorialManager.Instance.currentTutorialIndex == 5 ||
+                TutorialManager.Instance.currentTutorialIndex == 25 ||
+                TutorialManager.Instance.currentTutorialIndex >= 40)
             {
                 if (TutorialManager.Instance.currentTutorialIndex == 5)
                 {

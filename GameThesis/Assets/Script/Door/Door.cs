@@ -35,45 +35,23 @@ public class Door : MonoBehaviour
         {
             if (other.CompareTag("Player") || other.CompareTag("Enemy"))
             {
-                if (TutorialManager.Instance.currentTutorialIndex == 6)
-                {
-                    if (b_isForntDoor)
-                    {
-                        Vector3 forward = transform.TransformDirection(Vector3.forward);
-                        Vector3 toOther = other.transform.position - transform.position;
 
-                        float dot = Vector3.Dot(forward, toOther);
-                        if (dot < 0)
-                        {
-                            anim.SetBool("Behind", true);
-                            anim.SetBool("Fornt", false);
-                        }
-                        else
-                        {
-                            anim.SetBool("Behind", false);
-                            anim.SetBool("Fornt", true);
-                        }
-                        b_isOpen = true;
-                    }
+                Vector3 forward = transform.TransformDirection(Vector3.forward);
+                Vector3 toOther = other.transform.position - transform.position;
+
+                float dot = Vector3.Dot(forward, toOther);
+                if (dot < 0)
+                {
+                    anim.SetBool("Behind", true);
+                    anim.SetBool("Fornt", false);
                 }
                 else
                 {
-                    Vector3 forward = transform.TransformDirection(Vector3.forward);
-                    Vector3 toOther = other.transform.position - transform.position;
-
-                    float dot = Vector3.Dot(forward, toOther);
-                    if (dot < 0)
-                    {
-                        anim.SetBool("Behind", true);
-                        anim.SetBool("Fornt", false);
-                    }
-                    else
-                    {
-                        anim.SetBool("Behind", false);
-                        anim.SetBool("Fornt", true);
-                    }
-                    b_isOpen = true;
+                    anim.SetBool("Behind", false);
+                    anim.SetBool("Fornt", true);
                 }
+                b_isOpen = true;
+
             }
         }
 

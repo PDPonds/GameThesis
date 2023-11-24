@@ -48,6 +48,7 @@ public class EmployeeStateManager : StateManager, IDamageable
     [Header("===== Cooking =====")]
     public bool b_canCook;
     public bool b_isWorking;
+    public int indexPos;
     public Transform t_workingPos;
     public float f_cookingTime;
 

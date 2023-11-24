@@ -32,7 +32,8 @@ public class UpgradTable : MonoBehaviour, IInteracable
                 UpgradTable upTable = PlayerManager.Instance.g_interactiveObj.GetComponentInParent<UpgradTable>();
                 if (GameManager.Instance.f_pocketMoney >= f_costToBuy && upTable != null &&
                     upTable == this && GameManager.Instance.i_currentDay > 1 &&
-                    TutorialManager.Instance.currentTutorialIndex > 23)
+                    TutorialManager.Instance.currentTutorialIndex > 23 &&
+                    !b_readyToUse)
                 {
                     if (Input.GetKey(KeyCode.E))
                     {

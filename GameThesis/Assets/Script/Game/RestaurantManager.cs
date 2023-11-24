@@ -141,6 +141,7 @@ public class RestaurantManager : Auto_Singleton<RestaurantManager>
                     GameObject cookingEmpObj = Instantiate(g_cooker, cookingPos, Quaternion.Euler(cookingRot));
                     EmployeeStateManager emp = cookingEmpObj.GetComponent<EmployeeStateManager>();
                     emp.t_workingPos = allCookingPos[i];
+                    emp.indexPos = i;
                     allPotandPan[i].b_hasCooker = true;
                 }
             }

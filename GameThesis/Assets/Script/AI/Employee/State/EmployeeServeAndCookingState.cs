@@ -46,12 +46,17 @@ public class EmployeeServeAndCookingState : BaseState
                     {
                         emp.b_isWorking = true;
                         emp.anim.runtimeAnimatorController = emp.cookingAnim;
+                        if (emp.indexPos == 0 || emp.indexPos == 2)
+                        {
+                            emp.transform.rotation = Quaternion.Euler(0, 90, 0);
+                        }
+                        else
+                        {
+                            emp.transform.rotation = Quaternion.Euler(0, -90, 0);
+                        }
                         emp.agent.velocity = Vector3.zero;
                         emp.anim.SetBool("run", false);
                         emp.anim.SetBool("walk", false);
-
-                        Vector3 rot = new Vector3(0, emp.t_workingPos.rotation.y, 0);
-                        emp.transform.rotation = Quaternion.Euler(rot);
 
                         if (emp.b_canCook) emp.anim.SetBool("cooking", false);
                         else emp.anim.SetBool("cooking", true);
@@ -273,6 +278,14 @@ public class EmployeeServeAndCookingState : BaseState
                         {
                             emp.b_isWorking = true;
                             emp.anim.runtimeAnimatorController = emp.cookingAnim;
+                            if (emp.indexPos == 0 || emp.indexPos == 2)
+                            {
+                                emp.transform.rotation = Quaternion.Euler(0, 90, 0);
+                            }
+                            else
+                            {
+                                emp.transform.rotation = Quaternion.Euler(0, -90, 0);
+                            }
                             emp.agent.velocity = Vector3.zero;
                             emp.anim.SetBool("run", false);
                             emp.anim.SetBool("walk", false);

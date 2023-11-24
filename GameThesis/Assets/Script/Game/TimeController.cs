@@ -41,7 +41,7 @@ public class TimeController : Auto_Singleton<TimeController>
         bool playTime = TutorialManager.Instance.currentTutorialIndex > 36 || TutorialManager.Instance.currentTutorialIndex < 26;
 
         if (GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_openState
-            || playTime)
+            && playTime)
         {
             d_currentTime = d_currentTime.AddSeconds(Time.deltaTime * f_timeMultiplier);
         }
