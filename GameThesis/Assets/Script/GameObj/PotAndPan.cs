@@ -232,8 +232,8 @@ public class PotAndPan : MonoBehaviour, IInteracable
                             float dishCost = RestaurantManager.Instance.menuHandler.mainDish_Status[dish].cost;
                             float dirnkCost = RestaurantManager.Instance.menuHandler.drinks_Status[drink].cost;
 
-                            float dishIng = dishCost / 2;
-                            float drinkIng = dirnkCost / 2;
+                            float dishIng = dishCost * RestaurantManager.Instance.ingredientCostMul;
+                            float drinkIng = dirnkCost * RestaurantManager.Instance.ingredientCostMul;
 
                             float IngCost = dishIng + drinkIng;
 

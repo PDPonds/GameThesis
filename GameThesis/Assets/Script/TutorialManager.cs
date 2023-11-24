@@ -47,7 +47,7 @@ public class TutorialManager : Auto_Singleton<TutorialManager>
 
     [Header("- T6")]
     //public Vector3 lookAtFirstCusOffset;
-    public Sprite firstCusSprite;
+    //public Sprite firstCusSprite;
     [HideInInspector] public CustomerStateManager firstCus;
 
     [Header("- T7")]
@@ -59,8 +59,8 @@ public class TutorialManager : Auto_Singleton<TutorialManager>
     public GameObject counterWaypoint;
     WaypointIndicator currentCounterWaypoint;
 
-    [Header("- 11")]
-    public Sprite firstPay;
+    //[Header("- 11")]
+    //public Sprite firstPay;
 
     [Header("- 13")]
     public float queueCoin;
@@ -99,8 +99,8 @@ public class TutorialManager : Auto_Singleton<TutorialManager>
     [Header("- 29")]
     public Sprite drunkSprite;
 
-    [Header("- 32")]
-    public Sprite slackOffSprite;
+    //[Header("- 32")]
+    //public Sprite slackOffSprite;
 
     [Header("- 36")]
     public Sprite dashCusSprite;
@@ -109,9 +109,9 @@ public class TutorialManager : Auto_Singleton<TutorialManager>
     public string day3Text;
 
     [Header("- 40")]
-    public Transform letterMesh;
+    //public Transform letterMesh;
     public GameObject letterWaypoint;
-    public Sprite letterSprite;
+    //public Sprite letterSprite;
     WaypointIndicator currentLetterWaypoint;
 
     private void Update()
@@ -141,6 +141,7 @@ public class TutorialManager : Auto_Singleton<TutorialManager>
                             UIManager.Instance.g_unlockTable.SetActive(false);
                             UIManager.Instance.g_letter.SetActive(false);
                             UIManager.Instance.g_finalQueue.SetActive(false);
+                            UIManager.Instance.g_startCooking.SetActive(false);
 
                             UIManager.Instance.g_goToBoardForCooker.SetActive(false);
 
@@ -218,18 +219,29 @@ public class TutorialManager : Auto_Singleton<TutorialManager>
 
                             //ลูกค้าคนแรกเข้า
 
-                            if (RestaurantManager.Instance.GetWaitFirstChair(out int chairIndex, out int cusIndex))
+                            //if (RestaurantManager.Instance.GetWaitFirstChair(out int chairIndex, out int cusIndex))
+                            //{
+                            //    CustomerStateManager cus = RestaurantManager.Instance.allCustomers[cusIndex];
+                            //    ChairObj chair = RestaurantManager.Instance.allChairs[chairIndex];
+                            //    CameraController.Instance.s_playerCamera.PlayerLookAtTarget(cus.transform, Vector3.zero);
+
+                            //    tutorialImage.SetActive(true);
+                            //    TutorialImage image = tutorialImage.GetComponent<TutorialImage>();
+                            //    image.SetupImage(firstCusSprite);
+
+                            //    Pause.isPause = true;
+                            //    if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0))
+                            //    {
+                            //        currentTutorialIndex = 7;
+                            //    }
+                            //}
+
+                            if (RestaurantManager.Instance.currentPotAndPan != null)
                             {
-                                CustomerStateManager cus = RestaurantManager.Instance.allCustomers[cusIndex];
-                                ChairObj chair = RestaurantManager.Instance.allChairs[chairIndex];
-                                CameraController.Instance.s_playerCamera.PlayerLookAtTarget(cus.transform, Vector3.zero);
-
-                                tutorialImage.SetActive(true);
-                                TutorialImage image = tutorialImage.GetComponent<TutorialImage>();
-                                image.SetupImage(firstCusSprite);
-
-                                Pause.isPause = true;
-                                if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0))
+                                UIManager.Instance.g_startCooking.SetActive(true);
+                                Transform potAndPlayer = RestaurantManager.Instance.currentPotAndPan.transform;
+                                float potDis = Vector3.Distance(PlayerManager.Instance.transform.position, potAndPlayer.position);
+                                if (potDis <= 5)
                                 {
                                     currentTutorialIndex = 7;
                                 }
@@ -256,6 +268,7 @@ public class TutorialManager : Auto_Singleton<TutorialManager>
 
                                         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0))
                                         {
+                                            UIManager.Instance.g_startCooking.SetActive(false);
                                             currentTutorialIndex = 8;
                                         }
 
@@ -310,13 +323,19 @@ public class TutorialManager : Auto_Singleton<TutorialManager>
                         case 11:
 
                             //cus ทำท่าจ่ายตัง
-                            tutorialImage.SetActive(true);
-                            TutorialImage image3 = tutorialImage.GetComponent<TutorialImage>();
-                            image3.SetupImage(firstPay);
+                            //tutorialImage.SetActive(true);
+                            //TutorialImage image3 = tutorialImage.GetComponent<TutorialImage>();
+                            //image3.SetupImage(firstPay);
 
-                            CameraController.Instance.s_playerCamera.PlayerLookAtTarget(firstCus.transform, Vector3.zero);
-                            Pause.isPause = true;
-                            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0))
+                            //CameraController.Instance.s_playerCamera.PlayerLookAtTarget(firstCus.transform, Vector3.zero);
+                            //Pause.isPause = true;
+                            //if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0))
+                            //{
+                            //    currentTutorialIndex = 12;
+                            //}
+
+                            float payDis = Vector3.Distance(PlayerManager.Instance.transform.position, firstCus.transform.position);
+                            if(payDis < 10)
                             {
                                 currentTutorialIndex = 12;
                             }
@@ -520,7 +539,7 @@ public class TutorialManager : Auto_Singleton<TutorialManager>
                             //}
 
                             float upTable = Vector3.Distance(PlayerManager.Instance.transform.position, tableMesh2.position);
-                            if(upTable <= 5)
+                            if (upTable <= 5)
                             {
                                 currentTutorialIndex = 24;
                             }
@@ -631,14 +650,21 @@ public class TutorialManager : Auto_Singleton<TutorialManager>
                             break;
                         case 32:
 
-                            CameraController.Instance.s_playerCamera.PlayerLookAtTarget(slackOffEmp.transform, Vector3.zero);
+                            //CameraController.Instance.s_playerCamera.PlayerLookAtTarget(slackOffEmp.transform, Vector3.zero);
 
-                            tutorialImage.SetActive(true);
-                            TutorialImage image2 = tutorialImage.GetComponent<TutorialImage>();
-                            image2.SetupImage(slackOffSprite);
+                            //tutorialImage.SetActive(true);
+                            //TutorialImage image2 = tutorialImage.GetComponent<TutorialImage>();
+                            //image2.SetupImage(slackOffSprite);
 
-                            Pause.isPause = true;
-                            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0))
+                            //Pause.isPause = true;
+
+                            //if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0))
+                            //{
+                            //    currentTutorialIndex = 33;
+                            //}
+
+                            float slackOffDis = Vector3.Distance(PlayerManager.Instance.transform.position, slackOffEmp.transform.position);
+                            if (slackOffDis < 5f)
                             {
                                 currentTutorialIndex = 33;
                             }
@@ -647,8 +673,8 @@ public class TutorialManager : Auto_Singleton<TutorialManager>
                             break;
                         case 33:
 
-                            Pause.isPause = false;
-                            tutorialImage.SetActive(false);
+                            //Pause.isPause = false;
+                            //tutorialImage.SetActive(false);
                             if (slackOffEmp.s_currentState != slackOffEmp.s_slackOffState)
                             {
                                 currentTutorialIndex = 34;
@@ -733,7 +759,7 @@ public class TutorialManager : Auto_Singleton<TutorialManager>
 
                             if (currentLetterWaypoint == null)
                             {
-                                currentLetterWaypoint = UIManager.Instance.SpawnWayPoint(letterWaypoint, letterMesh);
+                                currentLetterWaypoint = UIManager.Instance.SpawnWayPoint(letterWaypoint, RestaurantManager.Instance.letter.transform);
                             }
                             UIManager.Instance.g_letter.SetActive(true);
 
