@@ -34,7 +34,7 @@ public class SoundManager : Auto_Singleton<SoundManager>
         removeCoinSource = InitializedAudioSource(false, false, 1);
         interactiveSource = InitializedAudioSource(false, false, 1);
         openRestaurantSource = InitializedAudioSource(false, false, 0.2f);
-        closeRestaurantSource = InitializedAudioSource(false, false, 1);
+        closeRestaurantSource = InitializedAudioSource(false, false, 0.2f);
         upgradeSource = InitializedAudioSource(false, false, 1);
         summarySource = InitializedAudioSource(false, false, 0.1f);
         cantIneractiveSource = InitializedAudioSource(false, false, 1);

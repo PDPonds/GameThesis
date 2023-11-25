@@ -130,13 +130,14 @@ public class UIManager : Auto_Singleton<UIManager>
 
     void WinButton()
     {
+        SceneManager.LoadScene(0);
         winPage.SetActive(false);
     }
 
     void LoseButton()
     {
-        losePage.SetActive(false);
         SceneManager.LoadScene(0);
+        losePage.SetActive(false);
     }
 
     void SkipDay()

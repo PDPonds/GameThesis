@@ -63,7 +63,9 @@ public class OpenCloseRestaurantInterac : MonoBehaviour, IInteracable
         string text = string.Empty;
         if (GameManager.Instance.s_gameState.s_currentState == GameManager.Instance.s_gameState.s_beforeOpenState)
         {
-            if (TutorialManager.Instance.currentTutorialIndex >= 5)
+            if (TutorialManager.Instance.currentTutorialIndex == 5 ||
+                TutorialManager.Instance.currentTutorialIndex == 25 ||
+                TutorialManager.Instance.currentTutorialIndex >= 40)
             {
                 text += "[E] to Open Restaurant";
             }

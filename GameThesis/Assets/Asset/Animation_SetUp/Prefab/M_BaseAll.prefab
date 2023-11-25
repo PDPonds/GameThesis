@@ -5854,7 +5854,7 @@ MonoBehaviour:
   f_fightDis: 1
   f_atkDelay: 1
   f_attackRange: 1.35
-  f_playerEscapeTime: 10
+  f_playerEscapeTime: 20
   f_hurtTime: 0.1
   f_protectStunTime: 1.5
   i_atkCount: 0
@@ -5871,9 +5871,9 @@ MonoBehaviour:
   i_dish: 0
   i_drink: 0
   v_minAndMaxEatFood: {x: 20, y: 30}
-  f_randomEventPercent: 10
+  f_randomEventPercent: 15
   b_escape: 0
-  f_fightBackPercent: 10
+  f_fightBackPercent: 20
   g_cashObj: {fileID: 8984431562625812036}
   f_payTime: 25
   v_minmaxTipsCoin: {x: 0, y: 5}
@@ -5883,12 +5883,12 @@ MonoBehaviour:
   f_destroyTime: 10
   g_stunVFX: {fileID: 2840335045684459295}
   b_isDrunk: 0
-  f_drunkPercent: 20
+  f_drunkPercent: 25
   f_currentWekeUpPoint: 0
   f_wekeUpMultiply: 1
   f_maxWekeUpPoint: 7
   g_sleepVFX: {fileID: 4981946437515006457}
-  f_isGangsterPercent: 5
+  f_isGangsterPercent: 20
   b_hasGang: 0
   v_minmaxGangCount: {x: 2, y: 5}
   b_isGang: 0
