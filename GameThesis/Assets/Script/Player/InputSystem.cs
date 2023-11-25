@@ -121,7 +121,9 @@ public class InputSystem : MonoBehaviour
 
     void Punch()
     {
-        if (!Pause.isPause && TutorialManager.Instance.currentTutorialIndex > 29)
+        if (!Pause.isPause && TutorialManager.Instance.currentTutorialIndex > 29 &&
+            !DebugController.Instance.showConsole)
+            
         {
             PlayerManager.Instance.b_isSprint = false;
             PlayerManager.Instance.s_playerFistCombat.Punch();

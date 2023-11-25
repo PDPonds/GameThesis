@@ -718,6 +718,11 @@ public class TutorialManager : Auto_Singleton<TutorialManager>
                                 }
                             }
 
+                            if(!dashCus.b_escape)
+                            {
+                                currentTutorialIndex = 37;
+                            }
+
                             break;
                         case 37:
 

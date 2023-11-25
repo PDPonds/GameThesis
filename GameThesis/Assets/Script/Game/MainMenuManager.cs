@@ -15,6 +15,12 @@ public class MainMenuManager : MonoBehaviour
         exitGame.onClick.AddListener(() => ExitGame());
     }
 
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
     void StartGame()
     {
         SceneManager.LoadScene(1);

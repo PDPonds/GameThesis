@@ -148,15 +148,21 @@ public class UIManager : Auto_Singleton<UIManager>
             float toAddPocket = GameManager.Instance.f_coin - RestaurantManager.Instance.f_currentCostPerDay;
             GameManager.Instance.AddPocketMoney(toAddPocket);
             GameManager.Instance.f_coin = 0;
+            #region Setup Employee
             //RestaurantManager.Instance.i_currentWaiterCount = 1;
             //if (GameManager.Instance.i_currentDay > 2)
             //{
             //    RestaurantManager.Instance.i_currentCookerCount = 1;
             //}
-
+            if (GameManager.Instance.i_currentDay == 7)
+            {
+                winPage.SetActive(true);
+            }
+            #endregion
         }
         else
         {
+            #region 
             //float toRemovePocket = RestaurantManager.Instance.f_currentCostPerDay - GameManager.Instance.f_coin;
             //GameManager.Instance.RemovePocketMoney(toRemovePocket);
             //GameManager.Instance.f_coin = 0;
@@ -165,6 +171,7 @@ public class UIManager : Auto_Singleton<UIManager>
             //{
             //    RestaurantManager.Instance.i_currentCookerCount = 1;
             //}
+            #endregion
 
             losePage.SetActive(true);
 

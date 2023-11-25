@@ -95,6 +95,14 @@ public class GameManager : Auto_Singleton<GameManager>
     {
         if (s_gameState.s_currentState == s_gameState.s_openState)
         {
+            if(i_currentDay == 1)
+            {
+                TutorialManager.Instance.currentTutorialIndex = 13;
+            }
+            else if(i_currentDay == 2)
+            {
+                TutorialManager.Instance.currentTutorialIndex = 37;
+            }
             s_gameState.SwitchState(s_gameState.s_afterOpenState);
             RestaurantManager.Instance.ClearRestaurant();
         }

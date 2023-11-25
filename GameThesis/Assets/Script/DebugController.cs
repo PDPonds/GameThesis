@@ -13,7 +13,11 @@ public class DebugController : Auto_Singleton<DebugController>
     //public static DebugCommand<int> UnlockIngredient;
     //public static DebugCommand<int, int> RemoveItem;
 
-    public static DebugCommand<float> AddPocketCoin;
+    public static DebugCommand<float> AddCoin;
+    public static DebugCommand<float> RemoveCoin;
+    public static DebugCommand<float> AddPocket;
+    public static DebugCommand<float> RemovePocket;
+    public static DebugCommand<float> SkipAndAddCoin;
     public static DebugCommand SkipDay;
 
     public List<object> commandList = new List<object>();
@@ -21,16 +25,38 @@ public class DebugController : Auto_Singleton<DebugController>
     private void Awake()
     {
 
-        AddPocketCoin = new DebugCommand<float>("add", "add pocket coint", "add", (i) =>
+        AddCoin = new DebugCommand<float>("add_coin", "add coin", "add_coin", (i) =>
+        {
+            GameManager.Instance.AddCoin(i);
+        });
+
+        RemoveCoin = new DebugCommand<float>("remove_coin,", "remove coin", "remove_coin", (i) =>
+        {
+            GameManager.Instance.RemoveCoin(i);
+        }
+        );
+
+        AddPocket = new DebugCommand<float>("add_pocket", "add pocket", "add_pocket", (i) =>
         {
             GameManager.Instance.AddPocketMoney(i);
         });
+
+        RemovePocket = new DebugCommand<float>("remove_pocket,", "remove pocket", "remove_pocket", (i) =>
+        {
+            GameManager.Instance.RemovePocketMoney(i);
+        }
+        );
 
         SkipDay = new DebugCommand("skip", "skip current day", "skip", () =>
         {
             GameManager.Instance.SkipDay();
         });
 
+        SkipAndAddCoin = new DebugCommand<float>("skip_add", "Skip And Add Coin", "skip_add", (i) =>
+        {
+            GameManager.Instance.SkipDay();
+            GameManager.Instance.AddCoin(i);
+        });
         //RemoveItem = new DebugCommand<int, int>("remove_item", "remove itemId count", "remove_item", (x, y) =>
         //{
         //    InventoryManager.Instance.RemoveItem(x, y);
@@ -48,7 +74,7 @@ public class DebugController : Auto_Singleton<DebugController>
 
         commandList = new List<object>()
         {
-            AddPocketCoin, SkipDay,
+            AddCoin, SkipDay, RemoveCoin,AddPocket, RemovePocket,SkipAndAddCoin
             //RemoveItem,ClearInventory,UnlockIngredient
         };
 
@@ -80,6 +106,10 @@ public class DebugController : Auto_Singleton<DebugController>
                 else if (commandList[i] as DebugCommand<int> != null)
                 {
                     (commandList[i] as DebugCommand<int>).Invoke(int.Parse(properties[1]));
+                }
+                else if (commandList[i] as DebugCommand<float> != null)
+                {
+                    (commandList[i] as DebugCommand<float>).Invoke(float.Parse(properties[1]));
                 }
                 else if (commandList[i] as DebugCommand<int, int> != null)
                 {
